@@ -1,6 +1,62 @@
-import { db, ref, push } from "./firebase.js";
+import { db, ref, push, get, child } from "./firebase.js";
 
-const form = document.getElementById("agendamentoForm");
+const dataInput = document.getElementById("data");
+const horarioSelect = document.getElementById("horario");
+
+const horariosFixos = [
+  "09:30",
+  "10:30",
+  "11:30",
+  "12:30",
+  "13:30",
+  "14:30",
+  "15:30",
+  "16:30"
+];
+
+if(dataInput){
+
+dataInput.addEventListener("change", async ()=>{
+
+const dataSelecionada = dataInput.value;
+
+horarioSelect.innerHTML = "";
+
+const snapshot = await get(child(ref(db), "agendamentos"));
+
+let ocupados = [];
+
+if(snapshot.exists()){
+
+const dados = snapshot.val();
+
+Object.values(dados).forEach(item=>{
+
+if(item.data === dataSelecionada){
+ocupados.push(item.horario);
+}
+
+});
+
+}
+
+const livres = horariosFixos.filter(
+h => !ocupados.includes(h)
+);
+
+livres.forEach(h=>{
+
+const option = document.createElement("option");
+option.value = h;
+option.textContent = h;
+
+horarioSelect.appendChild(option);
+
+});
+
+});
+
+}
 
 if (form) {
 
