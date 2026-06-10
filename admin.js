@@ -1,155 +1,157 @@
 import {
-  db,
-  ref,
-  get,
-  child,
-  remove
+db,
+ref,
+get,
+child,
+remove
 } from "./firebase.js";
 
 window.entrar = async function () {
 
-  const senha =
-    document.getElementById("senha").value;
+const senha =
+document.getElementById("senha").value;
 
-  if (senha !== "1234") {
+if (senha !== "1234") {
 
-    alert("Senha incorreta");
-    return;
+```
+alert("Senha incorreta");
+return;
+```
 
-  }
+}
 
-  document.getElementById("login").style.display = "none";
-  document.getElementById("painel").style.display = "block";
+document.getElementById("login").style.display = "none";
+document.getElementById("painel").style.display = "block";
 
-  carregarAgendamentos();
+carregarAgendamentos();
 
 };
 
 async function carregarAgendamentos() {
 
-  const lista =
-    document.getElementById("lista");
+const lista =
+document.getElementById("lista");
 
-  lista.innerHTML = "";
+lista.innerHTML = "";
 
-  const snapshot =
-    await get(child(ref(db), "agendamentos"));
+const snapshot =
+await get(child(ref(db), "agendamentos"));
 
-  if (!snapshot.exists()) {
+if (!snapshot.exists()) {
 
-    lista.innerHTML =
-      "<p>Nenhum agendamento encontrado.</p>";
+```
+lista.innerHTML =
+  "<p>Nenhum agendamento encontrado.</p>";
 
-    return;
+return;
+```
 
-  }
+}
 
-  const dados = snapshot.val();
+const dados = snapshot.val();
 
-  let totalAgendamentos = 0;
-  let faturamento = 0;
+let totalAgendamentos = 0;
+let faturamento = 0;
 
-  const pesquisa =
-    document.getElementById("pesquisa")
-      ? document.getElementById("pesquisa").value.toLowerCase()
-      : "";
+const pesquisa =
+document.getElementById("pesquisa")
+? document.getElementById("pesquisa").value.toLowerCase()
+: "";
 
-  for (const chave in dados) {
+for (const chave in dados) {
 
-    const item = dados[chave];
+```
+const item = dados[chave];
 
-    if (
-      pesquisa &&
-      !item.nome.toLowerCase().includes(pesquisa)
-    ) {
-      continue;
-    }
+if (
+  pesquisa &&
+  !item.nome.toLowerCase().includes(pesquisa)
+) {
+  continue;
+}
 
-    totalAgendamentos++;
+totalAgendamentos++;
 
-    const valor =
-      parseFloat(
-        item.servico
-          .replace(",", ".")
-          .match(/(\d+(\.\d+)?)/)?.[0] || 0
-      );
+let valor = 0;
 
-    faturamento += valor;
+if (item.servico.includes("120")) valor = 120;
+else if (item.servico.includes("99")) valor = 99;
+else if (item.servico.includes("79")) valor = 79.99;
+else if (item.servico.includes("69")) valor = 69.99;
+else if (item.servico.includes("50")) valor = 50;
 
-    const dataFormatada =
-      item.data.split("-").reverse().join("/");
+faturamento += valor;
 
-    const whatsapp =
-      `https://wa.me/55${item.telefone}`;
+const dataFormatada =
+  item.data.split("-").reverse().join("/");
 
-    lista.innerHTML += `
+const whatsapp =
+  `https://wa.me/55${item.telefone}`;
 
-      <div class="card">
+lista.innerHTML += `
 
-        <h3>${item.nome}</h3>
+  <div class="card">
 
-        <p>📞 ${item.telefone}</p>
+    <h3>${item.nome}</h3>
 
-        <p>💇 ${item.servico}</p>
+    <p>📞 ${item.telefone}</p>
 
-        <p>📅 ${dataFormatada}</p>
+    <p>💇 ${item.servico}</p>
 
-        <p>⏰ ${item.horario}</p>
+    <p>📅 ${dataFormatada}</p>
 
-        <a href="${whatsapp}"
-           target="_blank">
+    <p>⏰ ${item.horario}</p>
 
-          <button>
-            WhatsApp
-          </button>
+    <a href="${whatsapp}" target="_blank">
+      <button class="whatsapp">
+        WhatsApp
+      </button>
+    </a>
 
-        </a>
+    <button
+      class="excluir"
+      onclick="excluirAgendamento('${chave}')">
 
-        <button
-          class="excluir"
-          onclick="excluirAgendamento('${chave}')">
+      Excluir
 
-          Excluir
+    </button>
 
-        </button>
+  </div>
 
-      </div>
+`;
+```
 
-    `;
+}
 
-  }
+document.getElementById("total").innerHTML =
+`📅 Agendamentos: ${totalAgendamentos}`;
 
-  document.getElementById("total")
-    .innerHTML =
-    `📅 Agendamentos: ${totalAgendamentos}`;
-
-  document.getElementById("faturamento")
-    .innerHTML =
-    `💰 Faturamento Previsto: R$ ${faturamento.toFixed(2)}`;
+document.getElementById("faturamento").innerHTML =
+`💰 Faturamento Previsto: R$ ${faturamento.toFixed(2)}`;
 
 }
 
 window.excluirAgendamento =
-  async function (chave) {
+async function (chave) {
 
-    if (
-      !confirm(
-        "Deseja excluir este agendamento?"
-      )
-    ) {
-      return;
-    }
+if (
+!confirm(
+"Deseja excluir este agendamento?"
+)
+) {
+return;
+}
 
-    await remove(
-      ref(db, `agendamentos/${chave}`)
-    );
+await remove(
+ref(db, `agendamentos/${chave}`)
+);
 
-    alert("Agendamento excluído!");
+alert("Agendamento excluído!");
 
-    carregarAgendamentos();
+carregarAgendamentos();
 
-  };
+};
 
 window.pesquisarCliente = function () {
-  carregarAgendamentos();
+carregarAgendamentos();
 };
