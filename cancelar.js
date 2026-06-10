@@ -42,23 +42,26 @@ form.addEventListener("submit", async (e) => {
         agendamento.telefone.trim() === telefone
       ) {
 
+        const dataFormatada =
+          agendamento.data.split("-").reverse().join("/");
+
         await remove(
           ref(db, `agendamentos/${chave}`)
         );
 
-        const mensagem =
-`CANCELAMENTO - TODA BELLA STUDIO
+        const mensagem = `CANCELAMENTO - TODA BELLA STUDIO
 
 Nome: ${agendamento.nome}
 Telefone: ${agendamento.telefone}
+Serviço: ${agendamento.servico}
 
-Data: ${agendamento.data}
+Data: ${dataFormatada}
 Horário: ${agendamento.horario}
 
 O agendamento foi cancelado pelo site.`;
 
         const whatsapp =
-`https://wa.me/5511964201177?text=${encodeURIComponent(mensagem)}`;
+          `https://wa.me/5511964201177?text=${encodeURIComponent(mensagem)}`;
 
         alert("Agendamento cancelado com sucesso!");
 
