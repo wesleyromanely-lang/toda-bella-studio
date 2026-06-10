@@ -83,6 +83,21 @@ if (form) {
 
       alert("Agendamento realizado com sucesso!");
 
+const mensagem = `Olá! Novo agendamento no Toda Bella Studio.
+
+Nome: ${nome}
+Telefone: ${telefone}
+Serviço: ${servico}
+Data: ${data}
+Horário: ${horario}`;
+
+const urlWhatsapp =
+`https://wa.me/5511964201177?text=${encodeURIComponent(mensagem)}`;
+
+window.open(urlWhatsapp, "_blank");
+
+form.reset();
+
       form.reset();
 
     } catch (erro) {
