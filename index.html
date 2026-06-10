@@ -1,115 +1,280 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Toda Bella Studio</title>
 
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
 body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#fff;
+background:#fff7fa;
+color:#333;
 }
 
 header{
-    background:linear-gradient(135deg,#f8c8dc,#e7b8a4);
-    color:#fff;
-    text-align:center;
-    padding:80px 20px;
+background:linear-gradient(135deg,#f8c8dc,#d4a5b5);
+padding:80px 20px;
+text-align:center;
+color:white;
 }
 
-.btn{
-    background:#fff;
-    color:#e7b8a4;
-    padding:12px 20px;
-    border-radius:8px;
-    text-decoration:none;
-    font-weight:bold;
+header h1{
+font-size:3rem;
+margin-bottom:15px;
 }
 
-section{
-    padding:40px 20px;
-    max-width:1200px;
-    margin:auto;
+header p{
+font-size:1.2rem;
+margin-bottom:30px;
+}
+
+.botao{
+display:inline-block;
+padding:15px 30px;
+background:white;
+color:#c97b95;
+text-decoration:none;
+border-radius:30px;
+font-weight:bold;
+margin:10px;
+}
+
+.botao:hover{
+opacity:0.9;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:50px 20px;
+}
+
+.titulo{
+text-align:center;
+margin-bottom:30px;
+color:#c97b95;
+font-size:2rem;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
 }
 
 .card{
-    background:#fff;
-    border-radius:12px;
-    box-shadow:0 0 10px rgba(0,0,0,.1);
-    padding:20px;
-    margin:10px;
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+text-align:center;
+}
+
+.card h3{
+margin-bottom:10px;
+}
+
+.preco{
+font-size:24px;
+font-weight:bold;
+color:#c97b95;
+}
+
+.info{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+text-align:center;
+}
+
+.info p{
+margin:12px 0;
+font-size:18px;
+}
+
+.avaliacoes{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.avaliacao{
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+text-align:center;
 }
 
 footer{
-    background:#222;
-    color:#fff;
-    text-align:center;
-    padding:20px;
+background:#222;
+color:white;
+text-align:center;
+padding:25px;
+margin-top:50px;
 }
+
+@media(max-width:768px){
+
+header h1{
+font-size:2rem;
+}
+
+.botao{
+display:block;
+width:250px;
+margin:10px auto;
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
 
 <header>
-<h1>Toda Bella Studio</h1>
-<p>Transformando autoestima em beleza.</p>
 
-<a class="btn"
-href="https://www.instagram.com/todabellastudio2026/"
-Agendar pelo WhatsApp
+<h1>Toda Bella Studio</h1>
+
+<p>
+Transformando autoestima em beleza.
+</p>
+
+<a href="agendamento.html" class="botao">
+Agendar Horário
 </a>
+
+<a href="https://www.instagram.com/todabellastudio2026/"
+target="_blank"
+class="botao">
+Instagram </a>
+
 </header>
 
-<section>
-<h2>Serviços</h2>
+<section class="container">
+
+<h2 class="titulo">
+Nossos Serviços
+</h2>
+
+<div class="cards">
 
 <div class="card">
 <h3>Progressiva</h3>
-<p>R$ 120,00</p>
+<p class="preco">R$ 120,00</p>
 </div>
 
 <div class="card">
 <h3>Botox Capilar</h3>
-<p>R$ 99,00</p>
+<p class="preco">R$ 99,00</p>
 </div>
 
 <div class="card">
 <h3>Cronograma Capilar</h3>
-<p>R$ 99,00</p>
+<p class="preco">R$ 99,00</p>
 </div>
 
 <div class="card">
 <h3>Escova</h3>
-<p>R$ 50,00</p>
+<p class="preco">R$ 50,00</p>
 </div>
 
 <div class="card">
 <h3>Selagem</h3>
-<p>R$ 79,99</p>
+<p class="preco">R$ 79,99</p>
 </div>
 
 <div class="card">
 <h3>Tratamento Capilar</h3>
-<p>R$ 69,99</p>
+<p class="preco">R$ 69,99</p>
+</div>
+
 </div>
 
 </section>
 
-<section>
-<h2>Contato</h2>
+<section class="container">
 
-<p>📍 Ferraz de Vasconcelos - SP</p>
-<p>📞 (11) 96420-1177</p>
-<p>📷 @todabellastudio2026</p>
+<h2 class="titulo">
+Informações
+</h2>
+
+<div class="info">
+
+<p><strong>Local:</strong> Ferraz de Vasconcelos - SP</p>
+
+<p><strong>WhatsApp:</strong> (11) 96420-1177</p>
+
+<p><strong>Instagram:</strong> @todabellastudio2026</p>
+
+<p><strong>Atendimento:</strong></p>
+
+<p>Terça a Sábado</p>
+
+<p>09:30 às 17:00</p>
+
+<br>
+
+<a href="agendamento.html" class="botao">
+Agendar Agora
+</a>
+
+</div>
+
+</section>
+
+<section class="container">
+
+<h2 class="titulo">
+Avaliações
+</h2>
+
+<div class="avaliacoes">
+
+<div class="avaliacao">
+★★★★★
+<p>Excelente atendimento e resultado incrível.</p>
+</div>
+
+<div class="avaliacao">
+★★★★★
+<p>Ambiente agradável e profissionais muito atenciosas.</p>
+</div>
+
+<div class="avaliacao">
+★★★★★
+<p>Super recomendo o Toda Bella Studio.</p>
+</div>
+
+</div>
 
 </section>
 
 <footer>
-© 2026 Toda Bella Studio
+
+<p>Toda Bella Studio © 2026</p>
+
+<p>WhatsApp: (11) 96420-1177</p>
+
+<p>Instagram: @todabellastudio2026</p>
+
 </footer>
 
 </body>
+
 </html>
+
