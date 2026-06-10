@@ -15,6 +15,7 @@ const horariosFixos = [
 "16:30"
 ];
 
+// Carregar horários disponíveis
 async function carregarHorarios() {
 
 const dataSelecionada = dataInput.value;
@@ -86,13 +87,20 @@ horarioSelect.innerHTML =
 
 }
 
+// Atualizar horários quando escolher data
+if (dataInput) {
+
 dataInput.addEventListener("change", () => {
 
-    console.log("DATA ALTERADA");
-
-    carregarHorarios();
+```
+carregarHorarios();
+```
 
 });
+
+}
+
+// Salvar agendamento
 if (form) {
 
 form.addEventListener("submit", async (e) => {
@@ -106,7 +114,8 @@ const servico = document.getElementById("servico").value;
 const data = document.getElementById("data").value;
 const horario = document.getElementById("horario").value;
 
-const dataFormatada = data.split("-").reverse().join("/");
+const dataFormatada =
+  data.split("-").reverse().join("/");
 
 try {
 
@@ -140,7 +149,7 @@ Horário: ${horario}`;
 
 } catch (erro) {
 
-  console.error(erro);
+  console.error("Erro ao salvar:", erro);
 
   alert("Erro ao salvar agendamento.");
 
@@ -151,4 +160,7 @@ Horário: ${horario}`;
 
 }
 
-
+// Carrega horários caso a página já abra com data preenchida
+if (dataInput && dataInput.value) {
+carregarHorarios();
+}
