@@ -1,73 +1,24 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agendamento - Toda Bella Studio</title>
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-<link rel="stylesheet" href="style.css">
-</head>
+import {
+ getDatabase,
+ref,
+push,
+get,
+child
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-<body>
+const firebaseConfig = {
+  apiKey: "AIzaSyAstm5bEDdHWCKSVPhs4cfddCT-SYNqjZA",
+  authDomain: "todabelastudio-ea3ac.firebaseapp.com",
+  databaseURL: "https://todabelastudio-ea3ac-default-rtdb.firebaseio.com",
+  projectId: "todabelastudio-ea3ac",
+  storageBucket: "todabelastudio-ea3ac.firebasestorage.app",
+  messagingSenderId: "289555596882",
+  appId: "1:289555596882:web:32519783d49afacb28c18b"
+};
 
-<div style="text-align:center; margin-top:20px;">
+const app = initializeApp(firebaseConfig);
 
-    <a href="index.html"
-       style="
-       background:#c97b95;
-       color:white;
-       padding:12px 25px;
-       text-decoration:none;
-       border-radius:30px;
-       font-weight:bold;
-       display:inline-block;">
-       ⬅ Voltar ao Menu Principal
-    </a>
-
-</div>
-
-<header>
-    <h1>Toda Bella Studio</h1>
-    <p>Agende seu horário online</p>
-</header>
-
-<div class="container">
-
-    <div class="card">
-
-        <h2>Novo Agendamento</h2>
-
-        <form id="agendamentoForm">
-
-            <label>Nome</label>
-            <input type="text" id="nome" required>
-
-            <label>Telefone</label>
-            <input type="tel" id="telefone" required>
-
-            <label>Serviço</label>
-            <select id="servico" required>
-                <option value="">Selecione</option>
-                <option>Progressiva - R$120,00</option>
-                <option>Botox Capilar - R$99,00</option>
-                <option>Cronograma Capilar - R$99,00</option>
-                <option>Escova - R$50,00</option>
-                <option>Selagem - R$79,99</option>
-                <option>Tratamento Capilar - R$69,99</option>
-            </select>
-
-            <label>Data</label>
-            <input type="date" id="data" required>
-
-            <label>Horário</label>
-            <select id="horario" required>
-    <option value="">Selecione uma data primeiro</option>
-</select>
-
-            <button class="btn" type="submit">
-                Confirmar Agendamento
-            </button>
-
-        </form>
-
-    </
+export const db = getDatabase(app);
+export { ref, push, get, child };
