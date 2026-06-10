@@ -112,7 +112,7 @@ if (form) {
         criadoEm: new Date().toISOString()
       });
 
-      const mensagem = `Novo Agendamento - Toda Bella Studio
+      const mensagem = `Olá seja bem vinda ao nosso agendamento - Toda Bella Studio
 
 Nome: ${nome}
 Telefone: ${telefone}
@@ -120,7 +120,7 @@ Serviço: ${servico}
 Data: ${dataFormatada}
 Horário: ${horario}
 
-Agendamento realizado pelo site.`;
+Já confirmo seu Agendamento Obrigado.`;
 
       const whatsapp =
         `https://wa.me/5511964201177?text=${encodeURIComponent(mensagem)}`;
