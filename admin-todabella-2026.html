@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -98,8 +97,11 @@ margin-top:20px;
 box-shadow:0 0 10px rgba(0,0,0,.08);
 }
 
-</style>
+#dataAgenda{
+margin-top:10px;
+}
 
+</style>
 </head>
 
 <body>
@@ -155,8 +157,19 @@ placeholder="Pesquisar cliente">
 <div id="lista"></div>
 
 <div id="agendaVisual">
-<h2>📅 Agenda de Hoje</h2>
+
+<h2>📅 Agenda por Data</h2>
+
+<input
+type="date"
+id="dataAgenda">
+
+<button onclick="mostrarAgendaData()">
+📅 Consultar Agenda
+</button>
+
 <div id="agenda"></div>
+
 </div>
 
 </div>
@@ -165,4 +178,3 @@ placeholder="Pesquisar cliente">
 
 </body>
 </html>
-
