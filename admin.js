@@ -17,6 +17,8 @@ const horariosFixos = [
 "16:30"
 ];
 
+let todosAgendamentos = {};
+
 window.entrar = async function () {
 
 const senha =
@@ -58,9 +60,8 @@ return;
 
 }
 
-const dados = snapshot.val();
+todosAgendamentos = snapshot.val();
 
-let totalAgendamentos = 0;
 let faturamento = 0;
 let faturamentoHoje = 0;
 let agendamentosHoje = 0;
@@ -81,11 +82,9 @@ document.getElementById("pesquisa")
 ? document.getElementById("pesquisa").value.toLowerCase()
 : "";
 
-let ocupadosHoje = [];
+for (const chave in todosAgendamentos) {
 
-for (const chave in dados) {
-
-const item = dados[chave];
+const item = todosAgendamentos[chave];
 
 if (
 pesquisa &&
@@ -96,16 +95,11 @@ continue;
 
 let valor = 0;
 
-if (item.servico.includes("120"))
-valor = 120;
-else if (item.servico.includes("99"))
-valor = 99;
-else if (item.servico.includes("79"))
-valor = 79.99;
-else if (item.servico.includes("69"))
-valor = 69.99;
-else if (item.servico.includes("50"))
-valor = 50;
+if (item.servico.includes("120")) valor = 120;
+else if (item.servico.includes("99")) valor = 99;
+else if (item.servico.includes("79")) valor = 79.99;
+else if (item.servico.includes("69")) valor = 69.99;
+else if (item.servico.includes("50")) valor = 50;
 
 faturamento += valor;
 
@@ -114,11 +108,6 @@ if(item.data === hojeTexto){
 agendamentosHoje++;
 faturamentoHoje += valor;
 
-ocupadosHoje.push({
-horario:item.horario,
-nome:item.nome
-});
-
 }
 
 if(item.data === amanhaTexto){
@@ -126,8 +115,6 @@ if(item.data === amanhaTexto){
 agendamentosAmanha++;
 
 }
-
-totalAgendamentos++;
 
 const dataFormatada =
 item.data.split("-").reverse().join("/");
@@ -200,19 +187,73 @@ document.getElementById("faturamentoHoje").innerHTML =
 document.getElementById("faturamento").innerHTML =
 `💰 Total: R$ ${faturamento.toFixed(2)}`;
 
+mostrarAgendaHoje();
+
+}
+
+function mostrarAgendaHoje(){
+
+const hoje =
+new Date().toISOString().split("T")[0];
+
+gerarAgenda(hoje);
+
+}
+
+window.mostrarAgendaData = function(){
+
+const data =
+document.getElementById("dataAgenda").value;
+
+if(!data){
+
+alert("Selecione uma data");
+return;
+
+}
+
+gerarAgenda(data);
+
+}
+
+function gerarAgenda(dataSelecionada){
+
+let ocupados = [];
+
+for (const chave in todosAgendamentos){
+
+const item = todosAgendamentos[chave];
+
+if(item.data === dataSelecionada){
+
+ocupados.push({
+horario:item.horario,
+nome:item.nome
+});
+
+}
+
+}
+
 let agendaHTML = "";
+
+const dataFormatada =
+dataSelecionada.split("-").reverse().join("/");
+
+agendaHTML += `
+<h3>📅 ${dataFormatada}</h3>
+`;
 
 horariosFixos.forEach(horario => {
 
 const ocupado =
-ocupadosHoje.find(
+ocupados.find(
 item => item.horario === horario
 );
 
 if(ocupado){
 
 agendaHTML += `
-
 <p>
 ❌ ${horario} - ${ocupado.nome}
 </p>
@@ -221,7 +262,6 @@ agendaHTML += `
 }else{
 
 agendaHTML += `
-
 <p>
 ✅ ${horario} - Livre
 </p>
