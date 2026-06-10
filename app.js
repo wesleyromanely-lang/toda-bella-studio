@@ -86,10 +86,13 @@ horarioSelect.innerHTML =
 
 }
 
-if (dataInput) {
-dataInput.addEventListener("change", carregarHorarios);
-}
+dataInput.addEventListener("change", () => {
 
+    console.log("DATA ALTERADA");
+
+    carregarHorarios();
+
+});
 if (form) {
 
 form.addEventListener("submit", async (e) => {
