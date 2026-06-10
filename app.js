@@ -94,19 +94,8 @@ Horário: ${horario}`;
 const urlWhatsapp =
 `https://wa.me/5511964201177?text=${encodeURIComponent(mensagem)}`;
 
-window.open(urlWhatsapp, "_blank");
+window.location.href = urlWhatsapp;
 
 form.reset();
 
-      form.reset();
-
-    } catch (erro) {
-
-      alert("Erro ao salvar agendamento.");
-      console.error(erro);
-
-    }
-
-  });
-
-}
+    
