@@ -80,11 +80,9 @@ async function carregarHorarios() {
 
 }
 
-// Atualiza quando escolher uma data
+// Atualiza horários quando escolhe a data
 if (dataInput) {
-
   dataInput.addEventListener("change", carregarHorarios);
-
 }
 
 // Salvar agendamento
@@ -100,6 +98,9 @@ if (form) {
     const data = document.getElementById("data").value;
     const horario = document.getElementById("horario").value;
 
+    // Formata a data para DD/MM/AAAA
+    const dataFormatada = data.split("-").reverse().join("/");
+
     try {
 
       await push(ref(db, "agendamentos"), {
@@ -111,13 +112,15 @@ if (form) {
         criadoEm: new Date().toISOString()
       });
 
-      const mensagem = `Olá! Novo agendamento no Toda Bella Studio.
+      const mensagem = `🌸 Novo Agendamento - Toda Bella Studio
 
-Nome: ${nome}
-Telefone: ${telefone}
-Serviço: ${servico}
-Data: ${data}
-Horário: ${horario}`;
+👤 Nome: ${nome}
+📞 Telefone: ${telefone}
+💇 Serviço: ${servico}
+📅 Data: ${dataFormatada}
+⏰ Horário: ${horario}
+
+Agendamento realizado pelo site.`;
 
       const whatsapp =
         `https://wa.me/5511964201177?text=${encodeURIComponent(mensagem)}`;
@@ -139,5 +142,4 @@ Horário: ${horario}`;
   });
 
 }
-
     
