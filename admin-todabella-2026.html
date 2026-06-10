@@ -89,7 +89,8 @@ background:#2196F3;
 background:#e53935;
 }
 
-#agendaVisual{
+#agendaVisual,
+#relatorioMensal{
 background:white;
 padding:20px;
 border-radius:15px;
@@ -97,8 +98,18 @@ margin-top:20px;
 box-shadow:0 0 10px rgba(0,0,0,.08);
 }
 
-#dataAgenda{
-margin-top:10px;
+.livre{
+background:#e8f5e9;
+padding:10px;
+border-radius:10px;
+margin:5px 0;
+}
+
+.ocupado{
+background:#ffebee;
+padding:10px;
+border-radius:10px;
+margin:5px 0;
 }
 
 </style>
@@ -145,6 +156,18 @@ Entrar
 
 </div>
 
+<div id="relatorioMensal">
+
+<h2>📊 Relatório Mensal</h2>
+
+<p id="clientesMes">👩 Clientes: 0</p>
+
+<p id="faturamentoMes">💰 Faturamento Mensal: R$ 0,00</p>
+
+<p id="servicoMaisVendido">⭐ Serviço Mais Vendido: -</p>
+
+</div>
+
 <input
 type="text"
 id="pesquisa"
@@ -160,12 +183,10 @@ placeholder="Pesquisar cliente">
 
 <h2>📅 Agenda por Data</h2>
 
-<input
-type="date"
-id="dataAgenda">
+<input type="date" id="dataAgenda">
 
 <button onclick="mostrarAgendaData()">
-📅 Consultar Agenda
+Consultar Agenda
 </button>
 
 <div id="agenda"></div>
