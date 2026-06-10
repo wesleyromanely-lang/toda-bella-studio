@@ -67,9 +67,17 @@ let faturamentoHoje = 0;
 let agendamentosHoje = 0;
 let agendamentosAmanha = 0;
 
+let clientesMes = 0;
+let faturamentoMes = 0;
+
+const servicosContador = {};
+
 const hoje = new Date();
 const hojeTexto =
 hoje.toISOString().split("T")[0];
+
+const mesAtual =
+hojeTexto.substring(0,7);
 
 const amanha = new Date();
 amanha.setDate(amanha.getDate() + 1);
@@ -85,13 +93,6 @@ document.getElementById("pesquisa")
 for (const chave in todosAgendamentos) {
 
 const item = todosAgendamentos[chave];
-
-if (
-pesquisa &&
-!item.nome.toLowerCase().includes(pesquisa)
-) {
-continue;
-}
 
 let valor = 0;
 
@@ -114,6 +115,23 @@ if(item.data === amanhaTexto){
 
 agendamentosAmanha++;
 
+}
+
+if(item.data.startsWith(mesAtual)){
+
+clientesMes++;
+faturamentoMes += valor;
+
+servicosContador[item.servico] =
+(servicosContador[item.servico] || 0) + 1;
+
+}
+
+if (
+pesquisa &&
+!item.nome.toLowerCase().includes(pesquisa)
+) {
+continue;
 }
 
 const dataFormatada =
@@ -175,6 +193,20 @@ onclick="excluirAgendamento('${chave}')">
 
 }
 
+let servicoMaisVendido = "-";
+let maior = 0;
+
+for(const servico in servicosContador){
+
+if(servicosContador[servico] > maior){
+
+maior = servicosContador[servico];
+servicoMaisVendido = servico;
+
+}
+
+}
+
 document.getElementById("hoje").innerHTML =
 `📅 Hoje: ${agendamentosHoje}`;
 
@@ -186,6 +218,15 @@ document.getElementById("faturamentoHoje").innerHTML =
 
 document.getElementById("faturamento").innerHTML =
 `💰 Total: R$ ${faturamento.toFixed(2)}`;
+
+document.getElementById("clientesMes").innerHTML =
+`👩 Clientes: ${clientesMes}`;
+
+document.getElementById("faturamentoMes").innerHTML =
+`💰 Faturamento Mensal: R$ ${faturamentoMes.toFixed(2)}`;
+
+document.getElementById("servicoMaisVendido").innerHTML =
+`⭐ Serviço Mais Vendido: ${servicoMaisVendido}`;
 
 mostrarAgendaHoje();
 
@@ -214,7 +255,7 @@ return;
 
 gerarAgenda(data);
 
-}
+};
 
 function gerarAgenda(dataSelecionada){
 
@@ -254,17 +295,18 @@ item => item.horario === horario
 if(ocupado){
 
 agendaHTML += `
-<p>
-❌ ${horario} - ${ocupado.nome}
-</p>
+<div class="ocupado">
+🔴 ${horario}<br>
+${ocupado.nome}
+</div>
 `;
 
 }else{
 
 agendaHTML += `
-<p>
-✅ ${horario} - Livre
-</p>
+<div class="livre">
+🟢 ${horario} - Livre
+</div>
 `;
 
 }
