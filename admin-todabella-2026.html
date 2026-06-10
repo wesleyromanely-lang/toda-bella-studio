@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Painel Administrativo</title>
+<title>Painel Administrativo - Toda Bella Studio</title>
 
 <style>
 
@@ -12,21 +12,30 @@ body{
 font-family:Arial,sans-serif;
 background:#fff5f8;
 padding:20px;
+margin:0;
 }
 
 .login{
 max-width:400px;
 margin:50px auto;
 background:white;
-padding:20px;
+padding:25px;
 border-radius:15px;
-box-shadow:0 0 10px rgba(0,0,0,.1);
+box-shadow:0 0 15px rgba(0,0,0,.1);
+}
+
+.login h2{
+text-align:center;
+color:#c97b95;
 }
 
 input{
 width:100%;
 padding:12px;
 margin:10px 0;
+border:1px solid #ddd;
+border-radius:10px;
+box-sizing:border-box;
 }
 
 button{
@@ -37,22 +46,57 @@ color:white;
 border:none;
 border-radius:10px;
 cursor:pointer;
+font-weight:bold;
+}
+
+button:hover{
+opacity:.9;
 }
 
 #painel{
 display:none;
 }
 
+.dashboard{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:15px;
+margin-bottom:20px;
+}
+
+.box{
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 0 10px rgba(0,0,0,.08);
+text-align:center;
+}
+
+.box h3{
+margin:0;
+color:#c97b95;
+}
+
 .card{
 background:white;
-padding:15px;
-margin:10px 0;
+padding:20px;
+margin-top:15px;
 border-radius:15px;
 box-shadow:0 0 10px rgba(0,0,0,.08);
 }
 
+.card h3{
+margin-top:0;
+color:#c97b95;
+}
+
+.whatsapp{
+background:#25D366;
+margin-top:10px;
+}
+
 .excluir{
-background:red;
+background:#e53935;
 margin-top:10px;
 }
 
@@ -64,12 +108,12 @@ margin-top:10px;
 
 <div class="login" id="login">
 
-<h2>Área Administrativa</h2>
+<h2>🔒 Área Administrativa</h2>
 
 <input
 type="password"
 id="senha"
-placeholder="Digite a senha">
+placeholder="Digite sua senha">
 
 <button onclick="entrar()">
 Entrar
@@ -81,7 +125,30 @@ Entrar
 
 <h1>Toda Bella Studio</h1>
 
-<h3 id="total"></h3>
+<div class="dashboard">
+
+<div class="box">
+<h3 id="total">
+📅 Agendamentos: 0
+</h3>
+</div>
+
+<div class="box">
+<h3 id="faturamento">
+💰 Faturamento: R$ 0,00
+</h3>
+</div>
+
+</div>
+
+<input
+type="text"
+id="pesquisa"
+placeholder="Pesquisar cliente">
+
+<button onclick="pesquisarCliente()">
+🔍 Pesquisar
+</button>
 
 <div id="lista"></div>
 
