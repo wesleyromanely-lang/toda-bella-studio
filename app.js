@@ -1,5 +1,6 @@
 import { db, ref, push, get, child } from "./firebase.js";
 
+const form = document.getElementById("agendamentoForm");
 const dataInput = document.getElementById("data");
 const horarioSelect = document.getElementById("horario");
 
@@ -14,50 +15,79 @@ const horariosFixos = [
   "16:30"
 ];
 
-if(dataInput){
+// Carrega horários disponíveis
+async function carregarHorarios() {
 
-dataInput.addEventListener("change", async ()=>{
+  const dataSelecionada = dataInput.value;
 
-const dataSelecionada = dataInput.value;
+  if (!dataSelecionada) {
+    horarioSelect.innerHTML =
+      '<option value="">Selecione uma data primeiro</option>';
+    return;
+  }
 
-horarioSelect.innerHTML = "";
+  horarioSelect.innerHTML = "";
 
-const snapshot = await get(child(ref(db), "agendamentos"));
+  try {
 
-let ocupados = [];
+    const snapshot = await get(child(ref(db), "agendamentos"));
 
-if(snapshot.exists()){
+    let ocupados = [];
 
-const dados = snapshot.val();
+    if (snapshot.exists()) {
 
-Object.values(dados).forEach(item=>{
+      const dados = snapshot.val();
 
-if(item.data === dataSelecionada){
-ocupados.push(item.horario);
+      Object.values(dados).forEach(item => {
+
+        if (item.data === dataSelecionada) {
+          ocupados.push(item.horario);
+        }
+
+      });
+
+    }
+
+    const livres = horariosFixos.filter(
+      horario => !ocupados.includes(horario)
+    );
+
+    if (livres.length === 0) {
+
+      horarioSelect.innerHTML =
+        '<option value="">Nenhum horário disponível</option>';
+
+      return;
+
+    }
+
+    livres.forEach(horario => {
+
+      const option = document.createElement("option");
+
+      option.value = horario;
+      option.textContent = horario;
+
+      horarioSelect.appendChild(option);
+
+    });
+
+  } catch (erro) {
+
+    console.error("Erro ao carregar horários:", erro);
+
+  }
+
 }
 
-});
+// Atualiza quando escolher uma data
+if (dataInput) {
+
+  dataInput.addEventListener("change", carregarHorarios);
 
 }
 
-const livres = horariosFixos.filter(
-h => !ocupados.includes(h)
-);
-
-livres.forEach(h=>{
-
-const option = document.createElement("option");
-option.value = h;
-option.textContent = h;
-
-horarioSelect.appendChild(option);
-
-});
-
-});
-
-}
-
+// Salvar agendamento
 if (form) {
 
   form.addEventListener("submit", async (e) => {
@@ -81,9 +111,7 @@ if (form) {
         criadoEm: new Date().toISOString()
       });
 
-      alert("Agendamento realizado com sucesso!");
-
-const mensagem = `Olá! Novo agendamento no Toda Bella Studio.
+      const mensagem = `Olá! Novo agendamento no Toda Bella Studio.
 
 Nome: ${nome}
 Telefone: ${telefone}
@@ -91,11 +119,25 @@ Serviço: ${servico}
 Data: ${data}
 Horário: ${horario}`;
 
-const urlWhatsapp =
-`https://wa.me/5511964201177?text=${encodeURIComponent(mensagem)}`;
+      const whatsapp =
+        `https://wa.me/5511964201177?text=${encodeURIComponent(mensagem)}`;
 
-window.location.href = urlWhatsapp;
+      alert("Agendamento realizado com sucesso!");
 
-form.reset();
+      form.reset();
+
+      window.location.href = whatsapp;
+
+    } catch (erro) {
+
+      console.error(erro);
+
+      alert("Erro ao salvar agendamento.");
+
+    }
+
+  });
+
+}
 
     
