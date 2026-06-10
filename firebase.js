@@ -1,11 +1,12 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
- getDatabase,
-ref,
-push,
-get,
-child
+  getDatabase,
+  ref,
+  push,
+  get,
+  child,
+  remove
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const firebaseConfig = {
@@ -21,4 +22,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const db = getDatabase(app);
-export { ref, push, get, child };
+
+export {
+  ref,
+  push,
+  get,
+  child,
+  remove
+};
