@@ -112,13 +112,13 @@ if (form) {
         criadoEm: new Date().toISOString()
       });
 
-      const mensagem = `🌸 Novo Agendamento - Toda Bella Studio
+      const mensagem = `Novo Agendamento - Toda Bella Studio
 
-👤 Nome: ${nome}
-📞 Telefone: ${telefone}
-💇 Serviço: ${servico}
-📅 Data: ${dataFormatada}
-⏰ Horário: ${horario}
+Nome: ${nome}
+Telefone: ${telefone}
+Serviço: ${servico}
+Data: ${dataFormatada}
+Horário: ${horario}
 
 Agendamento realizado pelo site.`;
 
