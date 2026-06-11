@@ -20,8 +20,10 @@ async function carregarHorarios() {
   const dataSelecionada = dataInput.value;
 
   if (!dataSelecionada) {
+
     horarioSelect.innerHTML =
       '<option value="">Selecione uma data primeiro</option>';
+
     return;
   }
 
@@ -29,7 +31,8 @@ async function carregarHorarios() {
 
     horarioSelect.innerHTML = "";
 
-    const snapshot = await get(child(ref(db), "agendamentos"));
+    const snapshot =
+      await get(child(ref(db), "agendamentos"));
 
     let ocupados = [];
 
@@ -40,16 +43,65 @@ async function carregarHorarios() {
       Object.values(dados).forEach(item => {
 
         if (item.data === dataSelecionada) {
+
           ocupados.push(item.horario);
+
         }
 
       });
 
     }
 
-    const livres = horariosFixos.filter(
-      horario => !ocupados.includes(horario)
-    );
+    let horariosDisponiveis =
+      [...horariosFixos];
+
+    const hoje = new Date();
+
+    const hojeTexto =
+      hoje.toISOString().split("T")[0];
+
+    if (dataSelecionada === hojeTexto) {
+
+      const horaAtual =
+        hoje.getHours();
+
+      const minutoAtual =
+        hoje.getMinutes();
+
+      const minutosAgora =
+        (horaAtual * 60) + minutoAtual;
+
+      const fimExpediente =
+        (17 * 60);
+
+      if (minutosAgora >= fimExpediente) {
+
+        horarioSelect.innerHTML =
+          '<option value="">Não há mais horários disponíveis para hoje</option>';
+
+        return;
+
+      }
+
+      horariosDisponiveis =
+        horariosDisponiveis.filter(horario => {
+
+          const [hora, minuto] =
+            horario.split(":").map(Number);
+
+          const minutosHorario =
+            (hora * 60) + minuto;
+
+          return minutosHorario > minutosAgora;
+
+        });
+
+    }
+
+    const livres =
+      horariosDisponiveis.filter(
+        horario => !ocupados.includes(horario)
+      );
 
     if (livres.length === 0) {
 
@@ -62,7 +114,8 @@ async function carregarHorarios() {
 
     livres.forEach(horario => {
 
-      const option = document.createElement("option");
+      const option =
+        document.createElement("option");
 
       option.value = horario;
       option.textContent = horario;
@@ -82,17 +135,29 @@ async function carregarHorarios() {
 
 }
 
-dataInput.addEventListener("change", carregarHorarios);
+dataInput.addEventListener(
+  "change",
+  carregarHorarios
+);
 
 form.addEventListener("submit", async (e) => {
 
   e.preventDefault();
 
-  const nome = document.getElementById("nome").value;
-  const telefone = document.getElementById("telefone").value;
-  const servico = document.getElementById("servico").value;
-  const data = document.getElementById("data").value;
-  const horario = document.getElementById("horario").value;
+  const nome =
+    document.getElementById("nome").value;
+
+  const telefone =
+    document.getElementById("telefone").value;
+
+  const servico =
+    document.getElementById("servico").value;
+
+  const data =
+    document.getElementById("data").value;
+
+  const horario =
+    document.getElementById("horario").value;
 
   const dataFormatada =
     data.split("-").reverse().join("/");
@@ -100,15 +165,18 @@ form.addEventListener("submit", async (e) => {
   try {
 
     await push(ref(db, "agendamentos"), {
+
       nome,
       telefone,
       servico,
       data,
       horario,
       criadoEm: new Date().toISOString()
+
     });
 
-    const mensagem = `NOVO AGENDAMENTO - TODA BELLA STUDIO
+    const mensagem =
+`NOVO AGENDAMENTO - TODA BELLA STUDIO
 
 Nome: ${nome}
 Telefone: ${telefone}
@@ -119,15 +187,20 @@ Horário: ${horario}`;
     const whatsapp =
       `https://wa.me/5511964201177?text=${encodeURIComponent(mensagem)}`;
 
-    alert("Agendamento realizado com sucesso!");
+    alert(
+      "Agendamento realizado com sucesso!"
+    );
 
-    window.location.href = whatsapp;
+    window.location.href =
+      whatsapp;
 
   } catch (erro) {
 
     console.error(erro);
 
-    alert("Erro ao salvar agendamento.");
+    alert(
+      "Erro ao salvar agendamento."
+    );
 
   }
 
