@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Horários - Toda Bella Studio</title>
+
+<style>
+
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:#ffffff;
+color:#4a4a4a;
+padding-bottom:90px;
+}
+
+header{
+text-align:center;
+padding:30px 20px;
+}
+
+.logo{
+width:150px;
+max-width:80%;
+margin-bottom:15px;
+}
+
+h1{
+color:#b76e79;
+margin-bottom:10px;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+label{
+font-weight:bold;
+display:block;
+margin-bottom:10px;
+color:#b76e79;
+}
+
+input{
+width:100%;
+padding:15px;
+border:2px solid #f1d5db;
+border-radius:12px;
+box-sizing:border-box;
+margin-bottom:20px;
+font-size:16px;
+}
+
+.horario{
+padding:15px;
+border-radius:12px;
+margin-bottom:10px;
+text-align:center;
+font-weight:bold;
+}
+
+.livre{
+background:#e8f5e9;
+color:#2e7d32;
+}
+
+.ocupado{
+background:#ffebee;
+color:#c62828;
+}
+
+.menu{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:white;
+display:flex;
+justify-content:space-around;
+padding:15px 10px;
+box-shadow:0 -5px 20px rgba(0,0,0,.1);
+}
+
+.menu a{
+text-decoration:none;
+color:#b76e79;
+font-size:14px;
+font-weight:600;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:5px;
+}
+
+.menu span{
+font-size:24px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<img
+src="logo-todabella.png"
+alt="Toda Bella Studio"
+class="logo">
+
+<h1>Horários Disponíveis</h1>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<label>Selecione a data</label>
+
+<input type="date" id="data">
+
+<div id="listaHorarios">
+
+<p>Escolha uma data para consultar.</p>
+
+</div>
+
+</div>
+
+</div>
+
+<nav class="menu">
+
+<a href="index.html">
+<span>🏠</span>
+Início
+</a>
+
+<a href="agendamento.html">
+<span>📅</span>
+Agendar
+</a>
+
+<a href="horarios.html">
+<span>🕒</span>
+Horários
+</a>
+
+</nav>
+
+<script type="module">
+
+import {
+db,
+ref,
+get,
+child
+} from "./firebase.js";
+
+const horariosFixos = [
+"09:30",
+"10:30",
+"11:30",
+"12:30",
+"13:30",
+"14:30",
+"15:30",
+"16:30"
+];
+
+document
+.getElementById("data")
+.addEventListener("change", carregarHorarios);
+
+async function carregarHorarios(){
+
+const data =
+document.getElementById("data").value;
+
+const lista =
+document.getElementById("listaHorarios");
+
+lista.innerHTML = "";
+
+if(!data){
+return;
+}
+
+const snapshot =
+await get(child(ref(db), "agendamentos"));
+
+let ocupados = [];
+
+if(snapshot.exists()){
+
+const dados = snapshot.val();
+
+Object.values(dados).forEach(item => {
+
+if(item.data === data){
+
+ocupados.push(item.horario);
+
+}
+
+});
+
+}
+
+const hoje = new Date();
+const hojeTexto =
+hoje.toISOString().split("T")[0];
+
+let horariosVisiveis =
+horariosFixos;
+
+if(data === hojeTexto){
+
+const horaAtual =
+`${String(hoje.getHours()).padStart(2,"0")}:${String(hoje.getMinutes()).padStart(2,"0")}`;
+
+horariosVisiveis =
+horariosFixos.filter(
+horario => horario > horaAtual
+);
+
+}
+
+if(horariosVisiveis.length === 0){
+
+lista.innerHTML =
+"<p>Não há horários disponíveis para hoje.</p>";
+
+return;
+
+}
+
+horariosVisiveis.forEach(horario => {
+
+const div =
+document.createElement("div");
+
+div.classList.add("horario");
+
+if(ocupados.includes(horario)){
+
+div.classList.add("ocupado");
+
+div.innerHTML =
+`🔴 ${horario} - Ocupado`;
+
+}else{
+
+div.classList.add("livre");
+
+div.innerHTML =
+`🟢 ${horario} - Disponível`;
+
+}
+
+lista.appendChild(div);
+
+});
+
+}
+
+</script>
+
+</body>
+</html>
