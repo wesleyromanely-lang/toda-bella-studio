@@ -1,91 +1,147 @@
 body{
 margin:0;
 font-family:'Segoe UI',sans-serif;
-background:#fff7fa;
+background:linear-gradient(180deg,#fff7fa,#fdeef3);
 color:#333;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+.voltar-container{
+text-align:center;
+padding:20px 20px 0;
+}
+
+.btn-voltar{
+display:inline-block;
+background:white;
+color:#c97b95;
+padding:12px 25px;
+text-decoration:none;
+border-radius:40px;
+font-weight:bold;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+transition:.3s;
+}
+
+.btn-voltar:hover{
+transform:translateY(-3px);
 }
 
 header{
-background:linear-gradient(135deg,#f8c8dc,#d8a7b1);
-padding:60px 20px;
+background:linear-gradient(135deg,#c97b95,#e2a5bb,#f8d4df);
+padding:50px 20px;
 text-align:center;
 color:white;
-box-shadow:0 4px 15px rgba(0,0,0,.1);
+box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+.logo{
+width:220px;
+max-width:80%;
+display:block;
+margin:0 auto 25px;
 }
 
 header h1{
-font-size:2.5rem;
-margin-bottom:10px;
+font-size:2.8rem;
+margin-bottom:15px;
 }
 
 header p{
 font-size:1.1rem;
+max-width:500px;
+margin:0 auto;
+line-height:1.6;
 }
 
 .container{
 width:90%;
-max-width:900px;
+max-width:700px;
 margin:40px auto;
+flex:1;
 }
 
 .card{
 background:white;
-border-radius:20px;
-padding:30px;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
+border-radius:30px;
+padding:40px;
+box-shadow:0 15px 35px rgba(0,0,0,.08);
+transition:.3s;
 }
 
-h2{
+.card:hover{
+transform:translateY(-5px);
+}
+
+.boas-vindas{
 text-align:center;
+margin-bottom:30px;
+}
+
+.boas-vindas h2{
 color:#c97b95;
-margin-bottom:25px;
+font-size:2rem;
+margin-bottom:10px;
+}
+
+.boas-vindas p{
+color:#666;
+line-height:1.6;
 }
 
 label{
 font-weight:600;
 display:block;
 margin-bottom:8px;
+margin-top:15px;
+color:#555;
 }
 
 input,
 select{
 width:100%;
-padding:14px;
-border:2px solid #f1d1dc;
-border-radius:12px;
-margin-bottom:18px;
+padding:16px;
+border:2px solid #f3d4de;
+border-radius:15px;
 box-sizing:border-box;
 font-size:15px;
+background:#fff;
+transition:.3s;
 }
 
 input:focus,
 select:focus{
 outline:none;
-border-color:#d8a7b1;
+border-color:#c97b95;
+box-shadow:0 0 0 4px rgba(201,123,149,.15);
 }
 
 .btn{
 width:100%;
-background:linear-gradient(135deg,#d8a7b1,#c97b95);
+margin-top:30px;
+background:linear-gradient(135deg,#c97b95,#dba3b7);
 color:white;
 border:none;
-padding:16px;
-border-radius:12px;
-font-size:16px;
+padding:18px;
+border-radius:15px;
+font-size:17px;
 font-weight:bold;
 cursor:pointer;
 transition:.3s;
+box-shadow:0 8px 20px rgba(201,123,149,.3);
 }
 
 .btn:hover{
-transform:translateY(-2px);
+transform:translateY(-3px);
 }
 
 footer{
-text-align:center;
 background:#222;
 color:white;
-padding:25px;
+text-align:center;
+padding:25px 20px;
 margin-top:40px;
 }
 
@@ -93,16 +149,32 @@ footer p{
 margin:5px 0;
 }
 
-/* Responsivo */
-
 @media(max-width:768px){
 
+header{
+padding:40px 20px;
+}
+
+.logo{
+width:170px;
+}
+
 header h1{
-font-size:2rem;
+font-size:2.2rem;
 }
 
 .card{
-padding:20px;
+padding:25px;
+border-radius:25px;
+}
+
+.boas-vindas h2{
+font-size:1.7rem;
+}
+
+.btn-voltar{
+width:90%;
+max-width:320px;
 }
 
 }
