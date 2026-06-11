@@ -3,44 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Agendamento - Toda Bella Studio</title>
 
 <link rel="stylesheet" href="style.css">
-
-<style>
-
-.logo{
-width:200px;
-max-width:80%;
-display:block;
-margin:20px auto;
-}
-
-@media(max-width:768px){
-
-.logo{
-width:160px;
-}
-
-}
-
-</style>
 
 </head>
 
 <body>
 
-<div style="text-align:center; margin-top:20px;">
+<div class="voltar-container">
 
-<a href="index.html"
-style="
-background:#c97b95;
-color:white;
-padding:12px 25px;
-text-decoration:none;
-border-radius:30px;
-font-weight:bold;
-display:inline-block;">
+<a href="index.html" class="btn-voltar">
 
 ⬅ Voltar ao Menu Principal
 
@@ -57,7 +31,7 @@ class="logo">
 
 <h1>Toda Bella Studio</h1>
 
-<p>Agende seu horário online</p>
+<p>Reserve seu momento de beleza com conforto e praticidade.</p>
 
 </header>
 
@@ -65,32 +39,48 @@ class="logo">
 
 <div class="card">
 
-<h2>Novo Agendamento</h2>
+<div class="boas-vindas">
+
+<h2>✨ Novo Agendamento ✨</h2>
+
+<p>
+Escolha o serviço desejado e selecione o melhor horário para você.
+</p>
+
+</div>
 
 <form id="agendamentoForm">
 
-<label>Nome</label>
+<label for="nome">
+👤 Nome Completo
+</label>
 
 <input
 type="text"
 id="nome"
+placeholder="Digite seu nome"
 required>
 
-<label>Telefone</label>
+<label for="telefone">
+📞 Telefone
+</label>
 
 <input
 type="tel"
 id="telefone"
+placeholder="(11) 99999-9999"
 required>
 
-<label>Serviço</label>
+<label for="servico">
+💇 Serviço
+</label>
 
 <select
 id="servico"
 required>
 
 <option value="">
-Selecione
+Selecione um serviço
 </option>
 
 <option>
@@ -119,14 +109,18 @@ Tratamento Capilar - R$69,99
 
 </select>
 
-<label>Data</label>
+<label for="data">
+📅 Data
+</label>
 
 <input
 type="date"
 id="data"
 required>
 
-<label>Horário</label>
+<label for="horario">
+⏰ Horário
+</label>
 
 <select
 id="horario"
@@ -142,7 +136,7 @@ Selecione uma data primeiro
 class="btn"
 type="submit">
 
-Confirmar Agendamento
+🌸 Confirmar Agendamento
 
 </button>
 
@@ -154,7 +148,13 @@ Confirmar Agendamento
 
 <footer>
 
-© Toda Bella Studio
+<p>
+Toda Bella Studio © 2026
+</p>
+
+<p>
+Transformando autoestima em beleza.
+</p>
 
 </footer>
 
