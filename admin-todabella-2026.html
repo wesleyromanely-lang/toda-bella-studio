@@ -101,8 +101,7 @@ background:#e53935;
 }
 
 #agendaVisual,
-#relatorioMensal,
-#calendarioMensal{
+#relatorioMensal{
 background:white;
 padding:20px;
 border-radius:15px;
@@ -128,33 +127,6 @@ h1{
 text-align:center;
 color:#c97b95;
 margin-bottom:20px;
-}
-
-.calendario-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(80px,1fr));
-gap:10px;
-margin-top:15px;
-}
-
-.dia-calendario{
-padding:15px;
-border-radius:12px;
-text-align:center;
-font-weight:bold;
-cursor:pointer;
-}
-
-.dia-livre{
-background:#e8f5e9;
-}
-
-.dia-parcial{
-background:#fff8e1;
-}
-
-.dia-lotado{
-background:#ffebee;
 }
 
 @media(max-width:768px){
@@ -229,18 +201,6 @@ class="logo">
 <p id="faturamentoMes">💰 Faturamento Mensal: R$ 0,00</p>
 
 <p id="servicoMaisVendido">⭐ Serviço Mais Vendido: -</p>
-
-</div>
-
-<div id="calendarioMensal">
-
-<h2>📅 Calendário Mensal</h2>
-
-<p>
-🟢 Livre • 🟡 Parcial • 🔴 Lotado
-</p>
-
-<div id="calendario" class="calendario-grid"></div>
 
 </div>
 
