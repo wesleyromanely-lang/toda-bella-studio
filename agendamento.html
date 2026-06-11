@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Agendamento - Toda Bella Studio</title>
 
 <link rel="stylesheet" href="style.css">
@@ -12,9 +11,9 @@
 
 <body>
 
-<div class="voltar-container">
+<div style="text-align:center; margin-top:20px;">
 
-<a href="index.html" class="btn-voltar">
+<a href="index.html" class="voltar">
 
 ⬅ Voltar ao Menu Principal
 
@@ -24,14 +23,9 @@
 
 <header>
 
-<img
-src="logo-todabella.png"
-alt="Toda Bella Studio"
-class="logo">
-
 <h1>Toda Bella Studio</h1>
 
-<p>Reserve seu momento de beleza com conforto e praticidade.</p>
+<p>Agende seu horário online</p>
 
 </header>
 
@@ -39,48 +33,32 @@ class="logo">
 
 <div class="card">
 
-<div class="boas-vindas">
-
-<h2>✨ Novo Agendamento ✨</h2>
-
-<p>
-Escolha o serviço desejado e selecione o melhor horário para você.
-</p>
-
-</div>
+<h2>Novo Agendamento</h2>
 
 <form id="agendamentoForm">
 
-<label for="nome">
-👤 Nome Completo
-</label>
+<label>Nome</label>
 
 <input
 type="text"
 id="nome"
-placeholder="Digite seu nome"
 required>
 
-<label for="telefone">
-📞 Telefone
-</label>
+<label>Telefone</label>
 
 <input
 type="tel"
 id="telefone"
-placeholder="(11) 99999-9999"
 required>
 
-<label for="servico">
-💇 Serviço
-</label>
+<label>Serviço</label>
 
 <select
 id="servico"
 required>
 
 <option value="">
-Selecione um serviço
+Selecione
 </option>
 
 <option>
@@ -109,18 +87,14 @@ Tratamento Capilar - R$69,99
 
 </select>
 
-<label for="data">
-📅 Data
-</label>
+<label>Data</label>
 
 <input
 type="date"
 id="data"
 required>
 
-<label for="horario">
-⏰ Horário
-</label>
+<label>Horário</label>
 
 <select
 id="horario"
@@ -136,7 +110,7 @@ Selecione uma data primeiro
 class="btn"
 type="submit">
 
-🌸 Confirmar Agendamento
+Confirmar Agendamento
 
 </button>
 
@@ -148,13 +122,7 @@ type="submit">
 
 <footer>
 
-<p>
-Toda Bella Studio © 2026
-</p>
-
-<p>
-Transformando autoestima em beleza.
-</p>
+<p>© Toda Bella Studio</p>
 
 </footer>
 
