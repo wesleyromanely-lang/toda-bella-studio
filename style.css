@@ -9,20 +9,13 @@ header{
 background:#ffffff;
 padding:50px 20px;
 text-align:center;
-border-bottom:1px solid #f3f3f3;
-}
-
-.logo{
-width:180px;
-max-width:80%;
-display:block;
-margin:0 auto 20px;
+border-bottom:1px solid #f0f0f0;
 }
 
 header h1{
 font-size:2.5rem;
 margin-bottom:10px;
-color:#B76E79; /* Rose Gold */
+color:#B76E79;
 }
 
 header p{
@@ -95,23 +88,6 @@ background:#a85f6b;
 transform:translateY(-2px);
 }
 
-a{
-color:#B76E79;
-}
-
-footer{
-background:#ffffff;
-padding:25px;
-text-align:center;
-color:#888;
-border-top:1px solid #f0f0f0;
-margin-top:40px;
-}
-
-footer p{
-margin:5px 0;
-}
-
 .voltar{
 background:#B76E79;
 color:white;
@@ -127,6 +103,19 @@ transition:.3s;
 background:#a85f6b;
 }
 
+footer{
+background:#ffffff;
+padding:25px;
+text-align:center;
+color:#888;
+border-top:1px solid #f0f0f0;
+margin-top:40px;
+}
+
+footer p{
+margin:5px 0;
+}
+
 @media(max-width:768px){
 
 header h1{
@@ -135,10 +124,6 @@ font-size:2rem;
 
 .card{
 padding:25px;
-}
-
-.logo{
-width:150px;
 }
 
 }
