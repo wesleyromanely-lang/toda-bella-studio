@@ -4,12 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agendamento - Toda Bella Studio</title>
+
 <link rel="stylesheet" href="style.css">
+
+<style>
+
+.logo{
+width:200px;
+max-width:80%;
+display:block;
+margin:20px auto;
+}
+
+@media(max-width:768px){
+
+.logo{
+width:160px;
+}
+
+}
+
+</style>
+
 </head>
 
 <body>
 
 <div style="text-align:center; margin-top:20px;">
+
 <a href="index.html"
 style="
 background:#c97b95;
@@ -19,16 +41,28 @@ text-decoration:none;
 border-radius:30px;
 font-weight:bold;
 display:inline-block;">
+
 ⬅ Voltar ao Menu Principal
+
 </a>
+
 </div>
 
 <header>
+
+<img
+src="logo-todabella.png"
+alt="Toda Bella Studio"
+class="logo">
+
 <h1>Toda Bella Studio</h1>
+
 <p>Agende seu horário online</p>
+
 </header>
 
 <div class="container">
+
 <div class="card">
 
 <h2>Novo Agendamento</h2>
@@ -36,41 +70,92 @@ display:inline-block;">
 <form id="agendamentoForm">
 
 <label>Nome</label>
-<input type="text" id="nome" required>
+
+<input
+type="text"
+id="nome"
+required>
 
 <label>Telefone</label>
-<input type="tel" id="telefone" required>
+
+<input
+type="tel"
+id="telefone"
+required>
 
 <label>Serviço</label>
-<select id="servico" required>
-<option value="">Selecione</option>
-<option>Progressiva - R$120,00</option>
-<option>Botox Capilar - R$99,00</option>
-<option>Cronograma Capilar - R$99,00</option>
-<option>Escova - R$50,00</option>
-<option>Selagem - R$79,99</option>
-<option>Tratamento Capilar - R$69,99</option>
+
+<select
+id="servico"
+required>
+
+<option value="">
+Selecione
+</option>
+
+<option>
+Progressiva - R$120,00
+</option>
+
+<option>
+Botox Capilar - R$99,00
+</option>
+
+<option>
+Cronograma Capilar - R$99,00
+</option>
+
+<option>
+Escova - R$50,00
+</option>
+
+<option>
+Selagem - R$79,99
+</option>
+
+<option>
+Tratamento Capilar - R$69,99
+</option>
+
 </select>
 
 <label>Data</label>
-<input type="date" id="data" required>
+
+<input
+type="date"
+id="data"
+required>
 
 <label>Horário</label>
-<select id="horario" required>
-<option value="">Selecione uma data primeiro</option>
+
+<select
+id="horario"
+required>
+
+<option value="">
+Selecione uma data primeiro
+</option>
+
 </select>
 
-<button class="btn" type="submit">
+<button
+class="btn"
+type="submit">
+
 Confirmar Agendamento
+
 </button>
 
 </form>
 
 </div>
+
 </div>
 
 <footer>
+
 © Toda Bella Studio
+
 </footer>
 
 <script type="module" src="app.js"></script>
