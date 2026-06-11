@@ -29,6 +29,13 @@ text-align:center;
 color:#c97b95;
 }
 
+.logo{
+display:block;
+margin:0 auto 20px;
+width:180px;
+max-width:80%;
+}
+
 input{
 width:100%;
 padding:12px;
@@ -48,6 +55,10 @@ border-radius:10px;
 cursor:pointer;
 font-weight:bold;
 margin-top:5px;
+}
+
+button:hover{
+opacity:.9;
 }
 
 #painel{
@@ -112,12 +123,32 @@ border-radius:10px;
 margin:5px 0;
 }
 
+h1{
+text-align:center;
+color:#c97b95;
+margin-bottom:20px;
+}
+
+@media(max-width:768px){
+
+.logo{
+width:140px;
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
 
 <div class="login" id="login">
+
+<img
+src="logo-todabella.png"
+alt="Toda Bella Studio"
+class="logo">
 
 <h2>🔒 Área Administrativa</h2>
 
@@ -133,6 +164,11 @@ Entrar
 </div>
 
 <div id="painel">
+
+<img
+src="logo-todabella.png"
+alt="Toda Bella Studio"
+class="logo">
 
 <h1>Toda Bella Studio</h1>
 
@@ -183,7 +219,9 @@ placeholder="Pesquisar cliente">
 
 <h2>📅 Agenda por Data</h2>
 
-<input type="date" id="dataAgenda">
+<input
+type="date"
+id="dataAgenda">
 
 <button onclick="mostrarAgendaData()">
 Consultar Agenda
