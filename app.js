@@ -15,6 +15,33 @@ const horariosFixos = [
   "16:30"
 ];
 
+// Bloquear domingos e segundas
+dataInput.addEventListener("change", function () {
+
+  const dataSelecionada = new Date(this.value + "T00:00:00");
+
+  const diaSemana = dataSelecionada.getDay();
+
+  // 0 = Domingo | 1 = Segunda
+
+  if (diaSemana === 0 || diaSemana === 1) {
+
+    alert(
+      "Não realizamos atendimentos aos domingos e segundas-feiras."
+    );
+
+    this.value = "";
+
+    horarioSelect.innerHTML =
+      '<option value="">Selecione uma data válida</option>';
+
+    return;
+  }
+
+  carregarHorarios();
+
+});
+
 async function carregarHorarios() {
 
   const dataSelecionada = dataInput.value;
@@ -135,11 +162,6 @@ async function carregarHorarios() {
 
 }
 
-dataInput.addEventListener(
-  "change",
-  carregarHorarios
-);
-
 form.addEventListener("submit", async (e) => {
 
   e.preventDefault();
@@ -158,6 +180,14 @@ form.addEventListener("submit", async (e) => {
 
   const horario =
     document.getElementById("horario").value;
+
+  if (!horario) {
+
+    alert("Selecione um horário válido.");
+
+    return;
+
+  }
 
   const dataFormatada =
     data.split("-").reverse().join("/");
