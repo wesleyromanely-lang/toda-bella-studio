@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Agendamento - Toda Bella Studio</title>
 
 <link rel="stylesheet" href="style.css">
 
 </head>
 
+
 <body>
+
 
 <div style="text-align:center; margin-top:20px;">
 
@@ -21,6 +27,8 @@
 
 </div>
 
+
+
 <header>
 
 <h1>Toda Bella Studio</h1>
@@ -29,82 +37,124 @@
 
 </header>
 
+
+
 <div class="container">
+
 
 <div class="card">
 
+
 <h2>Novo Agendamento</h2>
+
 
 <form id="agendamentoForm">
 
-<label>Nome</label>
+
+
+<label>
+Nome
+</label>
 
 <input
 type="text"
 id="nome"
+placeholder="Digite seu nome"
 required>
 
-<label>Telefone</label>
+
+
+<label>
+Telefone
+</label>
 
 <input
 type="tel"
 id="telefone"
+placeholder="(11) 99999-9999"
 required>
 
-<label>Serviço</label>
 
-<select
-id="servico"
-required>
+
+
+<label>
+Serviço
+</label>
+
+
+<select id="servico" required>
+
 
 <option value="">
-Selecione
+Selecione o serviço
 </option>
+
 
 <option>
 Progressiva - R$120,00
 </option>
 
+
 <option>
 Botox Capilar - R$99,00
 </option>
+
 
 <option>
 Cronograma Capilar - R$99,00
 </option>
 
+
 <option>
 Escova - R$50,00
 </option>
+
 
 <option>
 Selagem - R$79,99
 </option>
 
+
 <option>
 Tratamento Capilar - R$69,99
 </option>
 
+
 </select>
 
-<label>Data</label>
+
+
+
+<label>
+Data
+</label>
+
 
 <input
 type="date"
 id="data"
 required>
 
-<label>Horário</label>
 
-<select
-id="horario"
-required>
+
+
+<label>
+Horário
+</label>
+
+
+<select id="horario" required>
+
 
 <option value="">
 Selecione uma data primeiro
 </option>
 
+
 </select>
+
+
+
 
 <button
 class="btn"
@@ -114,19 +164,37 @@ Confirmar Agendamento
 
 </button>
 
+
+
 </form>
 
-</div>
 
 </div>
+
+
+</div>
+
+
+
 
 <footer>
 
-<p>© Toda Bella Studio</p>
+<p>
+© Toda Bella Studio
+</p>
 
 </footer>
 
-<script type="module" src="app.js"></script>
+
+
+
+<script
+type="module"
+src="app.js">
+
+</script>
+
 
 </body>
+
 </html>
