@@ -15,19 +15,27 @@ const horariosFixos = [
   "16:30"
 ];
 
-// Bloquear domingos e segundas
+function diaBloqueado(data) {
+
+  const dataSelecionada =
+    new Date(data + "T00:00:00");
+
+  const diaSemana =
+    dataSelecionada.getDay();
+
+  return diaSemana === 0 || diaSemana === 1;
+
+}
+
+
+// Bloqueia domingos e segundas
+
 dataInput.addEventListener("change", function () {
 
-  const dataSelecionada = new Date(this.value + "T00:00:00");
-
-  const diaSemana = dataSelecionada.getDay();
-
-  // 0 = Domingo | 1 = Segunda
-
-  if (diaSemana === 0 || diaSemana === 1) {
+  if (diaBloqueado(this.value)) {
 
     alert(
-      "Não realizamos atendimentos aos domingos e segundas-feiras."
+      "A Toda Bella Studio não atende aos domingos e segundas-feiras."
     );
 
     this.value = "";
@@ -38,13 +46,19 @@ dataInput.addEventListener("change", function () {
     return;
   }
 
+
   carregarHorarios();
 
 });
 
+
+
 async function carregarHorarios() {
 
-  const dataSelecionada = dataInput.value;
+
+  const dataSelecionada =
+    dataInput.value;
+
 
   if (!dataSelecionada) {
 
@@ -52,22 +66,32 @@ async function carregarHorarios() {
       '<option value="">Selecione uma data primeiro</option>';
 
     return;
+
   }
+
 
   try {
 
+
     horarioSelect.innerHTML = "";
+
 
     const snapshot =
       await get(child(ref(db), "agendamentos"));
 
+
     let ocupados = [];
+
 
     if (snapshot.exists()) {
 
-      const dados = snapshot.val();
+
+      const dados =
+        snapshot.val();
+
 
       Object.values(dados).forEach(item => {
+
 
         if (item.data === dataSelecionada) {
 
@@ -77,109 +101,137 @@ async function carregarHorarios() {
 
       });
 
+
     }
+
+
 
     let horariosDisponiveis =
       [...horariosFixos];
 
-    const hoje = new Date();
+
+    const hoje =
+      new Date();
+
 
     const hojeTexto =
       hoje.toISOString().split("T")[0];
 
+
     if (dataSelecionada === hojeTexto) {
 
-      const horaAtual =
-        hoje.getHours();
-
-      const minutoAtual =
-        hoje.getMinutes();
 
       const minutosAgora =
-        (horaAtual * 60) + minutoAtual;
+        (hoje.getHours() * 60) +
+        hoje.getMinutes();
 
-      const fimExpediente =
-        (17 * 60);
 
-      if (minutosAgora >= fimExpediente) {
-
-        horarioSelect.innerHTML =
-          '<option value="">Não há mais horários disponíveis para hoje</option>';
-
-        return;
-
-      }
 
       horariosDisponiveis =
         horariosDisponiveis.filter(horario => {
 
-          const [hora, minuto] =
+
+          const [hora,minuto] =
             horario.split(":").map(Number);
+
 
           const minutosHorario =
             (hora * 60) + minuto;
 
+
           return minutosHorario > minutosAgora;
+
 
         });
 
+
     }
+
+
 
     const livres =
       horariosDisponiveis.filter(
         horario => !ocupados.includes(horario)
       );
 
+
+
     if (livres.length === 0) {
+
 
       horarioSelect.innerHTML =
         '<option value="">Nenhum horário disponível</option>';
+
 
       return;
 
     }
 
+
+
     livres.forEach(horario => {
+
 
       const option =
         document.createElement("option");
 
+
       option.value = horario;
       option.textContent = horario;
 
+
       horarioSelect.appendChild(option);
+
 
     });
 
+
+
   } catch (erro) {
 
+
     console.error("Erro:", erro);
+
 
     horarioSelect.innerHTML =
       '<option value="">Erro ao carregar horários</option>';
 
+
   }
+
 
 }
 
+
+
+
 form.addEventListener("submit", async (e) => {
 
+
   e.preventDefault();
+
+
 
   const nome =
     document.getElementById("nome").value;
 
+
   const telefone =
     document.getElementById("telefone").value;
+
 
   const servico =
     document.getElementById("servico").value;
 
+
   const data =
     document.getElementById("data").value;
 
+
   const horario =
     document.getElementById("horario").value;
+
+
 
   if (!horario) {
 
@@ -189,21 +241,48 @@ form.addEventListener("submit", async (e) => {
 
   }
 
+
+
+  // Proteção extra
+
+  if (diaBloqueado(data)) {
+
+
+    alert(
+      "Não é possível agendar aos domingos ou segundas."
+    );
+
+
+    return;
+
+  }
+
+
+
   const dataFormatada =
     data.split("-").reverse().join("/");
 
+
+
   try {
 
-    await push(ref(db, "agendamentos"), {
+
+
+    await push(ref(db,"agendamentos"), {
+
 
       nome,
       telefone,
       servico,
       data,
       horario,
-      criadoEm: new Date().toISOString()
+      criadoEm:
+      new Date().toISOString()
+
 
     });
+
+
 
     const mensagem =
 `NOVO AGENDAMENTO - TODA BELLA STUDIO
@@ -214,24 +293,36 @@ Serviço: ${servico}
 Data: ${dataFormatada}
 Horário: ${horario}`;
 
+
+
     const whatsapp =
-      `https://wa.me/5511964201177?text=${encodeURIComponent(mensagem)}`;
+    `https://wa.me/5511964201177?text=${encodeURIComponent(mensagem)}`;
+
+
 
     alert(
       "Agendamento realizado com sucesso!"
     );
 
+
+
     window.location.href =
       whatsapp;
 
+
+
   } catch (erro) {
 
+
     console.error(erro);
+
 
     alert(
       "Erro ao salvar agendamento."
     );
 
+
   }
+
 
 });
