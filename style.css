@@ -3,11 +3,12 @@ box-sizing:border-box;
 }
 
 
+
 body{
 
 margin:0;
 
-font-family:Arial, sans-serif;
+font-family:'Segoe UI',sans-serif;
 
 background:#f7f3f5;
 
@@ -32,7 +33,7 @@ margin:auto;
 
 background:white;
 
-border-radius:25px;
+border-radius:28px;
 
 padding:25px;
 
@@ -54,9 +55,9 @@ text-align:center;
 
 .logo-placeholder{
 
-width:90px;
+width:95px;
 
-height:90px;
+height:95px;
 
 border-radius:50%;
 
@@ -78,7 +79,6 @@ margin:auto;
 
 
 
-
 h1{
 
 color:#333;
@@ -94,9 +94,9 @@ width:100%;
 
 height:60px;
 
-border:0;
+border:none;
 
-border-radius:18px;
+border-radius:20px;
 
 background:#e91e63;
 
@@ -110,9 +110,7 @@ font-weight:bold;
 
 
 
-
 .servico{
-
 
 display:flex;
 
@@ -120,11 +118,11 @@ justify-content:space-between;
 
 align-items:center;
 
-padding:18px;
-
 background:#fafafa;
 
-border-radius:18px;
+padding:18px;
+
+border-radius:20px;
 
 margin-bottom:15px;
 
@@ -136,15 +134,13 @@ cursor:pointer;
 
 .servico span{
 
-
 background:#e91e63;
 
 color:white;
 
-padding:12px 15px;
+padding:12px 18px;
 
 border-radius:15px;
-
 
 }
 
@@ -152,13 +148,11 @@ border-radius:15px;
 
 .horarios{
 
-
 display:grid;
 
 grid-template-columns:1fr 1fr;
 
 gap:15px;
-
 
 }
 
@@ -166,10 +160,9 @@ gap:15px;
 
 .horarios button{
 
+height:60px;
 
-height:55px;
-
-border:0;
+border:none;
 
 border-radius:18px;
 
@@ -177,13 +170,26 @@ background:#f6d7e4;
 
 font-size:18px;
 
-font-weight:bold;
-
 cursor:pointer;
 
 }
 
 
 
+.resumo input{
 
+width:100%;
 
+height:55px;
+
+margin-top:15px;
+
+border-radius:15px;
+
+border:1px solid #ddd;
+
+padding:15px;
+
+font-size:16px;
+
+}
