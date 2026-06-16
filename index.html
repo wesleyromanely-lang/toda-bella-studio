@@ -20,27 +20,182 @@
 <div class="app">
 
 
+<!-- TELA INICIAL -->
 
-<header class="topo">
+<div id="home" class="tela">
 
 
-<div class="logo-placeholder">
+<header class="header">
+
+<div class="perfil">
 TB
 </div>
 
+<div>
+<h1>Toda Bella</h1>
+<p>Studio de Beleza ✨</p>
+</div>
 
-<h1>Toda Bella Studio</h1>
+
+</header>
+
+
+
+
+<div class="busca">
+
+🔍 Buscar serviço
+
+</div>
+
+
+
+
+<div class="banner">
+
+<h2>
+Realce sua beleza
+</h2>
 
 <p>
-Agende seu horário online ✨
+Agende seu horário online
 </p>
 
+</div>
 
-<button class="btn-principal" onclick="abrirAgenda()">
 
-Agendar agora
 
+
+
+<h2>Serviços</h2>
+
+
+
+<div class="cards">
+
+
+
+<div class="servico"
+onclick="abrirAgendamento('Manicure')">
+
+💅
+
+<h3>Manicure</h3>
+
+<p>60 min</p>
+
+</div>
+
+
+
+
+
+<div class="servico"
+onclick="abrirAgendamento('Corte')">
+
+💇
+
+<h3>Corte</h3>
+
+<p>45 min</p>
+
+</div>
+
+
+
+
+
+<div class="servico"
+onclick="abrirAgendamento('Escova')">
+
+✨
+
+<h3>Escova</h3>
+
+<p>40 min</p>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<h2>Especialista</h2>
+
+
+
+<div class="profissional">
+
+👩
+
+<div>
+
+<h3>Toda Bella</h3>
+
+⭐ 4.9
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<nav>
+
+
+<button>
+⌂
 </button>
+
+<button onclick="abrirAgendamento()">
+📅
+</button>
+
+<button>
+♡
+</button>
+
+<button>
+👤
+</button>
+
+
+</nav>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- TELA AGENDAMENTO -->
+
+<div id="agenda" class="tela escondida">
+
+
+
+<header class="top">
+
+<button onclick="voltar()">
+←
+</button>
+
+
+<h2>
+Agendamento
+</h2>
 
 
 </header>
@@ -49,206 +204,114 @@ Agendar agora
 
 
 
-<section class="card">
 
+<h3 id="tituloServico">
 
-<h2>Serviços</h2>
+Escolha o serviço
 
-
-
-<div class="servico" onclick="selecionarServico('Manicure')">
-
-<div>
-
-<h3>💅 Manicure</h3>
-
-<p>60 minutos</p>
-
-</div>
-
-<span>
-Escolher
-</span>
-
-</div>
-
-
-
-
-<div class="servico" onclick="selecionarServico('Corte Feminino')">
-
-<div>
-
-<h3>💇 Corte Feminino</h3>
-
-<p>45 minutos</p>
-
-</div>
-
-<span>
-Escolher
-</span>
-
-</div>
-
-
-
-
-
-<div class="servico" onclick="selecionarServico('Escova')">
-
-<div>
-
-<h3>✨ Escova</h3>
-
-<p>40 minutos</p>
-
-</div>
-
-<span>
-Escolher
-</span>
-
-</div>
-
-
-</section>
+</h3>
 
 
 
 
 
 
-
-<section class="card" id="agenda">
+<div class="calendario">
 
 
 <h2>
-Escolha o horário
+Junho
 </h2>
+
+
+<div class="dias">
+
+<span>09</span>
+<span>10</span>
+<span>11</span>
+<span>12</span>
+<span>13</span>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<h3>
+Horários
+</h3>
+
 
 
 
 <div class="horarios">
 
 
-<button onclick="escolherHorario('09:30')">
+<button onclick="hora('09:30')">
 09:30
 </button>
 
 
-<button onclick="escolherHorario('10:30')">
+<button onclick="hora('10:30')">
 10:30
 </button>
 
 
-<button onclick="escolherHorario('11:30')">
+<button onclick="hora('11:30')">
 11:30
 </button>
 
 
-<button onclick="escolherHorario('12:30')">
-12:30
-</button>
-
-
-<button onclick="escolherHorario('13:30')">
+<button onclick="hora('13:30')">
 13:30
 </button>
 
 
-<button onclick="escolherHorario('14:30')">
+<button onclick="hora('14:30')">
 14:30
 </button>
 
 
-<button onclick="escolherHorario('15:30')">
+<button onclick="hora('15:30')">
 15:30
 </button>
 
 
-<button onclick="escolherHorario('16:30')">
-16:30
+
+</div>
+
+
+
+
+
+
+<div class="confirm">
+
+
+<p id="resumo">
+
+Selecione o horário
+
+</p>
+
+
+<button onclick="confirmar()">
+
+Agendar
+
 </button>
 
 
 </div>
 
 
-</section>
 
-
-
-
-
-
-
-<section class="card resumo">
-
-
-<h2>
-Confirmar agendamento
-</h2>
-
-
-
-<p id="resultado">
-
-Escolha serviço e horário
-
-</p>
-
-
-
-
-<input 
-id="nomeCliente"
-placeholder="Seu nome">
-
-
-
-<input 
-id="telefone"
-placeholder="WhatsApp">
-
-
-
-
-
-<button class="confirmar" onclick="confirmar()">
-
-Confirmar
-
-</button>
-
-
-
-</section>
-
-
-
-
-
-
-<section class="card">
-
-
-<h2>
-Atendimento
-</h2>
-
-
-<p>
-Terça a Sábado
-</p>
-
-
-<p>
-09:30 às 16:30
-</p>
-
-
-</section>
+</div>
 
 
 
@@ -258,152 +321,7 @@ Terça a Sábado
 
 
 
-
-
-
-<script>
-
-
-let servico="";
-
-let horario="";
-
-
-
-
-
-function abrirAgenda(){
-
-
-document
-.getElementById("agenda")
-.scrollIntoView({
-behavior:"smooth"
-});
-
-
-}
-
-
-
-
-
-function selecionarServico(nome){
-
-
-servico = nome;
-
-
-
-document.getElementById("resultado").innerHTML =
-
-"Serviço:<br><b>"
-+servico+
-"</b><br><br>Escolha o horário";
-
-
-}
-
-
-
-
-
-
-function escolherHorario(hora){
-
-
-horario = hora;
-
-
-
-document.getElementById("resultado").innerHTML =
-
-"Serviço:<br><b>"
-+servico+
-"</b><br><br>Horário:<br><b>"
-+horario+
-"</b>";
-
-
-}
-
-
-
-
-
-
-function confirmar(){
-
-
-
-let nome =
-document.getElementById("nomeCliente").value;
-
-
-
-let telefone =
-document.getElementById("telefone").value;
-
-
-
-
-
-if(servico=="" || horario==""){
-
-
-alert("Escolha serviço e horário");
-
-return;
-
-}
-
-
-
-
-
-if(nome=="" || telefone==""){
-
-
-alert("Preencha seus dados");
-
-return;
-
-
-}
-
-
-
-
-
-document.getElementById("resultado").innerHTML =
-
-
-"✅ Agendamento confirmado!<br><br>"+
-
-"<b>"+servico+"</b><br>"+
-
-horario+
-
-"<br><br>"+
-
-nome+
-
-"<br>"+
-
-telefone;
-
-
-
-}
-
-
-
-
-
-</script>
-
-
-
+<script src="script.js"></script>
 
 
 </body>
