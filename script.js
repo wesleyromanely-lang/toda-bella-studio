@@ -1,8 +1,6 @@
-let servicoEscolhido = "";
-
-let diaEscolhido = "";
-
-let horarioEscolhido = "";
+let servicoEscolhido="";
+let diaEscolhido="";
+let horarioEscolhido="";
 
 
 
@@ -11,28 +9,47 @@ let horarioEscolhido = "";
 function abrirAgendamento(servico){
 
 
+
 if(servico){
 
-servicoEscolhido = servico;
+servicoEscolhido=servico;
 
 
-document.getElementById("tituloServico").innerHTML =
-"✨ " + servico;
-
+document.getElementById("tituloServico").innerHTML=
+"✨ "+servico;
 
 }
 
 
 
-document
-.getElementById("home")
-.classList.add("escondida");
+let home =
+document.getElementById("home");
+
+
+let agenda =
+document.getElementById("agenda");
 
 
 
-document
-.getElementById("agenda")
-.classList.remove("escondida");
+home.classList.add("sair");
+
+
+
+setTimeout(()=>{
+
+
+home.classList.add("escondida");
+
+
+agenda.classList.remove("escondida");
+
+
+agenda.classList.add("entrar");
+
+
+
+},300);
+
 
 
 }
@@ -46,18 +63,39 @@ document
 function voltar(){
 
 
-document
-.getElementById("agenda")
-.classList.add("escondida");
+
+let home =
+document.getElementById("home");
+
+
+let agenda =
+document.getElementById("agenda");
 
 
 
-document
-.getElementById("home")
-.classList.remove("escondida");
+agenda.classList.add("sair");
+
+
+
+setTimeout(()=>{
+
+
+agenda.classList.add("escondida");
+
+
+home.classList.remove("escondida");
+
+
+home.classList.add("entrar");
+
+
+
+},300);
+
 
 
 }
+
 
 
 
@@ -68,15 +106,13 @@ document
 function dia(valor){
 
 
-diaEscolhido = valor;
+diaEscolhido=valor;
 
 
-
-atualizarResumo();
+atualizar();
 
 
 }
-
 
 
 
@@ -85,51 +121,47 @@ atualizarResumo();
 function hora(valor){
 
 
-horarioEscolhido = valor;
+horarioEscolhido=valor;
+
+
+atualizar();
+
+
+}
 
 
 
-atualizarResumo();
+
+
+
+
+function atualizar(){
+
+
+
+document.getElementById("resumo").innerHTML=
+
+
+`
+Serviço:<br>
+<b>${servicoEscolhido}</b>
+
+<br><br>
+
+Dia:<br>
+<b>${diaEscolhido}</b>
+
+<br><br>
+
+Horário:<br>
+<b>${horarioEscolhido}</b>
+
+`;
+
 
 
 }
 
-
-
-
-
-
-
-function atualizarResumo(){
-
-
-
-document.getElementById("resumo").innerHTML =
-
-
-"Serviço:<br><b>"
-+
-servicoEscolhido
-+
-"</b><br><br>"+
-
-
-"Dia:<br><b>"
-+
-diaEscolhido
-+
-"</b><br><br>"+
-
-
-"Horário:<br><b>"
-+
-horarioEscolhido
-+
-"</b>";
-
-
-
-}
 
 
 
@@ -140,10 +172,8 @@ horarioEscolhido
 function confirmar(){
 
 
-
 let nome =
 document.getElementById("nome").value;
-
 
 
 let whatsapp =
@@ -152,17 +182,14 @@ document.getElementById("whatsapp").value;
 
 
 
-
-if(servicoEscolhido=="" ||
-diaEscolhido=="" ||
-horarioEscolhido==""){
+if(!servicoEscolhido ||
+!diaEscolhido ||
+!horarioEscolhido){
 
 
 alert("Complete o agendamento");
 
-
 return;
-
 
 }
 
@@ -170,14 +197,12 @@ return;
 
 
 
-if(nome=="" || whatsapp==""){
+if(!nome || !whatsapp){
 
 
-alert("Digite seus dados");
-
+alert("Informe seus dados");
 
 return;
-
 
 }
 
@@ -186,33 +211,26 @@ return;
 
 
 
-
-document.getElementById("resumo").innerHTML =
+document.getElementById("resumo").innerHTML=
 
 
 `
-<h2>✅ Confirmado</h2>
+<h2>✅ Agendado</h2>
 
-Serviço:
-<b>${servicoEscolhido}</b>
-
-<br><br>
-
-Dia:
-<b>${diaEscolhido}</b>
-
+${servicoEscolhido}
 
 <br><br>
 
-Horário:
-<b>${horarioEscolhido}</b>
+${diaEscolhido}
 
+<br>
+
+${horarioEscolhido}
 
 <br><br>
 
 Cliente:
 <b>${nome}</b>
-
 
 `;
 
