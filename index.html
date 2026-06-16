@@ -24,10 +24,11 @@
 
 
 <div class="logo">
-
-<img src="logo.png">
-
+<div class="logo-placeholder">
+TB
 </div>
+</div>
+
 
 
 <h1>Toda Bella Studio</h1>
@@ -37,8 +38,8 @@ Agende seu horário online ✨
 </p>
 
 
-<button class="btn-principal"
-onclick="abrirAgenda()">
+
+<button class="btn-principal" onclick="abrirAgenda()">
 
 Agendar agora
 
@@ -70,7 +71,7 @@ Agendar agora
 </div>
 
 
-<button onclick="selecionarServico('Manicure')">
+<button type="button" onclick="selecionarServico('Manicure')">
 
 Escolher
 
@@ -95,7 +96,7 @@ Escolher
 </div>
 
 
-<button onclick="selecionarServico('Corte Feminino')">
+<button type="button" onclick="selecionarServico('Corte Feminino')">
 
 Escolher
 
@@ -120,7 +121,7 @@ Escolher
 </div>
 
 
-<button onclick="selecionarServico('Escova')">
+<button type="button" onclick="selecionarServico('Escova')">
 
 Escolher
 
@@ -130,8 +131,8 @@ Escolher
 </div>
 
 
-
 </section>
+
 
 
 
@@ -160,7 +161,6 @@ Escolha o horário
 </button>
 
 
-
 <button onclick="horario('11:30')">
 11:30
 </button>
@@ -171,25 +171,31 @@ Escolha o horário
 </button>
 
 
-
 <button onclick="horario('13:30')">
+
 13:30
+
 </button>
 
 
 <button onclick="horario('14:30')">
+
 14:30
+
 </button>
 
 
-
 <button onclick="horario('15:30')">
+
 15:30
+
 </button>
 
 
 <button onclick="horario('16:30')">
+
 16:30
+
 </button>
 
 
@@ -198,6 +204,7 @@ Escolha o horário
 
 
 </section>
+
 
 
 
@@ -208,27 +215,32 @@ Escolha o horário
 
 
 <h2>
-Seu agendamento
+
+Resumo
+
 </h2>
 
 
 <p id="resultado">
 
-Escolha um serviço e horário
+Escolha o serviço e horário
 
 </p>
 
 
 
-<button class="confirmar"
-onclick="confirmar()">
+
+<button class="confirmar" onclick="confirmar()">
 
 Confirmar agendamento
 
 </button>
 
 
+
 </section>
+
+
 
 
 
@@ -239,17 +251,23 @@ Confirmar agendamento
 
 
 <h2>
-Horário de atendimento
+
+Atendimento
+
 </h2>
 
 
 <p>
+
 Terça a Sábado
+
 </p>
 
 
 <p>
+
 09:30 às 16:30
+
 </p>
 
 
@@ -257,8 +275,9 @@ Terça a Sábado
 
 
 
-
 </div>
+
+
 
 
 
@@ -272,13 +291,16 @@ let horarioEscolhido="";
 
 
 
+
 function abrirAgenda(){
+
 
 document
 .getElementById("agenda")
 .scrollIntoView({
 behavior:"smooth"
 });
+
 
 }
 
@@ -292,10 +314,17 @@ function selecionarServico(servico){
 servicoEscolhido = servico;
 
 
-atualizar();
+
+document.getElementById("resultado").innerHTML =
+
+"Serviço:<br><b>"
++servico+
+"</b><br><br>Escolha o horário";
 
 
 }
+
+
 
 
 
@@ -307,28 +336,20 @@ function horario(hora){
 horarioEscolhido = hora;
 
 
-atualizar();
+
+document.getElementById("resultado").innerHTML =
+
+"Serviço:<br><b>"
++servicoEscolhido+
+"</b><br><br>Horário:<br><b>"
++hora+
+"</b>";
 
 
 }
 
 
 
-
-
-function atualizar(){
-
-
-document
-.getElementById("resultado")
-.innerHTML =
-
-servicoEscolhido +
-"<br>" +
-horarioEscolhido;
-
-
-}
 
 
 
@@ -336,31 +357,37 @@ horarioEscolhido;
 function confirmar(){
 
 
-if(
-servicoEscolhido=="" ||
-horarioEscolhido==""
-){
+
+if(servicoEscolhido==="" || horarioEscolhido===""){
+
 
 alert(
 "Escolha serviço e horário"
 );
 
+
 return;
+
 
 }
 
 
 
 alert(
-"Agendamento realizado!"
+
+"Agendamento confirmado!"
+
 );
+
 
 
 }
 
 
 
+
 </script>
+
 
 
 
