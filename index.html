@@ -96,18 +96,11 @@ Agendar agora
 
 
 
-
-<h2>
-Serviços
-</h2>
-
-
+<h2>Serviços</h2>
 
 
 
 <div class="cards">
-
-
 
 
 
@@ -116,17 +109,11 @@ onclick="abrirAgendamento('Progressiva - R$120,00')">
 
 ✨
 
-<h3>
-Progressiva
-</h3>
+<h3>Progressiva</h3>
 
-<p>
-R$120,00
-</p>
+<p>R$120,00</p>
 
 </div>
-
-
 
 
 
@@ -135,20 +122,13 @@ R$120,00
 <div class="servico"
 onclick="abrirAgendamento('Botox Capilar - R$99,00')">
 
-
 💆
 
-<h3>
-Botox Capilar
-</h3>
+<h3>Botox</h3>
 
-<p>
-R$99,00
-</p>
+<p>R$99,00</p>
 
 </div>
-
-
 
 
 
@@ -157,20 +137,13 @@ R$99,00
 <div class="servico"
 onclick="abrirAgendamento('Cronograma Capilar - R$99,00')">
 
-
 🌸
 
-<h3>
-Cronograma
-</h3>
+<h3>Cronograma</h3>
 
-<p>
-R$99,00
-</p>
+<p>R$99,00</p>
 
 </div>
-
-
 
 
 
@@ -179,20 +152,13 @@ R$99,00
 <div class="servico"
 onclick="abrirAgendamento('Escova - R$50,00')">
 
-
 ✨
 
-<h3>
-Escova
-</h3>
+<h3>Escova</h3>
 
-<p>
-R$50,00
-</p>
+<p>R$50,00</p>
 
 </div>
-
-
 
 
 
@@ -201,20 +167,13 @@ R$50,00
 <div class="servico"
 onclick="abrirAgendamento('Selagem - R$79,99')">
 
-
 💎
 
-<h3>
-Selagem
-</h3>
+<h3>Selagem</h3>
 
-<p>
-R$79,99
-</p>
+<p>R$79,99</p>
 
 </div>
-
-
 
 
 
@@ -223,63 +182,17 @@ R$79,99
 <div class="servico"
 onclick="abrirAgendamento('Tratamento Capilar - R$69,99')">
 
-
 🌿
 
-<h3>
-Tratamento
-</h3>
+<h3>Tratamento</h3>
 
-<p>
-R$69,99
-</p>
+<p>R$69,99</p>
 
 </div>
 
 
 
-
-
-
 </div>
-
-
-
-
-
-
-
-
-
-<h2>
-Profissional
-</h2>
-
-
-
-<div class="profissional">
-
-
-<div>
-
-👩
-
-</div>
-
-
-<div>
-
-<h3>
-Toda Bella
-</h3>
-
-⭐ 4.9
-
-</div>
-
-
-</div>
-
 
 
 
@@ -288,30 +201,15 @@ Toda Bella
 
 <nav>
 
+<button>⌂</button>
 
-<button>
-⌂
-</button>
+<button onclick="abrirAgendamento()">📅</button>
 
+<button>♡</button>
 
-<button onclick="abrirAgendamento()">
-📅
-</button>
-
-
-<button>
-♡
-</button>
-
-
-<button>
-👤
-</button>
-
+<button>👤</button>
 
 </nav>
-
-
 
 
 
@@ -325,8 +223,7 @@ Toda Bella
 
 
 
-
-<!-- AGENDAMENTO -->
+<!-- AGENDA -->
 
 
 <div id="agenda" class="tela escondida">
@@ -346,13 +243,13 @@ Toda Bella
 
 
 <h2>
+
 Agendamento
+
 </h2>
 
 
 </header>
-
-
 
 
 
@@ -371,13 +268,13 @@ Escolha o serviço
 
 
 
-
-
 <div class="calendario">
 
 
 <h2>
+
 Escolha o dia
+
 </h2>
 
 
@@ -410,10 +307,12 @@ Sáb
 </button>
 
 
+
 </div>
 
 
 </div>
+
 
 
 
@@ -425,10 +324,7 @@ Sáb
 <div class="periodo">
 
 
-
-<h3>
-Manhã ☀️
-</h3>
+<h3>Manhã ☀️</h3>
 
 
 <div class="horarios">
@@ -455,9 +351,9 @@ Manhã ☀️
 
 
 
-<h3>
-Tarde 🌙
-</h3>
+
+<h3>Tarde 🌙</h3>
+
 
 
 <div class="horarios">
@@ -483,11 +379,11 @@ Tarde 🌙
 </button>
 
 
-</div>
-
 
 </div>
 
+
+</div>
 
 
 
@@ -500,11 +396,12 @@ Tarde 🌙
 
 
 
-<p id="resumo">
+<div id="resumo" class="resumo">
 
 Selecione serviço
 
-</p>
+</div>
+
 
 
 
@@ -520,9 +417,26 @@ placeholder="WhatsApp">
 
 
 
+
 <button onclick="confirmar()">
 
 Confirmar agendamento
+
+</button>
+
+
+
+
+
+<button 
+id="btnWhatsapp"
+class="whatsapp"
+onclick="whatsapp()"
+style="display:none;">
+
+
+📲 Enviar WhatsApp
+
 
 </button>
 
@@ -534,8 +448,6 @@ Confirmar agendamento
 
 
 
-
-
 </div>
 
 
@@ -543,7 +455,9 @@ Confirmar agendamento
 
 
 
+
 </div>
+
 
 
 
