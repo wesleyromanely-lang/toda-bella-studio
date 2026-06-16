@@ -2,130 +2,127 @@
 box-sizing:border-box;
 }
 
+
 body{
+
 margin:0;
 font-family:'Segoe UI',sans-serif;
-background:#ffffff;
-color:#333;
+
+background:
+linear-gradient(
+rgba(255,255,255,.7),
+rgba(255,255,255,.9)
+),
+url("fundo.jpg");
+
+background-size:cover;
+background-position:center;
+
 min-height:100vh;
-}
 
-
-/* CABEÇALHO */
-
-header{
-background:#ffffff;
-padding:45px 20px 35px;
-text-align:center;
-border-bottom:1px solid #f3e4e7;
-}
-
-
-header h1{
-font-size:2.5rem;
-margin:0;
-color:#b76e79;
-letter-spacing:.5px;
-}
-
-
-header p{
-margin-top:10px;
-color:#777;
-font-size:1.1rem;
-}
-
-
-/* BOTÃO VOLTAR */
-
-.voltar{
-
-background:linear-gradient(
-135deg,
-#b76e79,
-#d8a0aa
-);
-
-color:white;
-
-padding:12px 25px;
-
-text-decoration:none;
-
-border-radius:30px;
-
-font-weight:600;
-
-display:inline-block;
-
-box-shadow:
-0 8px 20px rgba(183,110,121,.25);
-
-transition:.3s;
-
-}
-
-
-.voltar:hover{
-
-transform:translateY(-2px);
+padding:20px;
 
 }
 
 
 
-/* CONTAINER */
+.app{
 
-.container{
-
-width:92%;
-max-width:500px;
-
-margin:35px auto;
+max-width:430px;
+margin:auto;
 
 }
 
 
 
-/* CARD PRINCIPAL */
-
-.card{
+.topo{
 
 background:white;
 
 border-radius:30px;
 
-padding:30px;
+padding:30px 20px;
+
+text-align:center;
 
 box-shadow:
-
-0 15px 40px rgba(183,110,121,.15);
-
-border:
-
-1px solid #f4dce1;
-
-animation:entrada .4s ease;
+0 15px 40px rgba(0,0,0,.12);
 
 }
 
 
 
-@keyframes entrada{
+.logo img{
 
-from{
+width:90px;
+height:90px;
 
-opacity:0;
-transform:translateY(15px);
+border-radius:50%;
+
+object-fit:cover;
+
+}
+
+
+
+h1{
+
+font-size:28px;
+color:#333;
 
 }
 
-to{
 
-opacity:1;
-transform:translateY(0);
+
+.topo p{
+
+color:#777;
 
 }
+
+
+
+.btn-principal{
+
+
+width:100%;
+
+padding:18px;
+
+border:0;
+
+border-radius:18px;
+
+background:#e91e63;
+
+color:white;
+
+font-size:18px;
+
+font-weight:bold;
+
+margin-top:20px;
+
+}
+
+
+
+
+
+.card{
+
+
+background:white;
+
+margin-top:20px;
+
+padding:22px;
+
+border-radius:25px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.10);
+
 
 }
 
@@ -133,190 +130,95 @@ transform:translateY(0);
 
 h2{
 
-text-align:center;
+margin-top:0;
 
-color:#b76e79;
-
-margin-bottom:30px;
+color:#333;
 
 }
 
 
 
-/* CAMPOS */
+
+.servico{
 
 
-label{
+display:flex;
 
-display:block;
+justify-content:space-between;
 
-font-weight:600;
+align-items:center;
 
-color:#555;
+background:#fafafa;
 
-margin-bottom:8px;
-
-}
-
-
-
-input,
-select{
-
-
-width:100%;
-
-padding:15px;
-
-border:
-
-1px solid #ead5da;
+padding:18px;
 
 border-radius:18px;
 
-margin-bottom:20px;
+margin-bottom:15px;
 
-font-size:15px;
-
-background:#fff;
-
-
-transition:.3s;
 
 }
 
 
 
-input:focus,
-select:focus{
-
-outline:none;
-
-border-color:#b76e79;
-
-box-shadow:
-
-0 0 12px rgba(183,110,121,.18);
-
-}
+.servico button{
 
 
+border:0;
 
-/* BOTÃO PRINCIPAL */
-
-
-.btn{
-
-width:100%;
-
-padding:17px;
-
-border:none;
-
-border-radius:20px;
-
-
-background:
-
-linear-gradient(
-135deg,
-#b76e79,
-#d8a0aa
-);
-
+background:#e91e63;
 
 color:white;
 
-font-size:16px;
+padding:14px 20px;
+
+border-radius:15px;
+
+font-size:15px;
+
+}
+
+
+
+.horarios{
+
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:15px;
+
+
+}
+
+
+
+.horarios button{
+
+
+height:55px;
+
+border:0;
+
+border-radius:18px;
+
+background:#f7d7e3;
+
+font-size:18px;
 
 font-weight:bold;
 
-cursor:pointer;
-
-
-box-shadow:
-
-0 10px 25px rgba(183,110,121,.25);
-
-
-transition:.3s;
 
 }
 
 
 
-.btn:hover{
-
-transform:translateY(-3px);
-
-}
-
-
-
-/* FOOTER */
-
-
-footer{
-
-margin-top:50px;
-
-padding:25px;
+.info{
 
 text-align:center;
 
-color:#999;
-
-border-top:
-
-1px solid #f4e4e7;
-
 }
 
 
 
-/* ADMIN E CARDS */
-
-.card h3{
-
-color:#b76e79;
-
-}
-
-
-
-button{
-
-font-family:inherit;
-
-}
-
-
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-
-header h1{
-
-font-size:2rem;
-
-}
-
-
-.card{
-
-padding:22px;
-
-border-radius:25px;
-
-}
-
-
-.container{
-
-width:94%;
-
-}
-
-}
