@@ -3,22 +3,14 @@ box-sizing:border-box;
 }
 
 
+
 body{
 
 margin:0;
+
 font-family:'Segoe UI',sans-serif;
 
-background:
-linear-gradient(
-rgba(255,255,255,.7),
-rgba(255,255,255,.9)
-),
-url("fundo.jpg");
-
-background-size:cover;
-background-position:center;
-
-min-height:100vh;
+background:#f8f5f6;
 
 padding:20px;
 
@@ -29,6 +21,7 @@ padding:20px;
 .app{
 
 max-width:430px;
+
 margin:auto;
 
 }
@@ -37,16 +30,17 @@ margin:auto;
 
 .topo{
 
+
 background:white;
 
-border-radius:30px;
-
 padding:30px 20px;
+
+border-radius:30px;
 
 text-align:center;
 
 box-shadow:
-0 15px 40px rgba(0,0,0,.12);
+0 15px 40px #0002;
 
 }
 
@@ -54,12 +48,15 @@ box-shadow:
 
 .logo img{
 
-width:90px;
-height:90px;
+
+width:95px;
+
+height:95px;
 
 border-radius:50%;
 
 object-fit:cover;
+
 
 }
 
@@ -67,7 +64,6 @@ object-fit:cover;
 
 h1{
 
-font-size:28px;
 color:#333;
 
 }
@@ -82,16 +78,17 @@ color:#777;
 
 
 
-.btn-principal{
+.btn-principal,
+.confirmar{
 
 
 width:100%;
 
-padding:18px;
+height:60px;
 
-border:0;
+border:none;
 
-border-radius:18px;
+border-radius:20px;
 
 background:#e91e63;
 
@@ -103,8 +100,8 @@ font-weight:bold;
 
 margin-top:20px;
 
-}
 
+}
 
 
 
@@ -121,21 +118,10 @@ padding:22px;
 border-radius:25px;
 
 box-shadow:
-0 10px 30px rgba(0,0,0,.10);
+0 10px 30px #0001;
 
 
 }
-
-
-
-h2{
-
-margin-top:0;
-
-color:#333;
-
-}
-
 
 
 
@@ -164,19 +150,19 @@ margin-bottom:15px;
 .servico button{
 
 
-border:0;
-
 background:#e91e63;
 
 color:white;
 
-padding:14px 20px;
+border:none;
+
+padding:14px 18px;
 
 border-radius:15px;
 
-font-size:15px;
 
 }
+
 
 
 
@@ -194,16 +180,17 @@ gap:15px;
 
 
 
+
 .horarios button{
 
 
-height:55px;
+height:60px;
 
-border:0;
+border:none;
 
 border-radius:18px;
 
-background:#f7d7e3;
+background:#f8d9e6;
 
 font-size:18px;
 
@@ -214,11 +201,21 @@ font-weight:bold;
 
 
 
+
+.confirmacao{
+
+text-align:center;
+
+}
+
+
+
 .info{
 
 text-align:center;
 
 }
+
 
 
 
