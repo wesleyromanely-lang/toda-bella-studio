@@ -31,8 +31,11 @@
 
 
 <div class="perfil">
-TB
+
+<img src="logo.png">
+
 </div>
+
 
 
 <div>
@@ -50,6 +53,7 @@ TB
 
 
 
+
 <div class="busca">
 
 🔍 Buscar serviço
@@ -60,16 +64,82 @@ TB
 
 
 
+
+
 <div class="banner">
 
 
 <h2>
-Realce sua beleza
+
+Olá 👋
+
 </h2>
 
 
+<h1>
+
+Seu momento de beleza
+
+</h1>
+
+
 <p>
-Agende seu horário online
+
+Agende seu horário com a Toda Bella ✨
+
+</p>
+
+
+
+<button onclick="abrirAgendamento()">
+
+Agendar agora
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+<h2>
+
+Serviços
+
+</h2>
+
+
+
+
+
+<div class="cards categorias">
+
+
+
+
+
+<div class="servico"
+onclick="abrirAgendamento('Manicure')">
+
+
+💅
+
+<h3>
+
+Manicure
+
+</h3>
+
+
+<p>
+
+60 min
+
 </p>
 
 
@@ -81,43 +151,32 @@ Agende seu horário online
 
 
 
-<h2>Serviços</h2>
-
-
-
-<div class="cards">
-
-
-
-<div class="servico"
-onclick="abrirAgendamento('Manicure')">
-
-💅
-
-<h3>Manicure</h3>
-
-<p>60 min</p>
-
-
-</div>
-
-
-
-
-
 <div class="servico"
 onclick="abrirAgendamento('Corte Feminino')">
+
 
 
 💇
 
 
-<h3>Corte</h3>
+<h3>
 
-<p>45 min</p>
+Corte
+
+</h3>
+
+
+<p>
+
+45 min
+
+</p>
 
 
 </div>
+
+
+
 
 
 
@@ -129,9 +188,19 @@ onclick="abrirAgendamento('Escova')">
 
 ✨
 
-<h3>Escova</h3>
 
-<p>40 min</p>
+<h3>
+
+Escova
+
+</h3>
+
+
+<p>
+
+40 min
+
+</p>
 
 
 </div>
@@ -140,6 +209,57 @@ onclick="abrirAgendamento('Escova')">
 
 
 </div>
+
+
+
+
+
+
+
+
+
+<h2>
+
+Profissional
+
+</h2>
+
+
+
+
+
+<div class="profissional">
+
+
+<div>
+
+👩
+
+</div>
+
+
+<div>
+
+
+<h3>
+
+Toda Bella
+
+</h3>
+
+
+⭐ 4.9
+
+
+</div>
+
+
+</div>
+
+
+
+
+
 
 
 
@@ -147,18 +267,44 @@ onclick="abrirAgendamento('Escova')">
 
 <nav>
 
-<button>⌂</button>
 
-<button onclick="abrirAgendamento()">
-📅
+<button>
+
+⌂
+
 </button>
 
-<button>♡</button>
 
-<button>👤</button>
+
+<button onclick="abrirAgendamento()">
+
+📅
+
+</button>
+
+
+
+<button>
+
+♡
+
+</button>
+
+
+
+
+<button>
+
+👤
+
+</button>
+
 
 
 </nav>
+
+
+
 
 
 
@@ -172,9 +318,13 @@ onclick="abrirAgendamento('Escova')">
 
 
 
-<!-- AGENDA -->
+<!-- AGENDAMENTO -->
+
+
 
 <div id="agenda" class="tela escondida">
+
+
 
 
 
@@ -182,16 +332,26 @@ onclick="abrirAgendamento('Escova')">
 
 
 <button onclick="voltar()">
+
 ←
+
 </button>
 
 
+
 <h2>
+
 Agendamento
+
 </h2>
 
 
+
 </header>
+
+
+
+
 
 
 
@@ -220,31 +380,45 @@ Escolha o dia
 
 
 
+
 <div class="dias">
 
 
 <button onclick="dia('Terça')">
+
 Ter
+
 </button>
 
 
 <button onclick="dia('Quarta')">
+
 Qua
+
 </button>
+
 
 
 <button onclick="dia('Quinta')">
+
 Qui
+
 </button>
+
 
 
 <button onclick="dia('Sexta')">
+
 Sex
+
 </button>
+
 
 
 <button onclick="dia('Sábado')">
+
 Sáb
+
 </button>
 
 
@@ -254,7 +428,6 @@ Sáb
 
 
 </div>
-
 
 
 
@@ -263,7 +436,9 @@ Sáb
 
 
 <h3>
+
 Horários
+
 </h3>
 
 
@@ -273,42 +448,64 @@ Horários
 <div class="horarios">
 
 
+
 <button onclick="hora('09:30')">
+
 09:30
+
 </button>
+
 
 
 <button onclick="hora('10:30')">
+
 10:30
+
 </button>
+
 
 
 
 <button onclick="hora('11:30')">
+
 11:30
+
 </button>
+
 
 
 
 <button onclick="hora('13:30')">
+
 13:30
+
 </button>
+
+
 
 
 <button onclick="hora('14:30')">
+
 14:30
+
 </button>
+
 
 
 
 <button onclick="hora('15:30')">
+
 15:30
+
 </button>
 
 
 
+
 <button onclick="hora('16:30')">
+
 16:30
+
 </button>
 
 
@@ -324,16 +521,20 @@ Horários
 <div class="confirm">
 
 
+
 <p id="resumo">
 
-Selecione serviço
+Selecione o horário
 
 </p>
 
 
 
+
 <input id="nome"
 placeholder="Seu nome">
+
+
 
 
 
@@ -344,22 +545,25 @@ placeholder="WhatsApp">
 
 
 
+
 <button onclick="confirmar()">
 
-Agendar
+Confirmar agendamento
 
 </button>
 
 
 
-</div>
-
-
-
-
 
 </div>
 
+
+
+
+
+
+
+</div>
 
 
 
