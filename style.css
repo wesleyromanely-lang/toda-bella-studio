@@ -3,14 +3,13 @@ box-sizing:border-box;
 }
 
 
-
 body{
 
 margin:0;
 
-font-family:'Segoe UI',sans-serif;
+font-family:Arial, sans-serif;
 
-background:#f8f5f6;
+background:#f7f3f5;
 
 padding:20px;
 
@@ -28,37 +27,55 @@ margin:auto;
 
 
 
-.topo{
-
+.topo,
+.card{
 
 background:white;
 
-padding:30px 20px;
+border-radius:25px;
 
-border-radius:30px;
+padding:25px;
+
+margin-bottom:20px;
+
+box-shadow:0 10px 30px #0002;
+
+}
+
+
+
+.topo{
 
 text-align:center;
 
-box-shadow:
-0 15px 40px #0002;
-
 }
 
 
 
-.logo img{
+.logo-placeholder{
 
+width:90px;
 
-width:95px;
-
-height:95px;
+height:90px;
 
 border-radius:50%;
 
-object-fit:cover;
+background:#e91e63;
 
+color:white;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:35px;
+
+margin:auto;
 
 }
+
 
 
 
@@ -70,25 +87,16 @@ color:#333;
 
 
 
-.topo p{
-
-color:#777;
-
-}
-
-
-
 .btn-principal,
 .confirmar{
-
 
 width:100%;
 
 height:60px;
 
-border:none;
+border:0;
 
-border-radius:20px;
+border-radius:18px;
 
 background:#e91e63;
 
@@ -98,30 +106,8 @@ font-size:18px;
 
 font-weight:bold;
 
-margin-top:20px;
-
-
 }
 
-
-
-
-.card{
-
-
-background:white;
-
-margin-top:20px;
-
-padding:22px;
-
-border-radius:25px;
-
-box-shadow:
-0 10px 30px #0001;
-
-
-}
 
 
 
@@ -134,35 +120,33 @@ justify-content:space-between;
 
 align-items:center;
 
-background:#fafafa;
-
 padding:18px;
+
+background:#fafafa;
 
 border-radius:18px;
 
 margin-bottom:15px;
 
+cursor:pointer;
 
 }
 
 
 
-.servico button{
+.servico span{
 
 
 background:#e91e63;
 
 color:white;
 
-border:none;
-
-padding:14px 18px;
+padding:12px 15px;
 
 border-radius:15px;
 
 
 }
-
 
 
 
@@ -180,41 +164,25 @@ gap:15px;
 
 
 
-
 .horarios button{
 
 
-height:60px;
+height:55px;
 
-border:none;
+border:0;
 
 border-radius:18px;
 
-background:#f8d9e6;
+background:#f6d7e4;
 
 font-size:18px;
 
 font-weight:bold;
 
+cursor:pointer;
 
 }
 
-
-
-
-.confirmacao{
-
-text-align:center;
-
-}
-
-
-
-.info{
-
-text-align:center;
-
-}
 
 
 
