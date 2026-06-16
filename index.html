@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Toda Bella Studio</title>
@@ -20,24 +22,31 @@
 
 <header class="topo">
 
+
 <div class="logo">
+
 <img src="logo.png">
+
 </div>
 
 
 <h1>Toda Bella Studio</h1>
 
 <p>
-Seu momento de beleza começa aqui ✨
+Agende seu horário online ✨
 </p>
 
 
-<button class="btn-principal">
-Agendar horário
+<button class="btn-principal"
+onclick="abrirAgenda()">
+
+Agendar agora
+
 </button>
 
 
 </header>
+
 
 
 
@@ -48,47 +57,75 @@ Agendar horário
 <h2>Serviços</h2>
 
 
+
 <div class="servico">
 
+
 <div>
+
 <h3>💅 Manicure</h3>
+
 <p>60 minutos</p>
+
 </div>
 
-<button>
+
+<button onclick="selecionarServico('Manicure')">
+
 Escolher
+
 </button>
 
+
 </div>
+
+
 
 
 
 <div class="servico">
 
+
 <div>
+
 <h3>💇 Corte Feminino</h3>
+
 <p>45 minutos</p>
+
 </div>
 
-<button>
+
+<button onclick="selecionarServico('Corte Feminino')">
+
 Escolher
+
 </button>
 
+
 </div>
+
 
 
 
 
 <div class="servico">
 
+
 <div>
+
 <h3>✨ Escova</h3>
+
 <p>40 minutos</p>
+
 </div>
 
-<button>
+
+<button onclick="selecionarServico('Escova')">
+
 Escolher
+
 </button>
+
 
 </div>
 
@@ -100,32 +137,99 @@ Escolher
 
 
 
-<section class="card">
+
+<section class="card" id="agenda">
 
 
-<h2>Escolha o horário</h2>
+<h2>
+Escolha o horário
+</h2>
+
 
 
 <div class="horarios">
 
 
-<button>09:30</button>
-<button>10:30</button>
+<button onclick="horario('09:30')">
+09:30
+</button>
 
-<button>11:30</button>
-<button>12:30</button>
 
-<button>13:30</button>
-<button>14:30</button>
+<button onclick="horario('10:30')">
+10:30
+</button>
 
-<button>15:30</button>
-<button>16:30</button>
+
+
+<button onclick="horario('11:30')">
+11:30
+</button>
+
+
+<button onclick="horario('12:30')">
+12:30
+</button>
+
+
+
+<button onclick="horario('13:30')">
+13:30
+</button>
+
+
+<button onclick="horario('14:30')">
+14:30
+</button>
+
+
+
+<button onclick="horario('15:30')">
+15:30
+</button>
+
+
+<button onclick="horario('16:30')">
+16:30
+</button>
+
 
 
 </div>
 
 
 </section>
+
+
+
+
+
+
+<section class="card confirmacao">
+
+
+<h2>
+Seu agendamento
+</h2>
+
+
+<p id="resultado">
+
+Escolha um serviço e horário
+
+</p>
+
+
+
+<button class="confirmar"
+onclick="confirmar()">
+
+Confirmar agendamento
+
+</button>
+
+
+</section>
+
 
 
 
@@ -134,11 +238,15 @@ Escolher
 <section class="card info">
 
 
-<h2>Horários</h2>
+<h2>
+Horário de atendimento
+</h2>
+
 
 <p>
 Terça a Sábado
 </p>
+
 
 <p>
 09:30 às 16:30
@@ -154,5 +262,109 @@ Terça a Sábado
 
 
 
+
+
+<script>
+
+
+let servicoEscolhido="";
+let horarioEscolhido="";
+
+
+
+function abrirAgenda(){
+
+document
+.getElementById("agenda")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+
+
+
+function selecionarServico(servico){
+
+
+servicoEscolhido = servico;
+
+
+atualizar();
+
+
+}
+
+
+
+
+
+function horario(hora){
+
+
+horarioEscolhido = hora;
+
+
+atualizar();
+
+
+}
+
+
+
+
+
+function atualizar(){
+
+
+document
+.getElementById("resultado")
+.innerHTML =
+
+servicoEscolhido +
+"<br>" +
+horarioEscolhido;
+
+
+}
+
+
+
+
+function confirmar(){
+
+
+if(
+servicoEscolhido=="" ||
+horarioEscolhido==""
+){
+
+alert(
+"Escolha serviço e horário"
+);
+
+return;
+
+}
+
+
+
+alert(
+"Agendamento realizado!"
+);
+
+
+}
+
+
+
+</script>
+
+
+
+
 </body>
+
 </html>
