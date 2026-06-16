@@ -1,8 +1,25 @@
-let servicoEscolhido = "";
+let servicoEscolhido="";
 
-let diaEscolhido = "";
+let diaEscolhido="";
 
-let horarioEscolhido = "";
+let horarioEscolhido="";
+
+
+
+
+
+const diasSemana=[
+
+"Dom",
+"Seg",
+"Ter",
+"Qua",
+"Qui",
+"Sex",
+"Sáb"
+
+];
+
 
 
 
@@ -11,13 +28,17 @@ let horarioEscolhido = "";
 function abrirAgendamento(servico){
 
 
+
 if(servico){
 
-servicoEscolhido = servico;
+
+servicoEscolhido=servico;
 
 
-document.getElementById("tituloServico").innerHTML =
-"✨ " + servico;
+document
+.getElementById("tituloServico")
+.innerHTML=
+"✨ "+servico;
 
 
 }
@@ -38,16 +59,13 @@ document
 .classList.add("escondida");
 
 
-
 document
 .getElementById("agenda")
 .classList.remove("escondida");
 
 
 
-document
-.getElementById("agenda")
-.classList.add("entrar");
+criarCalendario();
 
 
 
@@ -66,6 +84,7 @@ document
 function voltar(){
 
 
+
 document
 .getElementById("agenda")
 .classList.add("sair");
@@ -78,7 +97,6 @@ setTimeout(()=>{
 document
 .getElementById("agenda")
 .classList.add("escondida");
-
 
 
 document
@@ -99,10 +117,56 @@ document
 
 
 
-function dia(botao,valor){
 
 
-diaEscolhido = valor;
+function criarCalendario(){
+
+
+let area =
+document.getElementById("dias");
+
+
+area.innerHTML="";
+
+
+
+let hoje =
+new Date();
+
+
+
+for(let i=1;i<=7;i++){
+
+
+
+let data =
+new Date();
+
+
+data.setDate(
+hoje.getDate()+i
+);
+
+
+
+let botao =
+document.createElement("button");
+
+
+
+botao.innerHTML =
+
+diasSemana[data.getDay()]
++
+"<br>"
++
+data.getDate();
+
+
+
+
+
+botao.onclick=function(){
 
 
 
@@ -116,7 +180,17 @@ b.classList.remove("selecionado");
 
 
 
+
 botao.classList.add("selecionado");
+
+
+
+diaEscolhido =
+diasSemana[data.getDay()]
++
+" "
++
+data.getDate();
 
 
 
@@ -128,6 +202,20 @@ atualizarResumo();
 
 
 
+area.appendChild(botao);
+
+
+
+}
+
+
+
+}
+
+
+
+
+
 
 
 
@@ -135,7 +223,8 @@ atualizarResumo();
 function hora(botao,valor){
 
 
-horarioEscolhido = valor;
+
+horarioEscolhido=valor;
 
 
 
@@ -173,7 +262,9 @@ function atualizarResumo(){
 document.getElementById("resumo").innerHTML =
 
 
+
 `
+
 Serviço:
 
 <br>
@@ -200,11 +291,13 @@ Horário:
 
 <b>${horarioEscolhido}</b>
 
+
 `;
 
 
 
 }
+
 
 
 
@@ -233,12 +326,14 @@ if(!servicoEscolhido ||
 !horarioEscolhido){
 
 
-alert("Escolha serviço, dia e horário");
+alert("Escolha tudo antes");
+
 
 return;
 
 
 }
+
 
 
 
@@ -246,9 +341,11 @@ return;
 if(!nome || !whatsapp){
 
 
-alert("Preencha seus dados");
+alert("Digite seus dados");
+
 
 return;
+
 
 }
 
@@ -256,7 +353,14 @@ return;
 
 
 
+
+document.getElementById("btnWhatsapp")
+.style.display="block";
+
+
+
 document.getElementById("resumo").innerHTML =
+
 
 
 `
@@ -272,9 +376,7 @@ Cliente:
 <br><br>
 
 
-Serviço:
-
-<b>${servicoEscolhido}</b>
+${servicoEscolhido}
 
 
 <br><br>
@@ -288,6 +390,65 @@ ${horarioEscolhido}
 
 
 `;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function whatsapp(){
+
+
+
+let numero="5511999999999";
+
+
+
+
+let texto=
+
+`
+
+Olá Toda Bella ✨
+
+
+Quero confirmar meu horário:
+
+
+Cliente: ${document.getElementById("nome").value}
+
+
+Serviço: ${servicoEscolhido}
+
+
+Dia: ${diaEscolhido}
+
+
+Horário: ${horarioEscolhido}
+
+
+`;
+
+
+
+window.open(
+
+"https://wa.me/"
++
+numero
++
+"?text="
++
+encodeURIComponent(texto)
+
+);
 
 
 
