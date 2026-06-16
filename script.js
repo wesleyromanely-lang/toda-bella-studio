@@ -1,32 +1,34 @@
-let servico="";
-let horario="";
+let servicoEscolhido = "";
+let horarioEscolhido = "";
 
 
 
-function abrirAgenda(){
+// ABRIR TELA DE AGENDAMENTO
+
+function abrirAgendamento(servico){
+
+
+if(servico){
+
+servicoEscolhido = servico;
+
+
+document.getElementById("tituloServico").innerHTML =
+"✨ " + servico;
+
+
+}
+
+
+document
+.getElementById("home")
+.classList.add("escondida");
+
 
 document
 .getElementById("agenda")
-.scrollIntoView({
-behavior:"smooth"
-});
+.classList.remove("escondida");
 
-}
-
-
-
-
-function selecionarServico(nome){
-
-
-servico = nome;
-
-
-document.getElementById("resultado").innerHTML =
-
-"Serviço:<br><b>"
-+servico+
-"</b><br><br>Escolha o horário";
 
 
 }
@@ -35,42 +37,79 @@ document.getElementById("resultado").innerHTML =
 
 
 
-function escolherHorario(hora){
+// VOLTAR PARA HOME
+
+function voltar(){
 
 
-horario = hora;
+document
+.getElementById("agenda")
+.classList.add("escondida");
 
 
 
-document.getElementById("resultado").innerHTML =
+document
+.getElementById("home")
+.classList.remove("escondida");
 
-"Serviço:<br><b>"
-+servico+
-"</b><br><br>Horário:<br><b>"
-+horario+
-"</b>";
+
 
 }
 
 
 
 
+
+
+
+// ESCOLHER HORÁRIO
+
+function hora(hora){
+
+
+horarioEscolhido = hora;
+
+
+
+document
+.getElementById("resumo")
+.innerHTML =
+
+
+`
+Serviço:<br>
+
+<b>${servicoEscolhido}</b>
+
+<br><br>
+
+Horário:
+
+<br>
+
+<b>${horarioEscolhido}</b>
+`;
+
+
+
+}
+
+
+
+
+
+
+
+// CONFIRMAR AGENDAMENTO
 
 function confirmar(){
 
 
-let nome =
-document.getElementById("nomeCliente").value;
+
+if(servicoEscolhido === ""){
 
 
-let telefone =
-document.getElementById("telefone").value;
-
-
-
-if(servico=="" || horario==""){
-
-alert("Escolha serviço e horário");
+alert("Escolha um serviço");
 
 return;
 
@@ -78,10 +117,10 @@ return;
 
 
 
-if(nome=="" || telefone==""){
+if(horarioEscolhido === ""){
 
 
-alert("Preencha seus dados");
+alert("Escolha um horário");
 
 return;
 
@@ -90,21 +129,65 @@ return;
 
 
 
-document.getElementById("resultado").innerHTML =
 
-"✅ Agendamento confirmado!<br><br>"+
+document
+.getElementById("resumo")
+.innerHTML =
 
-"<b>"+servico+"</b><br>"+
 
-horario+
 
-"<br><br>"+
+`
+<div>
 
-nome+
+<h2>✅ Confirmado</h2>
 
-"<br>"+
 
-telefone;
+<p>
+Serviço:
+</p>
+
+<b>${servicoEscolhido}</b>
+
+
+<p>
+Horário:
+</p>
+
+<b>${horarioEscolhido}</b>
+
+
+<br><br>
+
+
+Obrigado por agendar com a Toda Bella ✨
+
+
+</div>
+
+`;
+
+
+
+}
+
+
+
+
+
+
+// LIMPAR AGENDAMENTO
+
+function limpar(){
+
+
+servicoEscolhido = "";
+
+horarioEscolhido = "";
+
+
+document.getElementById("resumo").innerHTML =
+"Selecione o horário";
+
 
 
 }
