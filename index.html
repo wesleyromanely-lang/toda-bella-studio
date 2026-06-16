@@ -21,6 +21,8 @@
 
 
 
+<!-- HOME -->
+
 <div id="home" class="tela">
 
 
@@ -60,26 +62,22 @@
 
 
 
+
 <div class="banner">
 
+
 <h2>
-
 Olá 👋
-
 </h2>
 
 
 <h1>
-
 Seu momento de beleza
-
 </h1>
 
 
 <p>
-
-Agende seu horário online
-
+Agende seu horário com a Toda Bella ✨
 </p>
 
 
@@ -98,7 +96,11 @@ Agendar agora
 
 
 
-<h2>Serviços</h2>
+
+<h2>
+Serviços
+</h2>
+
 
 
 
@@ -107,14 +109,20 @@ Agendar agora
 
 
 
+
+
 <div class="servico"
-onclick="abrirAgendamento('Manicure')">
+onclick="abrirAgendamento('Progressiva - R$120,00')">
 
-💅
+✨
 
-<h3>Manicure</h3>
+<h3>
+Progressiva
+</h3>
 
-<p>60 min</p>
+<p>
+R$120,00
+</p>
 
 </div>
 
@@ -122,17 +130,21 @@ onclick="abrirAgendamento('Manicure')">
 
 
 
+
+
 <div class="servico"
-onclick="abrirAgendamento('Corte Feminino')">
+onclick="abrirAgendamento('Botox Capilar - R$99,00')">
 
 
-💇
+💆
 
+<h3>
+Botox Capilar
+</h3>
 
-<h3>Corte</h3>
-
-<p>45 min</p>
-
+<p>
+R$99,00
+</p>
 
 </div>
 
@@ -140,23 +152,134 @@ onclick="abrirAgendamento('Corte Feminino')">
 
 
 
+
+
 <div class="servico"
-onclick="abrirAgendamento('Escova')">
+onclick="abrirAgendamento('Cronograma Capilar - R$99,00')">
+
+
+🌸
+
+<h3>
+Cronograma
+</h3>
+
+<p>
+R$99,00
+</p>
+
+</div>
+
+
+
+
+
+
+
+<div class="servico"
+onclick="abrirAgendamento('Escova - R$50,00')">
 
 
 ✨
 
+<h3>
+Escova
+</h3>
 
-<h3>Escova</h3>
+<p>
+R$50,00
+</p>
 
-<p>40 min</p>
+</div>
+
+
+
+
+
+
+
+<div class="servico"
+onclick="abrirAgendamento('Selagem - R$79,99')">
+
+
+💎
+
+<h3>
+Selagem
+</h3>
+
+<p>
+R$79,99
+</p>
+
+</div>
+
+
+
+
+
+
+
+<div class="servico"
+onclick="abrirAgendamento('Tratamento Capilar - R$69,99')">
+
+
+🌿
+
+<h3>
+Tratamento
+</h3>
+
+<p>
+R$69,99
+</p>
+
+</div>
+
+
+
+
 
 
 </div>
 
 
 
+
+
+
+
+
+
+<h2>
+Profissional
+</h2>
+
+
+
+<div class="profissional">
+
+
+<div>
+
+👩
+
 </div>
+
+
+<div>
+
+<h3>
+Toda Bella
+</h3>
+
+⭐ 4.9
+
+</div>
+
+
+</div>
+
 
 
 
@@ -165,15 +288,29 @@ onclick="abrirAgendamento('Escova')">
 
 <nav>
 
-<button>⌂</button>
 
-<button onclick="abrirAgendamento()">📅</button>
+<button>
+⌂
+</button>
 
-<button>♡</button>
 
-<button>👤</button>
+<button onclick="abrirAgendamento()">
+📅
+</button>
+
+
+<button>
+♡
+</button>
+
+
+<button>
+👤
+</button>
+
 
 </nav>
+
 
 
 
@@ -188,7 +325,13 @@ onclick="abrirAgendamento('Escova')">
 
 
 
+
+<!-- AGENDAMENTO -->
+
+
 <div id="agenda" class="tela escondida">
+
+
 
 
 
@@ -203,13 +346,14 @@ onclick="abrirAgendamento('Escova')">
 
 
 <h2>
-
 Agendamento
-
 </h2>
 
 
 </header>
+
+
+
 
 
 
@@ -227,13 +371,13 @@ Escolha o serviço
 
 
 
+
+
 <div class="calendario">
 
 
 <h2>
-
 Escolha o dia
-
 </h2>
 
 
@@ -242,43 +386,28 @@ Escolha o dia
 
 
 <button onclick="dia(this,'Terça')">
-
 Ter
-
 </button>
-
 
 
 <button onclick="dia(this,'Quarta')">
-
 Qua
-
 </button>
-
 
 
 <button onclick="dia(this,'Quinta')">
-
 Qui
-
 </button>
-
 
 
 <button onclick="dia(this,'Sexta')">
-
 Sex
-
 </button>
-
 
 
 <button onclick="dia(this,'Sábado')">
-
 Sáb
-
 </button>
-
 
 
 </div>
@@ -298,85 +427,59 @@ Sáb
 
 
 <h3>
-
 Manhã ☀️
-
 </h3>
-
 
 
 <div class="horarios">
 
 
 <button onclick="hora(this,'09:30')">
-
 09:30
-
 </button>
-
 
 
 <button onclick="hora(this,'10:30')">
-
 10:30
-
 </button>
-
 
 
 <button onclick="hora(this,'11:30')">
-
 11:30
-
 </button>
 
 
-
 </div>
-
 
 
 
 
 
 <h3>
-
 Tarde 🌙
-
 </h3>
-
-
-
 
 
 <div class="horarios">
 
 
 <button onclick="hora(this,'13:30')">
-
 13:30
-
 </button>
 
 
 <button onclick="hora(this,'14:30')">
-
 14:30
-
 </button>
 
 
 <button onclick="hora(this,'15:30')">
-
 15:30
-
 </button>
 
 
 <button onclick="hora(this,'16:30')">
-
 16:30
-
 </button>
 
 
@@ -384,6 +487,7 @@ Tarde 🌙
 
 
 </div>
+
 
 
 
@@ -404,7 +508,6 @@ Selecione serviço
 
 
 
-
 <input id="nome"
 placeholder="Seu nome">
 
@@ -412,6 +515,8 @@ placeholder="Seu nome">
 
 <input id="whatsapp"
 placeholder="WhatsApp">
+
+
 
 
 
@@ -428,7 +533,11 @@ Confirmar agendamento
 
 
 
+
+
+
 </div>
+
 
 
 
