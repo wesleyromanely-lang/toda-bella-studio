@@ -20,24 +20,32 @@
 <div class="app">
 
 
-<!-- TELA INICIAL -->
+
+<!-- HOME -->
 
 <div id="home" class="tela">
 
 
+
 <header class="header">
+
 
 <div class="perfil">
 TB
 </div>
 
+
 <div>
+
 <h1>Toda Bella</h1>
+
 <p>Studio de Beleza ✨</p>
+
 </div>
 
 
 </header>
+
 
 
 
@@ -51,17 +59,23 @@ TB
 
 
 
+
 <div class="banner">
+
 
 <h2>
 Realce sua beleza
 </h2>
 
+
 <p>
 Agende seu horário online
 </p>
 
+
 </div>
+
+
 
 
 
@@ -84,6 +98,7 @@ onclick="abrirAgendamento('Manicure')">
 
 <p>60 min</p>
 
+
 </div>
 
 
@@ -91,13 +106,16 @@ onclick="abrirAgendamento('Manicure')">
 
 
 <div class="servico"
-onclick="abrirAgendamento('Corte')">
+onclick="abrirAgendamento('Corte Feminino')">
+
 
 💇
+
 
 <h3>Corte</h3>
 
 <p>45 min</p>
+
 
 </div>
 
@@ -108,40 +126,20 @@ onclick="abrirAgendamento('Corte')">
 <div class="servico"
 onclick="abrirAgendamento('Escova')">
 
+
 ✨
 
 <h3>Escova</h3>
 
 <p>40 min</p>
 
-</div>
-
 
 </div>
 
 
 
 
-
-<h2>Especialista</h2>
-
-
-
-<div class="profissional">
-
-👩
-
-<div>
-
-<h3>Toda Bella</h3>
-
-⭐ 4.9
-
 </div>
-
-
-</div>
-
 
 
 
@@ -149,22 +147,15 @@ onclick="abrirAgendamento('Escova')">
 
 <nav>
 
-
-<button>
-⌂
-</button>
+<button>⌂</button>
 
 <button onclick="abrirAgendamento()">
 📅
 </button>
 
-<button>
-♡
-</button>
+<button>♡</button>
 
-<button>
-👤
-</button>
+<button>👤</button>
 
 
 </nav>
@@ -180,13 +171,15 @@ onclick="abrirAgendamento('Escova')">
 
 
 
-<!-- TELA AGENDAMENTO -->
+
+<!-- AGENDA -->
 
 <div id="agenda" class="tela escondida">
 
 
 
 <header class="top">
+
 
 <button onclick="voltar()">
 ←
@@ -204,7 +197,6 @@ Agendamento
 
 
 
-
 <h3 id="tituloServico">
 
 Escolha o serviço
@@ -216,26 +208,54 @@ Escolha o serviço
 
 
 
+
 <div class="calendario">
 
 
 <h2>
-Junho
+
+Escolha o dia
+
 </h2>
+
 
 
 <div class="dias">
 
-<span>09</span>
-<span>10</span>
-<span>11</span>
-<span>12</span>
-<span>13</span>
+
+<button onclick="dia('Terça')">
+Ter
+</button>
+
+
+<button onclick="dia('Quarta')">
+Qua
+</button>
+
+
+<button onclick="dia('Quinta')">
+Qui
+</button>
+
+
+<button onclick="dia('Sexta')">
+Sex
+</button>
+
+
+<button onclick="dia('Sábado')">
+Sáb
+</button>
+
+
 
 </div>
 
 
+
 </div>
+
+
 
 
 
@@ -245,6 +265,7 @@ Junho
 <h3>
 Horários
 </h3>
+
 
 
 
@@ -262,9 +283,11 @@ Horários
 </button>
 
 
+
 <button onclick="hora('11:30')">
 11:30
 </button>
+
 
 
 <button onclick="hora('13:30')">
@@ -277,13 +300,21 @@ Horários
 </button>
 
 
+
 <button onclick="hora('15:30')">
 15:30
 </button>
 
 
 
+<button onclick="hora('16:30')">
+16:30
+</button>
+
+
+
 </div>
+
 
 
 
@@ -295,9 +326,22 @@ Horários
 
 <p id="resumo">
 
-Selecione o horário
+Selecione serviço
 
 </p>
+
+
+
+<input id="nome"
+placeholder="Seu nome">
+
+
+
+<input id="whatsapp"
+placeholder="WhatsApp">
+
+
+
 
 
 <button onclick="confirmar()">
@@ -307,11 +351,16 @@ Agendar
 </button>
 
 
+
+</div>
+
+
+
+
+
 </div>
 
 
-
-</div>
 
 
 
