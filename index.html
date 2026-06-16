@@ -20,6 +20,7 @@
 <div class="app">
 
 
+
 <header class="topo">
 
 
@@ -30,11 +31,15 @@ TB
 
 <h1>Toda Bella Studio</h1>
 
-<p>Agende seu horário online ✨</p>
+<p>
+Agende seu horário online ✨
+</p>
 
 
 <button class="btn-principal" onclick="abrirAgenda()">
+
 Agendar agora
+
 </button>
 
 
@@ -70,7 +75,6 @@ Escolher
 
 
 
-
 <div class="servico" onclick="selecionarServico('Corte Feminino')">
 
 <div>
@@ -86,7 +90,6 @@ Escolher
 </span>
 
 </div>
-
 
 
 
@@ -109,7 +112,6 @@ Escolher
 </div>
 
 
-
 </section>
 
 
@@ -121,7 +123,10 @@ Escolher
 <section class="card" id="agenda">
 
 
-<h2>Escolha o horário</h2>
+<h2>
+Escolha o horário
+</h2>
+
 
 
 <div class="horarios">
@@ -178,17 +183,36 @@ Escolher
 
 
 
-<section class="card">
+<section class="card resumo">
 
 
-<h2>Resumo</h2>
+<h2>
+Confirmar agendamento
+</h2>
+
 
 
 <p id="resultado">
 
-Nenhum serviço escolhido
+Escolha serviço e horário
 
 </p>
+
+
+
+
+<input 
+id="nomeCliente"
+placeholder="Seu nome">
+
+
+
+<input 
+id="telefone"
+placeholder="WhatsApp">
+
+
+
 
 
 <button class="confirmar" onclick="confirmar()">
@@ -198,8 +222,8 @@ Confirmar
 </button>
 
 
-</section>
 
+</section>
 
 
 
@@ -209,11 +233,19 @@ Confirmar
 <section class="card">
 
 
-<h2>Atendimento</h2>
+<h2>
+Atendimento
+</h2>
 
-<p>Terça a Sábado</p>
 
-<p>09:30 às 16:30</p>
+<p>
+Terça a Sábado
+</p>
+
+
+<p>
+09:30 às 16:30
+</p>
 
 
 </section>
@@ -221,8 +253,9 @@ Confirmar
 
 
 
-
 </div>
+
+
 
 
 
@@ -237,13 +270,17 @@ let horario="";
 
 
 
+
+
 function abrirAgenda(){
+
 
 document
 .getElementById("agenda")
 .scrollIntoView({
 behavior:"smooth"
 });
+
 
 }
 
@@ -257,14 +294,17 @@ function selecionarServico(nome){
 servico = nome;
 
 
+
 document.getElementById("resultado").innerHTML =
 
-"Serviço escolhido:<br><b>"
+"Serviço:<br><b>"
 +servico+
-"</b><br><br>Agora escolha o horário";
+"</b><br><br>Escolha o horário";
 
 
 }
+
+
 
 
 
@@ -275,6 +315,7 @@ function escolherHorario(hora){
 horario = hora;
 
 
+
 document.getElementById("resultado").innerHTML =
 
 "Serviço:<br><b>"
@@ -283,12 +324,28 @@ document.getElementById("resultado").innerHTML =
 +horario+
 "</b>";
 
+
 }
 
 
 
 
+
+
 function confirmar(){
+
+
+
+let nome =
+document.getElementById("nomeCliente").value;
+
+
+
+let telefone =
+document.getElementById("telefone").value;
+
+
+
 
 
 if(servico=="" || horario==""){
@@ -301,16 +358,50 @@ return;
 }
 
 
-alert(
-"Agendamento confirmado!"
-);
+
+
+
+if(nome=="" || telefone==""){
+
+
+alert("Preencha seus dados");
+
+return;
 
 
 }
 
 
 
+
+
+document.getElementById("resultado").innerHTML =
+
+
+"✅ Agendamento confirmado!<br><br>"+
+
+"<b>"+servico+"</b><br>"+
+
+horario+
+
+"<br><br>"+
+
+nome+
+
+"<br>"+
+
+telefone;
+
+
+
+}
+
+
+
+
+
 </script>
+
 
 
 
