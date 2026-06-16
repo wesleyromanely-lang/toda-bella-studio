@@ -3,6 +3,7 @@ box-sizing:border-box;
 }
 
 
+
 body{
 
 margin:0;
@@ -16,6 +17,7 @@ padding:15px;
 }
 
 
+
 .app{
 
 max-width:420px;
@@ -23,6 +25,8 @@ max-width:420px;
 margin:auto;
 
 }
+
+
 
 
 
@@ -36,13 +40,17 @@ border-radius:30px;
 
 padding:20px;
 
-box-shadow:0 15px 40px #0002;
+box-shadow:
+0 20px 50px rgba(0,0,0,.15);
 
 position:relative;
 
 overflow:hidden;
 
+transition:.3s ease;
+
 }
+
 
 
 
@@ -54,6 +62,9 @@ display:none;
 
 
 
+
+
+/* TOPO */
 
 .header{
 
@@ -69,9 +80,10 @@ gap:15px;
 
 .perfil{
 
-width:55px;
 
-height:55px;
+width:60px;
+
+height:60px;
 
 border-radius:50%;
 
@@ -85,11 +97,15 @@ align-items:center;
 
 justify-content:center;
 
+font-size:22px;
+
 font-weight:bold;
 
-font-size:20px;
+box-shadow:
+0 10px 20px rgba(214,51,154,.35);
 
 }
+
 
 
 
@@ -97,9 +113,21 @@ h1{
 
 margin:0;
 
-font-size:22px;
+font-size:24px;
+
+color:#333;
 
 }
+
+
+
+h2{
+
+color:#333;
+
+}
+
+
 
 
 
@@ -107,11 +135,13 @@ p{
 
 color:#777;
 
-margin:5px 0;
-
 }
 
 
+
+
+
+/* BUSCA */
 
 
 .busca{
@@ -119,22 +149,26 @@ margin:5px 0;
 
 background:#fafafa;
 
-border:1px solid #eee;
-
 border-radius:20px;
 
-padding:15px;
+padding:16px;
 
 margin:25px 0;
 
-color:#aaa;
+box-shadow:
+inset 0 2px 5px #0001;
 
 }
 
 
 
 
+
+/* BANNER */
+
+
 .banner{
+
 
 background:#d6339a;
 
@@ -142,20 +176,28 @@ color:white;
 
 border-radius:25px;
 
-padding:20px;
+padding:25px;
+
+box-shadow:
+
+0 15px 30px rgba(214,51,154,.35);
+
+transition:.25s;
+
+
+}
+
+
+.banner:hover{
+
+transform:translateY(-6px);
 
 }
 
 
 
-.banner h2{
 
-margin:0;
-
-}
-
-
-
+/* SERVIÇOS */
 
 
 .cards{
@@ -172,31 +214,50 @@ gap:12px;
 
 
 
+
 .servico{
 
 
-background:#fff;
+background:white;
 
-border-radius:20px;
+border-radius:22px;
 
-padding:15px;
+padding:18px 10px;
 
 text-align:center;
-
-box-shadow:0 8px 20px #0001;
 
 cursor:pointer;
 
 
+box-shadow:
+
+0 8px 20px rgba(0,0,0,.10);
+
+
+transition:.25s;
+
+
 }
+
 
 
 
 .servico:hover{
 
-transform:scale(1.03);
+
+transform:
+translateY(-8px)
+scale(1.03);
+
+
+box-shadow:
+
+0 18px 35px rgba(0,0,0,.20);
+
 
 }
+
+
 
 
 
@@ -206,6 +267,11 @@ font-size:14px;
 
 }
 
+
+
+
+
+/* PROFISSIONAL */
 
 
 .profissional{
@@ -219,14 +285,36 @@ gap:15px;
 
 background:#fafafa;
 
-padding:15px;
+padding:18px;
 
 border-radius:20px;
+
+
+box-shadow:
+
+0 8px 20px #0001;
+
+
+transition:.25s;
+
 
 }
 
 
 
+.profissional:hover{
+
+
+transform:translateY(-5px);
+
+
+}
+
+
+
+
+
+/* MENU */
 
 nav{
 
@@ -252,6 +340,11 @@ justify-content:space-around;
 align-items:center;
 
 
+box-shadow:
+
+0 15px 30px rgba(214,51,154,.35);
+
+
 }
 
 
@@ -259,19 +352,37 @@ align-items:center;
 nav button{
 
 
+border:0;
+
 background:none;
 
-border:0;
+color:white;
 
 font-size:25px;
 
-color:white;
+cursor:pointer;
+
+transition:.2s;
 
 
 }
 
 
 
+nav button:hover{
+
+transform:
+translateY(-5px)
+scale(1.2);
+
+}
+
+
+
+
+
+
+/* AGENDA */
 
 
 .top{
@@ -293,13 +404,19 @@ gap:20px;
 
 border:0;
 
-background:#f5d5e8;
+background:#f7d7e7;
 
 border-radius:15px;
 
 font-size:25px;
 
+width:45px;
+
+height:45px;
+
+
 }
+
 
 
 
@@ -311,15 +428,24 @@ background:#d6339a;
 
 color:white;
 
-padding:20px;
+padding:22px;
 
 border-radius:25px;
+
+
+box-shadow:
+
+0 15px 30px rgba(214,51,154,.35);
+
 
 }
 
 
 
+
+
 .dias{
+
 
 display:flex;
 
@@ -329,8 +455,10 @@ gap:10px;
 
 
 
-.dias span{
+.dias button{
 
+
+border:0;
 
 background:white;
 
@@ -340,10 +468,31 @@ padding:12px;
 
 border-radius:15px;
 
+cursor:pointer;
+
+
+transition:.2s;
+
+
 }
 
 
 
+
+.dias button:hover{
+
+
+transform:
+translateY(-5px);
+
+
+}
+
+
+
+
+
+/* HORÁRIOS */
 
 
 .horarios{
@@ -355,7 +504,10 @@ grid-template-columns:1fr 1fr;
 
 gap:15px;
 
+
 }
+
+
 
 
 
@@ -374,8 +526,42 @@ font-size:18px;
 
 font-weight:bold;
 
+cursor:pointer;
+
+
+box-shadow:
+
+0 8px 15px #0002;
+
+
+transition:.25s;
+
+
 }
 
+
+
+
+
+.horarios button:hover{
+
+
+transform:
+translateY(-6px);
+
+
+box-shadow:
+
+0 15px 25px #0003;
+
+
+}
+
+
+
+
+
+/* CONFIRMAÇÃO */
 
 
 .confirm{
@@ -387,6 +573,31 @@ text-align:center;
 
 
 }
+
+
+
+
+
+.confirm input{
+
+
+width:100%;
+
+height:55px;
+
+margin-top:12px;
+
+border-radius:15px;
+
+border:1px solid #ddd;
+
+padding:15px;
+
+
+}
+
+
+
 
 
 
@@ -408,5 +619,57 @@ color:white;
 font-size:18px;
 
 font-weight:bold;
+
+cursor:pointer;
+
+
+box-shadow:
+
+0 12px 25px rgba(214,51,154,.35);
+
+
+transition:.25s;
+
+
+}
+
+
+
+
+.confirm button:hover{
+
+
+transform:
+translateY(-6px)
+scale(1.02);
+
+
+}
+
+
+
+
+
+
+/* EFEITO GERAL DE BOTÕES */
+
+
+button{
+
+
+transition:.25s ease;
+
+cursor:pointer;
+
+
+}
+
+
+
+button:active{
+
+
+transform:scale(.96);
+
 
 }
