@@ -1,9 +1,12 @@
 let servicoEscolhido = "";
+
+let diaEscolhido = "";
+
 let horarioEscolhido = "";
 
 
 
-// ABRIR TELA DE AGENDAMENTO
+
 
 function abrirAgendamento(servico){
 
@@ -20,15 +23,16 @@ document.getElementById("tituloServico").innerHTML =
 }
 
 
+
 document
 .getElementById("home")
 .classList.add("escondida");
 
 
+
 document
 .getElementById("agenda")
 .classList.remove("escondida");
-
 
 
 }
@@ -37,7 +41,7 @@ document
 
 
 
-// VOLTAR PARA HOME
+
 
 function voltar(){
 
@@ -53,7 +57,6 @@ document
 .classList.remove("escondida");
 
 
-
 }
 
 
@@ -62,34 +65,14 @@ document
 
 
 
-// ESCOLHER HORÁRIO
-
-function hora(hora){
+function dia(valor){
 
 
-horarioEscolhido = hora;
+diaEscolhido = valor;
 
 
 
-document
-.getElementById("resumo")
-.innerHTML =
-
-
-`
-Serviço:<br>
-
-<b>${servicoEscolhido}</b>
-
-<br><br>
-
-Horário:
-
-<br>
-
-<b>${horarioEscolhido}</b>
-`;
-
+atualizarResumo();
 
 
 }
@@ -99,28 +82,99 @@ Horário:
 
 
 
+function hora(valor){
 
-// CONFIRMAR AGENDAMENTO
+
+horarioEscolhido = valor;
+
+
+
+atualizarResumo();
+
+
+}
+
+
+
+
+
+
+
+function atualizarResumo(){
+
+
+
+document.getElementById("resumo").innerHTML =
+
+
+"Serviço:<br><b>"
++
+servicoEscolhido
++
+"</b><br><br>"+
+
+
+"Dia:<br><b>"
++
+diaEscolhido
++
+"</b><br><br>"+
+
+
+"Horário:<br><b>"
++
+horarioEscolhido
++
+"</b>";
+
+
+
+}
+
+
+
+
+
+
 
 function confirmar(){
 
 
 
-if(servicoEscolhido === ""){
+let nome =
+document.getElementById("nome").value;
 
 
-alert("Escolha um serviço");
+
+let whatsapp =
+document.getElementById("whatsapp").value;
+
+
+
+
+
+if(servicoEscolhido=="" ||
+diaEscolhido=="" ||
+horarioEscolhido==""){
+
+
+alert("Complete o agendamento");
+
 
 return;
+
 
 }
 
 
 
-if(horarioEscolhido === ""){
 
 
-alert("Escolha um horário");
+if(nome=="" || whatsapp==""){
+
+
+alert("Digite seus dados");
+
 
 return;
 
@@ -130,63 +184,37 @@ return;
 
 
 
-document
-.getElementById("resumo")
-.innerHTML =
 
+
+
+document.getElementById("resumo").innerHTML =
 
 
 `
-<div>
-
 <h2>✅ Confirmado</h2>
 
-
-<p>
 Serviço:
-</p>
-
 <b>${servicoEscolhido}</b>
 
+<br><br>
 
-<p>
+Dia:
+<b>${diaEscolhido}</b>
+
+
+<br><br>
+
 Horário:
-</p>
-
 <b>${horarioEscolhido}</b>
 
 
 <br><br>
 
+Cliente:
+<b>${nome}</b>
 
-Obrigado por agendar com a Toda Bella ✨
-
-
-</div>
 
 `;
-
-
-
-}
-
-
-
-
-
-
-// LIMPAR AGENDAMENTO
-
-function limpar(){
-
-
-servicoEscolhido = "";
-
-horarioEscolhido = "";
-
-
-document.getElementById("resumo").innerHTML =
-"Selecione o horário";
 
 
 
