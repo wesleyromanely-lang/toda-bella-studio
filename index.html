@@ -21,18 +21,13 @@
 
 
 
-<!-- HOME -->
-
 <div id="home" class="tela">
 
 
 <header class="header">
 
-
 <div class="perfil">
-
 <img src="logo.png">
-
 </div>
 
 
@@ -43,7 +38,6 @@
 <p>Studio de Beleza ✨</p>
 
 </div>
-
 
 </header>
 
@@ -61,24 +55,14 @@
 
 
 
-
-
 <div class="banner">
 
 
-<h2>
-Olá 👋
-</h2>
+<h2>Olá 👋</h2>
 
+<h1>Seu momento de beleza</h1>
 
-<h1>
-Seu momento de beleza
-</h1>
-
-
-<p>
-Agende seu horário com a Toda Bella ✨
-</p>
+<p>Agende seu horário online ✨</p>
 
 
 <button onclick="abrirAgendamento()">
@@ -89,7 +73,6 @@ Agendar agora
 
 
 </div>
-
 
 
 
@@ -118,7 +101,6 @@ onclick="abrirAgendamento('Progressiva - R$120,00')">
 
 
 
-
 <div class="servico"
 onclick="abrirAgendamento('Botox Capilar - R$99,00')">
 
@@ -129,7 +111,6 @@ onclick="abrirAgendamento('Botox Capilar - R$99,00')">
 <p>R$99,00</p>
 
 </div>
-
 
 
 
@@ -148,7 +129,6 @@ onclick="abrirAgendamento('Cronograma Capilar - R$99,00')">
 
 
 
-
 <div class="servico"
 onclick="abrirAgendamento('Escova - R$50,00')">
 
@@ -163,7 +143,6 @@ onclick="abrirAgendamento('Escova - R$50,00')">
 
 
 
-
 <div class="servico"
 onclick="abrirAgendamento('Selagem - R$79,99')">
 
@@ -174,7 +153,6 @@ onclick="abrirAgendamento('Selagem - R$79,99')">
 <p>R$79,99</p>
 
 </div>
-
 
 
 
@@ -212,7 +190,6 @@ onclick="abrirAgendamento('Tratamento Capilar - R$69,99')">
 </nav>
 
 
-
 </div>
 
 
@@ -223,34 +200,17 @@ onclick="abrirAgendamento('Tratamento Capilar - R$69,99')">
 
 
 
-<!-- AGENDA -->
-
-
 <div id="agenda" class="tela escondida">
-
-
 
 
 
 <header class="top">
 
+<button onclick="voltar()">←</button>
 
-<button onclick="voltar()">
-
-←
-
-</button>
-
-
-<h2>
-
-Agendamento
-
-</h2>
-
+<h2>Agendamento</h2>
 
 </header>
-
 
 
 
@@ -279,33 +239,7 @@ Escolha o dia
 
 
 
-<div class="dias">
-
-
-<button onclick="dia(this,'Terça')">
-Ter
-</button>
-
-
-<button onclick="dia(this,'Quarta')">
-Qua
-</button>
-
-
-<button onclick="dia(this,'Quinta')">
-Qui
-</button>
-
-
-<button onclick="dia(this,'Sexta')">
-Sex
-</button>
-
-
-<button onclick="dia(this,'Sábado')">
-Sáb
-</button>
-
+<div id="dias" class="dias">
 
 
 </div>
@@ -320,11 +254,13 @@ Sáb
 
 
 
+<h3>
 
-<div class="periodo">
+Horários
+
+</h3>
 
 
-<h3>Manhã ☀️</h3>
 
 
 <div class="horarios">
@@ -344,19 +280,6 @@ Sáb
 11:30
 </button>
 
-
-</div>
-
-
-
-
-
-
-<h3>Tarde 🌙</h3>
-
-
-
-<div class="horarios">
 
 
 <button onclick="hora(this,'13:30')">
@@ -379,11 +302,8 @@ Sáb
 </button>
 
 
-
 </div>
 
-
-</div>
 
 
 
@@ -417,14 +337,11 @@ placeholder="WhatsApp">
 
 
 
-
 <button onclick="confirmar()">
 
-Confirmar agendamento
+Confirmar
 
 </button>
-
-
 
 
 
@@ -432,21 +349,16 @@ Confirmar agendamento
 id="btnWhatsapp"
 class="whatsapp"
 onclick="whatsapp()"
-style="display:none;">
+style="display:none">
 
 
-📲 Enviar WhatsApp
+📲 WhatsApp
 
 
 </button>
 
 
 
-</div>
-
-
-
-
 
 </div>
 
@@ -454,12 +366,13 @@ style="display:none;">
 
 
 
-
-
 </div>
 
 
 
+
+
+</div>
 
 
 
