@@ -1,22 +1,18 @@
+import {
+db,
+ref,
+push,
+get
+} from "./firebase.js";
+
+
 let servicoEscolhido = "";
 
 let diaEscolhido = "";
 
 let horarioEscolhido = "";
 
-
-// TESTE DE HORÁRIOS OCUPADOS
-// depois vamos trocar pelo Firebase
-
-let horariosOcupados = [
-
-"10:30",
-
-"15:30"
-
-];
-
-
+let horariosOcupados = [];
 
 
 
@@ -35,19 +31,14 @@ const diasSemana = [
 
 
 
-
-
-
+// ABRIR AGENDA
 
 function abrirAgendamento(servico){
 
 
-
 if(servico){
 
-
 servicoEscolhido = servico;
-
 
 
 document.getElementById("tituloServico").innerHTML =
@@ -55,21 +46,7 @@ document.getElementById("tituloServico").innerHTML =
 "✨ " + servico;
 
 
-
 }
-
-
-
-
-document
-.getElementById("home")
-.classList.add("sair");
-
-
-
-
-setTimeout(()=>{
-
 
 
 document
@@ -87,12 +64,7 @@ document
 criarCalendario();
 
 
-
-bloquearHorarios();
-
-
-
-},300);
+carregarHorarios();
 
 
 
@@ -103,20 +75,9 @@ bloquearHorarios();
 
 
 
-
-
+// VOLTAR
 
 function voltar(){
-
-
-
-document
-.getElementById("agenda")
-.classList.add("sair");
-
-
-
-setTimeout(()=>{
 
 
 document
@@ -130,11 +91,6 @@ document
 .classList.remove("escondida");
 
 
-
-},300);
-
-
-
 }
 
 
@@ -144,21 +100,20 @@ document
 
 
 
+// CALENDARIO
 
 function criarCalendario(){
 
 
+let area =
+document.getElementById("dias");
 
-let area = document.getElementById("dias");
 
-
-
-area.innerHTML = "";
+area.innerHTML="";
 
 
 
 let hoje = new Date();
-
 
 
 
@@ -169,7 +124,6 @@ for(let i=1;i<=7;i++){
 let data = new Date();
 
 
-
 data.setDate(
 hoje.getDate()+i
 );
@@ -177,7 +131,8 @@ hoje.getDate()+i
 
 
 
-let botao = document.createElement("button");
+let botao =
+document.createElement("button");
 
 
 
@@ -185,7 +140,6 @@ let botao = document.createElement("button");
 botao.innerHTML =
 
 diasSemana[data.getDay()]
-
 +
 "<br>"
 +
@@ -209,16 +163,13 @@ b.classList.remove("selecionado");
 
 
 
-
 botao.classList.add("selecionado");
-
 
 
 
 diaEscolhido =
 
 diasSemana[data.getDay()]
-
 +
 " "
 +
@@ -227,13 +178,10 @@ data.getDate();
 
 
 
-
 atualizarResumo();
 
 
-
 }
-
 
 
 
@@ -244,6 +192,63 @@ area.appendChild(botao);
 }
 
 
+}
+
+
+
+
+
+
+
+
+// CARREGAR HORARIOS DO FIREBASE
+
+async function carregarHorarios(){
+
+
+
+horariosOcupados = [];
+
+
+
+const banco = await get(
+ref(db,"agendamentos")
+);
+
+
+
+if(banco.exists()){
+
+
+
+let dados = banco.val();
+
+
+
+Object.values(dados).forEach(item=>{
+
+
+if(item.dia == diaEscolhido){
+
+
+horariosOcupados.push(
+item.horario
+);
+
+
+}
+
+
+});
+
+
+
+}
+
+
+
+
+bloquearHorarios();
 
 
 }
@@ -256,17 +261,18 @@ area.appendChild(botao);
 
 
 
+// ESCOLHER HORARIO
+
 function hora(botao,valor){
 
 
 
 if(
 horariosOcupados.includes(valor)
-
 ){
 
 
-alert("Esse horário já está ocupado");
+alert("Horário já reservado");
 
 
 return;
@@ -278,9 +284,7 @@ return;
 
 
 
-
 horarioEscolhido = valor;
-
 
 
 
@@ -289,14 +293,9 @@ document
 .querySelectorAll(".horarios button")
 .forEach(b=>{
 
-
 b.classList.remove("selecionado");
 
-
 });
-
-
-
 
 
 
@@ -304,10 +303,7 @@ botao.classList.add("selecionado");
 
 
 
-
-
 atualizarResumo();
-
 
 
 
@@ -320,6 +316,8 @@ atualizarResumo();
 
 
 
+
+// BLOQUEAR HORARIOS
 
 function bloquearHorarios(){
 
@@ -330,26 +328,20 @@ document
 .forEach(botao=>{
 
 
-
 let horario =
 botao.innerText;
 
 
 
-
 if(
 horariosOcupados.includes(horario)
-
 ){
 
 
-
-botao.disabled = true;
-
+botao.disabled=true;
 
 
 botao.classList.add("ocupado");
-
 
 
 }
@@ -370,13 +362,13 @@ botao.classList.add("ocupado");
 
 
 
+// RESUMO
+
 function atualizarResumo(){
 
 
 
 document.getElementById("resumo").innerHTML =
-
-
 
 
 `
@@ -408,10 +400,7 @@ Horário:
 <b>${horarioEscolhido}</b>
 
 
-
 `;
-
-
 
 
 
@@ -425,22 +414,18 @@ Horário:
 
 
 
+// CONFIRMAR
 
-function confirmar(){
-
+async function confirmar(){
 
 
 let nome =
-
 document.getElementById("nome").value;
 
 
 
 let whatsapp =
-
 document.getElementById("whatsapp").value;
-
-
 
 
 
@@ -450,9 +435,7 @@ if(
 !servicoEscolhido ||
 !diaEscolhido ||
 !horarioEscolhido
-
 ){
-
 
 
 alert("Escolha serviço, dia e horário");
@@ -466,13 +449,9 @@ return;
 
 
 
-
-
-
 if(
 !nome ||
 !whatsapp
-
 ){
 
 
@@ -489,63 +468,47 @@ return;
 
 
 
+await push(
+
+ref(db,"agendamentos"),
+
+{
+
+
+nome:nome,
+
+
+whatsapp:whatsapp,
+
+
+servico:servicoEscolhido,
+
+
+dia:diaEscolhido,
+
+
+horario:horarioEscolhido,
+
+
+criado:
+new Date().toLocaleString()
+
+
+}
+
+);
+
+
+
+
+
+alert("Agendamento realizado ✨");
+
+
 
 document
 .getElementById("btnWhatsapp")
 .style.display="block";
-
-
-
-
-
-
-
-document.getElementById("resumo").innerHTML =
-
-
-
-
-`
-
-<h2>
-✅ Agendamento confirmado
-</h2>
-
-
-Cliente:
-
-<b>${nome}</b>
-
-
-<br><br>
-
-
-Serviço:
-
-<b>${servicoEscolhido}</b>
-
-
-<br><br>
-
-
-Dia:
-
-<b>${diaEscolhido}</b>
-
-
-<br><br>
-
-
-Horário:
-
-<b>${horarioEscolhido}</b>
-
-
-`;
-
-
-
-
 
 
 
@@ -555,26 +518,18 @@ Horário:
 
 
 
-
-
-
+// WHATSAPP
 
 function whatsapp(){
 
 
 
-
-
 let numero =
-
 "5511999999999";
 
 
 
-
-
 let mensagem =
-
 
 
 `
@@ -600,11 +555,7 @@ ${diaEscolhido}
 Horário:
 ${horarioEscolhido}
 
-
 `;
-
-
-
 
 
 
@@ -612,7 +563,6 @@ ${horarioEscolhido}
 window.open(
 
 "https://wa.me/"
-
 +
 numero
 +
@@ -623,5 +573,30 @@ encodeURIComponent(mensagem)
 );
 
 
-
 }
+
+
+
+
+
+
+
+
+window.abrirAgendamento =
+abrirAgendamento;
+
+
+window.voltar =
+voltar;
+
+
+window.hora =
+hora;
+
+
+window.confirmar =
+confirmar;
+
+
+window.whatsapp =
+whatsapp;
