@@ -26,9 +26,13 @@
 
 <header class="header">
 
+
 <div class="perfil">
-<img src="logo.png">
+
+<img src="logo-todabella.png">
+
 </div>
+
 
 
 <div>
@@ -38,6 +42,7 @@
 <p>Studio de Beleza ✨</p>
 
 </div>
+
 
 </header>
 
@@ -55,14 +60,19 @@
 
 
 
+
+
 <div class="banner">
 
 
 <h2>Olá 👋</h2>
 
+
 <h1>Seu momento de beleza</h1>
 
+
 <p>Agende seu horário online ✨</p>
+
 
 
 <button onclick="abrirAgendamento()">
@@ -72,7 +82,10 @@ Agendar agora
 </button>
 
 
+
 </div>
+
+
 
 
 
@@ -83,12 +96,17 @@ Agendar agora
 
 
 
+
+
 <div class="cards">
+
+
 
 
 
 <div class="servico"
 onclick="abrirAgendamento('Progressiva - R$120,00')">
+
 
 ✨
 
@@ -96,7 +114,11 @@ onclick="abrirAgendamento('Progressiva - R$120,00')">
 
 <p>R$120,00</p>
 
+
 </div>
+
+
+
 
 
 
@@ -104,13 +126,18 @@ onclick="abrirAgendamento('Progressiva - R$120,00')">
 <div class="servico"
 onclick="abrirAgendamento('Botox Capilar - R$99,00')">
 
+
 💆
 
-<h3>Botox</h3>
+<h3>Botox Capilar</h3>
 
 <p>R$99,00</p>
 
+
 </div>
+
+
+
 
 
 
@@ -118,13 +145,18 @@ onclick="abrirAgendamento('Botox Capilar - R$99,00')">
 <div class="servico"
 onclick="abrirAgendamento('Cronograma Capilar - R$99,00')">
 
+
 🌸
 
 <h3>Cronograma</h3>
 
 <p>R$99,00</p>
 
+
 </div>
+
+
+
 
 
 
@@ -132,13 +164,18 @@ onclick="abrirAgendamento('Cronograma Capilar - R$99,00')">
 <div class="servico"
 onclick="abrirAgendamento('Escova - R$50,00')">
 
+
 ✨
 
 <h3>Escova</h3>
 
 <p>R$50,00</p>
 
+
 </div>
+
+
+
 
 
 
@@ -146,13 +183,18 @@ onclick="abrirAgendamento('Escova - R$50,00')">
 <div class="servico"
 onclick="abrirAgendamento('Selagem - R$79,99')">
 
+
 💎
 
 <h3>Selagem</h3>
 
 <p>R$79,99</p>
 
+
 </div>
+
+
+
 
 
 
@@ -160,17 +202,23 @@ onclick="abrirAgendamento('Selagem - R$79,99')">
 <div class="servico"
 onclick="abrirAgendamento('Tratamento Capilar - R$69,99')">
 
+
 🌿
 
 <h3>Tratamento</h3>
 
 <p>R$69,99</p>
 
-</div>
-
-
 
 </div>
+
+
+
+
+
+
+</div>
+
 
 
 
@@ -179,15 +227,23 @@ onclick="abrirAgendamento('Tratamento Capilar - R$69,99')">
 
 <nav>
 
+
 <button>⌂</button>
+
 
 <button onclick="abrirAgendamento()">📅</button>
 
+
 <button>♡</button>
+
 
 <button>👤</button>
 
+
+
 </nav>
+
+
 
 
 </div>
@@ -204,13 +260,26 @@ onclick="abrirAgendamento('Tratamento Capilar - R$69,99')">
 
 
 
+
+
 <header class="top">
 
-<button onclick="voltar()">←</button>
+
+<button onclick="voltar()">
+
+←
+
+</button>
+
+
 
 <h2>Agendamento</h2>
 
+
+
 </header>
+
+
 
 
 
@@ -231,11 +300,13 @@ Escolha o serviço
 <div class="calendario">
 
 
+
 <h2>
 
 Escolha o dia
 
 </h2>
+
 
 
 
@@ -245,7 +316,9 @@ Escolha o dia
 </div>
 
 
+
 </div>
+
 
 
 
@@ -263,43 +336,71 @@ Horários
 
 
 
+
+
+
 <div class="horarios">
 
 
+
 <button onclick="hora(this,'09:30')">
+
 09:30
+
 </button>
+
 
 
 <button onclick="hora(this,'10:30')">
+
 10:30
+
 </button>
+
 
 
 <button onclick="hora(this,'11:30')">
+
 11:30
+
 </button>
+
 
 
 
 <button onclick="hora(this,'13:30')">
+
 13:30
+
 </button>
+
+
 
 
 <button onclick="hora(this,'14:30')">
+
 14:30
+
 </button>
+
+
 
 
 <button onclick="hora(this,'15:30')">
+
 15:30
+
 </button>
+
+
 
 
 <button onclick="hora(this,'16:30')">
+
 16:30
+
 </button>
+
 
 
 </div>
@@ -316,17 +417,27 @@ Horários
 
 
 
+
+
 <div id="resumo" class="resumo">
 
+
 Selecione serviço
+
 
 </div>
 
 
 
 
+
+
+
 <input id="nome"
 placeholder="Seu nome">
+
+
+
 
 
 
@@ -337,11 +448,19 @@ placeholder="WhatsApp">
 
 
 
+
+
 <button onclick="confirmar()">
 
-Confirmar
+
+Confirmar agendamento
+
 
 </button>
+
+
+
+
 
 
 
@@ -360,11 +479,6 @@ style="display:none">
 
 
 
-</div>
-
-
-
-
 
 </div>
 
@@ -372,13 +486,27 @@ style="display:none">
 
 
 
+
 </div>
 
 
 
-<script src="script.js"></script>
+
+
+
+
+</div>
+
+
+
+
+
+
+<script type="module" src="script.js"></script>
+
 
 
 </body>
+
 
 </html>
