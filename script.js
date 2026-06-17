@@ -30,8 +30,7 @@ const diasSemana = [
 
 
 
-
-// ABRIR AGENDA
+// ABRIR AGENDAMENTO
 
 function abrirAgendamento(servico){
 
@@ -47,6 +46,7 @@ document.getElementById("tituloServico").innerHTML =
 
 
 }
+
 
 
 document
@@ -98,8 +98,6 @@ document
 
 
 
-
-
 // CALENDARIO
 
 function criarCalendario(){
@@ -120,7 +118,6 @@ let hoje = new Date();
 for(let i=1;i<=7;i++){
 
 
-
 let data = new Date();
 
 
@@ -130,10 +127,8 @@ hoje.getDate()+i
 
 
 
-
 let botao =
 document.createElement("button");
-
 
 
 
@@ -177,6 +172,8 @@ data.getDate();
 
 
 
+carregarHorarios();
+
 
 atualizarResumo();
 
@@ -201,13 +198,12 @@ area.appendChild(botao);
 
 
 
-// CARREGAR HORARIOS DO FIREBASE
+// BUSCA HORARIOS NO FIREBASE
 
 async function carregarHorarios(){
 
 
-
-horariosOcupados = [];
+horariosOcupados=[];
 
 
 
@@ -220,8 +216,8 @@ ref(db,"agendamentos")
 if(banco.exists()){
 
 
-
-let dados = banco.val();
+let dados =
+banco.val();
 
 
 
@@ -239,6 +235,7 @@ item.horario
 }
 
 
+
 });
 
 
@@ -247,12 +244,11 @@ item.horario
 
 
 
-
 bloquearHorarios();
 
 
-}
 
+}
 
 
 
@@ -272,7 +268,7 @@ horariosOcupados.includes(valor)
 ){
 
 
-alert("Horário já reservado");
+alert("Esse horário já foi reservado");
 
 
 return;
@@ -283,9 +279,7 @@ return;
 
 
 
-
 horarioEscolhido = valor;
-
 
 
 
@@ -328,8 +322,16 @@ document
 .forEach(botao=>{
 
 
+
+botao.disabled=false;
+
+botao.classList.remove("ocupado");
+
+
+
 let horario =
 botao.innerText;
+
 
 
 
@@ -338,8 +340,8 @@ horariosOcupados.includes(horario)
 ){
 
 
-botao.disabled=true;
 
+botao.disabled=true;
 
 botao.classList.add("ocupado");
 
@@ -362,10 +364,10 @@ botao.classList.add("ocupado");
 
 
 
+
 // RESUMO
 
 function atualizarResumo(){
-
 
 
 document.getElementById("resumo").innerHTML =
@@ -398,7 +400,6 @@ Horário:
 <br>
 
 <b>${horarioEscolhido}</b>
-
 
 `;
 
@@ -477,18 +478,13 @@ ref(db,"agendamentos"),
 
 nome:nome,
 
-
 whatsapp:whatsapp,
-
 
 servico:servicoEscolhido,
 
-
 dia:diaEscolhido,
 
-
 horario:horarioEscolhido,
-
 
 criado:
 new Date().toLocaleString()
@@ -518,14 +514,19 @@ document
 
 
 
-// WHATSAPP
+
+
+
+
+
+// WHATSAPP TODA BELLA
 
 function whatsapp(){
 
 
 
 let numero =
-"5511999999999";
+"5511964201177";
 
 
 
@@ -574,7 +575,6 @@ encodeURIComponent(mensagem)
 
 
 }
-
 
 
 
