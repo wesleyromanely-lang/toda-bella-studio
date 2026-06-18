@@ -61,18 +61,14 @@
 
 
 
-
 <div class="banner">
 
 
 <h2>Olá 👋</h2>
 
-
 <h1>Seu momento de beleza</h1>
 
-
 <p>Agende seu horário online ✨</p>
-
 
 
 <button onclick="abrirAgendamento()">
@@ -82,9 +78,7 @@ Agendar agora
 </button>
 
 
-
 </div>
-
 
 
 
@@ -97,16 +91,12 @@ Agendar agora
 
 
 
-
 <div class="cards">
-
-
 
 
 
 <div class="servico"
 onclick="abrirAgendamento('Progressiva - R$120,00')">
-
 
 ✨
 
@@ -114,11 +104,7 @@ onclick="abrirAgendamento('Progressiva - R$120,00')">
 
 <p>R$120,00</p>
 
-
 </div>
-
-
-
 
 
 
@@ -126,17 +112,13 @@ onclick="abrirAgendamento('Progressiva - R$120,00')">
 <div class="servico"
 onclick="abrirAgendamento('Botox Capilar - R$99,00')">
 
-
 💆
 
 <h3>Botox Capilar</h3>
 
 <p>R$99,00</p>
 
-
 </div>
-
-
 
 
 
@@ -145,17 +127,13 @@ onclick="abrirAgendamento('Botox Capilar - R$99,00')">
 <div class="servico"
 onclick="abrirAgendamento('Cronograma Capilar - R$99,00')">
 
-
 🌸
 
 <h3>Cronograma</h3>
 
 <p>R$99,00</p>
 
-
 </div>
-
-
 
 
 
@@ -164,17 +142,13 @@ onclick="abrirAgendamento('Cronograma Capilar - R$99,00')">
 <div class="servico"
 onclick="abrirAgendamento('Escova - R$50,00')">
 
-
 ✨
 
 <h3>Escova</h3>
 
 <p>R$50,00</p>
 
-
 </div>
-
-
 
 
 
@@ -183,17 +157,13 @@ onclick="abrirAgendamento('Escova - R$50,00')">
 <div class="servico"
 onclick="abrirAgendamento('Selagem - R$79,99')">
 
-
 💎
 
 <h3>Selagem</h3>
 
 <p>R$79,99</p>
 
-
 </div>
-
-
 
 
 
@@ -202,18 +172,13 @@ onclick="abrirAgendamento('Selagem - R$79,99')">
 <div class="servico"
 onclick="abrirAgendamento('Tratamento Capilar - R$69,99')">
 
-
 🌿
 
 <h3>Tratamento</h3>
 
 <p>R$69,99</p>
 
-
 </div>
-
-
-
 
 
 
@@ -227,21 +192,16 @@ onclick="abrirAgendamento('Tratamento Capilar - R$69,99')">
 
 <nav>
 
-
 <button>⌂</button>
-
 
 <button onclick="abrirAgendamento()">📅</button>
 
-
 <button>♡</button>
-
 
 <button>👤</button>
 
-
-
 </nav>
+
 
 
 
@@ -265,15 +225,19 @@ onclick="abrirAgendamento('Tratamento Capilar - R$69,99')">
 <header class="top">
 
 
-<button onclick="voltar()">
+<button onclick="voltar()" class="btn-voltar">
 
-←
+Voltar
 
 </button>
 
 
 
-<h2>Agendamento</h2>
+<h2>
+
+Agendamento
+
+</h2>
 
 
 
@@ -297,8 +261,9 @@ Escolha o serviço
 
 
 
-<div class="calendario">
 
+
+<div class="calendario">
 
 
 <h2>
@@ -314,7 +279,6 @@ Escolha o dia
 
 
 </div>
-
 
 
 </div>
@@ -356,6 +320,7 @@ Horários
 10:30
 
 </button>
+
 
 
 
@@ -432,7 +397,6 @@ Selecione serviço
 
 
 
-
 <input id="nome"
 placeholder="Seu nome">
 
@@ -450,28 +414,13 @@ placeholder="WhatsApp">
 
 
 
-<button onclick="confirmar()">
-
-
-Confirmar agendamento
-
-
-</button>
-
-
-
-
-
-
-
-<button 
+<button
 id="btnWhatsapp"
 class="whatsapp"
-onclick="whatsapp()"
-style="display:none">
+onclick="whatsapp()">
 
 
-📲 WhatsApp
+📲 Confirmar pelo WhatsApp
 
 
 </button>
@@ -487,15 +436,18 @@ style="display:none">
 
 
 
-</div>
-
-
-
-
-
-
 
 </div>
+
+
+
+
+
+
+
+
+</div>
+
 
 
 
@@ -505,8 +457,6 @@ style="display:none">
 <script type="module" src="script.js"></script>
 
 
-
 </body>
-
 
 </html>
