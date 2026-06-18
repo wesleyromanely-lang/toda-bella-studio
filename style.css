@@ -3,8 +3,7 @@ box-sizing:border-box;
 }
 
 
-html,
-body{
+html,body{
 
 margin:0;
 
@@ -20,8 +19,6 @@ background:#f7f3f7;
 
 
 
-
-
 body{
 
 padding:0;
@@ -31,17 +28,11 @@ padding:0;
 
 
 
-
 .app{
 
 width:100%;
 
-max-width:none;
-
-margin:0;
-
 }
-
 
 
 
@@ -52,20 +43,13 @@ width:100%;
 
 min-height:100vh;
 
-border-radius:0;
+background:white;
 
-padding:20px;
+padding:22px;
 
 padding-bottom:110px;
 
-background:white;
-
-box-shadow:none;
-
-overflow-y:auto;
-
 }
-
 
 
 
@@ -75,6 +59,7 @@ overflow-y:auto;
 display:none;
 
 }
+
 
 
 
@@ -96,23 +81,18 @@ gap:15px;
 
 .perfil{
 
-width:75px;
+width:78px;
 
-height:75px;
-
-flex-shrink:0;
+height:78px;
 
 border-radius:50%;
 
 overflow:hidden;
 
 box-shadow:
-
-0 10px 25px #d6339a55;
+0 12px 30px #d6339a55;
 
 }
-
-
 
 
 
@@ -132,7 +112,7 @@ object-fit:cover;
 
 .busca{
 
-height:50px;
+height:52px;
 
 border-radius:25px;
 
@@ -147,10 +127,11 @@ padding:15px;
 margin:20px 0;
 
 box-shadow:
-
-0 5px 15px #0001;
+0 8px 20px #0001;
 
 }
+
+
 
 
 
@@ -158,19 +139,16 @@ box-shadow:
 
 .banner{
 
-border-radius:28px;
+background:#d6339a;
 
 padding:25px;
 
-background:#d6339a;
+border-radius:30px;
 
 box-shadow:
-
-0 15px 35px #d6339a55;
+0 20px 40px #d6339a55;
 
 }
-
-
 
 
 
@@ -185,24 +163,26 @@ color:white;
 
 
 
-
 .banner button{
 
-height:48px;
+height:50px;
 
 border:0;
 
-border-radius:18px;
+border-radius:20px;
 
-padding:0 20px;
+background:white;
 
 color:#d6339a;
 
-background:white;
+padding:0 25px;
 
 font-weight:bold;
 
 }
+
+
+
 
 
 
@@ -214,9 +194,7 @@ display:grid;
 
 grid-template-columns:repeat(2,1fr);
 
-gap:14px;
-
-margin-top:15px;
+gap:15px;
 
 }
 
@@ -226,23 +204,229 @@ margin-top:15px;
 
 .servico{
 
-height:145px;
+height:150px;
 
-border-radius:22px;
+border-radius:25px;
+
+background:white;
 
 display:flex;
 
 flex-direction:column;
 
+align-items:center;
+
 justify-content:center;
+
+box-shadow:
+0 12px 30px #0002;
+
+transition:.2s;
+
+}
+
+
+
+.servico:hover{
+
+transform:translateY(-7px);
+
+box-shadow:
+0 20px 40px #d6339a55;
+
+}
+
+
+
+
+.servico p{
+
+color:#d6339a;
+
+font-weight:bold;
+
+}
+
+
+
+
+
+
+/* AGENDA */
+
+
+.top{
+
+display:flex;
 
 align-items:center;
 
-background:white;
+gap:15px;
+
+margin-bottom:20px;
+
+}
+
+
+
+.top button{
+
+width:48px;
+
+height:48px;
+
+border:0;
+
+border-radius:18px;
+
+background:#f8d8e8;
+
+font-size:24px;
+
+}
+
+
+
+
+.top h2{
+
+font-size:24px;
+
+}
+
+
+
+
+
+
+
+
+.calendario{
+
+background:#d6339a;
+
+border-radius:30px;
+
+padding:22px;
 
 box-shadow:
 
-0 8px 25px rgba(0,0,0,.12);
+0 20px 40px #d6339a55;
+
+}
+
+
+
+.calendario h2{
+
+color:white;
+
+font-size:20px;
+
+}
+
+
+
+
+
+.dias{
+
+display:flex;
+
+gap:12px;
+
+overflow-x:auto;
+
+padding:8px 0;
+
+}
+
+
+
+
+
+.dias button{
+
+min-width:65px;
+
+height:70px;
+
+border:0;
+
+border-radius:22px;
+
+background:white;
+
+color:#d6339a;
+
+font-weight:bold;
+
+font-size:16px;
+
+box-shadow:
+
+0 8px 18px #0002;
+
+}
+
+
+
+
+
+
+
+.selecionado{
+
+background:#fff!important;
+
+color:#d6339a!important;
+
+transform:translateY(-8px);
+
+box-shadow:
+
+0 18px 30px #0003!important;
+
+}
+
+
+
+
+
+
+.horarios{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:15px;
+
+margin-top:15px;
+
+}
+
+
+
+
+
+.horarios button{
+
+height:65px;
+
+border:0;
+
+border-radius:22px;
+
+background:#f7d8ea;
+
+font-size:19px;
+
+font-weight:bold;
+
+box-shadow:
+
+0 10px 20px #0002;
 
 transition:.2s;
 
@@ -251,8 +435,7 @@ transition:.2s;
 
 
 
-
-.servico:hover{
+.horarios button:hover{
 
 transform:translateY(-5px);
 
@@ -262,25 +445,110 @@ transform:translateY(-5px);
 
 
 
-.servico h3{
 
-font-size:15px;
 
-margin:8px 0;
+.ocupado{
+
+background:#ddd!important;
+
+color:#999!important;
+
+box-shadow:none!important;
 
 }
 
 
 
-.servico p{
 
-font-size:13px;
 
-color:#d6339a;
+
+
+
+.confirm{
+
+margin-top:25px;
+
+}
+
+
+
+.resumo{
+
+background:white;
+
+border-radius:30px;
+
+padding:25px;
+
+box-shadow:
+
+0 15px 35px #0002;
+
+line-height:1.8;
+
+}
+
+
+
+
+
+.confirm input{
+
+width:100%;
+
+height:58px;
+
+margin-top:12px;
+
+border-radius:18px;
+
+border:1px solid #ddd;
+
+padding:15px;
+
+font-size:16px;
+
+}
+
+
+
+
+
+.confirm button{
+
+width:100%;
+
+height:62px;
+
+margin-top:15px;
+
+border:0;
+
+border-radius:22px;
+
+background:#d6339a;
+
+color:white;
+
+font-size:18px;
 
 font-weight:bold;
 
+box-shadow:
+
+0 15px 30px #d6339a55;
+
 }
+
+
+
+
+.whatsapp{
+
+background:#25D366!important;
+
+}
+
 
 
 
@@ -304,246 +572,25 @@ border-radius:25px;
 
 display:flex;
 
-justify-content:space-around;
-
 align-items:center;
+
+justify-content:space-around;
 
 z-index:99;
 
-box-shadow:
-
-0 15px 35px #d6339a66;
-
 }
+
 
 
 
 nav button{
 
-background:none;
-
 border:0;
+
+background:none;
 
 color:white;
 
 font-size:24px;
-
-}
-
-
-
-
-
-.top{
-
-display:flex;
-
-align-items:center;
-
-gap:15px;
-
-}
-
-
-
-.top button{
-
-width:45px;
-
-height:45px;
-
-border:0;
-
-border-radius:15px;
-
-background:#f7d7e7;
-
-}
-
-
-
-
-
-.calendario{
-
-background:#d6339a;
-
-padding:20px;
-
-border-radius:25px;
-
-}
-
-
-
-
-
-.calendario h2{
-
-color:white;
-
-}
-
-
-
-
-
-.dias{
-
-display:flex;
-
-gap:10px;
-
-overflow:auto;
-
-}
-
-
-
-
-
-.dias button{
-
-min-width:60px;
-
-height:60px;
-
-border:0;
-
-border-radius:18px;
-
-background:white;
-
-color:#d6339a;
-
-}
-
-
-
-
-
-.horarios{
-
-display:grid;
-
-grid-template-columns:repeat(2,1fr);
-
-gap:15px;
-
-}
-
-
-
-
-
-.horarios button{
-
-height:60px;
-
-border:0;
-
-border-radius:20px;
-
-background:#f7d8ea;
-
-font-size:18px;
-
-font-weight:bold;
-
-}
-
-
-
-
-
-.ocupado{
-
-background:#ddd!important;
-
-color:#999;
-
-}
-
-
-
-
-
-.confirm{
-
-margin-top:20px;
-
-}
-
-
-
-
-
-.resumo{
-
-background:#fafafa;
-
-padding:20px;
-
-border-radius:25px;
-
-box-shadow:
-
-0 8px 25px #0002;
-
-}
-
-
-
-
-
-.confirm input{
-
-width:100%;
-
-height:55px;
-
-margin-top:12px;
-
-border-radius:15px;
-
-border:1px solid #ddd;
-
-padding:15px;
-
-}
-
-
-
-
-
-.confirm button{
-
-width:100%;
-
-height:58px;
-
-margin-top:12px;
-
-border:0;
-
-border-radius:20px;
-
-background:#d6339a;
-
-color:white;
-
-font-size:17px;
-
-font-weight:bold;
-
-}
-
-
-
-
-
-.whatsapp{
-
-background:#25D366!important;
 
 }
