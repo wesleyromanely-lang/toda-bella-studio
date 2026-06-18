@@ -6,6 +6,7 @@ get
 } from "./firebase.js";
 
 
+
 let servicoEscolhido = "";
 
 let diaEscolhido = "";
@@ -13,6 +14,8 @@ let diaEscolhido = "";
 let horarioEscolhido = "";
 
 let horariosOcupados = [];
+
+
 
 
 
@@ -30,22 +33,38 @@ const diasSemana = [
 
 
 
-// ABRIR AGENDAMENTO
+
+
+
 
 function abrirAgendamento(servico){
 
 
-if(servico){
 
-servicoEscolhido = servico;
+servicoEscolhido = servico || "";
+
+diaEscolhido = "";
+
+horarioEscolhido = "";
+
+
 
 
 document.getElementById("tituloServico").innerHTML =
 
-"✨ " + servico;
+
+servicoEscolhido
+
+?
+
+"✨ " + servicoEscolhido
+
+:
+
+"Escolha o serviço";
 
 
-}
+
 
 
 
@@ -58,13 +77,26 @@ document
 document
 .getElementById("agenda")
 .classList.remove("escondida");
+
+
+
+
+
+
+document
+.getElementById("btnWhatsapp")
+.style.display="block";
+
+
+
 
 
 
 criarCalendario();
 
 
-carregarHorarios();
+
+limparHorarios();
 
 
 
@@ -75,9 +107,11 @@ carregarHorarios();
 
 
 
-// VOLTAR
+
+
 
 function voltar(){
+
 
 
 document
@@ -91,6 +125,11 @@ document
 .classList.remove("escondida");
 
 
+
+limparDados();
+
+
+
 }
 
 
@@ -98,13 +137,43 @@ document
 
 
 
-// CALENDARIO
+
+
+
+function limparDados(){
+
+
+servicoEscolhido="";
+
+diaEscolhido="";
+
+horarioEscolhido="";
+
+
+
+document.getElementById("nome").value="";
+
+document.getElementById("whatsapp").value="";
+
+
+
+}
+
+
+
+
+
+
+
+
 
 function criarCalendario(){
 
 
+
 let area =
 document.getElementById("dias");
+
 
 
 area.innerHTML="";
@@ -115,10 +184,14 @@ let hoje = new Date();
 
 
 
+
+
+
 for(let i=1;i<=7;i++){
 
 
 let data = new Date();
+
 
 
 data.setDate(
@@ -127,18 +200,27 @@ hoje.getDate()+i
 
 
 
+
+
 let botao =
 document.createElement("button");
+
+
+
 
 
 
 botao.innerHTML =
 
 diasSemana[data.getDay()]
+
 +
 "<br>"
+
 +
 data.getDate();
+
+
 
 
 
@@ -158,27 +240,43 @@ b.classList.remove("selecionado");
 
 
 
+
+
+
 botao.classList.add("selecionado");
+
 
 
 
 diaEscolhido =
 
+
 diasSemana[data.getDay()]
+
 +
 " "
+
 +
 data.getDate();
+
+
+
 
 
 
 carregarHorarios();
 
 
+
 atualizarResumo();
 
 
+
+
 }
+
+
+
 
 
 
@@ -186,21 +284,23 @@ area.appendChild(botao);
 
 
 
-}
-
 
 }
 
 
 
+}
 
 
 
 
 
-// BUSCA HORARIOS NO FIREBASE
+
+
+
 
 async function carregarHorarios(){
+
 
 
 horariosOcupados=[];
@@ -213,26 +313,41 @@ ref(db,"agendamentos")
 
 
 
+
+
+
 if(banco.exists()){
 
 
-let dados =
-banco.val();
+
+let dados = banco.val();
+
+
+
 
 
 
 Object.values(dados).forEach(item=>{
 
 
+
+
+
 if(item.dia == diaEscolhido){
 
 
+
 horariosOcupados.push(
+
 item.horario
+
 );
 
 
+
 }
+
+
 
 
 
@@ -240,7 +355,10 @@ item.horario
 
 
 
+
+
 }
+
 
 
 
@@ -257,9 +375,39 @@ bloquearHorarios();
 
 
 
-// ESCOLHER HORARIO
+
+function limparHorarios(){
+
+
+
+document
+.querySelectorAll(".horarios button")
+.forEach(botao=>{
+
+
+botao.disabled=false;
+
+botao.classList.remove("ocupado");
+
+botao.classList.remove("selecionado");
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+
 
 function hora(botao,valor){
+
+
 
 
 
@@ -268,7 +416,7 @@ horariosOcupados.includes(valor)
 ){
 
 
-alert("Esse horário já foi reservado");
+alert("Horário já reservado");
 
 
 return;
@@ -279,7 +427,12 @@ return;
 
 
 
-horarioEscolhido = valor;
+
+
+horarioEscolhido=valor;
+
+
+
 
 
 
@@ -293,11 +446,19 @@ b.classList.remove("selecionado");
 
 
 
+
+
+
 botao.classList.add("selecionado");
 
 
 
+
+
+
 atualizarResumo();
+
+
 
 
 
@@ -311,8 +472,6 @@ atualizarResumo();
 
 
 
-// BLOQUEAR HORARIOS
-
 function bloquearHorarios(){
 
 
@@ -323,14 +482,9 @@ document
 
 
 
-botao.disabled=false;
-
-botao.classList.remove("ocupado");
-
-
-
 let horario =
 botao.innerText;
+
 
 
 
@@ -346,6 +500,7 @@ botao.disabled=true;
 botao.classList.add("ocupado");
 
 
+
 }
 
 
@@ -364,10 +519,8 @@ botao.classList.add("ocupado");
 
 
 
-
-// RESUMO
-
 function atualizarResumo(){
+
 
 
 document.getElementById("resumo").innerHTML =
@@ -401,6 +554,7 @@ Horário:
 
 <b>${horarioEscolhido}</b>
 
+
 `;
 
 
@@ -415,9 +569,10 @@ Horário:
 
 
 
-// CONFIRMAR
+
 
 async function confirmar(){
+
 
 
 let nome =
@@ -450,6 +605,8 @@ return;
 
 
 
+
+
 if(
 !nome ||
 !whatsapp
@@ -469,6 +626,7 @@ return;
 
 
 
+
 await push(
 
 ref(db,"agendamentos"),
@@ -476,9 +634,9 @@ ref(db,"agendamentos"),
 {
 
 
-nome:nome,
+nome,
 
-whatsapp:whatsapp,
+whatsapp,
 
 servico:servicoEscolhido,
 
@@ -486,13 +644,14 @@ dia:diaEscolhido,
 
 horario:horarioEscolhido,
 
-criado:
-new Date().toLocaleString()
+criado:new Date().toLocaleString()
 
 
 }
 
+
 );
+
 
 
 
@@ -502,12 +661,6 @@ alert("Agendamento realizado ✨");
 
 
 
-document
-.getElementById("btnWhatsapp")
-.style.display="block";
-
-
-
 }
 
 
@@ -518,15 +671,17 @@ document
 
 
 
-
-// WHATSAPP TODA BELLA
-
 function whatsapp(){
 
 
 
 let numero =
+
 "5511964201177";
+
+
+
+
 
 
 
@@ -542,21 +697,31 @@ Quero confirmar meu agendamento.
 
 
 Cliente:
+
 ${document.getElementById("nome").value}
 
 
+
 Serviço:
+
 ${servicoEscolhido}
 
 
+
 Dia:
+
 ${diaEscolhido}
 
 
+
 Horário:
+
 ${horarioEscolhido}
 
+
 `;
+
+
 
 
 
@@ -564,14 +729,23 @@ ${horarioEscolhido}
 window.open(
 
 "https://wa.me/"
+
 +
+
 numero
+
 +
+
 "?text="
+
 +
+
 encodeURIComponent(mensagem)
 
 );
+
+
+
 
 
 }
@@ -582,21 +756,17 @@ encodeURIComponent(mensagem)
 
 
 
-window.abrirAgendamento =
-abrirAgendamento;
+
+window.abrirAgendamento = abrirAgendamento;
 
 
-window.voltar =
-voltar;
+window.voltar = voltar;
 
 
-window.hora =
-hora;
+window.hora = hora;
 
 
-window.confirmar =
-confirmar;
+window.confirmar = confirmar;
 
 
-window.whatsapp =
-whatsapp;
+window.whatsapp = whatsapp;
