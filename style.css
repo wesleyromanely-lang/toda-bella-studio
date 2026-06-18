@@ -18,7 +18,6 @@ background:#f7f3f7;
 }
 
 
-
 body{
 
 padding:0;
@@ -27,13 +26,11 @@ padding:0;
 
 
 
-
 .app{
 
 width:100%;
 
 }
-
 
 
 
@@ -47,10 +44,9 @@ background:white;
 
 padding:22px;
 
-padding-bottom:110px;
+padding-bottom:40px;
 
 }
-
 
 
 
@@ -59,7 +55,6 @@ padding-bottom:110px;
 display:none;
 
 }
-
 
 
 
@@ -81,18 +76,20 @@ gap:15px;
 
 .perfil{
 
-width:78px;
+width:80px;
 
-height:78px;
+height:80px;
 
 border-radius:50%;
 
 overflow:hidden;
 
 box-shadow:
-0 12px 30px #d6339a55;
+
+0 15px 30px #d6339a55;
 
 }
+
 
 
 
@@ -110,9 +107,10 @@ object-fit:cover;
 
 
 
+
 .busca{
 
-height:52px;
+height:55px;
 
 border-radius:25px;
 
@@ -127,6 +125,7 @@ padding:15px;
 margin:20px 0;
 
 box-shadow:
+
 0 8px 20px #0001;
 
 }
@@ -146,9 +145,11 @@ padding:25px;
 border-radius:30px;
 
 box-shadow:
+
 0 20px 40px #d6339a55;
 
 }
+
 
 
 
@@ -159,7 +160,6 @@ box-shadow:
 color:white;
 
 }
-
 
 
 
@@ -180,9 +180,6 @@ padding:0 25px;
 font-weight:bold;
 
 }
-
-
-
 
 
 
@@ -219,6 +216,7 @@ align-items:center;
 justify-content:center;
 
 box-shadow:
+
 0 12px 30px #0002;
 
 transition:.2s;
@@ -229,13 +227,13 @@ transition:.2s;
 
 .servico:hover{
 
-transform:translateY(-7px);
+transform:translateY(-8px);
 
 box-shadow:
-0 20px 40px #d6339a55;
+
+0 25px 45px #d6339a55;
 
 }
-
 
 
 
@@ -252,7 +250,13 @@ font-weight:bold;
 
 
 
+
+
+
 /* AGENDA */
+
+
+
 
 
 .top{
@@ -263,25 +267,7 @@ align-items:center;
 
 gap:15px;
 
-margin-bottom:20px;
-
-}
-
-
-
-.top button{
-
-width:48px;
-
-height:48px;
-
-border:0;
-
-border-radius:18px;
-
-background:#f8d8e8;
-
-font-size:24px;
+margin-bottom:25px;
 
 }
 
@@ -290,7 +276,64 @@ font-size:24px;
 
 .top h2{
 
-font-size:24px;
+font-size:26px;
+
+}
+
+
+
+
+.btn-voltar{
+
+
+height:55px;
+
+
+min-width:110px;
+
+
+border:0;
+
+
+border-radius:20px;
+
+
+background:#f7d8ea;
+
+
+color:#d6339a;
+
+
+font-size:18px;
+
+
+font-weight:bold;
+
+
+cursor:pointer;
+
+
+
+box-shadow:
+
+0 10px 25px #0002;
+
+
+
+transition:.2s;
+
+
+}
+
+
+
+
+
+.btn-voltar:hover{
+
+
+transform:translateY(-5px);
+
 
 }
 
@@ -303,25 +346,29 @@ font-size:24px;
 
 .calendario{
 
+
 background:#d6339a;
+
+
+padding:22px;
+
 
 border-radius:30px;
 
-padding:22px;
 
 box-shadow:
 
 0 20px 40px #d6339a55;
 
+
 }
+
 
 
 
 .calendario h2{
 
 color:white;
-
-font-size:20px;
 
 }
 
@@ -335,9 +382,7 @@ display:flex;
 
 gap:12px;
 
-overflow-x:auto;
-
-padding:8px 0;
+overflow:auto;
 
 }
 
@@ -347,25 +392,30 @@ padding:8px 0;
 
 .dias button{
 
+
 min-width:65px;
+
 
 height:70px;
 
+
 border:0;
+
 
 border-radius:22px;
 
+
 background:white;
+
 
 color:#d6339a;
 
+
 font-weight:bold;
+
 
 font-size:16px;
 
-box-shadow:
-
-0 8px 18px #0002;
 
 }
 
@@ -373,19 +423,19 @@ box-shadow:
 
 
 
-
-
 .selecionado{
+
 
 background:#fff!important;
 
-color:#d6339a!important;
 
 transform:translateY(-8px);
 
+
 box-shadow:
 
-0 18px 30px #0003!important;
+0 15px 30px #0003;
+
 
 }
 
@@ -396,13 +446,18 @@ box-shadow:
 
 .horarios{
 
+
 display:grid;
+
 
 grid-template-columns:repeat(2,1fr);
 
+
 gap:15px;
 
+
 margin-top:15px;
+
 
 }
 
@@ -412,36 +467,26 @@ margin-top:15px;
 
 .horarios button{
 
+
 height:65px;
+
 
 border:0;
 
+
 border-radius:22px;
+
 
 background:#f7d8ea;
 
-font-size:19px;
+
+font-size:18px;
+
 
 font-weight:bold;
 
-box-shadow:
-
-0 10px 20px #0002;
-
-transition:.2s;
 
 }
-
-
-
-
-.horarios button:hover{
-
-transform:translateY(-5px);
-
-}
-
-
 
 
 
@@ -449,16 +494,14 @@ transform:translateY(-5px);
 
 .ocupado{
 
+
 background:#ddd!important;
+
 
 color:#999!important;
 
-box-shadow:none!important;
 
 }
-
-
-
 
 
 
@@ -466,25 +509,35 @@ box-shadow:none!important;
 
 .confirm{
 
+
 margin-top:25px;
 
 }
 
 
 
+
+
 .resumo{
 
-background:white;
 
-border-radius:30px;
+background:#fafafa;
+
 
 padding:25px;
 
+
+border-radius:30px;
+
+
+line-height:1.7;
+
+
 box-shadow:
 
-0 15px 35px #0002;
 
-line-height:1.8;
+0 12px 30px #0002;
+
 
 }
 
@@ -494,61 +547,77 @@ line-height:1.8;
 
 .confirm input{
 
+
 width:100%;
+
 
 height:58px;
 
+
 margin-top:12px;
+
 
 border-radius:18px;
 
+
 border:1px solid #ddd;
+
 
 padding:15px;
 
+
 font-size:16px;
 
-}
-
-
-
-
-
-.confirm button{
-
-width:100%;
-
-height:62px;
-
-margin-top:15px;
-
-border:0;
-
-border-radius:22px;
-
-background:#d6339a;
-
-color:white;
-
-font-size:18px;
-
-font-weight:bold;
-
-box-shadow:
-
-0 15px 30px #d6339a55;
 
 }
+
+
+
 
 
 
 
 .whatsapp{
 
+
+width:100%;
+
+
+height:65px;
+
+
+margin-top:20px;
+
+
+border:0;
+
+
+border-radius:25px;
+
+
 background:#25D366!important;
 
-}
 
+color:white;
+
+
+font-size:19px;
+
+
+font-weight:bold;
+
+
+cursor:pointer;
+
+
+
+box-shadow:
+
+
+0 15px 30px #25D36655;
+
+
+}
 
 
 
@@ -558,25 +627,36 @@ nav{
 
 position:fixed;
 
+
 bottom:15px;
+
 
 left:15px;
 
+
 right:15px;
+
 
 height:65px;
 
+
 background:#d6339a;
+
 
 border-radius:25px;
 
+
 display:flex;
 
-align-items:center;
 
 justify-content:space-around;
 
+
+align-items:center;
+
+
 z-index:99;
+
 
 }
 
@@ -585,12 +665,17 @@ z-index:99;
 
 nav button{
 
-border:0;
 
 background:none;
 
+
+border:0;
+
+
 color:white;
 
+
 font-size:24px;
+
 
 }
