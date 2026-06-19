@@ -13,27 +13,19 @@
 
 </head>
 
-
 <body>
-
 
 <div class="app">
 
-
-
 <div id="home" class="tela">
 
-
-
 <header class="header">
-
 
 <div class="perfil">
 
 <img src="logo-todabella.png">
 
 </div>
-
 
 <div>
 
@@ -43,75 +35,36 @@
 
 </div>
 
-
 </header>
-
-
-
-
 
 <div class="busca">
 
-
 ✨ Transforme seu visual hoje
-
 
 </div>
 
-
-
-
-
-
-
 <div class="banner">
-
 
 <h2>Olá, seja bem-vinda ✨</h2>
 
-
 <h1>Realce sua beleza</h1>
-
 
 <p>
 Cuide de você com profissionais especializados 💖
 </p>
 
-
 <h3>
-
 Agende agora e transforme seu visual ✨
-
 </h3>
-
-
 
 </div>
 
-
-
-
-
-
-
-
 <h2>Serviços</h2>
-
-
-
-
-
-
 
 <div class="cards">
 
-
-
-
-
 <div class="servico"
 onclick="abrirAgendamento('Progressiva - R$120,00')">
-
 
 <h3>Progressiva</h3>
 
@@ -119,20 +72,10 @@ onclick="abrirAgendamento('Progressiva - R$120,00')">
 
 <span>Agende aqui</span>
 
-
 </div>
-
-
-
-
-
-
-
 
 <div class="servico"
 onclick="abrirAgendamento('Botox Capilar - R$99,00')">
-
-
 
 <h3>Botox Capilar</h3>
 
@@ -140,19 +83,10 @@ onclick="abrirAgendamento('Botox Capilar - R$99,00')">
 
 <span>Agende aqui</span>
 
-
 </div>
-
-
-
-
-
-
-
 
 <div class="servico"
 onclick="abrirAgendamento('Cronograma Capilar - R$99,00')">
-
 
 <h3>Cronograma Capilar</h3>
 
@@ -160,20 +94,10 @@ onclick="abrirAgendamento('Cronograma Capilar - R$99,00')">
 
 <span>Agende aqui</span>
 
-
 </div>
-
-
-
-
-
-
-
 
 <div class="servico"
 onclick="abrirAgendamento('Escova - R$50,00')">
-
-
 
 <h3>Escova</h3>
 
@@ -181,20 +105,10 @@ onclick="abrirAgendamento('Escova - R$50,00')">
 
 <span>Agende aqui</span>
 
-
 </div>
-
-
-
-
-
-
-
 
 <div class="servico"
 onclick="abrirAgendamento('Selagem - R$79,99')">
-
-
 
 <h3>Selagem</h3>
 
@@ -202,20 +116,10 @@ onclick="abrirAgendamento('Selagem - R$79,99')">
 
 <span>Agende aqui</span>
 
-
 </div>
-
-
-
-
-
-
-
 
 <div class="servico"
 onclick="abrirAgendamento('Tratamento Capilar - R$69,99')">
-
-
 
 <h3>Tratamento Capilar</h3>
 
@@ -223,306 +127,117 @@ onclick="abrirAgendamento('Tratamento Capilar - R$69,99')">
 
 <span>Agende aqui</span>
 
+</div>
 
 </div>
 
+<nav class="bottom-nav">
 
-
-
-
-</div>
-
-
-
-
-
-
-
-
-<nav>
-
-
-<button>⌂</button>
-
-
-<button onclick="abrirAgendamento()">📅</button>
-
-
-<button>♡</button>
-
-
-<button>👤</button>
-
+<button onclick="instagram()">
+📷 Instagram
+</button>
 
 </nav>
 
-
-
-
-
-
 </div>
-
-
-
-
-
-
-
-
-
-
-
 
 <div id="agenda" class="tela escondida">
 
-
-
-
-
 <header class="top">
 
-
 <button onclick="voltar()" class="btn-voltar">
-
 Voltar
-
 </button>
-
-
-
-
 
 <div>
 
-
 <h2>Toda Bella</h2>
-
 
 <p>Agendamento ✨</p>
 
-
 </div>
-
-
 
 </header>
 
-
-
-
-
-
-
-
 <h3 id="tituloServico">
-
 Escolha o serviço
-
 </h3>
-
-
-
-
-
-
-
 
 <div class="calendario">
 
-
 <h2>
-
 Escolha o dia
-
 </h2>
 
-
-
-
 <div id="dias" class="dias">
-
-
 </div>
 
-
-
 </div>
-
-
-
-
-
-
-
 
 <h3>
-
 Escolha o horário
-
 </h3>
-
-
-
-
-
 
 <div class="horarios">
 
-
-
 <button onclick="hora(this,'09:30')">
-
 09:30
-
 </button>
-
-
-
 
 <button onclick="hora(this,'10:30')">
-
 10:30
-
 </button>
-
-
-
 
 <button onclick="hora(this,'11:30')">
-
 11:30
-
 </button>
-
-
-
 
 <button onclick="hora(this,'13:30')">
-
 13:30
-
 </button>
-
-
-
 
 <button onclick="hora(this,'14:30')">
-
 14:30
-
 </button>
-
-
-
 
 <button onclick="hora(this,'15:30')">
-
 15:30
-
 </button>
-
-
-
 
 <button onclick="hora(this,'16:30')">
-
 16:30
-
 </button>
 
-
-
-
 </div>
-
-
-
-
-
-
-
 
 <div class="confirm">
 
-
-
-
-
 <div id="resumo" class="resumo">
-
 Selecione serviço
-
 </div>
-
-
-
-
-
-
-
 
 <input id="nome"
 placeholder="Seu nome">
 
-
-
-
-
-
-
 <input id="whatsapp"
 placeholder="WhatsApp">
-
-
-
-
-
 
 <button
 id="btnWhatsapp"
 class="whatsapp"
 onclick="whatsapp()">
 
-
-
 📲 Confirmar pelo WhatsApp
-
-
 
 </button>
 
-
-
-
-
+</div>
 
 </div>
 
-
-
-
-
-
-
 </div>
-
-
-
-
-
-
-
-</div>
-
-
-
-
-
 
 <script type="module" src="script.js"></script>
-
-
 
 </body>
 
