@@ -1,50 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Toda Bella Studio</title>
-
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
 <div class="app">
 
+<!-- HOME -->
 <div id="home" class="tela">
 
 <header class="header">
-
 <div class="perfil">
-
-<img src="logo-todabella.png">
-
+<img src="logo-todabella.png" alt="Toda Bella">
 </div>
 
 <div>
-
 <h1>Toda Bella</h1>
-
 <p>Studio de Beleza ✨</p>
-
 </div>
-
 </header>
 
 <div class="busca">
-
 ✨ Transforme seu visual hoje
-
 </div>
 
 <div class="banner">
-
 <h2>Olá, seja bem-vinda ✨</h2>
 
 <h1>Realce sua beleza</h1>
@@ -56,95 +41,66 @@ Cuide de você com profissionais especializados 💖
 <h3>
 Agende agora e transforme seu visual ✨
 </h3>
-
 </div>
 
 <h2>Serviços</h2>
 
 <div class="cards">
 
-<div class="servico"
-onclick="abrirAgendamento('Progressiva - R$120,00')">
-
+<div class="servico" onclick="abrirAgendamento('Progressiva - R$120,00')">
 <h3>Progressiva</h3>
-
 <p>R$120,00</p>
-
 <span>Agende aqui</span>
-
 </div>
 
-<div class="servico"
-onclick="abrirAgendamento('Botox Capilar - R$99,00')">
-
+<div class="servico" onclick="abrirAgendamento('Botox Capilar - R$99,00')">
 <h3>Botox Capilar</h3>
-
 <p>R$99,00</p>
-
 <span>Agende aqui</span>
-
 </div>
 
-<div class="servico"
-onclick="abrirAgendamento('Cronograma Capilar - R$99,00')">
-
+<div class="servico" onclick="abrirAgendamento('Cronograma Capilar - R$99,00')">
 <h3>Cronograma Capilar</h3>
-
 <p>R$99,00</p>
-
 <span>Agende aqui</span>
-
 </div>
 
-<div class="servico"
-onclick="abrirAgendamento('Escova - R$50,00')">
-
+<div class="servico" onclick="abrirAgendamento('Escova - R$50,00')">
 <h3>Escova</h3>
-
 <p>R$50,00</p>
-
 <span>Agende aqui</span>
-
 </div>
 
-<div class="servico"
-onclick="abrirAgendamento('Selagem - R$79,99')">
-
+<div class="servico" onclick="abrirAgendamento('Selagem - R$79,99')">
 <h3>Selagem</h3>
-
 <p>R$79,99</p>
-
 <span>Agende aqui</span>
-
 </div>
 
-<div class="servico"
-onclick="abrirAgendamento('Tratamento Capilar - R$69,99')">
-
+<div class="servico" onclick="abrirAgendamento('Tratamento Capilar - R$69,99')">
 <h3>Tratamento Capilar</h3>
-
 <p>R$69,99</p>
-
 <span>Agende aqui</span>
-
 </div>
 
 </div>
 
-<nav class="bottom-nav">
+<!-- RODAPÉ -->
+<footer class="bottom-nav">
 
 <button onclick="instagram()">
 
 <img src="instagram.png" alt="Instagram">
 
-<span>Instagram</span>
+<span>👉 Clique aqui e siga nosso Instagram</span>
 
 </button>
 
-</nav>
+</footer>
 
 </div>
 
+<!-- AGENDAMENTO -->
 <div id="agenda" class="tela escondida">
 
 <header class="top">
@@ -154,11 +110,8 @@ Voltar
 </button>
 
 <div>
-
 <h2>Toda Bella</h2>
-
 <p>Agendamento ✨</p>
-
 </div>
 
 </header>
@@ -169,48 +122,29 @@ Escolha o serviço
 
 <div class="calendario">
 
-<h2>
-Escolha o dia
-</h2>
+<h2>Escolha o dia</h2>
 
-<div id="dias" class="dias">
-</div>
+<div id="dias" class="dias"></div>
 
 </div>
 
-<h3>
-Escolha o horário
-</h3>
+<h3>Escolha o horário</h3>
 
 <div class="horarios">
 
-<button onclick="hora(this,'09:30')">
-09:30
-</button>
+<button onclick="hora(this,'09:30')">09:30</button>
 
-<button onclick="hora(this,'10:30')">
-10:30
-</button>
+<button onclick="hora(this,'10:30')">10:30</button>
 
-<button onclick="hora(this,'11:30')">
-11:30
-</button>
+<button onclick="hora(this,'11:30')">11:30</button>
 
-<button onclick="hora(this,'13:30')">
-13:30
-</button>
+<button onclick="hora(this,'13:30')">13:30</button>
 
-<button onclick="hora(this,'14:30')">
-14:30
-</button>
+<button onclick="hora(this,'14:30')">14:30</button>
 
-<button onclick="hora(this,'15:30')">
-15:30
-</button>
+<button onclick="hora(this,'15:30')">15:30</button>
 
-<button onclick="hora(this,'16:30')">
-16:30
-</button>
+<button onclick="hora(this,'16:30')">16:30</button>
 
 </div>
 
@@ -220,11 +154,9 @@ Escolha o horário
 Selecione serviço
 </div>
 
-<input id="nome"
-placeholder="Seu nome">
+<input id="nome" placeholder="Seu nome">
 
-<input id="whatsapp"
-placeholder="WhatsApp">
+<input id="whatsapp" placeholder="WhatsApp">
 
 <button
 id="btnWhatsapp"
@@ -241,8 +173,16 @@ onclick="whatsapp()">
 
 </div>
 
+<script>
+function instagram() {
+window.open(
+"https://instagram.com/todabellastudio2026",
+"_blank"
+);
+}
+</script>
+
 <script type="module" src="script.js"></script>
 
 </body>
-
 </html>
