@@ -45,6 +45,7 @@ const diasSemana = [
 
 
 
+
 function abrirAgendamento(servico){
 
 
@@ -52,6 +53,7 @@ servicoEscolhido = servico || "";
 
 diaEscolhido="";
 horarioEscolhido="";
+
 
 
 document.getElementById("tituloServico").innerHTML =
@@ -63,12 +65,13 @@ servicoEscolhido
 
 
 
-document.getElementById("home")
-.classList.add("escondida");
-
-
 document.getElementById("agenda")
 .classList.remove("escondida");
+
+
+
+document.getElementById("home")
+.classList.add("escondida");
 
 
 
@@ -77,7 +80,9 @@ criarCalendario();
 limparHorarios();
 
 
+
 }
+
 
 
 
@@ -107,7 +112,9 @@ document.getElementById("home")
 
 
 
+
 function criarCalendario(){
+
 
 
 let area =
@@ -115,6 +122,7 @@ document.getElementById("dias");
 
 
 area.innerHTML="";
+
 
 
 
@@ -129,13 +137,15 @@ let mes = hoje.getMonth();
 
 
 
-
 let titulo =
 document.createElement("h3");
 
 
 titulo.innerHTML =
-meses[mes]+" "+ano;
+
+meses[mes]+" "+ano+
+"<br><small>Atendimento: Terça a Sábado</small>";
+
 
 
 titulo.style.color="white";
@@ -143,8 +153,8 @@ titulo.style.color="white";
 titulo.style.gridColumn="1 / 8";
 
 
-area.appendChild(titulo);
 
+area.appendChild(titulo);
 
 
 
@@ -193,9 +203,9 @@ area.appendChild(vazio);
 
 
 
-
-
 for(let dia=1;dia<=totalDias;dia++){
+
+
 
 
 
@@ -209,19 +219,14 @@ dia
 
 
 
+
+
 let botao =
 document.createElement("button");
 
 
 
 botao.innerHTML =
-
-diasSemana[data.getDay()]
-
-+
-"<br>"
-
-+
 dia;
 
 
@@ -230,18 +235,48 @@ dia;
 
 
 
+let hojeSemHora =
+new Date();
 
-// BLOQUEAR DOMINGO E SEGUNDA
+hojeSemHora.setHours(0,0,0,0);
 
-if(
+
+
+
+
+
+
+if(data < hojeSemHora){
+
+
+botao.disabled=true;
+
+botao.classList.add("ocupado");
+
+
+}
+
+
+
+
+
+
+
+
+else if(
 data.getDay()==0 ||
 data.getDay()==1
 ){
 
 
+
 botao.disabled=true;
 
-botao.innerHTML += "<br>Folga";
+
+botao.innerHTML =
+dia+
+"<br>Folga";
+
 
 
 botao.classList.add("ocupado");
@@ -249,8 +284,6 @@ botao.classList.add("ocupado");
 
 
 }
-
-
 
 
 
@@ -280,7 +313,11 @@ b.classList.remove("selecionado");
 
 
 
+
+
 botao.classList.add("selecionado");
+
+
 
 
 
@@ -290,7 +327,6 @@ diaEscolhido =
 
 
 diasSemana[data.getDay()]
-
 +
 " "
 +
@@ -305,8 +341,8 @@ meses[mes];
 
 
 
-
 carregarHorarios();
+
 
 
 
@@ -315,14 +351,18 @@ atualizarResumo();
 
 
 
+
+
+
 }
 
 
 
 
 
-}
 
+
+}
 
 
 
@@ -332,7 +372,10 @@ area.appendChild(botao);
 
 
 
+
 }
+
+
 
 
 
@@ -349,6 +392,7 @@ area.appendChild(botao);
 async function carregarHorarios(){
 
 
+
 horariosOcupados=[];
 
 
@@ -361,6 +405,7 @@ ref(db,"agendamentos")
 
 
 
+
 if(dados.exists()){
 
 
@@ -369,29 +414,53 @@ Object.values(dados.val())
 .forEach(item=>{
 
 
-
 if(
-item.dia == diaEscolhido
+item.dia ==
+diaEscolhido
 ){
 
 
-horariosOcupados.push(item.horario);
+
+horariosOcupados.push(
+item.horario
+);
 
 
 }
-
 
 
 });
 
 
+
 }
+
+
 
 
 
 
 
 bloquearHorarios();
+
+
+
+
+
+
+
+if(
+horariosOcupados.length >= 7
+){
+
+
+alert(
+"Não existem horários disponíveis neste dia"
+);
+
+
+}
+
 
 
 }
@@ -405,6 +474,7 @@ bloquearHorarios();
 
 
 function limparHorarios(){
+
 
 
 document
@@ -421,8 +491,8 @@ botao.classList.remove("ocupado");
 botao.classList.remove("selecionado");
 
 
-
 });
+
 
 
 }
@@ -443,7 +513,9 @@ horariosOcupados.includes(valor)
 ){
 
 
-alert("Esse horário já está reservado");
+alert(
+"Esse horário já está reservado"
+);
 
 
 return;
@@ -454,7 +526,12 @@ return;
 
 
 
+
+
+
 horarioEscolhido=valor;
+
+
 
 
 
@@ -472,15 +549,18 @@ b.classList.remove("selecionado");
 
 
 
-botao.classList.add("selecionado");
 
+
+botao.classList.add("selecionado");
 
 
 
 atualizarResumo();
 
 
+
 }
+
 
 
 
@@ -502,8 +582,11 @@ document
 
 
 if(
-horariosOcupados.includes(botao.innerText)
+horariosOcupados.includes(
+botao.innerText
+)
 ){
+
 
 
 botao.disabled=true;
@@ -513,7 +596,6 @@ botao.classList.add("ocupado");
 
 
 }
-
 
 
 
@@ -599,6 +681,7 @@ document.getElementById("whatsapp").value;
 
 
 
+
 if(
 !servicoEscolhido ||
 !diaEscolhido ||
@@ -606,10 +689,15 @@ if(
 ){
 
 
-alert("Escolha serviço, dia e horário");
+
+alert(
+"Escolha serviço, dia e horário"
+);
+
 
 
 return;
+
 
 
 }
@@ -621,8 +709,11 @@ return;
 
 
 await push(
+
 ref(db,"agendamentos"),
+
 {
+
 
 nome,
 
@@ -636,9 +727,15 @@ horario:horarioEscolhido,
 
 data:new Date().toLocaleString()
 
+
 }
 
+
+
 );
+
+
+
 
 
 
@@ -679,8 +776,9 @@ ${diaEscolhido}
 Horário:
 ${horarioEscolhido}
 
-
 `;
+
+
 
 
 
@@ -689,6 +787,7 @@ ${horarioEscolhido}
 window.open(
 
 "https://wa.me/"
+
 +
 numero
 +
@@ -697,6 +796,8 @@ numero
 encodeURIComponent(mensagem)
 
 );
+
+
 
 
 
@@ -709,10 +810,11 @@ encodeURIComponent(mensagem)
 
 
 
-window.abrirAgendamento=abrirAgendamento;
 
-window.voltar=voltar;
+window.abrirAgendamento = abrirAgendamento;
 
-window.hora=hora;
+window.voltar = voltar;
 
-window.whatsapp=whatsapp;
+window.hora = hora;
+
+window.whatsapp = whatsapp;
