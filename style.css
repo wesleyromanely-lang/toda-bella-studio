@@ -36,7 +36,7 @@ width:100%;
 min-height:100vh;
 background:white;
 padding:20px;
-padding-bottom:110px;
+padding-bottom:100px;
 animation:entrada .4s ease;
 }
 
@@ -101,6 +101,18 @@ background:#d6339a;
 padding:28px;
 border-radius:30px;
 box-shadow:0 20px 45px #d6339a66;
+animation:banner .5s ease;
+}
+
+@keyframes banner{
+from{
+opacity:0;
+transform:scale(.9);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
 }
 
 .banner h1,
@@ -125,11 +137,16 @@ flex-direction:column;
 align-items:center;
 justify-content:center;
 box-shadow:0 12px 35px #0002;
+transition:.2s;
 cursor:pointer;
 }
 
 .servico:active{
-transform:scale(.97);
+transform:scale(.95);
+}
+
+.servico h3{
+text-align:center;
 }
 
 .servico p{
@@ -155,9 +172,9 @@ bottom:0;
 left:0;
 right:0;
 
-height:65px;
+height:70px;
 
-background:white;
+background:#fff;
 
 display:flex;
 
@@ -187,7 +204,13 @@ font-weight:600;
 }
 
 .link-instagram:hover,
-.link-suporte:hover
+.link-suporte:hover{
+color:#d6339a;
+}
+
+.rodape span{
+color:#bbb;
+}
 
 /* AGENDA */
 
@@ -213,12 +236,14 @@ font-weight:bold;
 background:#fafafa;
 padding:18px;
 border-radius:20px;
+box-shadow:0 8px 20px #0001;
 }
 
 .calendario{
 background:#d6339a;
 padding:20px;
 border-radius:30px;
+box-shadow:0 20px 40px #d6339a55;
 }
 
 .calendario h2{
@@ -240,6 +265,11 @@ color:#d6339a;
 font-weight:bold;
 }
 
+.selecionado{
+transform:translateY(-5px);
+box-shadow:0 12px 25px #0003;
+}
+
 .horarios{
 display:grid;
 grid-template-columns:repeat(2,1fr);
@@ -253,6 +283,12 @@ border-radius:22px;
 background:#f7d8e8;
 font-size:18px;
 font-weight:bold;
+box-shadow:0 10px 20px #0001;
+}
+
+.ocupado{
+background:#ddd!important;
+color:#999!important;
 }
 
 .confirm{
@@ -273,6 +309,7 @@ margin-top:12px;
 border-radius:18px;
 border:1px solid #ddd;
 padding:15px;
+box-shadow:0 8px 20px #00000008;
 }
 
 .whatsapp{
@@ -285,4 +322,12 @@ background:#25D366;
 color:white;
 font-size:18px;
 font-weight:bold;
+box-shadow:0 15px 30px #25D36666;
+animation:pulse 1.8s infinite;
+}
+
+@keyframes pulse{
+50%{
+transform:scale(1.04);
+}
 }
