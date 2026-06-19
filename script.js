@@ -43,23 +43,6 @@ const diasSemana = [
 
 
 
-const horariosDisponiveis = [
-
-"09:30",
-"10:30",
-"11:30",
-"13:30",
-"14:30",
-"15:30",
-"16:30"
-
-];
-
-
-
-
-
-
 
 
 function abrirAgendamento(servico){
@@ -72,17 +55,11 @@ horarioEscolhido="";
 
 
 document.getElementById("tituloServico").innerHTML =
-
 servicoEscolhido
-
 ?
-
 "✨ "+servicoEscolhido
-
 :
-
 "Escolha o serviço";
-
 
 
 
@@ -98,7 +75,6 @@ document
 
 
 
-
 dataCalendario = new Date();
 
 
@@ -109,8 +85,6 @@ limparHorarios();
 
 
 }
-
-
 
 
 
@@ -137,9 +111,6 @@ document
 
 
 
-
-
-
 function mudarMes(valor){
 
 
@@ -160,19 +131,14 @@ criarCalendario();
 
 
 
-
 function criarCalendario(){
-
 
 
 let area =
 document.getElementById("dias");
 
 
-
 area.innerHTML="";
-
-
 
 
 
@@ -180,10 +146,8 @@ let ano =
 dataCalendario.getFullYear();
 
 
-
 let mes =
 dataCalendario.getMonth();
-
 
 
 
@@ -192,23 +156,9 @@ new Date();
 
 
 
-let mesAtual =
-hoje.getMonth();
-
-
-
-let anoAtual =
-hoje.getFullYear();
-
-
-
-
-
-
 
 let topo =
 document.createElement("h3");
-
 
 
 topo.innerHTML =
@@ -225,7 +175,6 @@ ${meses[mes]} ${ano}
 <small>Atendimento: Terça a Sábado</small>
 
 `;
-
 
 
 
@@ -251,16 +200,12 @@ mes,
 
 
 
-
 let totalDias =
 new Date(
 ano,
 mes+1,
 0
 ).getDate();
-
-
-
 
 
 
@@ -285,7 +230,6 @@ area.appendChild(vazio);
 
 
 
-
 for(let dia=1;dia<=totalDias;dia++){
 
 
@@ -296,7 +240,6 @@ ano,
 mes,
 dia
 );
-
 
 
 
@@ -312,18 +255,16 @@ botao.innerHTML = dia;
 
 
 
+// bloqueia dias anteriores
+
+let hojeLimpo =
+new Date();
+
+hojeLimpo.setHours(0,0,0,0);
 
 
 
-// BLOQUEIA MESES PASSADOS
-
-if(
-data < new Date(
-hoje.getFullYear(),
-hoje.getMonth(),
-hoje.getDate()
-)
-){
+if(data < hojeLimpo){
 
 
 botao.disabled=true;
@@ -339,7 +280,8 @@ botao.classList.add("ocupado");
 
 
 
-// HOJE
+
+// bloqueia hoje depois das 16:30
 
 if(
 data.toDateString()
@@ -348,8 +290,51 @@ hoje.toDateString()
 ){
 
 
+
+let horaAtual =
+hoje.getHours();
+
+
+
+let minutoAtual =
+hoje.getMinutes();
+
+
+
+
+
+if(
+horaAtual > 16 ||
+(
+horaAtual == 16 &&
+minutoAtual > 30
+)
+){
+
+
+botao.disabled=true;
+
+
 botao.innerHTML =
-dia+"<br>Hoje";
+dia+
+"<br>Encerrado";
+
+
+botao.classList.add("ocupado");
+
+
+}
+
+else{
+
+
+botao.innerHTML =
+dia+
+"<br>Hoje";
+
+
+}
+
 
 
 }
@@ -361,7 +346,7 @@ dia+"<br>Hoje";
 
 
 
-// FOLGAS
+// domingo e segunda folga
 
 if(
 data.getDay()==0 ||
@@ -380,9 +365,7 @@ dia+
 botao.classList.add("ocupado");
 
 
-
 }
-
 
 
 
@@ -394,11 +377,7 @@ botao.classList.add("ocupado");
 if(!botao.disabled){
 
 
-
 botao.onclick=function(){
-
-
-
 
 
 
@@ -415,14 +394,7 @@ b.classList.remove("selecionado");
 
 
 
-
-
-
 botao.classList.add("selecionado");
-
-
-
-
 
 
 
@@ -446,8 +418,6 @@ meses[mes];
 
 
 
-
-
 carregarHorarios();
 
 
@@ -458,14 +428,10 @@ atualizarResumo();
 
 
 
-
 }
 
 
-
-
 }
-
 
 
 
@@ -477,8 +443,6 @@ area.appendChild(botao);
 
 
 }
-
-
 
 
 
@@ -495,7 +459,6 @@ area.appendChild(botao);
 async function carregarHorarios(){
 
 
-
 horariosOcupados=[];
 
 
@@ -508,13 +471,13 @@ ref(db,"agendamentos")
 
 
 
+
 if(dados.exists()){
 
 
 
 Object.values(dados.val())
 .forEach(item=>{
-
 
 
 if(
@@ -528,7 +491,6 @@ item.horario
 );
 
 
-
 }
 
 
@@ -537,7 +499,6 @@ item.horario
 
 
 }
-
 
 
 
@@ -553,9 +514,6 @@ bloquearHorarios();
 
 
 
-
-
-
 function limparHorarios(){
 
 
@@ -564,7 +522,7 @@ document
 .forEach(botao=>{
 
 
-botao.removeAttribute("disabled");
+botao.disabled=false;
 
 
 botao.classList.remove("ocupado");
@@ -576,9 +534,12 @@ botao.classList.remove("selecionado");
 });
 
 
-
-
 }
+
+
+
+
+
 
 
 
@@ -611,7 +572,6 @@ horarioEscolhido=valor;
 
 
 
-
 document
 .querySelectorAll(".horarios button")
 .forEach(b=>{
@@ -626,13 +586,11 @@ b.classList.remove("selecionado");
 
 
 
-
 botao.classList.add("selecionado");
 
 
 
 atualizarResumo();
-
 
 
 
@@ -676,7 +634,6 @@ botao.classList.add("ocupado");
 });
 
 
-
 }
 
 
@@ -688,7 +645,6 @@ botao.classList.add("ocupado");
 
 
 function atualizarResumo(){
-
 
 
 document.getElementById("resumo").innerHTML =
@@ -722,6 +678,7 @@ Horário:
 
 <b>${horarioEscolhido}</b>
 
+
 `;
 
 
@@ -744,10 +701,8 @@ let nome =
 document.getElementById("nome").value;
 
 
-
 let telefone =
 document.getElementById("whatsapp").value;
-
 
 
 
@@ -776,7 +731,6 @@ return;
 
 
 
-
 await push(
 
 ref(db,"agendamentos"),
@@ -799,10 +753,7 @@ data:new Date().toLocaleString()
 
 }
 
-
 );
-
-
 
 
 
@@ -810,7 +761,6 @@ data:new Date().toLocaleString()
 
 let numero =
 "5511964201177";
-
 
 
 
@@ -863,8 +813,6 @@ encodeURIComponent(mensagem)
 
 
 }
-
-
 
 
 
