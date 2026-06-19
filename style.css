@@ -39,7 +39,7 @@ padding:20px;
 padding-bottom:100px;
 }
 
-/* ANIMAÇÃO SUBINDO */
+/* ANIMAÇÃO */
 
 .header,
 .busca,
@@ -48,54 +48,27 @@ padding-bottom:100px;
 .top,
 .calendario,
 .confirm{
-
 opacity:0;
-
 animation:subir .8s ease forwards;
-
 }
 
-.header{
-animation-delay:.1s;
-}
-
-.busca{
-animation-delay:.2s;
-}
-
-.banner{
-animation-delay:.3s;
-}
-
-.cards{
-animation-delay:.5s;
-}
-
-.top{
-animation-delay:.2s;
-}
-
-.calendario{
-animation-delay:.3s;
-}
-
-.confirm{
-animation-delay:.5s;
-}
+.header{animation-delay:.1s;}
+.busca{animation-delay:.2s;}
+.banner{animation-delay:.3s;}
+.cards{animation-delay:.5s;}
+.top{animation-delay:.2s;}
+.calendario{animation-delay:.3s;}
+.confirm{animation-delay:.5s;}
 
 @keyframes subir{
-
 from{
 opacity:0;
 transform:translateY(60px);
 }
-
 to{
 opacity:1;
 transform:translateY(0);
-opacity:1;
 }
-
 }
 
 .escondida{
@@ -167,17 +140,12 @@ gap:16px;
 height:170px;
 border-radius:28px;
 background:white;
-
 display:flex;
 flex-direction:column;
-
 align-items:center;
 justify-content:center;
-
 box-shadow:0 12px 35px #0002;
-
 transition:.25s;
-
 cursor:pointer;
 }
 
@@ -198,74 +166,46 @@ font-weight:bold;
 .servico span{
 background:#d6339a;
 color:white;
-
 padding:8px 16px;
-
 border-radius:20px;
-
 font-size:13px;
-
 font-weight:bold;
 }
 
 /* RODAPÉ */
 
 .bottom-nav{
-
 position:fixed;
-
 bottom:0;
-
 left:0;
-
 right:0;
-
 height:70px;
-
 background:white;
-
 display:flex;
-
 justify-content:center;
-
 align-items:center;
-
 box-shadow:0 -8px 20px #00000010;
-
 border-top:1px solid #eee;
-
 z-index:100;
-
 }
 
 .rodape{
-
 display:flex;
-
 gap:18px;
-
 align-items:center;
-
 }
 
 .link-instagram,
 .link-suporte{
-
 text-decoration:none;
-
 color:#222;
-
 font-size:15px;
-
 font-weight:700;
-
 }
 
 .link-instagram:hover,
 .link-suporte:hover{
-
 color:#d6339a;
-
 }
 
 .rodape span{
@@ -282,47 +222,28 @@ margin-bottom:20px;
 }
 
 .btn-voltar{
-
 height:58px;
-
 min-width:120px;
-
 border:0;
-
 border-radius:22px;
-
 background:#f7d8e8;
-
 color:#d6339a;
-
 font-size:18px;
-
 font-weight:bold;
-
 }
 
 #tituloServico{
-
 background:#fafafa;
-
 padding:18px;
-
 border-radius:20px;
-
 box-shadow:0 8px 20px #0001;
-
 }
 
 .calendario{
-
 background:#d6339a;
-
 padding:20px;
-
 border-radius:30px;
-
 box-shadow:0 20px 40px #d6339a55;
-
 }
 
 .calendario h2{
@@ -330,57 +251,55 @@ color:white;
 }
 
 .dias{
-
 display:grid;
-
 grid-template-columns:repeat(7,1fr);
-
 gap:8px;
-
 }
 
 .dias button{
-
 height:55px;
-
 border:0;
-
 border-radius:16px;
-
 background:white;
-
 color:#d6339a;
-
 font-weight:bold;
+transition:.2s;
+}
 
+/* CORREÇÃO DOS DIAS BLOQUEADOS */
+
+.dias button:disabled,
+.ocupado,
+.passado,
+.fechado{
+background:#dddddd !important;
+color:#888 !important;
+box-shadow:none !important;
+cursor:not-allowed;
+opacity:.85;
+}
+
+.dias button.selecionado{
+background:#d6339a !important;
+color:white !important;
+transform:translateY(-4px);
+box-shadow:0 12px 25px #d6339a55;
 }
 
 .horarios{
-
 display:grid;
-
 grid-template-columns:repeat(2,1fr);
-
 gap:15px;
-
 }
 
 .horarios button{
-
 height:65px;
-
 border:0;
-
 border-radius:22px;
-
 background:#f7d8e8;
-
 font-size:18px;
-
 font-weight:bold;
-
 box-shadow:0 10px 20px #0001;
-
 }
 
 .confirm{
@@ -388,65 +307,38 @@ margin-top:25px;
 }
 
 .resumo{
-
 background:white;
-
 padding:25px;
-
 border-radius:30px;
-
 box-shadow:0 15px 35px #0002;
-
 }
 
 .confirm input{
-
 width:100%;
-
 height:58px;
-
 margin-top:12px;
-
 border-radius:18px;
-
 border:1px solid #ddd;
-
 padding:15px;
-
 box-shadow:0 8px 20px #00000008;
-
 }
 
 .whatsapp{
-
 width:100%;
-
 height:65px;
-
 margin-top:20px;
-
 border:0;
-
 border-radius:25px;
-
 background:#25D366;
-
 color:white;
-
 font-size:18px;
-
 font-weight:bold;
-
 box-shadow:0 15px 30px #25D36666;
-
 animation:pulse 1.8s infinite;
-
 }
 
 @keyframes pulse{
-
 50%{
 transform:scale(1.04);
 }
-
 }
