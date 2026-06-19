@@ -15,34 +15,34 @@ font-family:'Segoe UI',Arial,sans-serif;
 
 background:#f7f2f6;
 
-animation:abrirApp .6s ease;
+}
+
+
+
+
+body{
+
+overflow-x:hidden;
+
+animation:abrir .5s ease;
 
 }
 
 
 
-@keyframes abrirApp{
+@keyframes abrir{
 
 from{
-
 opacity:0;
-
-transform:scale(.96);
-
+transform:scale(.97);
 }
-
 
 to{
-
 opacity:1;
-
 transform:scale(1);
-
 }
 
 }
-
-
 
 
 
@@ -68,17 +68,14 @@ padding:20px;
 
 padding-bottom:100px;
 
-
-animation:entrarTela .45s ease;
+animation:entrada .4s ease;
 
 }
 
 
 
 
-
-@keyframes entrarTela{
-
+@keyframes entrada{
 
 from{
 
@@ -88,7 +85,6 @@ transform:translateY(20px);
 
 }
 
-
 to{
 
 opacity:1;
@@ -97,10 +93,7 @@ transform:translateY(0);
 
 }
 
-
 }
-
-
 
 
 
@@ -124,38 +117,7 @@ align-items:center;
 
 gap:16px;
 
-
-animation:subir .5s ease;
-
 }
-
-
-
-
-@keyframes subir{
-
-
-from{
-
-opacity:0;
-
-transform:translateY(-20px);
-
-}
-
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-
-}
-
-
 
 
 
@@ -170,13 +132,11 @@ border-radius:50%;
 
 overflow:hidden;
 
-
 box-shadow:
-
 0 15px 35px #d6339a55;
 
-
 }
+
 
 
 
@@ -189,6 +149,60 @@ height:100%;
 object-fit:cover;
 
 }
+
+
+
+
+
+
+.header h1{
+
+margin:0;
+
+font-size:28px;
+
+}
+
+
+
+.header p{
+
+margin:5px 0;
+
+color:#777;
+
+}
+
+
+
+
+
+
+
+
+.busca{
+
+height:55px;
+
+border-radius:25px;
+
+background:#fafafa;
+
+display:flex;
+
+align-items:center;
+
+padding:15px;
+
+margin:20px 0;
+
+
+box-shadow:
+0 8px 20px #0001;
+
+}
+
+
 
 
 
@@ -208,9 +222,7 @@ box-shadow:
 0 20px 45px #d6339a66;
 
 
-
-animation:zoomBanner .6s ease;
-
+animation:banner .5s ease;
 
 }
 
@@ -218,7 +230,7 @@ animation:zoomBanner .6s ease;
 
 
 
-@keyframes zoomBanner{
+@keyframes banner{
 
 
 from{
@@ -228,7 +240,6 @@ opacity:0;
 transform:scale(.9);
 
 }
-
 
 to{
 
@@ -244,11 +255,22 @@ transform:scale(1);
 
 
 
+.banner h1,
+.banner h2,
+.banner p,
+.banner h3{
+
+color:white;
+
+}
+
+
+
+
 
 
 
 .cards{
-
 
 display:grid;
 
@@ -256,8 +278,8 @@ grid-template-columns:repeat(2,1fr);
 
 gap:16px;
 
-
 }
+
 
 
 
@@ -284,18 +306,16 @@ align-items:center;
 justify-content:center;
 
 
-
 box-shadow:
 
 0 12px 35px #0002;
 
 
+transition:.2s;
 
-animation:cardEntrada .5s ease backwards;
 
 
-transition:.25s;
-
+animation:card .5s ease backwards;
 
 
 }
@@ -304,58 +324,41 @@ transition:.25s;
 
 
 .servico:nth-child(1){
-
 animation-delay:.1s;
-
 }
-
 
 .servico:nth-child(2){
-
 animation-delay:.2s;
-
 }
-
 
 .servico:nth-child(3){
-
 animation-delay:.3s;
-
 }
-
 
 .servico:nth-child(4){
-
 animation-delay:.4s;
-
 }
-
 
 .servico:nth-child(5){
-
 animation-delay:.5s;
-
 }
-
 
 .servico:nth-child(6){
-
 animation-delay:.6s;
-
 }
 
 
 
 
 
-@keyframes cardEntrada{
+@keyframes card{
 
 
 from{
 
 opacity:0;
 
-transform:translateY(30px);
+transform:translateY(25px);
 
 }
 
@@ -374,8 +377,6 @@ transform:translateY(0);
 
 
 
-
-
 .servico:active{
 
 transform:scale(.95);
@@ -386,23 +387,248 @@ transform:scale(.95);
 
 
 
+.servico h3{
+
+text-align:center;
+
+}
+
+
+
+.servico p{
+
+color:#d6339a;
+
+font-size:19px;
+
+font-weight:bold;
+
+}
+
+
+
 
 
 .servico span{
-
 
 background:#d6339a;
 
 color:white;
 
-
 padding:8px 16px;
+
+border-radius:20px;
+
+font-size:13px;
+
+font-weight:bold;
+
+}
+
+
+
+
+
+
+
+nav{
+
+position:fixed;
+
+bottom:15px;
+
+left:15px;
+
+right:15px;
+
+
+height:70px;
+
+
+background:#d6339a;
+
+
+border-radius:28px;
+
+
+display:flex;
+
+
+align-items:center;
+
+
+justify-content:space-around;
+
+
+z-index:100;
+
+
+box-shadow:
+
+0 20px 40px #d6339a66;
+
+
+}
+
+
+
+nav button{
+
+background:none;
+
+border:0;
+
+color:white;
+
+font-size:26px;
+
+}
+
+
+
+
+
+
+
+
+
+/* AGENDA */
+
+
+.top{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+margin-bottom:20px;
+
+}
+
+
+
+
+
+.btn-voltar{
+
+
+height:58px;
+
+
+min-width:120px;
+
+
+border:0;
+
+
+border-radius:22px;
+
+
+background:#f7d8e8;
+
+
+color:#d6339a;
+
+
+font-size:18px;
+
+
+font-weight:bold;
+
+
+}
+
+
+
+
+#tituloServico{
+
+
+background:#fafafa;
+
+
+padding:18px;
 
 
 border-radius:20px;
 
 
-font-size:13px;
+}
+
+
+
+
+
+
+
+.calendario{
+
+
+background:#d6339a;
+
+
+padding:20px;
+
+
+border-radius:30px;
+
+
+box-shadow:
+
+0 20px 40px #d6339a55;
+
+
+}
+
+
+
+
+
+.calendario h2{
+
+color:white;
+
+}
+
+
+
+
+
+
+.dias{
+
+
+display:grid;
+
+grid-template-columns:repeat(7,1fr);
+
+gap:8px;
+
+
+}
+
+
+
+
+
+.dias button{
+
+
+height:55px;
+
+
+border:0;
+
+
+border-radius:16px;
+
+
+background:white;
+
+
+color:#d6339a;
 
 
 font-weight:bold;
@@ -415,26 +641,15 @@ font-weight:bold;
 
 
 
+.selecionado{
 
 
-nav{
+transform:translateY(-5px);
 
 
-animation:subir .7s ease;
+box-shadow:
 
-
-}
-
-
-
-
-
-
-
-
-.top{
-
-animation:subir .4s ease;
+0 12px 25px #0003;
 
 }
 
@@ -443,38 +658,21 @@ animation:subir .4s ease;
 
 
 
-.btn-voltar{
 
 
-transition:.2s;
-
-}
+.horarios{
 
 
-
-.btn-voltar:active{
-
-
-transform:scale(.92);
+display:grid;
 
 
-}
+grid-template-columns:repeat(2,1fr);
 
 
-
-
-
-
-.calendario{
-
-
-animation:zoomBanner .4s ease;
+gap:15px;
 
 
 }
-
-
-
 
 
 
@@ -482,22 +680,102 @@ animation:zoomBanner .4s ease;
 .horarios button{
 
 
-transition:.2s;
+height:65px;
+
+
+border:0;
+
+
+border-radius:22px;
+
+
+background:#f7d8e8;
+
+
+font-size:18px;
+
+
+font-weight:bold;
 
 
 }
 
 
 
-.horarios button:active{
 
 
-transform:scale(.92);
+
+.ocupado{
+
+
+background:#ddd!important;
+
+color:#999!important;
+
+}
+
+
+
+
+
+
+
+
+.confirm{
+
+margin-top:25px;
+
+}
+
+
+
+
+
+.resumo{
+
+
+background:white;
+
+
+padding:25px;
+
+
+border-radius:30px;
+
+
+box-shadow:
+
+0 15px 35px #0002;
 
 
 }
 
 
+
+
+
+.confirm input{
+
+
+width:100%;
+
+
+height:58px;
+
+
+margin-top:12px;
+
+
+border-radius:18px;
+
+
+border:1px solid #ddd;
+
+
+padding:15px;
+
+
+}
 
 
 
@@ -505,7 +783,34 @@ transform:scale(.92);
 .whatsapp{
 
 
-animation:pulsar 1.8s infinite;
+width:100%;
+
+
+height:65px;
+
+
+margin-top:20px;
+
+
+border:0;
+
+
+border-radius:25px;
+
+
+background:#25D366;
+
+
+color:white;
+
+
+font-size:18px;
+
+
+font-weight:bold;
+
+
+animation:pulse 1.8s infinite;
 
 
 }
@@ -513,27 +818,12 @@ animation:pulsar 1.8s infinite;
 
 
 
-
-@keyframes pulsar{
-
-
-0%{
-
-transform:scale(1);
-
-}
+@keyframes pulse{
 
 
 50%{
 
 transform:scale(1.04);
-
-}
-
-
-100%{
-
-transform:scale(1);
 
 }
 
