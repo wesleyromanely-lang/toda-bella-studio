@@ -12,6 +12,8 @@ let horarioEscolhido = "";
 let horariosOcupados = [];
 
 
+let dataCalendario = new Date();
+
 
 const meses = [
 "Janeiro",
@@ -41,6 +43,20 @@ const diasSemana = [
 
 
 
+const horariosDisponiveis = [
+
+"09:30",
+"10:30",
+"11:30",
+"13:30",
+"14:30",
+"15:30",
+"16:30"
+
+];
+
+
+
 
 
 
@@ -55,34 +71,44 @@ diaEscolhido="";
 horarioEscolhido="";
 
 
-
 document.getElementById("tituloServico").innerHTML =
+
 servicoEscolhido
+
 ?
+
 "✨ "+servicoEscolhido
+
 :
+
 "Escolha o serviço";
 
 
 
-document.getElementById("agenda")
-.classList.remove("escondida");
 
-
-
-document.getElementById("home")
+document
+.getElementById("home")
 .classList.add("escondida");
 
 
 
+document
+.getElementById("agenda")
+.classList.remove("escondida");
+
+
+
+
+dataCalendario = new Date();
+
+
 criarCalendario();
+
 
 limparHorarios();
 
 
-
 }
-
 
 
 
@@ -94,16 +120,38 @@ limparHorarios();
 function voltar(){
 
 
-document.getElementById("agenda")
+document
+.getElementById("agenda")
 .classList.add("escondida");
 
 
-document.getElementById("home")
+document
+.getElementById("home")
 .classList.remove("escondida");
 
 
 }
 
+
+
+
+
+
+
+
+
+function mudarMes(valor){
+
+
+dataCalendario.setMonth(
+dataCalendario.getMonth()+valor
+);
+
+
+criarCalendario();
+
+
+}
 
 
 
@@ -121,40 +169,73 @@ let area =
 document.getElementById("dias");
 
 
+
 area.innerHTML="";
 
 
 
 
-let hoje = new Date();
 
-
-let ano = hoje.getFullYear();
-
-let mes = hoje.getMonth();
+let ano =
+dataCalendario.getFullYear();
 
 
 
+let mes =
+dataCalendario.getMonth();
 
 
-let titulo =
+
+
+let hoje =
+new Date();
+
+
+
+let mesAtual =
+hoje.getMonth();
+
+
+
+let anoAtual =
+hoje.getFullYear();
+
+
+
+
+
+
+
+let topo =
 document.createElement("h3");
 
 
-titulo.innerHTML =
 
-meses[mes]+" "+ano+
-"<br><small>Atendimento: Terça a Sábado</small>";
+topo.innerHTML =
+
+`
+<button onclick="mudarMes(-1)">←</button>
+
+${meses[mes]} ${ano}
+
+<button onclick="mudarMes(1)">→</button>
+
+<br>
+
+<small>Atendimento: Terça a Sábado</small>
+
+`;
 
 
 
-titulo.style.color="white";
 
-titulo.style.gridColumn="1 / 8";
+topo.style.color="white";
+
+topo.style.gridColumn="1 / 8";
 
 
 
-area.appendChild(titulo);
+area.appendChild(topo);
 
 
 
@@ -203,9 +284,9 @@ area.appendChild(vazio);
 
 
 
+
+
 for(let dia=1;dia<=totalDias;dia++){
-
-
 
 
 
@@ -219,15 +300,12 @@ dia
 
 
 
-
-
 let botao =
 document.createElement("button");
 
 
 
-botao.innerHTML =
-dia;
+botao.innerHTML = dia;
 
 
 
@@ -235,18 +313,17 @@ dia;
 
 
 
-let hojeSemHora =
-new Date();
-
-hojeSemHora.setHours(0,0,0,0);
 
 
+// BLOQUEIA MESES PASSADOS
 
-
-
-
-
-if(data < hojeSemHora){
+if(
+data < new Date(
+hoje.getFullYear(),
+hoje.getMonth(),
+hoje.getDate()
+)
+){
 
 
 botao.disabled=true;
@@ -262,12 +339,34 @@ botao.classList.add("ocupado");
 
 
 
+// HOJE
 
-else if(
+if(
+data.toDateString()
+==
+hoje.toDateString()
+){
+
+
+botao.innerHTML =
+dia+"<br>Hoje";
+
+
+}
+
+
+
+
+
+
+
+
+// FOLGAS
+
+if(
 data.getDay()==0 ||
 data.getDay()==1
 ){
-
 
 
 botao.disabled=true;
@@ -278,7 +377,6 @@ dia+
 "<br>Folga";
 
 
-
 botao.classList.add("ocupado");
 
 
@@ -291,7 +389,9 @@ botao.classList.add("ocupado");
 
 
 
-else{
+
+
+if(!botao.disabled){
 
 
 
@@ -301,11 +401,14 @@ botao.onclick=function(){
 
 
 
+
 document
 .querySelectorAll(".dias button")
 .forEach(b=>{
 
+
 b.classList.remove("selecionado");
+
 
 });
 
@@ -323,10 +426,12 @@ botao.classList.add("selecionado");
 
 
 
+
 diaEscolhido =
 
 
 diasSemana[data.getDay()]
+
 +
 " "
 +
@@ -341,9 +446,9 @@ meses[mes];
 
 
 
+
+
 carregarHorarios();
-
-
 
 
 
@@ -359,17 +464,15 @@ atualizarResumo();
 
 
 
-
-
-
 }
 
 
 
 
 
-area.appendChild(botao);
 
+
+area.appendChild(botao);
 
 
 
@@ -405,7 +508,6 @@ ref(db,"agendamentos")
 
 
 
-
 if(dados.exists()){
 
 
@@ -414,16 +516,17 @@ Object.values(dados.val())
 .forEach(item=>{
 
 
+
 if(
 item.dia ==
 diaEscolhido
 ){
 
 
-
 horariosOcupados.push(
 item.horario
 );
+
 
 
 }
@@ -438,32 +541,12 @@ item.horario
 
 
 
-
-
-
 bloquearHorarios();
 
 
 
-
-
-
-
-if(
-horariosOcupados.length >= 7
-){
-
-
-alert(
-"Não existem horários disponíveis neste dia"
-);
-
-
 }
 
-
-
-}
 
 
 
@@ -476,13 +559,12 @@ alert(
 function limparHorarios(){
 
 
-
 document
 .querySelectorAll(".horarios button")
 .forEach(botao=>{
 
 
-botao.disabled=false;
+botao.removeAttribute("disabled");
 
 
 botao.classList.remove("ocupado");
@@ -495,11 +577,8 @@ botao.classList.remove("selecionado");
 
 
 
+
 }
-
-
-
-
 
 
 
@@ -527,10 +606,7 @@ return;
 
 
 
-
-
 horarioEscolhido=valor;
-
 
 
 
@@ -559,6 +635,7 @@ atualizarResumo();
 
 
 
+
 }
 
 
@@ -579,14 +656,11 @@ document
 
 
 
-
-
 if(
 horariosOcupados.includes(
 botao.innerText
 )
 ){
-
 
 
 botao.disabled=true;
@@ -620,7 +694,6 @@ function atualizarResumo(){
 document.getElementById("resumo").innerHTML =
 
 
-
 `
 
 Serviço:
@@ -648,7 +721,6 @@ Horário:
 <br>
 
 <b>${horarioEscolhido}</b>
-
 
 `;
 
@@ -689,15 +761,12 @@ if(
 ){
 
 
-
 alert(
 "Escolha serviço, dia e horário"
 );
 
 
-
 return;
-
 
 
 }
@@ -731,10 +800,7 @@ data:new Date().toLocaleString()
 }
 
 
-
 );
-
-
 
 
 
@@ -748,17 +814,15 @@ let numero =
 
 
 
-
-
-
 let mensagem =
+
 
 `
 
 Olá Toda Bella ✨
 
 
-Quero confirmar meu horário.
+Quero confirmar meu agendamento.
 
 
 Cliente:
@@ -776,9 +840,8 @@ ${diaEscolhido}
 Horário:
 ${horarioEscolhido}
 
+
 `;
-
-
 
 
 
@@ -799,8 +862,6 @@ encodeURIComponent(mensagem)
 
 
 
-
-
 }
 
 
@@ -810,11 +871,12 @@ encodeURIComponent(mensagem)
 
 
 
+window.abrirAgendamento=abrirAgendamento;
 
-window.abrirAgendamento = abrirAgendamento;
+window.voltar=voltar;
 
-window.voltar = voltar;
+window.hora=hora;
 
-window.hora = hora;
+window.whatsapp=whatsapp;
 
-window.whatsapp = whatsapp;
+window.mudarMes=mudarMes;
