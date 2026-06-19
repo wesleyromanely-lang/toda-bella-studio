@@ -814,10 +814,14 @@ encodeURIComponent(mensagem)
 
 }
 
+window.instagram = function(){
 
+window.open(
+"https://www.instagram.com/todabellastudio2026/",
+"_blank"
+);
 
-
-
+};
 
 window.abrirAgendamento=abrirAgendamento;
 
@@ -828,3 +832,6 @@ window.hora=hora;
 window.whatsapp=whatsapp;
 
 window.mudarMes=mudarMes;
+
+
+
