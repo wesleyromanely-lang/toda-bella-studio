@@ -36,7 +36,7 @@ width:100%;
 min-height:100vh;
 background:white;
 padding:20px;
-padding-bottom:100px;
+padding-bottom:110px;
 animation:entrada .4s ease;
 }
 
@@ -101,18 +101,6 @@ background:#d6339a;
 padding:28px;
 border-radius:30px;
 box-shadow:0 20px 45px #d6339a66;
-animation:banner .5s ease;
-}
-
-@keyframes banner{
-from{
-opacity:0;
-transform:scale(.9);
-}
-to{
-opacity:1;
-transform:scale(1);
-}
 }
 
 .banner h1,
@@ -137,35 +125,11 @@ flex-direction:column;
 align-items:center;
 justify-content:center;
 box-shadow:0 12px 35px #0002;
-transition:.2s;
-animation:card .5s ease backwards;
 cursor:pointer;
 }
 
-.servico:nth-child(1){animation-delay:.1s;}
-.servico:nth-child(2){animation-delay:.2s;}
-.servico:nth-child(3){animation-delay:.3s;}
-.servico:nth-child(4){animation-delay:.4s;}
-.servico:nth-child(5){animation-delay:.5s;}
-.servico:nth-child(6){animation-delay:.6s;}
-
-@keyframes card{
-from{
-opacity:0;
-transform:translateY(25px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
 .servico:active{
-transform:scale(.95);
-}
-
-.servico h3{
-text-align:center;
+transform:scale(.97);
 }
 
 .servico p{
@@ -183,58 +147,47 @@ font-size:13px;
 font-weight:bold;
 }
 
-/* BARRA INSTAGRAM */
+/* RODAPÉ */
 
 .bottom-nav{
 position:fixed;
-bottom:15px;
-left:15px;
-right:15px;
-height:70px;
-background:#d6339a;
-border-radius:28px;
+bottom:0;
+left:0;
+right:0;
+
+height:65px;
+
+background:white;
+
 display:flex;
+
 align-items:center;
+
 justify-content:center;
+
+border-top:1px solid #eee;
+
+box-shadow:0 -6px 20px #00000010;
+
 z-index:100;
-box-shadow:0 20px 40px #d6339a66;
 }
 
-.bottom-nav button{
-
+.rodape{
 display:flex;
-
 align-items:center;
-
-justify-content:center;
-
-gap:12px;
-
-background:none;
-
-border:0;
-
-color:white;
-
-font-size:20px;
-
-font-weight:700;
-
-cursor:pointer;
-
+gap:18px;
 }
 
-.bottom-nav button img{
-
-width:34px;
-
-height:34px;
-
-border-radius:8px;
-
-object-fit:cover;
-
+.link-instagram,
+.link-suporte{
+text-decoration:none;
+color:#222;
+font-size:15px;
+font-weight:600;
 }
+
+.link-instagram:hover,
+.link-suporte:hover
 
 /* AGENDA */
 
@@ -266,7 +219,6 @@ border-radius:20px;
 background:#d6339a;
 padding:20px;
 border-radius:30px;
-box-shadow:0 20px 40px #d6339a55;
 }
 
 .calendario h2{
@@ -288,11 +240,6 @@ color:#d6339a;
 font-weight:bold;
 }
 
-.selecionado{
-transform:translateY(-5px);
-box-shadow:0 12px 25px #0003;
-}
-
 .horarios{
 display:grid;
 grid-template-columns:repeat(2,1fr);
@@ -306,11 +253,6 @@ border-radius:22px;
 background:#f7d8e8;
 font-size:18px;
 font-weight:bold;
-}
-
-.ocupado{
-background:#ddd!important;
-color:#999!important;
 }
 
 .confirm{
@@ -343,11 +285,4 @@ background:#25D366;
 color:white;
 font-size:18px;
 font-weight:bold;
-animation:pulse 1.8s infinite;
-}
-
-@keyframes pulse{
-50%{
-transform:scale(1.04);
-}
 }
