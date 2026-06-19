@@ -15,15 +15,34 @@ font-family:'Segoe UI',Arial,sans-serif;
 
 background:#f7f2f6;
 
+animation:abrirApp .6s ease;
+
+}
+
+
+
+@keyframes abrirApp{
+
+from{
+
+opacity:0;
+
+transform:scale(.96);
+
 }
 
 
+to{
 
-body{
+opacity:1;
 
-overflow-x:hidden;
+transform:scale(1);
 
 }
+
+}
+
+
 
 
 
@@ -49,7 +68,39 @@ padding:20px;
 
 padding-bottom:100px;
 
+
+animation:entrarTela .45s ease;
+
 }
+
+
+
+
+
+@keyframes entrarTela{
+
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+
+}
+
+
 
 
 
@@ -73,7 +124,39 @@ align-items:center;
 
 gap:16px;
 
+
+animation:subir .5s ease;
+
 }
+
+
+
+
+@keyframes subir{
+
+
+from{
+
+opacity:0;
+
+transform:translateY(-20px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+
+}
+
+
+
 
 
 
@@ -87,9 +170,11 @@ border-radius:50%;
 
 overflow:hidden;
 
+
 box-shadow:
 
 0 15px 35px #d6339a55;
+
 
 }
 
@@ -102,56 +187,6 @@ width:100%;
 height:100%;
 
 object-fit:cover;
-
-}
-
-
-
-
-
-
-.header h1{
-
-margin:0;
-
-font-size:28px;
-
-}
-
-
-
-
-.header p{
-
-color:#777;
-
-}
-
-
-
-
-
-
-.busca{
-
-height:55px;
-
-border-radius:25px;
-
-background:#fafafa;
-
-display:flex;
-
-align-items:center;
-
-padding:15px;
-
-margin:20px 0;
-
-
-box-shadow:
-
-0 8px 20px #0001;
 
 }
 
@@ -172,16 +207,37 @@ box-shadow:
 
 0 20px 45px #d6339a66;
 
+
+
+animation:zoomBanner .6s ease;
+
+
 }
 
 
 
-.banner h1,
-.banner h2,
-.banner p,
-.banner h3{
 
-color:white;
+
+@keyframes zoomBanner{
+
+
+from{
+
+opacity:0;
+
+transform:scale(.9);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:scale(1);
+
+}
+
 
 }
 
@@ -193,13 +249,16 @@ color:white;
 
 .cards{
 
+
 display:grid;
 
 grid-template-columns:repeat(2,1fr);
 
 gap:16px;
 
+
 }
+
 
 
 
@@ -225,12 +284,89 @@ align-items:center;
 justify-content:center;
 
 
+
 box-shadow:
 
 0 12px 35px #0002;
 
 
-transition:.2s;
+
+animation:cardEntrada .5s ease backwards;
+
+
+transition:.25s;
+
+
+
+}
+
+
+
+
+.servico:nth-child(1){
+
+animation-delay:.1s;
+
+}
+
+
+.servico:nth-child(2){
+
+animation-delay:.2s;
+
+}
+
+
+.servico:nth-child(3){
+
+animation-delay:.3s;
+
+}
+
+
+.servico:nth-child(4){
+
+animation-delay:.4s;
+
+}
+
+
+.servico:nth-child(5){
+
+animation-delay:.5s;
+
+}
+
+
+.servico:nth-child(6){
+
+animation-delay:.6s;
+
+}
+
+
+
+
+
+@keyframes cardEntrada{
+
+
+from{
+
+opacity:0;
+
+transform:translateY(30px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
 
 
 }
@@ -239,49 +375,41 @@ transition:.2s;
 
 
 
-.servico:hover{
 
-transform:translateY(-8px);
+.servico:active{
 
-}
-
-
-
-.servico h3{
-
-text-align:center;
+transform:scale(.95);
 
 }
 
 
 
-.servico p{
 
-font-size:20px;
-
-font-weight:bold;
-
-color:#d6339a;
-
-}
 
 
 
 .servico span{
 
+
 background:#d6339a;
 
 color:white;
 
+
 padding:8px 16px;
+
 
 border-radius:20px;
 
+
 font-size:13px;
+
 
 font-weight:bold;
 
+
 }
+
 
 
 
@@ -292,37 +420,7 @@ font-weight:bold;
 nav{
 
 
-position:fixed;
-
-
-bottom:15px;
-
-
-left:15px;
-
-
-right:15px;
-
-
-height:70px;
-
-
-background:#d6339a;
-
-
-border-radius:28px;
-
-
-display:flex;
-
-
-align-items:center;
-
-
-justify-content:space-around;
-
-
-z-index:99;
+animation:subir .7s ease;
 
 
 }
@@ -331,46 +429,15 @@ z-index:99;
 
 
 
-nav button{
 
-background:none;
-
-border:0;
-
-color:white;
-
-font-size:26px;
-
-}
-
-
-
-
-
-
-
-
-
-/* AGENDA */
 
 
 .top{
 
-display:flex;
-
-align-items:center;
-
-gap:15px;
+animation:subir .4s ease;
 
 }
 
-
-
-.top h2{
-
-margin:0;
-
-}
 
 
 
@@ -379,51 +446,20 @@ margin:0;
 .btn-voltar{
 
 
-height:58px;
-
-
-min-width:120px;
-
-
-border:0;
-
-
-border-radius:22px;
-
-
-background:#f7d8e8;
-
-
-color:#d6339a;
-
-
-font-size:18px;
-
-
-font-weight:bold;
-
+transition:.2s;
 
 }
 
 
 
+.btn-voltar:active{
 
 
-
-
-#tituloServico{
-
-
-background:#fafafa;
-
-
-padding:18px;
-
-
-border-radius:20px;
+transform:scale(.92);
 
 
 }
+
 
 
 
@@ -432,151 +468,12 @@ border-radius:20px;
 .calendario{
 
 
-background:#d6339a;
-
-
-padding:20px;
-
-
-border-radius:30px;
-
-
-box-shadow:
-
-0 20px 40px #d6339a55;
+animation:zoomBanner .4s ease;
 
 
 }
 
 
-
-
-.calendario h2{
-
-color:white;
-
-}
-
-
-
-
-
-
-
-/* CALENDARIO NOVO */
-
-
-.dias{
-
-
-display:grid;
-
-
-grid-template-columns:repeat(7,1fr);
-
-
-gap:8px;
-
-
-width:100%;
-
-
-}
-
-
-
-
-
-.dias button{
-
-
-height:55px;
-
-
-border:0;
-
-
-border-radius:16px;
-
-
-background:white;
-
-
-color:#d6339a;
-
-
-font-weight:bold;
-
-
-font-size:14px;
-
-
-box-shadow:
-
-0 5px 15px #0002;
-
-
-}
-
-
-
-
-
-
-
-.dias button:hover{
-
-
-transform:translateY(-4px);
-
-
-}
-
-
-
-
-
-
-
-.selecionado{
-
-
-background:white!important;
-
-
-transform:scale(1.08);
-
-
-box-shadow:
-
-0 12px 25px #0003!important;
-
-
-}
-
-
-
-
-
-
-
-
-.horarios{
-
-
-display:grid;
-
-
-grid-template-columns:repeat(2,1fr);
-
-
-gap:15px;
-
-
-margin-top:15px;
-
-
-}
 
 
 
@@ -585,102 +482,21 @@ margin-top:15px;
 .horarios button{
 
 
-height:65px;
-
-
-border:0;
-
-
-border-radius:22px;
-
-
-background:#f7d8ea;
-
-
-font-size:18px;
-
-
-font-weight:bold;
+transition:.2s;
 
 
 }
 
 
 
+.horarios button:active{
 
 
-.ocupado{
-
-
-background:#ddd!important;
-
-color:#999!important;
-
-}
-
-
-
-
-
-
-
-
-.confirm{
-
-
-margin-top:25px;
-
-}
-
-
-
-
-
-.resumo{
-
-
-background:#fff;
-
-
-padding:25px;
-
-
-border-radius:30px;
-
-
-box-shadow:
-
-0 15px 35px #0002;
+transform:scale(.92);
 
 
 }
 
-
-
-
-
-.confirm input{
-
-
-width:100%;
-
-
-height:58px;
-
-
-margin-top:12px;
-
-
-border-radius:18px;
-
-
-border:1px solid #ddd;
-
-
-padding:15px;
-
-
-}
 
 
 
@@ -689,31 +505,37 @@ padding:15px;
 .whatsapp{
 
 
-width:100%;
+animation:pulsar 1.8s infinite;
 
 
-height:65px;
+}
 
 
-margin-top:20px;
 
 
-border:0;
+
+@keyframes pulsar{
 
 
-border-radius:25px;
+0%{
+
+transform:scale(1);
+
+}
 
 
-background:#25D366;
+50%{
+
+transform:scale(1.04);
+
+}
 
 
-color:white;
+100%{
 
+transform:scale(1);
 
-font-size:18px;
-
-
-font-weight:bold;
+}
 
 
 }
