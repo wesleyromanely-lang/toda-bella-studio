@@ -24,10 +24,38 @@ const diasSemana=[
 
 function abrirAgendamento(servico){
 
-servicoEscolhido=servico||"";
+servicoEscolhido=servico;
 
 diaEscolhido="";
 horarioEscolhido="";
+horariosOcupados=[];
+
+document
+.querySelectorAll(".horarios button")
+.forEach(b=>{
+b.classList.remove("selecionado");
+b.disabled=false;
+b.classList.remove("ocupado");
+});
+
+document.getElementById("tituloServico").innerHTML=
+"✨ "+servicoEscolhido;
+
+document
+.getElementById("home")
+.classList.add("escondida");
+
+document
+.getElementById("agenda")
+.classList.remove("escondida");
+
+dataCalendario=new Date();
+
+criarCalendario();
+
+atualizarResumo();
+
+}
 
 document.getElementById("tituloServico").innerHTML=
 servicoEscolhido
