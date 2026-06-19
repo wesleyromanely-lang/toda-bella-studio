@@ -1,510 +1,365 @@
-```js
-import {
-db,
-ref,
-push,
-get
-} from "./firebase.js";
-
-let servicoEscolhido="";
-let diaEscolhido="";
-let horarioEscolhido="";
-let horariosOcupados=[];
-
-let dataCalendario=new Date();
-
-const meses=[
-"Janeiro","Fevereiro","Março","Abril","Maio","Junho",
-"Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"
-];
-
-const diasSemana=[
-"Dom","Seg","Ter","Qua","Qui","Sex","Sáb"
-];
-
-function abrirAgendamento(servico){
-
-servicoEscolhido=servico;
-
-diaEscolhido="";
-horarioEscolhido="";
-horariosOcupados=[];
-
-document
-.querySelectorAll(".horarios button")
-.forEach(b=>{
-b.classList.remove("selecionado");
-b.disabled=false;
-b.classList.remove("ocupado");
-});
-
-document.getElementById("tituloServico").innerHTML=
-"✨ "+servicoEscolhido;
-
-document
-.getElementById("home")
-.classList.add("escondida");
-
-document
-.getElementById("agenda")
-.classList.remove("escondida");
-
-dataCalendario=new Date();
-
-criarCalendario();
-
-atualizarResumo();
-
+```css
+*{
+box-sizing:border-box;
 }
 
-document.getElementById("tituloServico").innerHTML=
-servicoEscolhido
-?
-"✨ "+servicoEscolhido
-:
-"Escolha o serviço";
-
-document.getElementById("home").classList.add("escondida");
-
-document.getElementById("agenda").classList.remove("escondida");
-
-dataCalendario=new Date();
-
-criarCalendario();
-
-limparHorarios();
-
-atualizarResumo();
-
+html,body{
+margin:0;
+padding:0;
+width:100%;
+min-height:100%;
+font-family:'Segoe UI',Arial,sans-serif;
+background:#f7f2f6;
 }
 
-function voltar(){
-
-document.getElementById("agenda").classList.add("escondida");
-
-document.getElementById("home").classList.remove("escondida");
-
+body{
+overflow-x:hidden;
+animation:abrir .5s ease;
 }
 
-function mudarMes(valor){
-
-dataCalendario.setMonth(
-dataCalendario.getMonth()+valor
-);
-
-criarCalendario();
-
+@keyframes abrir{
+from{
+opacity:0;
+transform:scale(.98);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
 }
 
-function criarCalendario(){
-
-let area=document.getElementById("dias");
-
-area.innerHTML="";
-
-let ano=dataCalendario.getFullYear();
-
-let mes=dataCalendario.getMonth();
-
-let hoje=new Date();
-
-let topo=document.createElement("h3");
-
-topo.innerHTML=
-`
-<button onclick="mudarMes(-1)">←</button>
-
-${meses[mes]} ${ano}
-
-<button onclick="mudarMes(1)">→</button>
-
-<br>
-
-<small>Atendimento: Terça a Sábado</small>
-`;
-
-topo.style.color="white";
-
-topo.style.gridColumn="1 / 8";
-
-area.appendChild(topo);
-
-let primeiroDia=
-new Date(
-ano,
-mes,
-1
-).getDay();
-
-let totalDias=
-new Date(
-ano,
-mes+1,
-0
-).getDate();
-
-for(let i=0;i<primeiroDia;i++){
-
-let vazio=document.createElement("div");
-
-area.appendChild(vazio);
-
+.app{
+width:100%;
 }
 
-for(let dia=1;dia<=totalDias;dia++){
-
-let data=new Date(
-ano,
-mes,
-dia
-);
-
-let botao=document.createElement("button");
-
-botao.innerHTML=dia;
-
-let hojeLimpo=new Date();
-
-hojeLimpo.setHours(0,0,0,0);
-
-if(data<hojeLimpo){
-
-botao.disabled=true;
-
-botao.classList.add("ocupado");
-
+.tela{
+width:100%;
+min-height:100vh;
+background:white;
+padding:20px;
+padding-bottom:100px;
 }
 
-if(
-data.toDateString()
-==
-hoje.toDateString()
-){
-
-let horaAtual=hoje.getHours();
-
-let minutoAtual=hoje.getMinutes();
-
-if(
-horaAtual>16
-||
-(
-horaAtual==16
-&&
-minutoAtual>30
-)
-){
-
-botao.disabled=true;
-
-botao.innerHTML=
-dia+
-"<br>Encerrado";
-
-botao.classList.add("ocupado");
-
+.header,
+.busca,
+.banner,
+.cards,
+.top,
+.calendario,
+.confirm{
+opacity:0;
+animation:subir .8s ease forwards;
 }
 
-else{
+.header{animation-delay:.1s;}
+.busca{animation-delay:.2s;}
+.banner{animation-delay:.3s;}
+.cards{animation-delay:.5s;}
+.top{animation-delay:.2s;}
+.calendario{animation-delay:.3s;}
+.confirm{animation-delay:.5s;}
 
-botao.innerHTML=
-dia+
-"<br>Hoje";
-
+@keyframes subir{
+from{
+opacity:0;
+transform:translateY(60px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
+.escondida{
+display:none;
 }
 
-if(
-data.getDay()==0
-||
-data.getDay()==1
-){
-
-botao.disabled=true;
-
-botao.innerHTML=
-dia+
-"<br>Folga";
-
-botao.classList.add("ocupado");
-
+.header{
+display:flex;
+align-items:center;
+gap:16px;
 }
 
-if(!botao.disabled){
-
-botao.onclick=function(){
-
-document
-.querySelectorAll(".dias button")
-.forEach(b=>{
-
-b.classList.remove("selecionado");
-
-});
-
-botao.classList.add("selecionado");
-
-diaEscolhido=
-diasSemana[data.getDay()]
-+
-" "
-+
-dia
-+
-" de "
-+
-meses[mes];
-
-carregarHorarios();
-
-atualizarResumo();
-
-};
-
+.perfil{
+width:85px;
+height:85px;
+border-radius:50%;
+overflow:hidden;
+box-shadow:0 15px 35px #d6339a55;
 }
 
-area.appendChild(botao);
-
+.perfil img{
+width:100%;
+height:100%;
+object-fit:cover;
 }
 
+.header h1{
+margin:0;
+font-size:28px;
 }
 
-async function carregarHorarios(){
-
-horariosOcupados=[];
-
-let dados=
-await get(
-ref(db,"agendamentos")
-);
-
-if(dados.exists()){
-
-Object.values(dados.val())
-.forEach(item=>{
-
-if(
-item.dia==
-diaEscolhido
-){
-
-horariosOcupados.push(
-item.horario
-);
-
+.header p{
+margin:5px 0;
+color:#777;
 }
 
-});
-
+.busca{
+height:55px;
+border-radius:25px;
+background:#fafafa;
+display:flex;
+align-items:center;
+padding:15px;
+margin:20px 0;
+box-shadow:0 8px 20px #0001;
 }
 
-bloquearHorarios();
-
+.banner{
+background:#d6339a;
+padding:28px;
+border-radius:30px;
+box-shadow:0 20px 45px #d6339a66;
 }
 
-function limparHorarios(){
-
-horarioEscolhido="";
-
-document
-.querySelectorAll(".horarios button")
-.forEach(botao=>{
-
-botao.disabled=false;
-
-botao.classList.remove("ocupado");
-
-botao.classList.remove("selecionado");
-
-});
-
+.banner h1,
+.banner h2,
+.banner p,
+.banner h3{
+color:white;
 }
 
-function hora(botao,valor){
-
-if(
-horariosOcupados.includes(valor)
-){
-
-alert(
-"Esse horário já está reservado"
-);
-
-return;
-
+.cards{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:16px;
 }
 
-horarioEscolhido=valor;
-
-document
-.querySelectorAll(".horarios button")
-.forEach(b=>{
-
-b.classList.remove("selecionado");
-
-});
-
-botao.classList.add("selecionado");
-
-atualizarResumo();
-
+.servico{
+height:170px;
+border-radius:28px;
+background:white;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+box-shadow:0 12px 35px #0002;
+cursor:pointer;
+transition:.25s;
 }
 
-function bloquearHorarios(){
-
-document
-.querySelectorAll(".horarios button")
-.forEach(botao=>{
-
-botao.disabled=false;
-
-botao.classList.remove("ocupado");
-
-if(
-horariosOcupados.includes(
-botao.innerText.trim()
-)
-){
-
-botao.disabled=true;
-
-botao.classList.add("ocupado");
-
+.servico:hover{
+transform:translateY(-3px);
 }
 
-});
-
+.servico:active{
+transform:scale(.96);
 }
 
-function atualizarResumo(){
-
-document.getElementById("resumo").innerHTML=
-`
-
-Serviço:
-
-<br>
-
-<b>${servicoEscolhido}</b>
-
-<br><br>
-
-Dia:
-
-<br>
-
-<b>${diaEscolhido}</b>
-
-<br><br>
-
-Horário:
-
-<br>
-
-<b>${horarioEscolhido}</b>
-
-`;
-
+.servico h3{
+text-align:center;
 }
 
-async function whatsapp(){
-
-let nome=
-document.getElementById("nome").value;
-
-let telefone=
-document.getElementById("whatsapp").value;
-
-if(
-!servicoEscolhido
-||
-!diaEscolhido
-||
-!horarioEscolhido
-){
-
-alert(
-"Escolha serviço, dia e horário"
-);
-
-return;
-
+.servico p{
+color:#d6339a;
+font-size:19px;
+font-weight:bold;
 }
 
-await push(
-
-ref(db,"agendamentos"),
-
-{
-
-nome,
-
-telefone,
-
-servico:servicoEscolhido,
-
-dia:diaEscolhido,
-
-horario:horarioEscolhido,
-
-data:new Date().toLocaleString()
-
+.servico span{
+background:#d6339a;
+color:white;
+padding:8px 16px;
+border-radius:20px;
+font-size:13px;
+font-weight:bold;
 }
 
-);
-
-let numero="5511964201177";
-
-let mensagem=
-`
-
-Olá Toda Bella ✨
-
-Quero confirmar meu agendamento.
-
-Cliente:
-${nome}
-
-Serviço:
-${servicoEscolhido}
-
-Dia:
-${diaEscolhido}
-
-Horário:
-${horarioEscolhido}
-
-`;
-
-window.open(
-
-"https://wa.me/"
-+
-numero
-+
-"?text="
-+
-encodeURIComponent(mensagem)
-
-);
-
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+height:70px;
+background:white;
+display:flex;
+justify-content:center;
+align-items:center;
+box-shadow:0 -8px 20px #00000010;
+border-top:1px solid #eee;
+z-index:100;
 }
 
-window.instagram=function(){
+.rodape{
+display:flex;
+gap:18px;
+align-items:center;
+}
 
-window.open(
-"https://www.instagram.com/todabellastudio2026/",
-"_blank"
-);
+.link-instagram,
+.link-suporte{
+text-decoration:none;
+color:#222;
+font-weight:700;
+}
 
-};
+.link-instagram:hover,
+.link-suporte:hover{
+color:#d6339a;
+}
 
-window.abrirAgendamento=abrirAgendamento;
-window.voltar=voltar;
-window.hora=hora;
-window.whatsapp=whatsapp;
-window.mudarMes=mudarMes;
+.top{
+display:flex;
+gap:15px;
+align-items:center;
+margin-bottom:20px;
+}
+
+.btn-voltar{
+height:58px;
+min-width:120px;
+border:0;
+border-radius:22px;
+background:#f7d8e8;
+color:#d6339a;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+#tituloServico{
+background:#fafafa;
+padding:18px;
+border-radius:20px;
+box-shadow:0 8px 20px #0001;
+}
+
+.calendario{
+background:#d6339a;
+padding:20px;
+border-radius:30px;
+box-shadow:0 20px 40px #d6339a55;
+}
+
+.calendario h2{
+color:white;
+}
+
+.dias{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:8px;
+}
+
+.dias button{
+height:55px;
+border:0;
+border-radius:16px;
+background:white;
+color:#d6339a;
+font-weight:bold;
+transition:.25s;
+cursor:pointer;
+}
+
+.dias button.selecionado{
+background:#d6339a !important;
+color:white !important;
+transform:translateY(-4px);
+box-shadow:0 12px 25px #d6339a55;
+}
+
+.dias button:disabled,
+.ocupado,
+.passado,
+.fechado{
+background:#ddd !important;
+color:#888 !important;
+box-shadow:none !important;
+cursor:not-allowed;
+}
+
+.horarios{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+margin-top:20px;
+}
+
+.horarios button{
+height:65px;
+border:0;
+border-radius:22px;
+background:#f7d8e8;
+color:#d6339a;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+transition:.25s;
+box-shadow:0 10px 20px #0001;
+}
+
+.horarios button:hover{
+transform:translateY(-2px);
+}
+
+.horarios button:active{
+transform:scale(.97);
+}
+
+.horarios button.selecionado{
+background:#d6339a !important;
+color:white !important;
+transform:translateY(-4px);
+box-shadow:0 12px 25px #d6339a55;
+}
+
+.horarios button:disabled{
+background:#ddd !important;
+color:#888 !important;
+box-shadow:none !important;
+cursor:not-allowed;
+}
+
+.confirm{
+margin-top:25px;
+}
+
+.resumo{
+background:white;
+padding:25px;
+border-radius:30px;
+box-shadow:0 15px 35px #0002;
+}
+
+.confirm input{
+width:100%;
+height:58px;
+margin-top:12px;
+padding:15px;
+border-radius:18px;
+border:1px solid #ddd;
+}
+
+.whatsapp{
+width:100%;
+height:65px;
+margin-top:20px;
+border:0;
+border-radius:25px;
+background:#25D366;
+color:white;
+font-size:18px;
+font-weight:bold;
+box-shadow:0 15px 30px #25D36666;
+animation:pulse 1.8s infinite;
+}
+
+@keyframes pulse{
+50%{
+transform:scale(1.04);
+}
+}
 ```
 
 
