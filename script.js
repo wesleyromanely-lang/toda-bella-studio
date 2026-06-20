@@ -30,16 +30,20 @@ const diasSemana=[
 
 function abrirAgendamento(servico){
 
-servicoEscolhido=servico||"";
+servicoEscolhido=servico || "";
 
 diaEscolhido="";
 horarioEscolhido="";
 dataSelecionada="";
 
+
 document.getElementById("tituloServico").innerHTML =
-servicoEscolhido ?
-"✨ "+servicoEscolhido :
+servicoEscolhido
+?
+"✨ "+servicoEscolhido
+:
 "Escolha o serviço";
+
 
 
 document.getElementById("home")
@@ -48,6 +52,7 @@ document.getElementById("home")
 
 document.getElementById("agenda")
 .classList.remove("escondida");
+
 
 
 dataCalendario=new Date();
@@ -60,15 +65,18 @@ limparHorarios();
 
 
 
+
 function voltar(){
 
 document.getElementById("agenda")
 .classList.add("escondida");
 
+
 document.getElementById("home")
 .classList.remove("escondida");
 
 }
+
 
 
 
@@ -78,9 +86,12 @@ dataCalendario.setMonth(
 dataCalendario.getMonth()+valor
 );
 
+
 criarCalendario();
 
 }
+
+
 
 
 
@@ -94,9 +105,12 @@ area.innerHTML="";
 
 
 let ano=dataCalendario.getFullYear();
+
 let mes=dataCalendario.getMonth();
 
+
 let hoje=new Date();
+
 
 
 let topo=document.createElement("h3");
@@ -117,19 +131,26 @@ ${meses[mes]} ${ano}
 `;
 
 
+
 topo.style.color="white";
+
 topo.style.gridColumn="1 / 8";
+
 
 area.appendChild(topo);
 
 
 
-let primeiroDia=
+
+
+let primeiroDia =
 new Date(ano,mes,1).getDay();
 
 
-let totalDias=
+let totalDias =
 new Date(ano,mes+1,0).getDate();
+
+
 
 
 
@@ -143,18 +164,23 @@ document.createElement("div")
 
 
 
+
+
+
 for(let dia=1;dia<=totalDias;dia++){
 
 
-let data=new Date(
+
+let data =
+new Date(
 ano,
 mes,
 dia
 );
 
 
-let botao=document.createElement("button");
 
+let botao=document.createElement("button");
 
 botao.innerHTML=dia;
 
@@ -169,9 +195,11 @@ hojeLimpo.setHours(0,0,0,0);
 if(data < hojeLimpo){
 
 botao.disabled=true;
+
 botao.classList.add("ocupado");
 
 }
+
 
 
 
@@ -188,10 +216,13 @@ hoje.getMinutes()>30
 )
 ){
 
+
 botao.disabled=true;
+
 
 botao.innerHTML =
 dia+"<br>Encerrado";
+
 
 botao.classList.add("ocupado");
 
@@ -218,14 +249,14 @@ data.getDay()==1
 
 botao.disabled=true;
 
+
 botao.innerHTML =
 dia+"<br>Folga";
 
+
 botao.classList.add("ocupado");
 
-
 }
-
 
 
 
@@ -233,12 +264,18 @@ botao.classList.add("ocupado");
 if(!botao.disabled){
 
 
-botao.onclick=()=>{
+botao.onclick=function(){
+
 
 
 document
 .querySelectorAll(".dias button")
-.forEach(b=>b.classList.remove("selecionado"));
+.forEach(b=>{
+
+b.classList.remove("selecionado");
+
+});
+
 
 
 
@@ -246,41 +283,60 @@ botao.classList.add("selecionado");
 
 
 
+
+
 dataSelecionada =
+
 `${ano}-${String(mes+1).padStart(2,"0")}-${String(dia).padStart(2,"0")}`;
+
+
 
 
 
 diaEscolhido =
 
 diasSemana[data.getDay()]
-+" "
-+dia+
++
+" "
++
+dia
++
 " de "
-+meses[mes];
++
+meses[mes];
+
+
 
 
 
 carregarHorarios();
 
-
 atualizarResumo();
 
 
-}
+
+
+};
 
 
 
 }
+
+
+
 
 
 area.appendChild(botao);
 
 
+
 }
 
 
+
 }
+
+
 
 
 
@@ -288,30 +344,44 @@ area.appendChild(botao);
 async function carregarHorarios(){
 
 
+
 horariosOcupados=[];
+
+
+
+limparHorarios();
+
 
 
 
 let dados =
 await get(
+
 ref(
 db,
 "agendamentos/"+dataSelecionada
 )
+
 );
+
 
 
 
 if(dados.exists()){
 
 
+
 Object.values(dados.val())
 .forEach(item=>{
 
 
+if(item.horario){
+
 horariosOcupados.push(
 item.horario
 );
+
+}
 
 
 });
@@ -321,7 +391,9 @@ item.horario
 
 
 
+
 bloquearHorarios();
+
 
 
 }
@@ -334,6 +406,7 @@ bloquearHorarios();
 
 function limparHorarios(){
 
+
 document
 .querySelectorAll(".horarios button")
 .forEach(botao=>{
@@ -341,7 +414,9 @@ document
 
 botao.disabled=false;
 
+
 botao.classList.remove("ocupado");
+
 
 botao.classList.remove("selecionado");
 
@@ -355,6 +430,8 @@ botao.classList.remove("selecionado");
 
 
 
+
+
 function hora(botao,valor){
 
 
@@ -362,27 +439,38 @@ if(
 horariosOcupados.includes(valor)
 ){
 
+
 alert(
 "Esse horário já está reservado"
 );
+
 
 return;
 
 }
 
 
+
 horarioEscolhido=valor;
+
 
 
 document
 .querySelectorAll(".horarios button")
-.forEach(b=>b.classList.remove("selecionado"));
+.forEach(b=>{
+
+b.classList.remove("selecionado");
+
+});
+
 
 
 botao.classList.add("selecionado");
 
 
+
 atualizarResumo();
+
 
 
 }
@@ -409,16 +497,20 @@ botao.innerText
 
 botao.disabled=true;
 
+
 botao.classList.add("ocupado");
 
 
 }
 
 
+
 });
 
 
+
 }
+
 
 
 
@@ -429,6 +521,7 @@ function atualizarResumo(){
 
 
 document.getElementById("resumo").innerHTML=
+
 
 `
 
@@ -461,7 +554,12 @@ Horário:
 
 `;
 
+
+
 }
+
+
+
 
 
 
@@ -470,12 +568,16 @@ Horário:
 async function whatsapp(){
 
 
-let nome=
+
+let nome =
 document.getElementById("nome").value;
 
 
-let telefone=
+
+let telefone =
 document.getElementById("whatsapp").value;
+
+
 
 
 
@@ -486,13 +588,19 @@ if(
 !horarioEscolhido
 ){
 
+
 alert(
 "Escolha serviço, dia e horário"
 );
 
+
 return;
 
+
 }
+
+
+
 
 
 
@@ -522,13 +630,18 @@ data:dataSelecionada
 
 }
 
+
+
 );
 
 
 
 
 
+
+
 let numero="5511964201177";
+
 
 
 let mensagem=
@@ -553,6 +666,7 @@ ${horarioEscolhido}
 
 
 
+
 window.open(
 
 "https://wa.me/"
@@ -566,7 +680,10 @@ encodeURIComponent(mensagem)
 );
 
 
+
 }
+
+
 
 
 
@@ -582,8 +699,15 @@ window.open(
 };
 
 
+
+
+
 window.abrirAgendamento=abrirAgendamento;
+
 window.voltar=voltar;
+
 window.hora=hora;
+
 window.whatsapp=whatsapp;
+
 window.mudarMes=mudarMes;
