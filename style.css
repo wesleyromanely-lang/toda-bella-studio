@@ -149,6 +149,11 @@ transition:.25s;
 cursor:pointer;
 }
 
+.servico:hover{
+transform:translateY(-8px);
+box-shadow:0 20px 40px #d6339a33;
+}
+
 .servico:active{
 transform:scale(.95);
 }
@@ -286,6 +291,8 @@ transform:translateY(-4px);
 box-shadow:0 12px 25px #d6339a55;
 }
 
+/* HORÁRIOS */
+
 .horarios{
 display:grid;
 grid-template-columns:repeat(2,1fr);
@@ -300,6 +307,29 @@ background:#f7d8e8;
 font-size:18px;
 font-weight:bold;
 box-shadow:0 10px 20px #0001;
+cursor:pointer;
+transition:.25s;
+}
+
+.horarios button:hover{
+transform:translateY(-4px);
+}
+
+.horarios button.selecionado{
+background:#d6339a !important;
+color:white !important;
+border:2px solid #f8b4d9;
+transform:translateY(-4px);
+box-shadow:0 12px 25px #d6339a66;
+}
+
+.horarios button.ocupado{
+background:#dddddd !important;
+color:#888 !important;
+border:none !important;
+transform:none !important;
+box-shadow:none !important;
+cursor:not-allowed !important;
 }
 
 .confirm{
