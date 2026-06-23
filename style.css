@@ -33,14 +33,16 @@ display:flex;
 align-items:center;
 gap:15px;
 margin-bottom:25px;
+padding-bottom:15px;
+border-bottom:1px solid #f2f2f2;
 }
 
 .perfil{
-width:70px;
-height:70px;
+width:75px;
+height:75px;
 border-radius:50%;
 overflow:hidden;
-border:3px solid #f7c8dc;
+border:3px solid #ffd6e5;
 }
 
 .perfil img{
@@ -51,12 +53,14 @@ object-fit:cover;
 
 .header h1{
 font-size:24px;
+font-weight:700;
 color:#222;
 }
 
 .header p{
-color:#777;
+color:#888;
 font-size:14px;
+margin-top:3px;
 }
 
 /* TITULO */
@@ -64,7 +68,7 @@ font-size:14px;
 .titulo-servicos{
 font-size:24px;
 font-weight:700;
-margin-bottom:20px;
+margin-bottom:18px;
 color:#222;
 }
 
@@ -72,42 +76,53 @@ color:#222;
 
 .cards{
 display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
+grid-template-columns:repeat(2,1fr);
+gap:14px;
 margin-bottom:25px;
 }
 
 .servico{
 background:#fff;
-border:1px solid #eeeeee;
-border-radius:14px;
-padding:15px 10px;
+border:1px solid #ededed;
+border-radius:16px;
+padding:16px 12px;
 text-align:center;
 cursor:pointer;
-transition:.2s;
+transition:.25s;
 }
 
 .servico:hover{
-transform:translateY(-3px);
-box-shadow:0 8px 20px rgba(0,0,0,.08);
+transform:translateY(-4px);
+box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
 .icone{
-font-size:28px;
+width:52px;
+height:52px;
+margin:0 auto 12px;
+border-radius:50%;
+background:#ffe6ef;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
 color:#e75480;
-margin-bottom:10px;
 }
 
 .servico h3{
-font-size:13px;
+font-size:14px;
 font-weight:600;
 line-height:1.3;
 margin-bottom:8px;
 color:#333;
+min-height:36px;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 .servico p{
-font-size:16px;
+font-size:17px;
 font-weight:700;
 color:#e75480;
 margin-bottom:10px;
@@ -117,35 +132,35 @@ margin-bottom:10px;
 display:inline-block;
 background:#ffe6ef;
 color:#e75480;
-padding:6px 10px;
+padding:7px 12px;
 border-radius:8px;
-font-size:11px;
+font-size:12px;
 font-weight:700;
 }
 
-/* CARDS SOCIAIS */
+/* REDES SOCIAIS */
 
 .social-card{
 display:flex;
 align-items:center;
 text-decoration:none;
 background:#fff;
-border:1px solid #eeeeee;
-border-radius:14px;
+border:1px solid #ededed;
+border-radius:16px;
 padding:16px;
 margin-bottom:12px;
 color:#333;
-transition:.2s;
+transition:.25s;
 }
 
 .social-card:hover{
-box-shadow:0 8px 20px rgba(0,0,0,.08);
+box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
 .social-icon{
-width:50px;
-height:50px;
-border-radius:12px;
+width:52px;
+height:52px;
+border-radius:50%;
 background:#ffe6ef;
 display:flex;
 align-items:center;
@@ -161,7 +176,7 @@ margin-left:15px;
 
 .social-info h3{
 font-size:16px;
-margin-bottom:3px;
+margin-bottom:4px;
 }
 
 .social-info p{
@@ -170,8 +185,8 @@ color:#777;
 }
 
 .arrow{
+font-size:16px;
 color:#999;
-font-size:18px;
 }
 
 /* ASSINATURA */
@@ -186,9 +201,9 @@ margin-bottom:15px;
 }
 
 .linha{
+width:90px;
 height:1px;
 background:#ddd;
-width:80px;
 }
 
 .coracao{
@@ -200,7 +215,8 @@ font-size:16px;
 text-align:center;
 font-size:13px;
 color:#777;
-padding-bottom:20px;
+padding-bottom:25px;
+line-height:1.7;
 }
 
 .copyright strong{
@@ -221,19 +237,20 @@ background:#ffe6ef;
 color:#e75480;
 border:none;
 padding:12px 18px;
-border-radius:10px;
+border-radius:12px;
 font-weight:700;
 cursor:pointer;
 }
 
 #tituloServico{
-margin-bottom:20px;
+margin-bottom:18px;
+font-size:18px;
 }
 
 .calendario{
 background:#fff;
-border:1px solid #eee;
-border-radius:14px;
+border:1px solid #ededed;
+border-radius:16px;
 padding:20px;
 margin-bottom:20px;
 }
@@ -254,8 +271,8 @@ height:42px;
 border:none;
 border-radius:10px;
 background:#f5f5f5;
-cursor:pointer;
 font-weight:600;
+cursor:pointer;
 }
 
 .dias button.selecionado{
@@ -271,12 +288,12 @@ margin-top:15px;
 }
 
 .horarios button{
-height:50px;
+height:52px;
 border:none;
-border-radius:10px;
+border-radius:12px;
 background:#f5f5f5;
-cursor:pointer;
 font-weight:700;
+cursor:pointer;
 }
 
 .horarios button.selecionado{
@@ -290,26 +307,26 @@ margin-top:25px;
 
 .resumo{
 background:#fff;
-border:1px solid #eee;
-border-radius:14px;
+border:1px solid #ededed;
+border-radius:16px;
 padding:15px;
 margin-bottom:15px;
 }
 
 .confirm input{
 width:100%;
-height:50px;
+height:52px;
 padding:12px;
 border:1px solid #ddd;
-border-radius:10px;
+border-radius:12px;
 margin-bottom:12px;
 }
 
 .whatsapp{
 width:100%;
-height:55px;
+height:58px;
 border:none;
-border-radius:12px;
+border-radius:14px;
 background:#25D366;
 color:white;
 font-size:16px;
