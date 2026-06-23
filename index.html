@@ -31,7 +31,6 @@
 Transforme seu visual hoje
 </div>
 
-
 <div class="banner">
 
 <h2>Olá, seja bem-vinda</h2>
@@ -48,12 +47,9 @@ Agende agora e transforme seu visual
 
 </div>
 
-
 <h2>Serviços</h2>
 
-
 <div class="cards">
-
 
 <div class="servico" onclick="abrirAgendamento('Progressiva - R$120,00')">
 <h3>Progressiva</h3>
@@ -61,13 +57,11 @@ Agende agora e transforme seu visual
 <span>Agende aqui</span>
 </div>
 
-
 <div class="servico" onclick="abrirAgendamento('Botox Capilar - R$99,00')">
 <h3>Botox Capilar</h3>
 <p>R$99,00</p>
 <span>Agende aqui</span>
 </div>
-
 
 <div class="servico" onclick="abrirAgendamento('Cronograma Capilar - R$99,00')">
 <h3>Cronograma Capilar</h3>
@@ -75,13 +69,11 @@ Agende agora e transforme seu visual
 <span>Agende aqui</span>
 </div>
 
-
 <div class="servico" onclick="abrirAgendamento('Escova - R$50,00')">
 <h3>Escova</h3>
 <p>R$50,00</p>
 <span>Agende aqui</span>
 </div>
-
 
 <div class="servico" onclick="abrirAgendamento('Selagem - R$79,99')">
 <h3>Selagem</h3>
@@ -89,20 +81,16 @@ Agende agora e transforme seu visual
 <span>Agende aqui</span>
 </div>
 
-
 <div class="servico" onclick="abrirAgendamento('Tratamento Capilar - R$69,99')">
 <h3>Tratamento Capilar</h3>
 <p>R$69,99</p>
 <span>Agende aqui</span>
 </div>
 
-
 </div>
 
-
-<footer
-class="bottom-nav"
-style="
+<!-- FOOTER CORRIGIDO -->
+<footer class="bottom-nav" style="
 position:relative;
 background:transparent;
 box-shadow:none;
@@ -112,51 +100,32 @@ padding:15px 0 30px 0;
 text-align:center;
 ">
 
-<div style="
-display:flex;
-flex-direction:column;
-gap:8px;
-">
+<!-- LINKS -->
+<div style="display:flex; flex-direction:column; gap:8px;">
 
-<a
-href="https://www.instagram.com/todabellastudio2026"
+<a href="https://www.instagram.com/todabellastudio2026"
 target="_blank"
-style="
-text-decoration:none;
-color:black;
-font-size:14px;
-font-weight:bold;
-">
+style="text-decoration:none; color:black; font-size:14px; font-weight:bold;">
 📷 Siga nosso Instagram @todabellastudio2026 — Clique aqui
 </a>
 
-<a
-href="https://wa.me/5511939160618"
+<a href="https://wa.me/5511939160618"
 target="_blank"
-style="
-text-decoration:none;
-color:black;
-font-size:14px;
-font-weight:bold;
-">
+style="text-decoration:none; color:black; font-size:14px; font-weight:bold;">
 💬 Suporte — Falar no WhatsApp
 </a>
 
 </div>
 
-<!-- ASSINATURA NEXSITE (FORÇADO EM BAIXO) -->
+<!-- ASSINATURA NEXSITE -->
 <div style="
 margin-top:25px;
-width:100%;
-display:block;
 text-align:center;
 font-size:13px;
 color:#777;
 ">
 
-<p style="margin:5px;">
-© 2026 Toda Bella Studio
-</p>
+<p style="margin:5px;">© 2026 Toda Bella Studio</p>
 
 <p style="margin:5px;">
 Site desenvolvido por <strong style="color:#c2185b;">Nexsite</strong>
@@ -166,117 +135,63 @@ Site desenvolvido por <strong style="color:#c2185b;">Nexsite</strong>
 
 </footer>
 
-
 </div>
 
-
-
+<!-- AGENDAMENTO -->
 <div id="agenda" class="tela escondida">
 
-
 <header class="top">
-
 
 <button onclick="voltar()" class="btn-voltar">
 Voltar
 </button>
-
 
 <div>
 <h2>Toda Bella</h2>
 <p>Agendamento</p>
 </div>
 
-
 </header>
 
-
-
-<h3 id="tituloServico">
-Escolha o serviço
-</h3>
-
-
+<h3 id="tituloServico">Escolha o serviço</h3>
 
 <div class="calendario">
-
-
 <h2>Escolha o dia</h2>
-
-
-<div id="dias" class="dias">
+<div id="dias" class="dias"></div>
 </div>
-
-
-</div>
-
-
 
 <h3>Escolha o horário</h3>
 
-
-
 <div class="horarios">
 
-
 <button onclick="hora(this,'09:30')">09:30</button>
-
 <button onclick="hora(this,'10:30')">10:30</button>
-
 <button onclick="hora(this,'11:30')">11:30</button>
-
 <button onclick="hora(this,'13:30')">13:30</button>
-
 <button onclick="hora(this,'14:30')">14:30</button>
-
 <button onclick="hora(this,'15:30')">15:30</button>
-
 <button onclick="hora(this,'16:30')">16:30</button>
 
-
 </div>
-
-
 
 <div class="confirm">
 
-
-<div id="resumo" class="resumo">
-Selecione serviço
-</div>
-
+<div id="resumo" class="resumo">Selecione serviço</div>
 
 <input id="nome" placeholder="Seu nome">
-
-
 <input id="whatsapp" placeholder="WhatsApp">
 
-
-
-<button
-id="btnWhatsapp"
-class="whatsapp"
-onclick="whatsapp()">
-
+<button id="btnWhatsapp" class="whatsapp" onclick="whatsapp()">
 Confirmar pelo WhatsApp
-
 </button>
 
+</div>
 
 </div>
 
-
-
 </div>
-
-
-</div>
-
-
 
 <script type="module" src="script.js"></script>
 
-
 </body>
-
 </html>
