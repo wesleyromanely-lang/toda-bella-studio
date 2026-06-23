@@ -12,132 +12,164 @@
 
 <div class="app">
 
+<!-- HOME -->
 <div id="home" class="tela">
 
-<header class="header">
-
-<div class="perfil">
-<img src="logo-todabella.png" alt="Logo Toda Bella">
-</div>
-
-<div>
-<h1>Toda Bella</h1>
-<p>Studio de Beleza</p>
-</div>
-
-</header>
-
-<div class="busca">
-Transforme seu visual hoje
-</div>
-
-<div class="banner">
-
-<h2>Olá, seja bem-vinda</h2>
-
-<h1>Realce sua beleza</h1>
-
-<p>
-Cuide de você com profissionais especializados
-</p>
-
-<h3>
-Agende agora e transforme seu visual
-</h3>
-
-</div>
-
-<h2>Serviços</h2>
+<h2 class="titulo-servicos">Serviços</h2>
 
 <div class="cards">
 
 <div class="servico" onclick="abrirAgendamento('Progressiva - R$120,00')">
+
+<div class="icone">💇</div>
+
 <h3>Progressiva</h3>
+
 <p>R$120,00</p>
+
 <span>Agende aqui</span>
+
 </div>
 
 <div class="servico" onclick="abrirAgendamento('Botox Capilar - R$99,00')">
+
+<div class="icone">🧴</div>
+
 <h3>Botox Capilar</h3>
+
 <p>R$99,00</p>
+
 <span>Agende aqui</span>
+
 </div>
 
 <div class="servico" onclick="abrirAgendamento('Cronograma Capilar - R$99,00')">
+
+<div class="icone">💧</div>
+
 <h3>Cronograma Capilar</h3>
+
 <p>R$99,00</p>
+
 <span>Agende aqui</span>
+
 </div>
 
 <div class="servico" onclick="abrirAgendamento('Escova - R$50,00')">
+
+<div class="icone">💨</div>
+
 <h3>Escova</h3>
+
 <p>R$50,00</p>
+
 <span>Agende aqui</span>
+
 </div>
 
 <div class="servico" onclick="abrirAgendamento('Selagem - R$79,99')">
+
+<div class="icone">✨</div>
+
 <h3>Selagem</h3>
+
 <p>R$79,99</p>
+
 <span>Agende aqui</span>
+
 </div>
 
 <div class="servico" onclick="abrirAgendamento('Tratamento Capilar - R$69,99')">
+
+<div class="icone">🧪</div>
+
 <h3>Tratamento Capilar</h3>
+
 <p>R$69,99</p>
+
 <span>Agende aqui</span>
-</div>
 
 </div>
 
-<!-- FOOTER CORRIGIDO -->
-<footer class="bottom-nav" style="
-position:relative;
-background:transparent;
-box-shadow:none;
-border:none;
-margin-top:30px;
-padding:15px 0 30px 0;
-text-align:center;
-">
+</div>
 
-<!-- LINKS -->
-<div style="display:flex; flex-direction:column; gap:8px;">
+<!-- INSTAGRAM -->
 
-<a href="https://www.instagram.com/todabellastudio2026"
-target="_blank"
-style="text-decoration:none; color:black; font-size:14px; font-weight:bold;">
-📷 Siga nosso Instagram @todabellastudio2026 — Clique aqui
+<a
+class="social-card"
+href="https://www.instagram.com/todabellastudio2026"
+target="_blank">
+
+<div class="social-icon">
+📷
+</div>
+
+<div class="social-info">
+
+<h3>Instagram</h3>
+
+<p>@todabellastudio2026</p>
+
+</div>
+
+<div class="arrow">
+›
+</div>
+
 </a>
 
-<a href="https://wa.me/5511939160618"
-target="_blank"
-style="text-decoration:none; color:black; font-size:14px; font-weight:bold;">
-💬 Suporte — Falar no WhatsApp
-</a>
+<!-- SUPORTE -->
+
+<a
+class="social-card"
+href="https://wa.me/5511939160618"
+target="_blank">
+
+<div class="social-icon">
+💬
+</div>
+
+<div class="social-info">
+
+<h3>Suporte</h3>
+
+<p>Falar no WhatsApp</p>
 
 </div>
 
-<!-- ASSINATURA NEXSITE -->
-<div style="
-margin-top:25px;
-text-align:center;
-font-size:13px;
-color:#777;
-">
+<div class="arrow">
+›
+</div>
 
-<p style="margin:5px;">© 2026 Toda Bella Studio</p>
+</a>
 
-<p style="margin:5px;">
-Site desenvolvido por <strong style="color:#c2185b;">Nexsite</strong>
+<!-- RODAPÉ -->
+
+<div class="assinatura">
+
+<div class="linha"></div>
+
+<div class="coracao">♥</div>
+
+<div class="linha"></div>
+
+</div>
+
+<div class="copyright">
+
+<p>© 2026 Toda Bella Studio</p>
+
+<p>
+Site desenvolvido por
+<strong>Nexsite</strong>
 </p>
 
 </div>
 
-</footer>
-
 </div>
 
 <!-- AGENDAMENTO -->
+
 <div id="agenda" class="tela escondida">
 
 <header class="top">
@@ -147,17 +179,25 @@ Voltar
 </button>
 
 <div>
+
 <h2>Toda Bella</h2>
+
 <p>Agendamento</p>
+
 </div>
 
 </header>
 
-<h3 id="tituloServico">Escolha o serviço</h3>
+<h3 id="tituloServico">
+Escolha o serviço
+</h3>
 
 <div class="calendario">
+
 <h2>Escolha o dia</h2>
+
 <div id="dias" class="dias"></div>
+
 </div>
 
 <h3>Escolha o horário</h3>
@@ -176,13 +216,23 @@ Voltar
 
 <div class="confirm">
 
-<div id="resumo" class="resumo">Selecione serviço</div>
+<div id="resumo" class="resumo">
+
+Selecione serviço
+
+</div>
 
 <input id="nome" placeholder="Seu nome">
+
 <input id="whatsapp" placeholder="WhatsApp">
 
-<button id="btnWhatsapp" class="whatsapp" onclick="whatsapp()">
+<button
+id="btnWhatsapp"
+class="whatsapp"
+onclick="whatsapp()">
+
 Confirmar pelo WhatsApp
+
 </button>
 
 </div>
