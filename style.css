@@ -18,9 +18,7 @@ min-height:100vh;
 
 .tela{
 width:100%;
-max-width:480px;
-margin:0 auto;
-padding:15px;
+padding:12px;
 }
 
 .escondida{
@@ -33,17 +31,18 @@ display:none;
 display:flex;
 align-items:center;
 gap:15px;
-margin-bottom:25px;
-padding-bottom:15px;
+margin-bottom:15px;
+padding-bottom:12px;
 border-bottom:1px solid #f2f2f2;
 }
 
 .perfil{
-width:75px;
-height:75px;
+width:85px;
+height:85px;
 border-radius:50%;
 overflow:hidden;
 border:3px solid #ffd6e5;
+flex-shrink:0;
 }
 
 .perfil img{
@@ -69,7 +68,7 @@ margin-top:3px;
 .titulo-servicos{
 font-size:24px;
 font-weight:700;
-margin-bottom:18px;
+margin-bottom:15px;
 color:#222;
 }
 
@@ -79,7 +78,7 @@ color:#222;
 display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:12px;
-margin-bottom:25px;
+margin-bottom:20px;
 }
 
 .servico{
@@ -90,10 +89,11 @@ padding:14px 10px;
 text-align:center;
 cursor:pointer;
 transition:.25s;
+box-shadow:0 4px 12px rgba(0,0,0,.04);
 }
 
 .servico:hover{
-transform:translateY(-4px);
+transform:translateY(-3px);
 box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
@@ -152,6 +152,7 @@ padding:16px;
 margin-bottom:12px;
 color:#333;
 transition:.25s;
+box-shadow:0 4px 12px rgba(0,0,0,.04);
 }
 
 .social-card:hover{
