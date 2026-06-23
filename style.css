@@ -1,92 +1,46 @@
 *{
+margin:0;
+padding:0;
 box-sizing:border-box;
 }
 
-html,body{
-margin:0;
-padding:0;
-width:100%;
-min-height:100%;
-font-family:'Segoe UI',Arial,sans-serif;
-background:#f7f2f6;
-}
-
 body{
-overflow-x:hidden;
-animation:abrir .5s ease;
-}
-
-@keyframes abrir{
-from{
-opacity:0;
-transform:scale(.98);
-}
-to{
-opacity:1;
-transform:scale(1);
-}
+font-family:'Segoe UI',sans-serif;
+background:#ffffff;
+color:#333;
 }
 
 .app{
 width:100%;
+max-width:500px;
+margin:auto;
+background:#fff;
+min-height:100vh;
 }
 
 .tela{
-width:100%;
-min-height:100vh;
-background:white;
 padding:20px;
-padding-bottom:100px;
-}
-
-/* ANIMAÇÃO */
-
-.header,
-.busca,
-.banner,
-.cards,
-.top,
-.calendario,
-.confirm{
-opacity:0;
-animation:subir .8s ease forwards;
-}
-
-.header{animation-delay:.1s;}
-.busca{animation-delay:.2s;}
-.banner{animation-delay:.3s;}
-.cards{animation-delay:.5s;}
-.top{animation-delay:.2s;}
-.calendario{animation-delay:.3s;}
-.confirm{animation-delay:.5s;}
-
-@keyframes subir{
-from{
-opacity:0;
-transform:translateY(60px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
 }
 
 .escondida{
 display:none;
 }
 
+/* TOPO */
+
 .header{
 display:flex;
 align-items:center;
-gap:16px;
+gap:15px;
+margin-bottom:25px;
 }
 
 .perfil{
-width:85px;
-height:85px;
+width:70px;
+height:70px;
 border-radius:50%;
 overflow:hidden;
-box-shadow:0 15px 35px #d6339a55;
+border:3px solid #f7c8dc;
 }
 
 .perfil img{
@@ -96,128 +50,164 @@ object-fit:cover;
 }
 
 .header h1{
-margin:0;
-font-size:28px;
+font-size:24px;
+color:#222;
 }
 
 .header p{
-margin:5px 0;
 color:#777;
+font-size:14px;
 }
 
-.busca{
-height:55px;
-border-radius:25px;
-background:#fafafa;
-display:flex;
-align-items:center;
-padding:15px;
-margin:20px 0;
-box-shadow:0 8px 20px #0001;
+/* TITULO */
+
+.titulo-servicos{
+font-size:24px;
+font-weight:700;
+margin-bottom:20px;
+color:#222;
 }
 
-.banner{
-background:#d6339a;
-padding:28px;
-border-radius:30px;
-box-shadow:0 20px 45px #d6339a66;
-}
-
-.banner h1,
-.banner h2,
-.banner p,
-.banner h3{
-color:white;
-}
+/* SERVIÇOS */
 
 .cards{
 display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:16px;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+margin-bottom:25px;
 }
 
 .servico{
-height:170px;
-border-radius:28px;
-background:white;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-box-shadow:0 12px 35px #0002;
-transition:.25s;
+background:#fff;
+border:1px solid #eeeeee;
+border-radius:14px;
+padding:15px 10px;
+text-align:center;
 cursor:pointer;
+transition:.2s;
 }
 
 .servico:hover{
-transform:translateY(-8px);
-box-shadow:0 20px 40px #d6339a33;
+transform:translateY(-3px);
+box-shadow:0 8px 20px rgba(0,0,0,.08);
 }
 
-.servico:active{
-transform:scale(.95);
+.icone{
+font-size:28px;
+color:#e75480;
+margin-bottom:10px;
 }
 
 .servico h3{
-text-align:center;
+font-size:13px;
+font-weight:600;
+line-height:1.3;
+margin-bottom:8px;
+color:#333;
 }
 
 .servico p{
-color:#d6339a;
-font-size:19px;
-font-weight:bold;
+font-size:16px;
+font-weight:700;
+color:#e75480;
+margin-bottom:10px;
 }
 
 .servico span{
-background:#d6339a;
-color:white;
-padding:8px 16px;
-border-radius:20px;
-font-size:13px;
-font-weight:bold;
-}
-
-/* RODAPÉ */
-
-.bottom-nav{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-height:70px;
-background:white;
-display:flex;
-justify-content:center;
-align-items:center;
-box-shadow:0 -8px 20px #00000010;
-border-top:1px solid #eee;
-z-index:100;
-}
-
-.rodape{
-display:flex;
-gap:18px;
-align-items:center;
-}
-
-.link-instagram,
-.link-suporte{
-text-decoration:none;
-color:#222;
-font-size:15px;
+display:inline-block;
+background:#ffe6ef;
+color:#e75480;
+padding:6px 10px;
+border-radius:8px;
+font-size:11px;
 font-weight:700;
 }
 
-.link-instagram:hover,
-.link-suporte:hover{
-color:#d6339a;
+/* CARDS SOCIAIS */
+
+.social-card{
+display:flex;
+align-items:center;
+text-decoration:none;
+background:#fff;
+border:1px solid #eeeeee;
+border-radius:14px;
+padding:16px;
+margin-bottom:12px;
+color:#333;
+transition:.2s;
 }
 
-.rodape span{
-color:#bbb;
+.social-card:hover{
+box-shadow:0 8px 20px rgba(0,0,0,.08);
 }
 
-/* AGENDA */
+.social-icon{
+width:50px;
+height:50px;
+border-radius:12px;
+background:#ffe6ef;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+color:#e75480;
+}
+
+.social-info{
+flex:1;
+margin-left:15px;
+}
+
+.social-info h3{
+font-size:16px;
+margin-bottom:3px;
+}
+
+.social-info p{
+font-size:13px;
+color:#777;
+}
+
+.arrow{
+color:#999;
+font-size:18px;
+}
+
+/* ASSINATURA */
+
+.assinatura{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:12px;
+margin-top:25px;
+margin-bottom:15px;
+}
+
+.linha{
+height:1px;
+background:#ddd;
+width:80px;
+}
+
+.coracao{
+color:#e75480;
+font-size:16px;
+}
+
+.copyright{
+text-align:center;
+font-size:13px;
+color:#777;
+padding-bottom:20px;
+}
+
+.copyright strong{
+color:#e75480;
+}
+
+/* AGENDAMENTO */
 
 .top{
 display:flex;
@@ -227,32 +217,30 @@ margin-bottom:20px;
 }
 
 .btn-voltar{
-height:58px;
-min-width:120px;
-border:0;
-border-radius:22px;
-background:#f7d8e8;
-color:#d6339a;
-font-size:18px;
-font-weight:bold;
+background:#ffe6ef;
+color:#e75480;
+border:none;
+padding:12px 18px;
+border-radius:10px;
+font-weight:700;
+cursor:pointer;
 }
 
 #tituloServico{
-background:#fafafa;
-padding:18px;
-border-radius:20px;
-box-shadow:0 8px 20px #0001;
+margin-bottom:20px;
 }
 
 .calendario{
-background:#d6339a;
+background:#fff;
+border:1px solid #eee;
+border-radius:14px;
 padding:20px;
-border-radius:30px;
-box-shadow:0 20px 40px #d6339a55;
+margin-bottom:20px;
 }
 
 .calendario h2{
-color:white;
+font-size:18px;
+margin-bottom:15px;
 }
 
 .dias{
@@ -262,74 +250,38 @@ gap:8px;
 }
 
 .dias button{
-height:55px;
-border:0;
-border-radius:16px;
-background:white;
-color:#d6339a;
-font-weight:bold;
-transition:.2s;
-}
-
-/* CORREÇÃO DOS DIAS BLOQUEADOS */
-
-.dias button:disabled,
-.ocupado,
-.passado,
-.fechado{
-background:#dddddd !important;
-color:#888 !important;
-box-shadow:none !important;
-cursor:not-allowed;
-opacity:.85;
+height:42px;
+border:none;
+border-radius:10px;
+background:#f5f5f5;
+cursor:pointer;
+font-weight:600;
 }
 
 .dias button.selecionado{
-background:#d6339a !important;
-color:white !important;
-transform:translateY(-4px);
-box-shadow:0 12px 25px #d6339a55;
+background:#e75480;
+color:white;
 }
-
-/* HORÁRIOS */
 
 .horarios{
 display:grid;
 grid-template-columns:repeat(2,1fr);
-gap:15px;
+gap:12px;
+margin-top:15px;
 }
 
 .horarios button{
-height:65px;
-border:0;
-border-radius:22px;
-background:#f7d8e8;
-font-size:18px;
-font-weight:bold;
-box-shadow:0 10px 20px #0001;
+height:50px;
+border:none;
+border-radius:10px;
+background:#f5f5f5;
 cursor:pointer;
-transition:.25s;
-}
-
-.horarios button:hover{
-transform:translateY(-4px);
+font-weight:700;
 }
 
 .horarios button.selecionado{
-background:#d6339a !important;
-color:white !important;
-border:2px solid #f8b4d9;
-transform:translateY(-4px);
-box-shadow:0 12px 25px #d6339a66;
-}
-
-.horarios button.ocupado{
-background:#dddddd !important;
-color:#888 !important;
-border:none !important;
-transform:none !important;
-box-shadow:none !important;
-cursor:not-allowed !important;
+background:#e75480;
+color:white;
 }
 
 .confirm{
@@ -337,38 +289,38 @@ margin-top:25px;
 }
 
 .resumo{
-background:white;
-padding:25px;
-border-radius:30px;
-box-shadow:0 15px 35px #0002;
+background:#fff;
+border:1px solid #eee;
+border-radius:14px;
+padding:15px;
+margin-bottom:15px;
 }
 
 .confirm input{
 width:100%;
-height:58px;
-margin-top:12px;
-border-radius:18px;
+height:50px;
+padding:12px;
 border:1px solid #ddd;
-padding:15px;
-box-shadow:0 8px 20px #00000008;
+border-radius:10px;
+margin-bottom:12px;
 }
 
 .whatsapp{
 width:100%;
-height:65px;
-margin-top:20px;
-border:0;
-border-radius:25px;
+height:55px;
+border:none;
+border-radius:12px;
 background:#25D366;
 color:white;
-font-size:18px;
-font-weight:bold;
-box-shadow:0 15px 30px #25D36666;
-animation:pulse 1.8s infinite;
+font-size:16px;
+font-weight:700;
+cursor:pointer;
 }
 
-@keyframes pulse{
-50%{
-transform:scale(1.04);
+@media(max-width:480px){
+
+.cards{
+grid-template-columns:repeat(2,1fr);
 }
+
 }
