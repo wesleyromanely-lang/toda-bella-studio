@@ -249,17 +249,21 @@ margin-bottom:18px;
 font-size:18px;
 }
 
+/* CALENDÁRIO ROSA RESTAURADO */
+
 .calendario{
-background:#fff;
-border:1px solid #ededed;
-border-radius:16px;
+background:#e75480;
+border:none;
+border-radius:20px;
 padding:20px;
 margin-bottom:20px;
+box-shadow:0 10px 25px rgba(231,84,128,.25);
 }
 
 .calendario h2{
 font-size:18px;
 margin-bottom:15px;
+color:white;
 }
 
 .dias{
@@ -272,13 +276,14 @@ gap:8px;
 height:42px;
 border:none;
 border-radius:10px;
-background:#f5f5f5;
+background:white;
+color:#e75480;
 font-weight:600;
 cursor:pointer;
 }
 
 .dias button.selecionado{
-background:#e75480;
+background:#c2185b;
 color:white;
 }
 
