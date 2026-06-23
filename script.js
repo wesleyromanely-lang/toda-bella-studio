@@ -6,16 +6,13 @@ push,
 get
 } from "./firebase.js";
 
-
 let servicoEscolhido="";
 let diaEscolhido="";
 let horarioEscolhido="";
 let horariosOcupados=[];
 
 let dataSelecionada="";
-
 let dataCalendario=new Date();
-
 
 const meses=[
 "Janeiro","Fevereiro","Março","Abril","Maio","Junho",
@@ -27,106 +24,56 @@ const diasSemana=[
 ];
 
 
-/* ANIMAÇÃO DE ENTRADA */
+/* EFEITO VISUAL SEM INTERFERIR NO SITE */
 
-window.addEventListener("load",()=>{
-
-document.body.animate(
-
-[
-{
-opacity:0,
-transform:"translateY(20px)"
-},
-
-{
-opacity:1,
-transform:"translateY(0)"
-}
-
-],
-
-{
-duration:700,
-easing:"ease-out"
-}
-
-);
-
-
-
-setTimeout(()=>{
+window.addEventListener("DOMContentLoaded",()=>{
 
 let hero=document.querySelector(".hero");
 
 if(hero){
 
-hero.animate(
+hero.style.opacity="0";
 
-[
-{
-opacity:0,
-transform:"translateY(35px)"
-},
+hero.style.transform="translateY(20px)";
 
-{
-opacity:1,
-transform:"translateY(0)"
-}
+setTimeout(()=>{
 
-],
+hero.style.transition=
+"all .8s ease";
 
-{
-duration:900,
-easing:"ease-out"
-}
+hero.style.opacity="1";
 
-);
-
-}
+hero.style.transform=
+"translateY(0)";
 
 },150);
 
-
-
-setTimeout(()=>{
+}
 
 document
 .querySelectorAll(".servico")
 .forEach((card,index)=>{
 
-card.animate(
+card.style.opacity="0";
 
-[
-{
-opacity:0,
-transform:"translateY(25px)"
-},
+card.style.transform=
+"translateY(16px)";
 
-{
-opacity:1,
-transform:"translateY(0)"
-}
+setTimeout(()=>{
 
-],
+card.style.transition=
+"all .6s ease";
 
-{
-duration:700,
-delay:index*90,
-fill:"both",
-easing:"ease-out"
-}
+card.style.opacity="1";
 
-);
+card.style.transform=
+"translateY(0)";
+
+},250+(index*90));
 
 });
 
-},300);
-
-
-
 });
-
 
 
 
@@ -145,10 +92,12 @@ servicoEscolhido
 :
 "Escolha o serviço";
 
-document.getElementById("home")
+document
+.getElementById("home")
 .classList.add("escondida");
 
-document.getElementById("agenda")
+document
+.getElementById("agenda")
 .classList.remove("escondida");
 
 dataCalendario=new Date();
@@ -161,17 +110,17 @@ limparHorarios();
 
 
 
-
 function voltar(){
 
-document.getElementById("agenda")
+document
+.getElementById("agenda")
 .classList.add("escondida");
 
-document.getElementById("home")
+document
+.getElementById("home")
 .classList.remove("escondida");
 
 }
-
 
 
 
@@ -187,20 +136,24 @@ criarCalendario();
 
 
 
-
 function criarCalendario(){
 
-let area=document.getElementById("dias");
+let area=
+document.getElementById("dias");
 
 area.innerHTML="";
 
-let ano=dataCalendario.getFullYear();
+let ano=
+dataCalendario.getFullYear();
 
-let mes=dataCalendario.getMonth();
+let mes=
+dataCalendario.getMonth();
 
-let hoje=new Date();
+let hoje=
+new Date();
 
-let topo=document.createElement("h3");
+let topo=
+document.createElement("h3");
 
 topo.innerHTML=
 
@@ -222,10 +175,10 @@ topo.style.gridColumn="1 / 8";
 
 area.appendChild(topo);
 
-let primeiroDia =
+let primeiroDia=
 new Date(ano,mes,1).getDay();
 
-let totalDias =
+let totalDias=
 new Date(ano,mes+1,0).getDate();
 
 for(let i=0;i<primeiroDia;i++){
@@ -238,54 +191,32 @@ document.createElement("div")
 
 for(let dia=1;dia<=totalDias;dia++){
 
-let data =
+let data=
 new Date(
 ano,
 mes,
 dia
 );
 
-let botao=document.createElement("button");
+let botao=
+document.createElement("button");
 
 botao.innerHTML=dia;
 
-let hojeLimpo=new Date();
+let hojeLimpo=
+new Date();
 
-hojeLimpo.setHours(0,0,0,0);
+hojeLimpo.setHours(
+0,0,0,0
+);
 
-if(data < hojeLimpo){
-
-botao.disabled=true;
-
-botao.classList.add("ocupado");
-
-}
-
-if(
-data.toDateString()==hoje.toDateString()
-){
-
-if(
-hoje.getHours()>16 ||
-(
-hoje.getHours()==16 &&
-hoje.getMinutes()>30
-)
-){
+if(data<hojeLimpo){
 
 botao.disabled=true;
 
-botao.innerHTML =
-dia+"<br>Encerrado";
-
-botao.classList.add("ocupado");
-
-}else{
-
-botao.innerHTML =
-dia+"<br>Hoje";
-
-}
+botao.classList.add(
+"ocupado"
+);
 
 }
 
@@ -296,10 +227,12 @@ data.getDay()==1
 
 botao.disabled=true;
 
-botao.innerHTML =
+botao.innerHTML=
 dia+"<br>Folga";
 
-botao.classList.add("ocupado");
+botao.classList.add(
+"ocupado"
+);
 
 }
 
@@ -308,22 +241,30 @@ if(!botao.disabled){
 botao.onclick=function(){
 
 document
-.querySelectorAll(".dias button")
+.querySelectorAll(
+".dias button"
+)
 .forEach(b=>{
 
-b.classList.remove("selecionado");
+b.classList.remove(
+"selecionado"
+);
 
 });
 
-botao.classList.add("selecionado");
+botao.classList.add(
+"selecionado"
+);
 
-dataSelecionada =
+dataSelecionada=
 
 `${ano}-${String(mes+1).padStart(2,"0")}-${String(dia).padStart(2,"0")}`;
 
-diaEscolhido =
+diaEscolhido=
 
-diasSemana[data.getDay()]
+diasSemana[
+data.getDay()
+]
 +
 " "
 +
@@ -341,12 +282,13 @@ atualizarResumo();
 
 }
 
-area.appendChild(botao);
+area.appendChild(
+botao
+);
 
 }
 
 }
-
 
 
 
@@ -356,7 +298,7 @@ horariosOcupados=[];
 
 limparHorarios();
 
-let dados =
+let dados=
 await get(
 
 ref(
@@ -368,7 +310,11 @@ db,
 
 if(dados.exists()){
 
-Object.values(dados.val())
+Object
+.values(
+dados.val()
+)
+
 .forEach(item=>{
 
 if(item.horario){
@@ -392,14 +338,21 @@ bloquearHorarios();
 function limparHorarios(){
 
 document
-.querySelectorAll(".horarios button")
+.querySelectorAll(
+".horarios button"
+)
+
 .forEach(botao=>{
 
 botao.disabled=false;
 
-botao.classList.remove("ocupado");
+botao.classList.remove(
+"ocupado"
+);
 
-botao.classList.remove("selecionado");
+botao.classList.remove(
+"selecionado"
+);
 
 });
 
@@ -407,10 +360,15 @@ botao.classList.remove("selecionado");
 
 
 
-function hora(botao,valor){
+function hora(
+botao,
+valor
+){
 
 if(
-horariosOcupados.includes(valor)
+horariosOcupados.includes(
+valor
+)
 ){
 
 alert(
@@ -421,17 +379,25 @@ return;
 
 }
 
-horarioEscolhido=valor;
+horarioEscolhido=
+valor;
 
 document
-.querySelectorAll(".horarios button")
+.querySelectorAll(
+".horarios button"
+)
+
 .forEach(b=>{
 
-b.classList.remove("selecionado");
+b.classList.remove(
+"selecionado"
+);
 
 });
 
-botao.classList.add("selecionado");
+botao.classList.add(
+"selecionado"
+);
 
 atualizarResumo();
 
@@ -442,18 +408,25 @@ atualizarResumo();
 function bloquearHorarios(){
 
 document
-.querySelectorAll(".horarios button")
+.querySelectorAll(
+".horarios button"
+)
+
 .forEach(botao=>{
 
 if(
+
 horariosOcupados.includes(
 botao.innerText
 )
+
 ){
 
 botao.disabled=true;
 
-botao.classList.add("ocupado");
+botao.classList.add(
+"ocupado"
+);
 
 }
 
@@ -465,7 +438,12 @@ botao.classList.add("ocupado");
 
 function atualizarResumo(){
 
-document.getElementById("resumo").innerHTML=
+document
+.getElementById(
+"resumo"
+)
+
+.innerHTML=
 
 `
 Serviço:
@@ -497,11 +475,17 @@ Horário:
 
 async function whatsapp(){
 
-let nome =
-document.getElementById("nome").value;
+let nome=
+document
+.getElementById(
+"nome"
+).value;
 
-let telefone =
-document.getElementById("whatsapp").value;
+let telefone=
+document
+.getElementById(
+"whatsapp"
+).value;
 
 if(
 !servicoEscolhido ||
@@ -527,22 +511,26 @@ db,
 {
 
 nome,
-
 telefone,
 
-servico:servicoEscolhido,
+servico:
+servicoEscolhido,
 
-dia:diaEscolhido,
+dia:
+diaEscolhido,
 
-horario:horarioEscolhido,
+horario:
+horarioEscolhido,
 
-data:dataSelecionada
+data:
+dataSelecionada
 
 }
 
 );
 
-let numero="5511964201177";
+let numero=
+"5511964201177";
 
 let mensagem=
 
@@ -572,11 +560,15 @@ numero
 +
 "?text="
 +
-encodeURIComponent(mensagem)
+encodeURIComponent(
+mensagem
+)
 
 );
 
 }
+
+
 
 window.instagram=function(){
 
@@ -587,15 +579,20 @@ window.open(
 
 };
 
-window.abrirAgendamento=abrirAgendamento;
+window.abrirAgendamento=
+abrirAgendamento;
 
-window.voltar=voltar;
+window.voltar=
+voltar;
 
-window.hora=hora;
+window.hora=
+hora;
 
-window.whatsapp=whatsapp;
+window.whatsapp=
+whatsapp;
 
-window.mudarMes=mudarMes;
+window.mudarMes=
+mudarMes;
 ```
 
 
