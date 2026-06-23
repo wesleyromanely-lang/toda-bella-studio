@@ -425,5 +425,84 @@ font-weight:700;
 cursor:pointer;
 }
 ```
+/* EFEITO DE ENTRADA */
 
+.header{
+animation:entradaTopo .8s ease;
+}
+
+.hero{
+animation:entradaHero 1s ease;
+}
+
+.cards .servico{
+opacity:0;
+animation:entradaCards .8s ease forwards;
+}
+
+.cards .servico:nth-child(1){
+animation-delay:.15s;
+}
+
+.cards .servico:nth-child(2){
+animation-delay:.30s;
+}
+
+.cards .servico:nth-child(3){
+animation-delay:.45s;
+}
+
+.cards .servico:nth-child(4){
+animation-delay:.60s;
+}
+
+.cards .servico:nth-child(5){
+animation-delay:.75s;
+}
+
+.cards .servico:nth-child(6){
+animation-delay:.90s;
+}
+
+@keyframes entradaTopo{
+
+from{
+opacity:0;
+transform:translateY(-20px);
+}
+
+to{
+opacity:1;
+transform:none;
+}
+
+}
+
+@keyframes entradaHero{
+
+from{
+opacity:0;
+transform:scale(.96);
+}
+
+to{
+opacity:1;
+transform:scale(1);
+}
+
+}
+
+@keyframes entradaCards{
+
+from{
+opacity:0;
+transform:translateY(25px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
 
