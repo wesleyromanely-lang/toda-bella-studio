@@ -32,46 +32,51 @@ form.addEventListener("submit", async (e) => {
 
     let encontrado = false;
 
-    for (const chave in dados) {
+    for (const data in dados) {
 
-      const agendamento = dados[chave];
+      const agendamentosDoDia = dados[data];
 
-      if (
-        agendamento.nome.trim().toLowerCase() === nome.toLowerCase()
-        &&
-        agendamento.telefone.trim() === telefone
-      ) {
+      for (const chave in agendamentosDoDia) {
 
-        const dataFormatada =
-          agendamento.data.split("-").reverse().join("/");
+        const agendamento = agendamentosDoDia[chave];
 
-        await remove(
-          ref(db, `agendamentos/${chave}`)
-        );
+        if (
+          agendamento.nome?.trim().toLowerCase() === nome.toLowerCase()
+          &&
+          agendamento.telefone?.trim() === telefone
+        ) {
 
-        const mensagem = `CANCELAMENTO - TODA BELLA STUDIO
+          await remove(
+            ref(db, `agendamentos/${data}/${chave}`)
+          );
+
+          const mensagem = `CANCELAMENTO - TODA BELLA STUDIO
 
 Nome: ${agendamento.nome}
 Telefone: ${agendamento.telefone}
 Serviço: ${agendamento.servico}
 
-Data: ${dataFormatada}
+Data: ${agendamento.data}
 Horário: ${agendamento.horario}
 
 O agendamento foi cancelado pelo site.`;
 
-        const whatsapp =
-          `https://wa.me/5511964201177?text=${encodeURIComponent(mensagem)}`;
+          const whatsapp =
+            `https://wa.me/5511964201177?text=${encodeURIComponent(mensagem)}`;
 
-        alert("Agendamento cancelado com sucesso!");
+          alert("Agendamento cancelado com sucesso!");
 
-        window.location.href = whatsapp;
+          window.location.href = whatsapp;
 
-        encontrado = true;
+          encontrado = true;
 
-        break;
+          break;
+
+        }
 
       }
+
+      if (encontrado) break;
 
     }
 
