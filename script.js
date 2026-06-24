@@ -667,8 +667,11 @@ ${horarioEscolhido}
 
 
 
-window.open(
+alert(
+"✅ Agendamento realizado com sucesso!\n\nVocê será redirecionado para o WhatsApp para finalizar a confirmação."
+);
 
+window.open(
 "https://wa.me/"
 +
 numero
@@ -676,7 +679,6 @@ numero
 "?text="
 +
 encodeURIComponent(mensagem)
-
 );
 
 
