@@ -64,7 +64,9 @@ O agendamento foi cancelado pelo site.`;
           const whatsapp =
             `https://wa.me/5511964201177?text=${encodeURIComponent(mensagem)}`;
 
-          alert("Agendamento cancelado com sucesso!");
+         alert(
+"✅ Agendamento cancelado com sucesso!\n\nO horário foi liberado novamente na agenda."
+);
 
           window.location.href = whatsapp;
 
