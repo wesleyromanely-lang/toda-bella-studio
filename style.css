@@ -453,3 +453,12 @@ color:white;
 font-weight:700;
 cursor:pointer;
 }
+/* DIA ATUAL */
+
+.dias button.hoje{
+background:#fff5fa;
+border:2px solid #ffffff;
+color:#c2185b;
+font-weight:700;
+box-shadow:0 0 15px rgba(255,255,255,.4);
+}
