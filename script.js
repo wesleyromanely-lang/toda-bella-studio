@@ -354,41 +354,33 @@ Horário: <br> <b>${horarioEscolhido}</b>
 
 async function whatsapp(){
 
-let nome=
+const nome =
 document
 .getElementById("nome")
 .value
 .trim();
 
-let telefone=
+const telefone =
 document
 .getElementById("whatsapp")
 .value
 .trim();
 
-if(nome===""){
+if(nome.length===0){
 
 alert(
-"Preencha seu nome para agendar."
+"Preencha seu nome para continuar."
 );
-
-document
-.getElementById("nome")
-.focus();
 
 return;
 
 }
 
-if(telefone===""){
+if(telefone.length===0){
 
 alert(
-"Preencha seu WhatsApp para agendar."
+"Preencha seu WhatsApp para continuar."
 );
-
-document
-.getElementById("whatsapp")
-.focus();
 
 return;
 
@@ -456,7 +448,6 @@ ${diaEscolhido}
 
 Horário:
 ${horarioEscolhido}
-
 `;
 
 mostrarPopup(
@@ -473,13 +464,16 @@ numero
 +
 "?text="
 +
-encodeURIComponent(mensagem)
+encodeURIComponent(mensagem),
+
+"_blank"
 
 );
 
 },1500);
 
 }
+
 
 window.instagram=function(){
 
