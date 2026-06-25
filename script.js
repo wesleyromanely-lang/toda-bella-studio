@@ -664,13 +664,6 @@ Horário:
 ${horarioEscolhido}
 `;
 
-
-
-
-alert(
-"✅ Agendamento realizado com sucesso!\n\nVocê será redirecionado para o WhatsApp para finalizar a confirmação."
-);
-
 mostrarPopup(
 "Seu agendamento foi realizado com sucesso! 🎉<br><br>Você será direcionado para o WhatsApp."
 );
