@@ -476,26 +476,36 @@ opacity:.95;
 /* CABEÇALHO DO MÊS */
 
 .dias h3{
-display:flex;
-align-items:center;
-justify-content:space-between;
+position:relative;
 grid-column:1/8;
-margin-bottom:10px;
+text-align:center;
+margin-bottom:15px;
 font-size:24px;
 font-weight:700;
 color:white;
+padding:0 50px;
+line-height:1.5;
 }
 
 .dias h3 button{
-width:42px;
-height:42px;
+position:absolute;
+top:0;
+width:40px;
+height:40px;
 border:none;
 border-radius:50%;
 background:rgba(255,255,255,.18);
 color:white;
 font-size:20px;
 cursor:pointer;
-transition:.3s;
+}
+
+.dias h3 button:first-child{
+left:0;
+}
+
+.dias h3 button:last-child{
+right:0;
 }
 
 .dias h3 button:hover{
