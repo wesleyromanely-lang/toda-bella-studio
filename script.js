@@ -713,4 +713,17 @@ window.hora=hora;
 window.whatsapp=whatsapp;
 
 window.mudarMes=mudarMes;
+window.mostrarPopup = function(texto){
+
+document.getElementById("popupTexto").innerHTML = texto;
+
+document.getElementById("popupSucesso").style.display = "flex";
+
+}
+
+window.fecharPopup = function(){
+
+document.getElementById("popupSucesso").style.display = "none";
+
+}
 
