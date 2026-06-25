@@ -671,7 +671,14 @@ alert(
 "✅ Agendamento realizado com sucesso!\n\nVocê será redirecionado para o WhatsApp para finalizar a confirmação."
 );
 
+mostrarPopup(
+"Seu agendamento foi realizado com sucesso! 🎉<br><br>Você será direcionado para o WhatsApp."
+);
+
+setTimeout(()=>{
+
 window.open(
+
 "https://wa.me/"
 +
 numero
@@ -679,7 +686,10 @@ numero
 "?text="
 +
 encodeURIComponent(mensagem)
+
 );
+
+},1500);
 
 
 
