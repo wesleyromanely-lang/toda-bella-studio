@@ -34,66 +34,522 @@ display:none;
 .header{
 display:flex;
 align-items:center;
-gap:10px;
-margin-bottom:10px;
-padding-bottom:10px;
+gap:15px;
+margin-bottom:20px;
+padding-bottom:15px;
 border-bottom:1px solid #eee;
 }
 
 .perfil{
-width:120px;
-height:120px;
+width:80px;
+height:80px;
 border-radius:50%;
 overflow:hidden;
-border:5px solid #ffd9e7;
+border:3px solid #ffd9e7;
 flex-shrink:0;
-
-box-shadow:
-0 10px 30px rgba(231,84,128,.25);
-
-margin-left:-5px;
 }
 
 .perfil img{
 width:100%;
 height:100%;
 object-fit:cover;
-
-transform:scale(1.12);
 }
 
 .header h1{
-font-size:34px;
-font-weight:800;
+font-size:26px;
+font-weight:700;
 color:#222;
-line-height:1;
-margin-bottom:6px;
-}
-
-.header p{
-font-size:16px;
-color:#888;
-}
-
-@media(max-width:600px){
-
-.header{
-gap:10px;
-margin-bottom:12px;
-}
-
-.perfil{
-width:105px;
-height:105px;
-}
-
-.header h1{
-font-size:28px;
 }
 
 .header p{
 font-size:14px;
+color:#888;
+}
+
+/* HERO */
+
+.hero{
+background:linear-gradient(135deg,#e75480,#c97b95);
+padding:25px;
+border-radius:20px;
+margin-bottom:20px;
+color:white;
+box-shadow:0 10px 25px rgba(231,84,128,.25);
+}
+
+.hero h2{
+font-size:18px;
+margin-bottom:5px;
+}
+
+.hero h3{
+font-size:28px;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:14px;
+line-height:1.5;
+opacity:.95;
+}
+
+.hero-text{
+margin-top:15px;
+display:inline-block;
+background:white;
+color:#e75480;
+padding:10px 18px;
+border-radius:30px;
+font-weight:700;
+}
+
+/* TITULO */
+
+.titulo-servicos{
+font-size:24px;
+font-weight:700;
+margin-bottom:15px;
+}
+
+/* SERVIÇOS */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+margin-bottom:20px;
+}
+
+.servico{
+background:white;
+border:1px solid #eee;
+border-radius:18px;
+padding:15px;
+text-align:center;
+cursor:pointer;
+transition:.25s;
+box-shadow:0 4px 10px rgba(0,0,0,.04);
+}
+
+.servico:hover{
+transform:translateY(-3px);
+}
+
+.icone{
+width:55px;
+height:55px;
+border-radius:50%;
+background:#ffe4ee;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:auto;
+margin-bottom:12px;
+font-size:22px;
+color:#e75480;
+}
+
+.servico h3{
+font-size:14px;
+min-height:36px;
+display:flex;
+align-items:center;
+justify-content:center;
+margin-bottom:8px;
+}
+
+.servico p{
+font-size:18px;
+font-weight:700;
+color:#e75480;
+margin-bottom:10px;
+}
+
+.servico span{
+display:inline-block;
+padding:8px 12px;
+background:#ffe4ee;
+color:#e75480;
+border-radius:10px;
+font-size:12px;
+font-weight:700;
+}
+
+/* REDES */
+
+.social-card{
+display:flex;
+align-items:center;
+text-decoration:none;
+background:white;
+border:1px solid #eee;
+border-radius:18px;
+padding:15px;
+margin-bottom:12px;
+color:#333;
+box-shadow:0 4px 10px rgba(0,0,0,.04);
+}
+
+.social-icon{
+width:50px;
+height:50px;
+border-radius:50%;
+background:#ffe4ee;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+color:#e75480;
+}
+
+.social-info{
+flex:1;
+margin-left:15px;
+}
+
+.social-info h3{
+font-size:16px;
+margin-bottom:4px;
+}
+
+.social-info p{
+font-size:13px;
+color:#777;
+}
+
+.arrow{
+color:#999;
+}
+
+/* ASSINATURA */
+
+.assinatura{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:12px;
+margin-top:25px;
+margin-bottom:15px;
+}
+
+.linha{
+width:90px;
+height:1px;
+background:#ddd;
+}
+
+.coracao{
+color:#e75480;
+}
+
+.copyright{
+text-align:center;
+font-size:13px;
+color:#777;
+padding-bottom:20px;
+line-height:1.7;
+}
+
+.copyright strong{
+color:#e75480;
+}
+
+/* AGENDAMENTO */
+
+.top{
+display:flex;
+align-items:center;
+gap:15px;
+margin-bottom:20px;
+}
+
+.btn-voltar{
+background:#ffe4ee;
+color:#e75480;
+border:none;
+padding:12px 18px;
+border-radius:12px;
+font-weight:700;
+cursor:pointer;
+}
+
+#tituloServico{
+margin-bottom:15px;
+font-size:18px;
+}
+
+.calendario{
+background:#e75480;
+padding:20px;
+border-radius:18px;
+margin-bottom:20px;
+color:white;
+}
+
+.calendario h2{
+margin-bottom:15px;
+}
+
+.dias{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:8px;
+}
+
+.dias button{
+height:42px;
+border:none;
+border-radius:10px;
+background:white;
+color:#e75480;
+font-weight:700;
+cursor:pointer;
+}
+
+.dias button.selecionado{
+background:#c2185b;
+color:white;
+}
+
+.dias button.ocupado{
+background:#ddd;
+color:#888;
+cursor:not-allowed;
+}
+
+.horarios{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+margin-top:15px;
+}
+
+.horarios button{
+height:52px;
+border:none;
+border-radius:12px;
+background:#f3f3f3;
+font-weight:700;
+cursor:pointer;
+}
+
+.horarios button.selecionado{
+background:#e75480;
+color:white;
+}
+
+.horarios button.ocupado{
+background:#ddd;
+color:#888;
+cursor:not-allowed;
+}
+
+.confirm{
+margin-top:20px;
+}
+
+.resumo{
+background:white;
+border:1px solid #eee;
+padding:15px;
+border-radius:16px;
+margin-bottom:15px;
+}
+
+.confirm input{
+width:100%;
+height:52px;
+border:1px solid #ddd;
+border-radius:12px;
+padding:12px;
+margin-bottom:12px;
+}
+
+.whatsapp{
+width:100%;
+height:58px;
+border:none;
+border-radius:14px;
+background:#25D366;
+color:white;
+font-size:16px;
+font-weight:700;
+cursor:pointer;
+}
+
+/* CANCELAR */
+
+.btn-cancelar{
+display:block;
+width:100%;
+text-align:center;
+margin-top:12px;
+padding:16px;
+background:#dc3545;
+color:white;
+text-decoration:none;
+border-radius:14px;
+font-weight:700;
+}
+
+/* POPUP */
+
+.popup-sucesso{
+position:fixed;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:rgba(0,0,0,.45);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:9999;
+padding:20px;
+}
+
+.popup-card{
+background:white;
+width:100%;
+max-width:350px;
+border-radius:20px;
+padding:30px;
+text-align:center;
+box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
+
+.popup-icon{
+width:80px;
+height:80px;
+margin:auto;
+margin-bottom:20px;
+border-radius:50%;
+background:#25D366;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:38px;
+font-weight:bold;
+color:white;
+}
+
+.popup-card h2{
+margin-bottom:10px;
+}
+
+.popup-card p{
+line-height:1.6;
+color:#666;
+margin-bottom:20px;
+}
+
+.popup-card button{
+width:100%;
+height:50px;
+border:none;
+border-radius:12px;
+background:#e75480;
+color:white;
+font-weight:700;
+cursor:pointer;
+}
+/* DIA ATUAL */
+
+.dias button.hoje{
+background:#fff5fa;
+border:2px solid #ffffff;
+color:#c2185b;
+font-weight:700;
+box-shadow:0 0 15px rgba(255,255,255,.4);
+}
+/* DIAS DA SEMANA */
+
+.dia-semana{
+text-align:center;
+font-size:13px;
+font-weight:700;
+color:white;
+padding:8px 0;
+opacity:.95;
+}
+
+/* CABEÇALHO DO MÊS */
+
+.dias h3{
+position:relative;
+grid-column:1/8;
+text-align:center;
+margin-bottom:15px;
+font-size:24px;
+font-weight:700;
+color:white;
+padding:0 50px;
+line-height:1.5;
+}
+
+.dias h3 button{
+position:absolute;
+top:0;
+width:40px;
+height:40px;
+border:none;
+border-radius:50%;
+background:rgba(255,255,255,.18);
+color:white;
+font-size:20px;
+cursor:pointer;
+}
+
+.dias h3 button:first-child{
+left:0;
+}
+
+.dias h3 button:last-child{
+right:0;
+}
+
+.dias h3 button:hover{
+transform:scale(1.08);
+background:rgba(255,255,255,.28);
+}
+.mes-nav{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:15px;
+width:100%;
+}
+
+.mes-titulo{
+flex:1;
+text-align:center;
+font-size:34px;
+font-weight:800;
+}
+
+.seta-cal{
+width:48px;
+height:48px;
+border:none;
+border-radius:50%;
+background:rgba(255,255,255,.20);
+color:white;
+font-size:24px;
+font-weight:700;
+cursor:pointer;
+flex-shrink:0;
+}
+
+@media(max-width:600px){
+
+.mes-titulo{
+font-size:22px;
+}
+
+.seta-cal{
+width:42px;
+height:42px;
+font-size:20px;
 }
 
 }
-
