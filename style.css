@@ -553,3 +553,72 @@ font-size:20px;
 }
 
 }
+/* CANCELAMENTO */
+
+.container{
+max-width:500px;
+margin:40px auto;
+padding:20px;
+}
+
+.card{
+background:#fff;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.card h2{
+text-align:center;
+margin-bottom:25px;
+color:#e75480;
+font-size:28px;
+}
+
+.card label{
+display:block;
+margin-bottom:8px;
+font-weight:600;
+}
+
+.card input{
+width:100%;
+height:55px;
+padding:15px;
+border:1px solid #ddd;
+border-radius:14px;
+margin-bottom:15px;
+font-size:16px;
+}
+
+.btn{
+width:100%;
+height:58px;
+border:none;
+border-radius:14px;
+background:#dc3545;
+color:white;
+font-size:16px;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
+}
+
+.btn:hover{
+transform:translateY(-2px);
+}
+
+header{
+text-align:center;
+padding:20px;
+}
+
+header h1{
+font-size:32px;
+color:#222;
+}
+
+header p{
+color:#777;
+margin-top:5px;
+}
