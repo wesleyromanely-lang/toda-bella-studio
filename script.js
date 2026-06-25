@@ -138,7 +138,27 @@ topo.style.gridColumn="1 / 8";
 
 
 area.appendChild(topo);
+const semana = [
+"Dom",
+"Seg",
+"Ter",
+"Qua",
+"Qui",
+"Sex",
+"Sáb"
+];
 
+semana.forEach(dia=>{
+
+const item=document.createElement("div");
+
+item.className="dia-semana";
+
+item.innerHTML=dia;
+
+area.appendChild(item);
+
+});
 
 
 
