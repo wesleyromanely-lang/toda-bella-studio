@@ -116,16 +116,22 @@ let hoje=new Date();
 let topo=document.createElement("h3");
 
 
-topo.innerHTML=
+topo.innerHTML = `
+<div class="mes-nav">
 
-`
-<button onclick="mudarMes(-1)">←</button>
+<button class="seta-cal" onclick="mudarMes(-1)">
+←
+</button>
 
+<span class="mes-titulo">
 ${meses[mes]} ${ano}
+</span>
 
-<button onclick="mudarMes(1)">→</button>
+<button class="seta-cal" onclick="mudarMes(1)">
+→
+</button>
 
-<br>
+</div>
 
 <small>Atendimento: Terça a Sábado</small>
 `;
