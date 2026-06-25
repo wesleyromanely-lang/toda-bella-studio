@@ -11,7 +11,6 @@ let horarioEscolhido="";
 let horariosOcupados=[];
 
 let dataSelecionada="";
-
 let dataCalendario=new Date();
 
 const meses=[
@@ -26,12 +25,14 @@ const diasSemana=[
 function abrirAgendamento(servico){
 
 servicoEscolhido=servico || "";
-
 diaEscolhido="";
 horarioEscolhido="";
 dataSelecionada="";
 
-document.getElementById("tituloServico").innerHTML =
+document.getElementById("nome").value="";
+document.getElementById("whatsapp").value="";
+
+document.getElementById("tituloServico").innerHTML=
 servicoEscolhido
 ?
 "✨ "+servicoEscolhido
@@ -49,6 +50,8 @@ dataCalendario=new Date();
 criarCalendario();
 
 limparHorarios();
+
+atualizarResumo();
 
 }
 
@@ -86,7 +89,7 @@ let hoje=new Date();
 
 let topo=document.createElement("h3");
 
-topo.innerHTML = `
+topo.innerHTML=`
 
 <div class="mes-nav">
 
@@ -105,15 +108,15 @@ ${meses[mes]} ${ano}
 </div>
 
 <small>Atendimento: Terça a Sábado</small>
+
 `;
 
 topo.style.color="white";
-
 topo.style.gridColumn="1 / 8";
 
 area.appendChild(topo);
 
-const semana = [
+const semana=[
 "Dom",
 "Seg",
 "Ter",
@@ -135,10 +138,10 @@ area.appendChild(item);
 
 });
 
-let primeiroDia =
+let primeiroDia=
 new Date(ano,mes,1).getDay();
 
-let totalDias =
+let totalDias=
 new Date(ano,mes+1,0).getDate();
 
 for(let i=0;i<primeiroDia;i++){
@@ -151,7 +154,7 @@ document.createElement("div")
 
 for(let dia=1;dia<=totalDias;dia++){
 
-let data =
+let data=
 new Date(
 ano,
 mes,
@@ -166,41 +169,11 @@ let hojeLimpo=new Date();
 
 hojeLimpo.setHours(0,0,0,0);
 
-if(data < hojeLimpo){
+if(data<hojeLimpo){
 
 botao.disabled=true;
 
 botao.classList.add("ocupado");
-
-}
-
-if(
-data.toDateString()==hoje.toDateString()
-){
-
-if(
-hoje.getHours()>16 ||
-(
-hoje.getHours()==16 &&
-hoje.getMinutes()>30
-)
-){
-
-botao.disabled=true;
-
-botao.innerHTML =
-dia+"<br>Encerrado";
-
-botao.classList.add("ocupado");
-
-}else{
-
-botao.innerHTML =
-dia+"<br>Hoje";
-
-botao.classList.add("hoje");
-
-}
 
 }
 
@@ -211,10 +184,10 @@ data.getDay()==1
 
 botao.disabled=true;
 
-botao.innerHTML =
-dia+"<br>Folga";
-
 botao.classList.add("ocupado");
+
+botao.innerHTML=
+dia+"<br>Folga";
 
 }
 
@@ -232,18 +205,14 @@ b.classList.remove("selecionado");
 
 botao.classList.add("selecionado");
 
-dataSelecionada =
+dataSelecionada=
 `${ano}-${String(mes+1).padStart(2,"0")}-${String(dia).padStart(2,"0")}`;
 
-diaEscolhido =
+diaEscolhido=
 diasSemana[data.getDay()]
-+
-" "
-+
-dia
-+
-" de "
-+
++" "+
+dia+
+" de "+
 meses[mes];
 
 carregarHorarios();
@@ -266,7 +235,7 @@ horariosOcupados=[];
 
 limparHorarios();
 
-let dados =
+let dados=
 await get(
 ref(
 db,
@@ -368,27 +337,16 @@ function atualizarResumo(){
 document.getElementById("resumo").innerHTML=
 
 `
-Serviço:
 
-<br>
-
-<b>${servicoEscolhido}</b>
+Serviço: <br> <b>${servicoEscolhido}</b>
 
 <br><br>
 
-Dia:
-
-<br>
-
-<b>${diaEscolhido}</b>
+Dia: <br> <b>${diaEscolhido}</b>
 
 <br><br>
 
-Horário:
-
-<br>
-
-<b>${horarioEscolhido}</b>
+Horário: <br> <b>${horarioEscolhido}</b>
 
 `;
 
@@ -396,35 +354,41 @@ Horário:
 
 async function whatsapp(){
 
-let nome =
-document.getElementById("nome")
+let nome=
+document
+.getElementById("nome")
 .value
 .trim();
 
-let telefone =
-document.getElementById("whatsapp")
+let telefone=
+document
+.getElementById("whatsapp")
 .value
 .trim();
 
-if(!nome){
+if(nome===""){
 
 alert(
-"Digite seu nome para continuar."
+"Preencha seu nome para agendar."
 );
 
-document.getElementById("nome").focus();
+document
+.getElementById("nome")
+.focus();
 
 return;
 
 }
 
-if(!telefone){
+if(telefone===""){
 
 alert(
-"Digite seu WhatsApp para continuar."
+"Preencha seu WhatsApp para agendar."
 );
 
-document.getElementById("whatsapp").focus();
+document
+.getElementById("whatsapp")
+.focus();
 
 return;
 
@@ -437,7 +401,7 @@ if(
 ){
 
 alert(
-"Escolha serviço, dia e horário"
+"Escolha serviço, dia e horário."
 );
 
 return;
@@ -453,9 +417,9 @@ db,
 
 {
 
-nome,
+nome:nome,
 
-telefone,
+telefone:telefone,
 
 servico:servicoEscolhido,
 
@@ -492,10 +456,11 @@ ${diaEscolhido}
 
 Horário:
 ${horarioEscolhido}
+
 `;
 
 mostrarPopup(
-"Seu agendamento foi realizado com sucesso! 🎉<br><br>Você será direcionado para o WhatsApp."
+"Seu agendamento foi realizado com sucesso! 🎉"
 );
 
 setTimeout(()=>{
@@ -526,26 +491,28 @@ window.open(
 };
 
 window.abrirAgendamento=abrirAgendamento;
-
 window.voltar=voltar;
-
 window.hora=hora;
-
 window.whatsapp=whatsapp;
-
 window.mudarMes=mudarMes;
 
-window.mostrarPopup = function(texto){
+window.mostrarPopup=function(texto){
 
-document.getElementById("popupTexto").innerHTML = texto;
+document
+.getElementById("popupTexto")
+.innerHTML=texto;
 
-document.getElementById("popupSucesso").style.display = "flex";
+document
+.getElementById("popupSucesso")
+.style.display="flex";
 
 }
 
-window.fecharPopup = function(){
+window.fecharPopup=function(){
 
-document.getElementById("popupSucesso").style.display = "none";
+document
+.getElementById("popupSucesso")
+.style.display="none";
 
 }
 
