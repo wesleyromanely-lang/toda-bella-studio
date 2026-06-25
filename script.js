@@ -229,9 +229,10 @@ botao.classList.add("ocupado");
 
 }else{
 
-
 botao.innerHTML =
 dia+"<br>Hoje";
+
+botao.classList.add("hoje");
 
 }
 
