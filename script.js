@@ -170,7 +170,28 @@ let hojeLimpo=new Date();
 hojeLimpo.setHours(0,0,0,0);
 
 if(data<hojeLimpo){
+// DESTACA O DIA ATUAL
+if (data.toDateString() === hoje.toDateString()) {
 
+    botao.classList.add("hoje");
+
+    // Depois das 16:30 o atendimento encerra
+    if (
+        hoje.getHours() > 16 ||
+        (hoje.getHours() === 16 && hoje.getMinutes() >= 30)
+    ) {
+
+        botao.disabled = true;
+        botao.classList.add("ocupado");
+        botao.innerHTML = dia + "<br><small>Encerrado</small>";
+
+    } else {
+
+        botao.innerHTML = dia + "<br><small>Hoje</small>";
+
+    }
+
+}
 botao.disabled=true;
 
 botao.classList.add("ocupado");
