@@ -179,7 +179,7 @@ if (data.toDateString() === hoje.toDateString()) {
 if (
     hoje.getHours() > 17 ||
     (hoje.getHours() === 17 && hoje.getMinutes() >= 0)
-)
+){
         botao.disabled = true;
         botao.classList.add("ocupado");
         botao.innerHTML = dia + "<br><small>Encerrado</small>";
