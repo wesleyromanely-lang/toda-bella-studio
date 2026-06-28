@@ -175,11 +175,11 @@ if (data.toDateString() === hoje.toDateString()) {
 
     botao.classList.add("hoje");
 
-    // Depois das 16:30 o atendimento encerra
-    if (
-        hoje.getHours() > 16 ||
-        (hoje.getHours() === 16 && hoje.getMinutes() >= 30)
-    ) {
+    // Depois das 17:00 o atendimento encerra
+if (
+    hoje.getHours() > 17 ||
+    (hoje.getHours() === 17 && hoje.getMinutes() >= 0)
+) {
 
         botao.disabled = true;
         botao.classList.add("ocupado");
