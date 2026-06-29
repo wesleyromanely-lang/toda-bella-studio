@@ -171,17 +171,26 @@ hojeLimpo.setHours(0,0,0,0);
 
 // Dias anteriores ficam bloqueados
 if (data < hojeLimpo) {
-
     botao.disabled = true;
     botao.classList.add("ocupado");
-
 }
 
 // Dia atual
 if (data.toDateString() === hoje.toDateString()) {
 
-    
-    
+    botao.classList.add("hoje");
+
+    const horaEncerramento = 17;
+
+    if (hoje.getHours() >= horaEncerramento) {
+        botao.disabled = true;
+        botao.classList.add("ocupado");
+        botao.innerHTML = dia + "<br><small>Encerrado</small>";
+    } else {
+        botao.innerHTML = dia + "<br><small>Hoje</small>";
+    }
+
+}
 
 // Domingo e Segunda = Folga
 if (
@@ -202,11 +211,7 @@ if (!botao.disabled) {
 
         document
             .querySelectorAll(".dias button")
-            .forEach(b => {
-
-                b.classList.remove("selecionado");
-
-            });
+            .forEach(b => b.classList.remove("selecionado"));
 
         botao.classList.add("selecionado");
 
@@ -221,7 +226,6 @@ if (!botao.disabled) {
             meses[mes];
 
         carregarHorarios();
-
         atualizarResumo();
 
     };
