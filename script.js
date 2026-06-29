@@ -202,7 +202,6 @@ if (data.toDateString() === hoje.toDateString()) {
 
     botao.classList.add("hoje");
 
-    // Horário de encerramento
     const horaEncerramento = 17;
 
     if (hoje.getHours() >= horaEncerramento) {
