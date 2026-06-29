@@ -197,8 +197,6 @@ if (data.toDateString() === hoje.toDateString()) {
     }
 
 }
-// Dia atual
-if (data.toDateString() === hoje.toDateString()) {
 
     botao.classList.add("hoje");
 
