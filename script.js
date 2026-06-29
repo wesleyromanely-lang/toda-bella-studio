@@ -382,4 +382,19 @@ document
 .style.display="none";
 
 }
+if(
+data.getDay()==0 ||
+data.getDay()==1
+){
+    ...
+}
+if(!botao.disabled){
 
+    botao.onclick=function(){
+
+        ...
+    }
+
+}
+
+area.appendChild(botao);
