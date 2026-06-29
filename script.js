@@ -183,11 +183,15 @@ if (data.toDateString() === hoje.toDateString()) {
     const horaEncerramento = 17;
 
     if (hoje.getHours() >= horaEncerramento) {
+
         botao.disabled = true;
         botao.classList.add("ocupado");
         botao.innerHTML = dia + "<br><small>Encerrado</small>";
+
     } else {
+
         botao.innerHTML = dia + "<br><small>Hoje</small>";
+
     }
 
 }
@@ -233,3 +237,6 @@ if (!botao.disabled) {
 }
 
 area.appendChild(botao);
+}
+
+}
