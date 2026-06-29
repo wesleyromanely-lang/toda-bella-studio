@@ -169,25 +169,17 @@ let hojeLimpo=new Date();
 
 hojeLimpo.setHours(0,0,0,0);
 
-// Dias anteriores ficam bloqueados
-if (data < hojeLimpo) {
-
-    botao.disabled = true;
-    botao.classList.add("ocupado");
-
-}
-
-// Dia atual
+if(data<hojeLimpo){
+// DESTACA O DIA ATUAL
 if (data.toDateString() === hoje.toDateString()) {
 
     botao.classList.add("hoje");
 
-    // Horário de encerramento
-    const horaEncerramento = 17;
-
-    if (
-        hoje.getHours() >= horaEncerramento
-    ) {
+    // Depois das 17:00 o atendimento encerra
+if (
+    hoje.getHours() > 17 ||
+    (hoje.getHours() === 17 && hoje.getMinutes() >= 0)
+) {
 
         botao.disabled = true;
         botao.classList.add("ocupado");
@@ -198,6 +190,162 @@ if (data.toDateString() === hoje.toDateString()) {
         botao.innerHTML = dia + "<br><small>Hoje</small>";
 
     }
+
+}
+botao.disabled=true;
+
+botao.classList.add("ocupado");
+
+}
+
+if(
+data.getDay()==0 ||
+data.getDay()==1
+){
+
+botao.disabled=true;
+
+botao.classList.add("ocupado");
+
+botao.innerHTML=
+dia+"<br>Folga";
+
+}
+
+if(!botao.disabled){
+
+botao.onclick=function(){
+
+document
+.querySelectorAll(".dias button")
+.forEach(b=>{
+
+b.classList.remove("selecionado");
+
+});
+
+botao.classList.add("selecionado");
+
+dataSelecionada=
+`${ano}-${String(mes+1).padStart(2,"0")}-${String(dia).padStart(2,"0")}`;
+
+diaEscolhido=
+diasSemana[data.getDay()]
++" "+
+dia+
+" de "+
+meses[mes];
+
+carregarHorarios();
+
+atualizarResumo();
+
+};
+
+}
+
+area.appendChild(botao);
+
+}
+
+}
+
+async function carregarHorarios(){
+
+horariosOcupados=[];
+
+limparHorarios();
+
+let dados=
+await get(
+ref(
+db,
+"agendamentos/"+dataSelecionada
+)
+);
+
+if(dados.exists()){
+
+Object.values(dados.val())
+.forEach(item=>{
+
+if(item.horario){
+
+horariosOcupados.push(
+item.horario
+);
+
+}
+
+});
+
+}
+
+bloquearHorarios();
+
+}
+
+function limparHorarios(){
+
+document
+.querySelectorAll(".horarios button")
+.forEach(botao=>{
+
+botao.disabled=false;
+
+botao.classList.remove("ocupado");
+
+botao.classList.remove("selecionado");
+
+});
+
+}
+
+function hora(botao,valor){
+
+if(
+horariosOcupados.includes(valor)
+){
+
+alert(
+"Esse horário já está reservado"
+);
+
+return;
+
+}
+
+horarioEscolhido=valor;
+
+document
+.querySelectorAll(".horarios button")
+.forEach(b=>{
+
+b.classList.remove("selecionado");
+
+});
+
+botao.classList.add("selecionado");
+
+atualizarResumo();
+
+}
+
+function bloquearHorarios(){
+
+document
+.querySelectorAll(".horarios button")
+.forEach(botao=>{
+
+if(
+horariosOcupados.includes(
+botao.innerText
+)
+){
+
+botao.disabled=true;
+
+botao.classList.add("ocupado");
 
 }
 
@@ -382,19 +530,4 @@ document
 .style.display="none";
 
 }
-if(
-data.getDay()==0 ||
-data.getDay()==1
-){
-    ...
-}
-if(!botao.disabled){
 
-    botao.onclick=function(){
-
-        ...
-    }
-
-}
-
-area.appendChild(botao);
