@@ -170,16 +170,23 @@ let hojeLimpo=new Date();
 hojeLimpo.setHours(0,0,0,0);
 
 if(data<hojeLimpo){
-// DESTACA O DIA ATUAL
+// Dias anteriores ficam bloqueados
+if (data < hojeLimpo) {
+
+    botao.disabled = true;
+    botao.classList.add("ocupado");
+
+}
+
+// Dia atual
 if (data.toDateString() === hoje.toDateString()) {
 
     botao.classList.add("hoje");
 
-    // Depois das 17:00 o atendimento encerra
-if (
-    hoje.getHours() > 17 ||
-    (hoje.getHours() === 17 && hoje.getMinutes() >= 0)
-) {
+    // Horário de encerramento
+    const horaEncerramento = 17;
+
+    if (hoje.getHours() >= horaEncerramento) {
 
         botao.disabled = true;
         botao.classList.add("ocupado");
@@ -192,342 +199,50 @@ if (
     }
 
 }
-botao.disabled=true;
 
-botao.classList.add("ocupado");
+// Domingo e Segunda = Folga
+if (
+    data.getDay() == 0 ||
+    data.getDay() == 1
+) {
 
-}
-
-if(
-data.getDay()==0 ||
-data.getDay()==1
-){
-
-botao.disabled=true;
-
-botao.classList.add("ocupado");
-
-botao.innerHTML=
-dia+"<br>Folga";
+    botao.disabled = true;
+    botao.classList.add("ocupado");
+    botao.innerHTML = dia + "<br>Folga";
 
 }
 
-if(!botao.disabled){
+// Dias disponíveis
+if (!botao.disabled) {
 
-botao.onclick=function(){
+    botao.onclick = function () {
 
-document
-.querySelectorAll(".dias button")
-.forEach(b=>{
+        document
+            .querySelectorAll(".dias button")
+            .forEach(b => {
 
-b.classList.remove("selecionado");
+                b.classList.remove("selecionado");
 
-});
+            });
 
-botao.classList.add("selecionado");
+        botao.classList.add("selecionado");
 
-dataSelecionada=
-`${ano}-${String(mes+1).padStart(2,"0")}-${String(dia).padStart(2,"0")}`;
+        dataSelecionada =
+            `${ano}-${String(mes + 1).padStart(2, "0")}-${String(dia).padStart(2, "0")}`;
 
-diaEscolhido=
-diasSemana[data.getDay()]
-+" "+
-dia+
-" de "+
-meses[mes];
+        diaEscolhido =
+            diasSemana[data.getDay()] +
+            " " +
+            dia +
+            " de " +
+            meses[mes];
 
-carregarHorarios();
+        carregarHorarios();
 
-atualizarResumo();
+        atualizarResumo();
 
-};
+    };
 
 }
 
 area.appendChild(botao);
-
-}
-
-}
-
-async function carregarHorarios(){
-
-horariosOcupados=[];
-
-limparHorarios();
-
-let dados=
-await get(
-ref(
-db,
-"agendamentos/"+dataSelecionada
-)
-);
-
-if(dados.exists()){
-
-Object.values(dados.val())
-.forEach(item=>{
-
-if(item.horario){
-
-horariosOcupados.push(
-item.horario
-);
-
-}
-
-});
-
-}
-
-bloquearHorarios();
-
-}
-
-function limparHorarios(){
-
-document
-.querySelectorAll(".horarios button")
-.forEach(botao=>{
-
-botao.disabled=false;
-
-botao.classList.remove("ocupado");
-
-botao.classList.remove("selecionado");
-
-});
-
-}
-
-function hora(botao,valor){
-
-if(
-horariosOcupados.includes(valor)
-){
-
-alert(
-"Esse horário já está reservado"
-);
-
-return;
-
-}
-
-horarioEscolhido=valor;
-
-document
-.querySelectorAll(".horarios button")
-.forEach(b=>{
-
-b.classList.remove("selecionado");
-
-});
-
-botao.classList.add("selecionado");
-
-atualizarResumo();
-
-}
-
-function bloquearHorarios(){
-
-document
-.querySelectorAll(".horarios button")
-.forEach(botao=>{
-
-if(
-horariosOcupados.includes(
-botao.innerText
-)
-){
-
-botao.disabled=true;
-
-botao.classList.add("ocupado");
-
-}
-
-});
-
-}
-
-function atualizarResumo(){
-
-document.getElementById("resumo").innerHTML=
-
-`
-
-Serviço: <br> <b>${servicoEscolhido}</b>
-
-<br><br>
-
-Dia: <br> <b>${diaEscolhido}</b>
-
-<br><br>
-
-Horário: <br> <b>${horarioEscolhido}</b>
-
-`;
-
-}
-
-async function whatsapp(){
-
-const nome =
-document
-.getElementById("nome")
-.value
-.trim();
-
-const telefone =
-document
-.getElementById("whatsapp")
-.value
-.trim();
-
-if(nome.length===0){
-
-alert(
-"Preencha seu nome para continuar."
-);
-
-return;
-
-}
-
-if(telefone.length===0){
-
-alert(
-"Preencha seu WhatsApp para continuar."
-);
-
-return;
-
-}
-
-if(
-!servicoEscolhido ||
-!diaEscolhido ||
-!horarioEscolhido
-){
-
-alert(
-"Escolha serviço, dia e horário."
-);
-
-return;
-
-}
-
-await push(
-
-ref(
-db,
-"agendamentos/"+dataSelecionada
-),
-
-{
-
-nome:nome,
-
-telefone:telefone,
-
-servico:servicoEscolhido,
-
-dia:diaEscolhido,
-
-horario:horarioEscolhido,
-
-data:dataSelecionada
-
-}
-
-);
-
-let numero="5511964201177";
-
-let mensagem=
-
-`
-Olá Toda Bella ✨
-
-Quero confirmar meu agendamento.
-
-Cliente:
-${nome}
-
-Telefone:
-${telefone}
-
-Serviço:
-${servicoEscolhido}
-
-Dia:
-${diaEscolhido}
-
-Horário:
-${horarioEscolhido}
-`;
-
-mostrarPopup(
-"Seu agendamento foi realizado com sucesso! 🎉"
-);
-
-setTimeout(()=>{
-
-window.open(
-
-"https://wa.me/"
-+
-numero
-+
-"?text="
-+
-encodeURIComponent(mensagem),
-
-"_blank"
-
-);
-
-},1500);
-
-}
-
-
-window.instagram=function(){
-
-window.open(
-"https://www.instagram.com/todabellastudio2026/",
-"_blank"
-);
-
-};
-
-window.abrirAgendamento=abrirAgendamento;
-window.voltar=voltar;
-window.hora=hora;
-window.whatsapp=whatsapp;
-window.mudarMes=mudarMes;
-
-window.mostrarPopup=function(texto){
-
-document
-.getElementById("popupTexto")
-.innerHTML=texto;
-
-document
-.getElementById("popupSucesso")
-.style.display="flex";
-
-}
-
-window.fecharPopup=function(){
-
-document
-.getElementById("popupSucesso")
-.style.display="none";
-
-}
-
