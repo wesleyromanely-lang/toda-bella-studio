@@ -1,19 +1,21 @@
 import {
     db,
+    auth,
     ref,
     push,
     get,
     child,
     remove,
-    update
+    update,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
 } from "./firebase.js";
 
 
 // =====================================
 // CONFIGURAÇÕES
 // =====================================
-
-const SENHA_ADMIN = "1234";
 
 const CAMINHO = "controleFinanceiro";
 
@@ -54,6 +56,24 @@ const filtroMes =
 
 
 // =====================================
+// E-MAIL DO ADMIN
+// =====================================
+//
+// IMPORTANTE:
+// coloque aqui o MESMO e-mail que você
+// cadastrou no Firebase Authentication.
+//
+// Exemplo:
+//
+// const EMAIL_ADMIN = "seuemail@gmail.com";
+//
+// NÃO coloque sua senha aqui.
+//
+
+const EMAIL_ADMIN = "COLOQUE_SEU_EMAIL_AQUI";
+
+
+// =====================================
 // DATA LOCAL
 // =====================================
 
@@ -76,6 +96,7 @@ function dataLocal() {
         ).padStart(2, "0");
 
     return `${ano}-${mes}-${dia}`;
+
 }
 
 
@@ -105,10 +126,8 @@ function formatarData(data) {
 
     }
 
-
     const partes =
         data.split("-");
-
 
     return `${partes[2]}/${partes[1]}/${partes[0]}`;
 
@@ -135,25 +154,41 @@ function formatarDinheiro(valor) {
 
 
 // =====================================
-// LOGIN
+// LOGIN FIREBASE
 // =====================================
 
 window.entrar =
-function () {
+async function () {
 
-    const valorSenha =
-        senha.value;
+    const email =
+        EMAIL_ADMIN.trim();
+
+    const password =
+        senha.value.trim();
+
+
+    erroLogin.textContent =
+        "";
 
 
     if (
-        valorSenha !==
-        SENHA_ADMIN
+        !email ||
+        email ===
+        "COLOQUE_SEU_EMAIL_AQUI"
     ) {
 
         erroLogin.textContent =
-            "Senha incorreta.";
+            "Configure o e-mail do administrador no admin.js.";
 
-        senha.value = "";
+        return;
+
+    }
+
+
+    if (!password) {
+
+        erroLogin.textContent =
+            "Digite sua senha.";
 
         senha.focus();
 
@@ -162,9 +197,149 @@ function () {
     }
 
 
-    erroLogin.textContent =
-        "";
+    const botao =
+        login.querySelector(
+            "button"
+        );
 
+
+    if (botao) {
+
+        botao.disabled =
+            true;
+
+        botao.textContent =
+            "Entrando...";
+
+    }
+
+
+    try {
+
+        const resultado =
+            await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+
+        if (
+            resultado.user.email
+                .toLowerCase() !==
+            email.toLowerCase()
+        ) {
+
+            await signOut(
+                auth
+            );
+
+            throw new Error(
+                "Usuário não autorizado."
+            );
+
+        }
+
+
+        senha.value =
+            "";
+
+
+        mostrarPainel();
+
+
+    }
+
+    catch (erro) {
+
+        console.error(
+            "Erro no login:",
+            erro
+        );
+
+
+        let mensagem =
+            "Não foi possível entrar.";
+
+
+        if (
+            erro.code ===
+            "auth/invalid-credential"
+        ) {
+
+            mensagem =
+                "E-mail ou senha incorretos.";
+
+        }
+
+        else if (
+            erro.code ===
+            "auth/invalid-email"
+        ) {
+
+            mensagem =
+                "O e-mail do administrador é inválido.";
+
+        }
+
+        else if (
+            erro.code ===
+            "auth/too-many-requests"
+        ) {
+
+            mensagem =
+                "Muitas tentativas. Aguarde um pouco e tente novamente.";
+
+        }
+
+        else if (
+            erro.code ===
+            "auth/network-request-failed"
+        ) {
+
+            mensagem =
+                "Verifique sua conexão com a internet.";
+
+        }
+
+        else if (
+            erro.message ===
+            "Usuário não autorizado."
+        ) {
+
+            mensagem =
+                "Usuário não autorizado.";
+
+        }
+
+
+        erroLogin.textContent =
+            mensagem;
+
+    }
+
+    finally {
+
+        if (botao) {
+
+            botao.disabled =
+                false;
+
+            botao.textContent =
+                "🔐 Entrar";
+
+        }
+
+    }
+
+};
+
+
+// =====================================
+// MOSTRAR PAINEL
+// =====================================
+
+function mostrarPainel() {
 
     login.style.display =
         "none";
@@ -184,15 +359,14 @@ function () {
 
     carregarRegistros();
 
-};
+}
 
 
 // =====================================
-// SAIR
+// ESCONDER PAINEL
 // =====================================
 
-window.sair =
-function () {
+function esconderPainel() {
 
     painel.style.display =
         "none";
@@ -206,9 +380,86 @@ function () {
         "";
 
 
-    senha.focus();
+    erroLogin.textContent =
+        "";
+
+}
+
+
+// =====================================
+// SAIR
+// =====================================
+
+window.sair =
+async function () {
+
+    try {
+
+        await signOut(
+            auth
+        );
+
+        esconderPainel();
+
+    }
+
+    catch (erro) {
+
+        console.error(
+            "Erro ao sair:",
+            erro
+        );
+
+        alert(
+            "Não foi possível sair."
+        );
+
+    }
 
 };
+
+
+// =====================================
+// VERIFICAR AUTENTICAÇÃO
+// =====================================
+
+onAuthStateChanged(
+    auth,
+    function (user) {
+
+        if (!user) {
+
+            esconderPainel();
+
+            return;
+
+        }
+
+
+        if (
+            !user.email ||
+            user.email.toLowerCase() !==
+            EMAIL_ADMIN.toLowerCase()
+        ) {
+
+            signOut(
+                auth
+            );
+
+            esconderPainel();
+
+            erroLogin.textContent =
+                "Usuário não autorizado.";
+
+            return;
+
+        }
+
+
+        mostrarPainel();
+
+    }
+);
 
 
 // =====================================
@@ -220,6 +471,21 @@ formRegistro.addEventListener(
     async function (event) {
 
         event.preventDefault();
+
+
+        // Garantir que existe usuário autenticado
+
+        if (!auth.currentUser) {
+
+            alert(
+                "Sua sessão expirou. Entre novamente."
+            );
+
+            esconderPainel();
+
+            return;
+
+        }
 
 
         const data =
@@ -349,7 +615,7 @@ formRegistro.addEventListener(
 
 
             // =================================
-            // ATUALIZAR REGISTRO EXISTENTE
+            // ATUALIZAR EXISTENTE
             // =================================
 
             if (
@@ -372,10 +638,8 @@ formRegistro.addEventListener(
                     btn.disabled =
                         false;
 
-
                     btn.textContent =
                         "💾 Salvar dia";
-
 
                     return;
 
@@ -403,7 +667,6 @@ formRegistro.addEventListener(
                 alert(
                     "Registro atualizado com sucesso! 🌸"
                 );
-
 
             }
 
@@ -451,7 +714,6 @@ formRegistro.addEventListener(
 
             await carregarRegistros();
 
-
         }
 
         catch (erro) {
@@ -462,9 +724,37 @@ formRegistro.addEventListener(
             );
 
 
-            alert(
-                "Não foi possível salvar o registro."
-            );
+            if (
+                erro.code ===
+                "PERMISSION_DENIED"
+            ) {
+
+                alert(
+                    "O Firebase bloqueou o acesso. Ainda precisamos atualizar as regras de segurança."
+                );
+
+            }
+
+            else if (
+                erro.code ===
+                "auth/user-token-expired"
+            ) {
+
+                alert(
+                    "Sua sessão expirou. Entre novamente."
+                );
+
+                esconderPainel();
+
+            }
+
+            else {
+
+                alert(
+                    "Não foi possível salvar o registro."
+                );
+
+            }
 
         }
 
@@ -472,7 +762,6 @@ formRegistro.addEventListener(
 
             btn.disabled =
                 false;
-
 
             btn.textContent =
                 "💾 Salvar dia";
@@ -489,6 +778,13 @@ formRegistro.addEventListener(
 
 window.carregarRegistros =
 async function () {
+
+    if (!auth.currentUser) {
+
+        return;
+
+    }
+
 
     listaRegistros.innerHTML = `
         <div class="carregando">
@@ -533,6 +829,8 @@ async function () {
 
             atualizarResumo({});
 
+            atualizarResumoFiltro([]);
+
             return;
 
         }
@@ -551,7 +849,6 @@ async function () {
             dados
         );
 
-
     }
 
     catch (erro) {
@@ -562,11 +859,30 @@ async function () {
         );
 
 
-        listaRegistros.innerHTML = `
-            <div class="erro-box">
-                ❌ Erro ao carregar os registros.
-            </div>
-        `;
+        if (
+            erro.code ===
+            "PERMISSION_DENIED"
+        ) {
+
+            listaRegistros.innerHTML = `
+                <div class="erro-box">
+                    🔒 O Firebase bloqueou o acesso.
+                    <br><br>
+                    Precisamos configurar as regras de segurança.
+                </div>
+            `;
+
+        }
+
+        else {
+
+            listaRegistros.innerHTML = `
+                <div class="erro-box">
+                    ❌ Erro ao carregar os registros.
+                </div>
+            `;
+
+        }
 
     }
 
@@ -594,9 +910,7 @@ function renderizarHistorico(
             .filter(
                 ([chave, item]) => {
 
-                    if (
-                        !filtro
-                    ) {
+                    if (!filtro) {
 
                         return true;
 
@@ -757,7 +1071,7 @@ function renderizarHistorico(
 
 
 // =====================================
-// RESUMO GERAL
+// RESUMO
 // =====================================
 
 function atualizarResumo(
@@ -992,6 +1306,19 @@ function () {
 window.editarRegistro =
 async function (chave) {
 
+    if (!auth.currentUser) {
+
+        alert(
+            "Sua sessão expirou."
+        );
+
+        esconderPainel();
+
+        return;
+
+    }
+
+
     try {
 
         const snapshot =
@@ -1048,7 +1375,6 @@ async function (chave) {
             "Edite os dados acima e clique em Salvar dia."
         );
 
-
     }
 
     catch (erro) {
@@ -1074,15 +1400,26 @@ async function (chave) {
 window.excluirRegistro =
 async function (chave) {
 
+    if (!auth.currentUser) {
+
+        alert(
+            "Sua sessão expirou."
+        );
+
+        esconderPainel();
+
+        return;
+
+    }
+
+
     const confirmar =
         confirm(
             "Deseja realmente excluir este registro?"
         );
 
 
-    if (
-        !confirmar
-    ) {
+    if (!confirmar) {
 
         return;
 
@@ -1105,7 +1442,6 @@ async function (chave) {
 
 
         carregarRegistros();
-
 
     }
 
