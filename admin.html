@@ -2,55 +2,105 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Controle ADM - Toda Bella Studio</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="admin.css">
+    <title>
+        Controle ADM - Toda Bella Studio
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="admin.css"
+    >
+
 </head>
+
 
 <body>
 
-    <!-- LOGIN -->
 
-    <section id="login" class="login-container">
+    <!-- =========================
+         LOGIN
+    ========================== -->
+
+    <section
+        id="login"
+        class="login-container"
+    >
 
         <div class="login-card">
 
-            <div class="logo">🌸</div>
+            <div class="logo">
+                🌸
+            </div>
 
-            <h1>Toda Bella Studio</h1>
+            <h1>
+                Toda Bella Studio
+            </h1>
 
-            <p>Área Administrativa</p>
+            <p>
+                Área Administrativa
+            </p>
+
 
             <input
                 type="password"
                 id="senha"
                 placeholder="Digite sua senha"
+                autocomplete="current-password"
             >
 
-            <button onclick="entrar()">
+
+            <button
+                onclick="entrar()"
+            >
                 🔐 Entrar
             </button>
 
-            <p id="erroLogin" class="erro"></p>
+
+            <p
+                id="erroLogin"
+                class="erro"
+            ></p>
 
         </div>
 
     </section>
 
 
-    <!-- PAINEL -->
 
-    <main id="painel" class="painel">
+    <!-- =========================
+         PAINEL
+    ========================== -->
+
+    <main
+        id="painel"
+        class="painel"
+    >
+
+
+        <!-- TOPO -->
 
         <header class="topo">
 
             <div>
-                <h1>Controle Financeiro</h1>
-                <p>Toda Bella Studio 🌸</p>
+
+                <h1>
+                    Controle Financeiro
+                </h1>
+
+                <p>
+                    Toda Bella Studio 🌸
+                </p>
+
             </div>
+
 
             <button
                 class="btn-sair"
@@ -62,19 +112,29 @@
         </header>
 
 
-        <!-- RESUMO -->
+
+        <!-- =========================
+             RESUMO
+        ========================== -->
 
         <section class="resumo">
 
+
             <div class="card-resumo">
 
-                <span>👩</span>
+                <span>
+                    👩
+                </span>
 
                 <div>
 
-                    <small>Pessoas hoje</small>
+                    <small>
+                        Pessoas hoje
+                    </small>
 
-                    <strong id="pessoasHoje">
+                    <strong
+                        id="pessoasHoje"
+                    >
                         0
                     </strong>
 
@@ -83,15 +143,22 @@
             </div>
 
 
+
             <div class="card-resumo">
 
-                <span>💰</span>
+                <span>
+                    💰
+                </span>
 
                 <div>
 
-                    <small>Ganho hoje</small>
+                    <small>
+                        Ganho hoje
+                    </small>
 
-                    <strong id="ganhoHoje">
+                    <strong
+                        id="ganhoHoje"
+                    >
                         R$ 0,00
                     </strong>
 
@@ -100,15 +167,22 @@
             </div>
 
 
+
             <div class="card-resumo">
 
-                <span>👩</span>
+                <span>
+                    👩
+                </span>
 
                 <div>
 
-                    <small>Pessoas no mês</small>
+                    <small>
+                        Pessoas no mês
+                    </small>
 
-                    <strong id="pessoasMes">
+                    <strong
+                        id="pessoasMes"
+                    >
                         0
                     </strong>
 
@@ -117,47 +191,69 @@
             </div>
 
 
+
             <div class="card-resumo">
 
-                <span>💰</span>
+                <span>
+                    💰
+                </span>
 
                 <div>
 
-                    <small>Ganho no mês</small>
+                    <small>
+                        Ganho no mês
+                    </small>
 
-                    <strong id="ganhoMes">
+                    <strong
+                        id="ganhoMes"
+                    >
                         R$ 0,00
                     </strong>
 
                 </div>
 
             </div>
+
 
         </section>
 
 
-        <!-- REGISTRAR DIA -->
+
+        <!-- =========================
+             REGISTRAR DIA
+        ========================== -->
 
         <section class="card">
 
+
             <div class="titulo-secao">
 
-                <h2>➕ Registrar dia</h2>
+                <h2>
+                    ➕ Registrar dia
+                </h2>
 
                 <p>
-                    Informe apenas a quantidade de pessoas e quanto ganhou.
+                    Informe a quantidade de pessoas
+                    e quanto ganhou.
                 </p>
 
             </div>
 
 
-            <form id="formRegistro">
+
+            <form
+                id="formRegistro"
+            >
+
 
                 <div class="campo">
 
                     <label for="data">
+
                         📅 Data
+
                     </label>
+
 
                     <input
                         type="date"
@@ -168,11 +264,15 @@
                 </div>
 
 
+
                 <div class="campo">
 
                     <label for="pessoas">
+
                         👩 Pessoas atendidas
+
                     </label>
+
 
                     <input
                         type="number"
@@ -186,11 +286,15 @@
                 </div>
 
 
+
                 <div class="campo">
 
                     <label for="ganho">
+
                         💰 Ganho do dia
+
                     </label>
+
 
                     <input
                         type="number"
@@ -204,6 +308,7 @@
                 </div>
 
 
+
                 <button
                     type="submit"
                     class="btn-salvar"
@@ -212,23 +317,30 @@
                     💾 Salvar dia
                 </button>
 
+
             </form>
 
         </section>
 
 
-        <!-- HISTÓRICO -->
+
+        <!-- =========================
+             HISTÓRICO
+        ========================== -->
 
         <section class="card">
+
 
             <div class="titulo-historico">
 
                 <div>
 
-                    <h2>📋 Histórico</h2>
+                    <h2>
+                        📋 Histórico
+                    </h2>
 
                     <p>
-                        Seus registros financeiros
+                        Consulte seus registros.
                     </p>
 
                 </div>
@@ -244,6 +356,94 @@
             </div>
 
 
+
+            <!-- FILTRO -->
+
+            <div class="filtro-mes">
+
+                <label for="filtroMes">
+
+                    📅 Ver mês
+
+                </label>
+
+
+                <input
+                    type="month"
+                    id="filtroMes"
+                >
+
+
+                <button
+                    type="button"
+                    onclick="limparFiltro()"
+                    class="btn-limpar"
+                >
+                    Ver todos
+                </button>
+
+            </div>
+
+
+
+            <!-- RESUMO DO FILTRO -->
+
+            <div
+                id="resumoFiltro"
+                class="resumo-filtro"
+            >
+
+                <div>
+
+                    <span>
+                        👩
+                    </span>
+
+                    <div>
+
+                        <small>
+                            Pessoas no período
+                        </small>
+
+                        <strong
+                            id="pessoasFiltro"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        💰
+                    </span>
+
+                    <div>
+
+                        <small>
+                            Ganho no período
+                        </small>
+
+                        <strong
+                            id="ganhoFiltro"
+                        >
+                            R$ 0,00
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- LISTA -->
+
             <div
                 id="listaRegistros"
                 class="lista-registros"
@@ -251,44 +451,69 @@
                 Carregando...
             </div>
 
+
         </section>
 
 
-        <!-- TOTAL GERAL -->
+
+        <!-- =========================
+             TOTAL GERAL
+        ========================== -->
 
         <section class="total-geral">
 
+
             <div>
 
-                <span>👩</span>
+                <span>
+                    👩
+                </span>
 
-                <p>Total de pessoas</p>
+                <p>
+                    Total de pessoas
+                </p>
 
-                <strong id="pessoasTotal">
+                <strong
+                    id="pessoasTotal"
+                >
                     0
                 </strong>
 
             </div>
 
 
+
             <div>
 
-                <span>💰</span>
+                <span>
+                    💰
+                </span>
 
-                <p>Ganho total</p>
+                <p>
+                    Ganho total
+                </p>
 
-                <strong id="ganhoTotal">
+                <strong
+                    id="ganhoTotal"
+                >
                     R$ 0,00
                 </strong>
 
             </div>
 
+
         </section>
+
 
     </main>
 
 
-    <script type="module" src="admin.js"></script>
+
+    <script
+        type="module"
+        src="admin.js"
+    ></script>
+
 
 </body>
 
