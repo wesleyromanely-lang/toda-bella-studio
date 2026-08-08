@@ -1,0 +1,512 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #faf7f8;
+    color: #333;
+    min-height: 100vh;
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(
+        135deg,
+        #e75480,
+        #c97b95
+    );
+}
+
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    border-radius: 25px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.18);
+}
+
+
+.logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #fff0f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    margin: 0 auto 18px;
+}
+
+
+.login-card h1 {
+    color: #c94f78;
+    font-size: 25px;
+    margin-bottom: 7px;
+}
+
+
+.login-card p {
+    color: #888;
+    margin-bottom: 25px;
+}
+
+
+.login-card input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 15px;
+}
+
+
+.login-card input:focus {
+    border-color: #e75480;
+}
+
+
+.login-card button {
+    width: 100%;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    background: #e75480;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.login-card button:hover {
+    opacity: 0.9;
+}
+
+
+.erro {
+    color: #d32f2f !important;
+    margin-top: 15px !important;
+    margin-bottom: 0 !important;
+}
+
+
+/* =========================
+   PAINEL
+========================= */
+
+.painel {
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+    padding: 25px 18px 50px;
+}
+
+
+/* =========================
+   TOPO
+========================= */
+
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+
+.topo h1 {
+    color: #c94f78;
+    font-size: 27px;
+}
+
+
+.topo p {
+    color: #888;
+    margin-top: 5px;
+}
+
+
+.btn-sair {
+    border: none;
+    background: #333;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+/* =========================
+   RESUMO
+========================= */
+
+.resumo {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+
+.card-resumo {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.06);
+}
+
+
+.card-resumo > span {
+    font-size: 30px;
+}
+
+
+.card-resumo small {
+    display: block;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+
+.card-resumo strong {
+    display: block;
+    color: #c94f78;
+    font-size: 20px;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.06);
+}
+
+
+.titulo-secao {
+    margin-bottom: 22px;
+}
+
+
+.titulo-secao h2,
+.titulo-historico h2 {
+    color: #444;
+    font-size: 21px;
+}
+
+
+.titulo-secao p,
+.titulo-historico p {
+    color: #999;
+    margin-top: 6px;
+    font-size: 14px;
+}
+
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+#formRegistro {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+
+.campo label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+
+.campo input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ddd;
+    border-radius: 11px;
+    outline: none;
+    font-size: 15px;
+}
+
+
+.campo input:focus {
+    border-color: #e75480;
+}
+
+
+.btn-salvar {
+    grid-column: 1 / -1;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    background: #e75480;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.btn-salvar:hover {
+    transform: translateY(-1px);
+}
+
+
+.btn-salvar:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+
+/* =========================
+   HISTÓRICO
+========================= */
+
+.titulo-historico {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+.btn-atualizar {
+    border: none;
+    background: #fff0f5;
+    color: #c94f78;
+    padding: 9px 13px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+.lista-registros {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.registro {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: #fffafa;
+    border: 1px solid #f3e6ea;
+    border-radius: 14px;
+}
+
+
+.registro-data {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.registro-data > span {
+    font-size: 22px;
+}
+
+
+.registro-data strong {
+    display: block;
+}
+
+
+.registro-data small {
+    display: block;
+    color: #999;
+    margin-top: 4px;
+}
+
+
+.registro-valor strong {
+    display: block;
+    color: #c94f78;
+}
+
+
+.registro-valor small {
+    color: #999;
+}
+
+
+.registro-acoes {
+    display: flex;
+    gap: 7px;
+}
+
+
+.registro-acoes button {
+    border: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+.btn-editar {
+    background: #fff1c9;
+}
+
+
+.btn-excluir {
+    background: #ffe1e1;
+}
+
+
+.carregando,
+.vazio,
+.erro-box {
+    text-align: center;
+    padding: 30px;
+    color: #888;
+}
+
+
+.vazio div {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+
+.vazio strong {
+    color: #555;
+}
+
+
+.vazio p {
+    margin-top: 5px;
+}
+
+
+/* =========================
+   TOTAL GERAL
+========================= */
+
+.total-geral {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+
+.total-geral > div {
+    background: #e75480;
+    color: white;
+    padding: 25px;
+    border-radius: 18px;
+    text-align: center;
+}
+
+
+.total-geral span {
+    font-size: 25px;
+}
+
+
+.total-geral p {
+    margin: 8px 0;
+}
+
+
+.total-geral strong {
+    font-size: 25px;
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 650px) {
+
+    .painel {
+        padding: 20px 12px 40px;
+    }
+
+
+    .topo {
+        align-items: flex-start;
+    }
+
+
+    .topo h1 {
+        font-size: 22px;
+    }
+
+
+    .resumo {
+        grid-template-columns: 1fr;
+    }
+
+
+    #formRegistro {
+        grid-template-columns: 1fr;
+    }
+
+
+    .registro {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+
+    .registro-valor {
+        border-top: 1px solid #eee;
+        padding-top: 10px;
+    }
+
+
+    .registro-acoes {
+        justify-content: flex-end;
+    }
+
+
+    .total-geral {
+        grid-template-columns: 1fr;
+    }
+
+
+    .card {
+        padding: 18px;
+    }
+
+}
