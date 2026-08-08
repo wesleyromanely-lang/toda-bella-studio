@@ -1,346 +1,845 @@
 import {
-db,
-ref,
-get,
-child,
-remove
+    db,
+    ref,
+    get,
+    child,
+    remove
 } from "./firebase.js";
 
+
+// ===============================
+// HORÁRIOS FIXOS
+// ===============================
+
 const horariosFixos = [
-"09:30",
-"10:30",
-"11:30",
-"12:30",
-"13:30",
-"14:30",
-"15:30",
-"16:30"
+    "09:30",
+    "10:30",
+    "11:30",
+    "12:30",
+    "13:30",
+    "14:30",
+    "15:30",
+    "16:30"
 ];
+
+
+// ===============================
+// VARIÁVEIS
+// ===============================
 
 let todosAgendamentos = {};
 
+
+// ===============================
+// DATA LOCAL
+// ===============================
+
+function dataLocal() {
+    const hoje = new Date();
+
+    const ano = hoje.getFullYear();
+    const mes = String(hoje.getMonth() + 1).padStart(2, "0");
+    const dia = String(hoje.getDate()).padStart(2, "0");
+
+    return `${ano}-${mes}-${dia}`;
+}
+
+
+// ===============================
+// LOGIN ADM
+// ===============================
+
 window.entrar = async function () {
 
-const senha =
-document.getElementById("senha").value;
+    const campoSenha = document.getElementById("senha");
 
-if (senha !== "1234") {
+    if (!campoSenha) {
+        alert("Campo de senha não encontrado.");
+        return;
+    }
 
-alert("Senha incorreta");
-return;
+    const senha = campoSenha.value;
+
+    if (senha !== "1234") {
+        alert("Senha incorreta!");
+        return;
+    }
+
+    document.getElementById("login").style.display = "none";
+    document.getElementById("painel").style.display = "block";
+
+    await carregarAgendamentos();
+};
+
+
+// ===============================
+// PREÇO DOS SERVIÇOS
+// ===============================
+
+function obterValorServico(servico) {
+
+    if (!servico) {
+        return 0;
+    }
+
+    const nome = servico.toLowerCase();
+
+    if (nome.includes("progressiva")) {
+        return 120;
+    }
+
+    if (nome.includes("botox")) {
+        return 99;
+    }
+
+    if (nome.includes("cronograma")) {
+        return 99;
+    }
+
+    if (nome.includes("selagem")) {
+        return 79.99;
+    }
+
+    if (nome.includes("tratamento")) {
+        return 69.99;
+    }
+
+    if (nome.includes("escova")) {
+        return 50;
+    }
+
+    return 0;
+}
+
+
+// ===============================
+// FORMATAR DINHEIRO
+// ===============================
+
+function formatarMoeda(valor) {
+
+    return valor.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    });
 
 }
 
-document.getElementById("login").style.display =
-"none";
 
-document.getElementById("painel").style.display =
-"block";
-
-carregarAgendamentos();
-
-};
+// ===============================
+// CARREGAR AGENDAMENTOS
+// ===============================
 
 async function carregarAgendamentos() {
 
-const lista =
-document.getElementById("lista");
+    const lista = document.getElementById("lista");
 
-lista.innerHTML = "";
+    if (!lista) {
+        console.error("Elemento #lista não encontrado.");
+        return;
+    }
 
-const snapshot =
-await get(child(ref(db), "agendamentos"));
+    lista.innerHTML = "Carregando...";
 
-if (!snapshot.exists()) {
+    try {
 
-lista.innerHTML =
-"<p>Nenhum agendamento encontrado.</p>";
+        const snapshot = await get(
+            child(ref(db), "agendamentos")
+        );
 
-return;
+        if (!snapshot.exists()) {
 
-}
+            todosAgendamentos = {};
 
-todosAgendamentos = snapshot.val();
+            lista.innerHTML =
+                "<p>Nenhum agendamento encontrado.</p>";
 
-let faturamento = 0;
-let faturamentoHoje = 0;
-let agendamentosHoje = 0;
-let agendamentosAmanha = 0;
+            atualizarResumo();
 
-let clientesMes = 0;
-let faturamentoMes = 0;
+            mostrarAgendaHoje();
 
-const servicosContador = {};
+            return;
+        }
 
-const hoje = new Date();
-const hojeTexto =
-hoje.toISOString().split("T")[0];
+        todosAgendamentos = snapshot.val();
 
-const mesAtual =
-hojeTexto.substring(0,7);
+        renderizarAgendamentos();
 
-const amanha = new Date();
-amanha.setDate(amanha.getDate() + 1);
+        atualizarResumo();
 
-const amanhaTexto =
-amanha.toISOString().split("T")[0];
+        mostrarAgendaHoje();
 
-const pesquisa =
-document.getElementById("pesquisa")
-? document.getElementById("pesquisa").value.toLowerCase()
-: "";
+    } catch (erro) {
 
-for (const chave in todosAgendamentos) {
+        console.error("Erro ao carregar agendamentos:", erro);
 
-const item = todosAgendamentos[chave];
+        lista.innerHTML =
+            "<p>Erro ao carregar os agendamentos.</p>";
 
-let valor = 0;
-
-if (item.servico.includes("120")) valor = 120;
-else if (item.servico.includes("99")) valor = 99;
-else if (item.servico.includes("79")) valor = 79.99;
-else if (item.servico.includes("69")) valor = 69.99;
-else if (item.servico.includes("50")) valor = 50;
-
-faturamento += valor;
-
-if(item.data === hojeTexto){
-
-agendamentosHoje++;
-faturamentoHoje += valor;
+    }
 
 }
 
-if(item.data === amanhaTexto){
 
-agendamentosAmanha++;
+// ===============================
+// RENDERIZAR LISTA
+// ===============================
 
-}
+function renderizarAgendamentos() {
 
-if(item.data.startsWith(mesAtual)){
+    const lista = document.getElementById("lista");
 
-clientesMes++;
-faturamentoMes += valor;
+    if (!lista) return;
 
-servicosContador[item.servico] =
-(servicosContador[item.servico] || 0) + 1;
+    lista.innerHTML = "";
 
-}
+    const pesquisaElement =
+        document.getElementById("pesquisa");
 
-if (
-pesquisa &&
-!item.nome.toLowerCase().includes(pesquisa)
-) {
-continue;
-}
+    const pesquisa =
+        pesquisaElement
+            ? pesquisaElement.value.trim().toLowerCase()
+            : "";
 
-const dataFormatada =
-item.data.split("-").reverse().join("/");
+    let encontrados = 0;
 
-const whatsapp =
-`https://wa.me/55${item.telefone}`;
 
-const mensagemConfirmacao =
-`Olá ${item.nome}!
+    // Ordenar agendamentos por data e horário
 
-Seu horário está confirmado no Toda Bella Studio 🌸
+    const agendamentos = Object.entries(todosAgendamentos)
+        .sort((a, b) => {
+
+            const itemA = a[1];
+            const itemB = b[1];
+
+            const dataA =
+                `${itemA.data || ""} ${itemA.horario || ""}`;
+
+            const dataB =
+                `${itemB.data || ""} ${itemB.horario || ""}`;
+
+            return dataA.localeCompare(dataB);
+
+        });
+
+
+    for (const [chave, item] of agendamentos) {
+
+        const nome =
+            item.nome || "Cliente";
+
+        const telefone =
+            item.telefone || "";
+
+        const servico =
+            item.servico || "Serviço não informado";
+
+        const data =
+            item.data || "";
+
+        const horario =
+            item.horario || "";
+
+
+        // Pesquisa
+
+        if (
+            pesquisa &&
+            !nome.toLowerCase().includes(pesquisa) &&
+            !telefone.toLowerCase().includes(pesquisa) &&
+            !servico.toLowerCase().includes(pesquisa)
+        ) {
+            continue;
+        }
+
+
+        encontrados++;
+
+
+        const valor =
+            obterValorServico(servico);
+
+
+        const dataFormatada =
+            data
+                ? data.split("-").reverse().join("/")
+                : "--/--/----";
+
+
+        // WhatsApp
+
+        const telefoneLimpo =
+            telefone.replace(/\D/g, "");
+
+
+        const mensagemConfirmacao =
+`Olá ${nome}! 🌸
+
+Seu horário está confirmado no Toda Bella Studio.
 
 📅 Data: ${dataFormatada}
-⏰ Horário: ${item.horario}
+⏰ Horário: ${horario}
+💇 Serviço: ${servico}
 
-Aguardamos você!`;
+Aguardamos você! 💕`;
 
-const confirmar =
-`https://wa.me/55${item.telefone}?text=${encodeURIComponent(mensagemConfirmacao)}`;
 
-lista.innerHTML += `
+        let linkWhatsApp = "#";
 
-<div class="card">
+        if (telefoneLimpo) {
 
-<h3>${item.nome}</h3>
+            linkWhatsApp =
+                `https://wa.me/55${telefoneLimpo}?text=${encodeURIComponent(
+                    mensagemConfirmacao
+                )}`;
 
-<p>📞 ${item.telefone}</p>
+        }
 
-<p>💇 ${item.servico}</p>
 
-<p>📅 ${dataFormatada}</p>
+        // Card
 
-<p>⏰ ${item.horario}</p>
+        lista.innerHTML += `
 
-<a href="${whatsapp}" target="_blank">
-<button class="whatsapp">
-WhatsApp
-</button>
-</a>
+            <div class="agendamento-card">
 
-<a href="${confirmar}" target="_blank">
-<button class="confirmar">
-✅ Confirmar Atendimento
-</button>
-</a>
+                <div class="agendamento-info">
 
-<button
-class="excluir"
-onclick="excluirAgendamento('${chave}')">
+                    <h3>👩 ${nome}</h3>
 
-🗑️ Excluir
+                    <p>
+                        📅 <strong>${dataFormatada}</strong>
+                    </p>
 
-</button>
+                    <p>
+                        ⏰ <strong>${horario}</strong>
+                    </p>
 
-</div>
+                    <p>
+                        💇 ${servico}
+                    </p>
 
-`;
+                    <p>
+                        📱 ${telefone || "Telefone não informado"}
+                    </p>
 
-}
+                    <p>
+                        💰 ${formatarMoeda(valor)}
+                    </p>
 
-let servicoMaisVendido = "-";
-let maior = 0;
+                </div>
 
-for(const servico in servicosContador){
 
-if(servicosContador[servico] > maior){
+                <div class="agendamento-acoes">
 
-maior = servicosContador[servico];
-servicoMaisVendido = servico;
+                    ${
+                        telefoneLimpo
+                        ? `
+                        <a
+                            href="${linkWhatsApp}"
+                            target="_blank"
+                            class="btn-whatsapp"
+                        >
+                            💬 WhatsApp
+                        </a>
+                        `
+                        : ""
+                    }
 
-}
 
-}
+                    <button
+                        onclick="excluirAgendamento('${chave}')"
+                        class="btn-excluir"
+                    >
+                        🗑️ Excluir
+                    </button>
 
-document.getElementById("hoje").innerHTML =
-`📅 Hoje: ${agendamentosHoje}`;
+                </div>
 
-document.getElementById("amanha").innerHTML =
-`📅 Amanhã: ${agendamentosAmanha}`;
+            </div>
 
-document.getElementById("faturamentoHoje").innerHTML =
-`💰 Hoje: R$ ${faturamentoHoje.toFixed(2)}`;
+        `;
 
-document.getElementById("faturamento").innerHTML =
-`💰 Total: R$ ${faturamento.toFixed(2)}`;
+    }
 
-document.getElementById("clientesMes").innerHTML =
-`👩 Clientes: ${clientesMes}`;
 
-document.getElementById("faturamentoMes").innerHTML =
-`💰 Faturamento Mensal: R$ ${faturamentoMes.toFixed(2)}`;
+    if (encontrados === 0) {
 
-document.getElementById("servicoMaisVendido").innerHTML =
-`⭐ Serviço Mais Vendido: ${servicoMaisVendido}`;
+        lista.innerHTML =
+            "<p>Nenhum cliente encontrado.</p>";
 
-mostrarAgendaHoje();
-
-}
-
-function mostrarAgendaHoje(){
-
-const hoje =
-new Date().toISOString().split("T")[0];
-
-gerarAgenda(hoje);
+    }
 
 }
 
-window.mostrarAgendaData = function(){
 
-const data =
-document.getElementById("dataAgenda").value;
+// ===============================
+// RESUMO DO PAINEL
+// ===============================
 
-if(!data){
+function atualizarResumo() {
 
-alert("Selecione uma data");
-return;
+    let faturamento = 0;
+    let faturamentoHoje = 0;
+
+    let agendamentosHoje = 0;
+    let agendamentosAmanha = 0;
+
+    let clientesMes = 0;
+    let faturamentoMes = 0;
+
+    const servicosContador = {};
+
+
+    const hojeTexto = dataLocal();
+
+    const hoje = new Date();
+
+    const amanha = new Date(hoje);
+
+    amanha.setDate(
+        amanha.getDate() + 1
+    );
+
+
+    const anoAmanha =
+        amanha.getFullYear();
+
+    const mesAmanha =
+        String(amanha.getMonth() + 1)
+            .padStart(2, "0");
+
+    const diaAmanha =
+        String(amanha.getDate())
+            .padStart(2, "0");
+
+    const amanhaTexto =
+        `${anoAmanha}-${mesAmanha}-${diaAmanha}`;
+
+
+    const mesAtual =
+        hojeTexto.substring(0, 7);
+
+
+    for (const chave in todosAgendamentos) {
+
+        const item =
+            todosAgendamentos[chave];
+
+        const valor =
+            obterValorServico(item.servico);
+
+
+        // Total
+
+        faturamento += valor;
+
+
+        // Hoje
+
+        if (item.data === hojeTexto) {
+
+            agendamentosHoje++;
+
+            faturamentoHoje += valor;
+
+        }
+
+
+        // Amanhã
+
+        if (item.data === amanhaTexto) {
+
+            agendamentosAmanha++;
+
+        }
+
+
+        // Mês
+
+        if (
+            item.data &&
+            item.data.startsWith(mesAtual)
+        ) {
+
+            clientesMes++;
+
+            faturamentoMes += valor;
+
+
+            const servico =
+                item.servico || "Não informado";
+
+
+            servicosContador[servico] =
+                (servicosContador[servico] || 0) + 1;
+
+        }
+
+    }
+
+
+    // Serviço mais vendido
+
+    let servicoMaisVendido = "-";
+
+    let maior = 0;
+
+
+    for (
+        const servico in servicosContador
+    ) {
+
+        if (
+            servicosContador[servico] > maior
+        ) {
+
+            maior =
+                servicosContador[servico];
+
+            servicoMaisVendido =
+                servico;
+
+        }
+
+    }
+
+
+    // Atualizar elementos
+
+    const hojeElemento =
+        document.getElementById("hoje");
+
+    if (hojeElemento) {
+
+        hojeElemento.innerHTML =
+            `📅 Hoje: ${agendamentosHoje}`;
+
+    }
+
+
+    const amanhaElemento =
+        document.getElementById("amanha");
+
+    if (amanhaElemento) {
+
+        amanhaElemento.innerHTML =
+            `📅 Amanhã: ${agendamentosAmanha}`;
+
+    }
+
+
+    const faturamentoHojeElemento =
+        document.getElementById("faturamentoHoje");
+
+    if (faturamentoHojeElemento) {
+
+        faturamentoHojeElemento.innerHTML =
+            `💰 Hoje: ${formatarMoeda(faturamentoHoje)}`;
+
+    }
+
+
+    const faturamentoElemento =
+        document.getElementById("faturamento");
+
+    if (faturamentoElemento) {
+
+        faturamentoElemento.innerHTML =
+            `💰 Total: ${formatarMoeda(faturamento)}`;
+
+    }
+
+
+    const clientesMesElemento =
+        document.getElementById("clientesMes");
+
+    if (clientesMesElemento) {
+
+        clientesMesElemento.innerHTML =
+            `👩 Clientes: ${clientesMes}`;
+
+    }
+
+
+    const faturamentoMesElemento =
+        document.getElementById("faturamentoMes");
+
+    if (faturamentoMesElemento) {
+
+        faturamentoMesElemento.innerHTML =
+            `💰 Faturamento Mensal: ${formatarMoeda(faturamentoMes)}`;
+
+    }
+
+
+    const servicoElemento =
+        document.getElementById("servicoMaisVendido");
+
+    if (servicoElemento) {
+
+        servicoElemento.innerHTML =
+            `⭐ Serviço Mais Vendido: ${servicoMaisVendido}`;
+
+    }
 
 }
 
-gerarAgenda(data);
+
+// ===============================
+// AGENDA DE HOJE
+// ===============================
+
+function mostrarAgendaHoje() {
+
+    gerarAgenda(dataLocal());
+
+}
+
+
+// ===============================
+// ESCOLHER DATA DA AGENDA
+// ===============================
+
+window.mostrarAgendaData = function () {
+
+    const campo =
+        document.getElementById("dataAgenda");
+
+
+    if (!campo) {
+
+        alert("Campo de data não encontrado.");
+
+        return;
+
+    }
+
+
+    const data =
+        campo.value;
+
+
+    if (!data) {
+
+        alert("Selecione uma data.");
+
+        return;
+
+    }
+
+
+    gerarAgenda(data);
 
 };
 
-function gerarAgenda(dataSelecionada){
 
-let ocupados = [];
+// ===============================
+// GERAR AGENDA
+// ===============================
 
-for (const chave in todosAgendamentos){
+function gerarAgenda(dataSelecionada) {
 
-const item = todosAgendamentos[chave];
+    const agenda =
+        document.getElementById("agenda");
 
-if(item.data === dataSelecionada){
 
-ocupados.push({
-horario:item.horario,
-nome:item.nome
-});
+    if (!agenda) {
+
+        console.error(
+            "Elemento #agenda não encontrado."
+        );
+
+        return;
+
+    }
+
+
+    const ocupados = [];
+
+
+    for (
+        const chave in todosAgendamentos
+    ) {
+
+        const item =
+            todosAgendamentos[chave];
+
+
+        if (
+            item.data === dataSelecionada
+        ) {
+
+            ocupados.push({
+
+                horario: item.horario,
+
+                nome: item.nome,
+
+                chave: chave
+
+            });
+
+        }
+
+    }
+
+
+    const dataFormatada =
+        dataSelecionada
+            .split("-")
+            .reverse()
+            .join("/");
+
+
+    let agendaHTML = `
+
+        <div class="agenda-titulo">
+
+            <h3>
+                📅 Agenda do dia ${dataFormatada}
+            </h3>
+
+        </div>
+
+        <div class="agenda-horarios">
+
+    `;
+
+
+    horariosFixos.forEach(horario => {
+
+        const ocupado =
+            ocupados.find(
+                item =>
+                    item.horario === horario
+            );
+
+
+        if (ocupado) {
+
+            agendaHTML += `
+
+                <div class="horario ocupado">
+
+                    <div>
+                        <strong>⏰ ${horario}</strong>
+
+                        <span>
+                            🔴 Ocupado
+                        </span>
+                    </div>
+
+                    <div>
+                        👩 ${ocupado.nome}
+                    </div>
+
+                    <button
+                        onclick="excluirAgendamento('${ocupado.chave}')"
+                        class="btn-excluir"
+                    >
+                        🗑️
+                    </button>
+
+                </div>
+
+            `;
+
+        } else {
+
+            agendaHTML += `
+
+                <div class="horario disponivel">
+
+                    <div>
+                        <strong>⏰ ${horario}</strong>
+                    </div>
+
+                    <span>
+                        🟢 Disponível
+                    </span>
+
+                </div>
+
+            `;
+
+        }
+
+    });
+
+
+    agendaHTML += `
+
+        </div>
+
+    `;
+
+
+    agenda.innerHTML =
+        agendaHTML;
 
 }
 
-}
 
-let agendaHTML = "";
-
-const dataFormatada =
-dataSelecionada.split("-").reverse().join("/");
-
-agendaHTML += `
-<h3>📅 ${dataFormatada}</h3>
-`;
-
-horariosFixos.forEach(horario => {
-
-const ocupado =
-ocupados.find(
-item => item.horario === horario
-);
-
-if(ocupado){
-
-agendaHTML += `
-<div class="ocupado">
-🔴 ${horario}<br>
-${ocupado.nome}
-</div>
-`;
-
-}else{
-
-agendaHTML += `
-<div class="livre">
-🟢 ${horario} - Livre
-</div>
-`;
-
-}
-
-});
-
-document.getElementById("agenda").innerHTML =
-agendaHTML;
-
-}
+// ===============================
+// EXCLUIR AGENDAMENTO
+// ===============================
 
 window.excluirAgendamento =
-async function (chave) {
+    async function (chave) {
 
-if (
-!confirm(
-"Deseja excluir este agendamento?"
-)
-) {
-return;
-}
+        if (
+            !confirm(
+                "Deseja realmente excluir este agendamento?"
+            )
+        ) {
 
-await remove(
-ref(db, `agendamentos/${chave}`)
-);
+            return;
 
-alert("Agendamento excluído!");
+        }
 
-carregarAgendamentos();
 
-};
+        try {
 
-window.pesquisarCliente = function () {
+            await remove(
+                ref(
+                    db,
+                    `agendamentos/${chave}`
+                )
+            );
 
-carregarAgendamentos();
 
-};
+            alert(
+                "Agendamento excluído com sucesso!"
+            );
+
+
+            await carregarAgendamentos();
+
+
+        } catch (erro) {
+
+            console.error(
+                "Erro ao excluir:",
+                erro
+            );
+
+
+            alert(
+                "Erro ao excluir o agendamento."
+            );
+
+        }
+
+    };
+
+
+// ===============================
+// PESQUISA
+// ===============================
+
+window.pesquisarCliente =
+    function () {
+
+        renderizarAgendamentos();
+
+    };
