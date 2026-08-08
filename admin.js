@@ -70,7 +70,7 @@ const filtroMes =
 // NÃO coloque sua senha aqui.
 //
 
-const EMAIL_ADMIN = "COLOQUE_SEU_EMAIL_AQUI";
+const EMAIL_ADMIN = "amorinhaamora495@gmail.com";
 
 
 // =====================================
