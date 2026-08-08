@@ -19,63 +19,95 @@ body {
 
 .login-container {
     min-height: 100vh;
+
     display: flex;
+
     justify-content: center;
+
     align-items: center;
+
     padding: 20px;
-    background: linear-gradient(
-        135deg,
-        #e75480,
-        #c97b95
-    );
+
+    background:
+        linear-gradient(
+            135deg,
+            #e75480,
+            #c97b95
+        );
 }
 
 
 .login-card {
     width: 100%;
+
     max-width: 400px;
+
     background: white;
+
     border-radius: 25px;
+
     padding: 40px 30px;
+
     text-align: center;
+
     box-shadow:
-        0 20px 50px rgba(0,0,0,0.18);
+        0 20px 50px
+        rgba(0,0,0,0.18);
 }
 
 
 .logo {
     width: 70px;
+
     height: 70px;
+
     border-radius: 50%;
+
     background: #fff0f5;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
     font-size: 34px;
-    margin: 0 auto 18px;
+
+    margin:
+        0 auto 18px;
 }
 
 
 .login-card h1 {
     color: #c94f78;
+
     font-size: 25px;
+
     margin-bottom: 7px;
 }
 
 
 .login-card p {
     color: #888;
+
     margin-bottom: 25px;
 }
 
 
 .login-card input {
     width: 100%;
+
     padding: 15px;
-    border: 1px solid #ddd;
+
+    border:
+        1px solid #ddd;
+
     border-radius: 12px;
+
     font-size: 16px;
+
     outline: none;
+
     margin-bottom: 15px;
 }
 
@@ -87,13 +119,21 @@ body {
 
 .login-card button {
     width: 100%;
+
     border: none;
+
     padding: 15px;
+
     border-radius: 12px;
+
     background: #e75480;
+
     color: white;
+
     font-size: 16px;
+
     font-weight: bold;
+
     cursor: pointer;
 }
 
@@ -105,7 +145,9 @@ body {
 
 .erro {
     color: #d32f2f !important;
+
     margin-top: 15px !important;
+
     margin-bottom: 0 !important;
 }
 
@@ -116,9 +158,13 @@ body {
 
 .painel {
     width: 100%;
+
     max-width: 900px;
+
     margin: auto;
-    padding: 25px 18px 50px;
+
+    padding:
+        25px 18px 50px;
 }
 
 
@@ -128,30 +174,42 @@ body {
 
 .topo {
     display: flex;
-    justify-content: space-between;
+
+    justify-content:
+        space-between;
+
     align-items: center;
+
     margin-bottom: 25px;
 }
 
 
 .topo h1 {
     color: #c94f78;
+
     font-size: 27px;
 }
 
 
 .topo p {
     color: #888;
+
     margin-top: 5px;
 }
 
 
 .btn-sair {
     border: none;
+
     background: #333;
+
     color: white;
-    padding: 10px 18px;
+
+    padding:
+        10px 18px;
+
     border-radius: 10px;
+
     cursor: pointer;
 }
 
@@ -162,21 +220,32 @@ body {
 
 .resumo {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
     gap: 15px;
+
     margin-bottom: 20px;
 }
 
 
 .card-resumo {
     background: white;
+
     border-radius: 18px;
+
     padding: 20px;
+
     display: flex;
+
     align-items: center;
+
     gap: 15px;
+
     box-shadow:
-        0 5px 20px rgba(0,0,0,0.06);
+        0 5px 20px
+        rgba(0,0,0,0.06);
 }
 
 
@@ -187,14 +256,18 @@ body {
 
 .card-resumo small {
     display: block;
+
     color: #888;
+
     margin-bottom: 5px;
 }
 
 
 .card-resumo strong {
     display: block;
+
     color: #c94f78;
+
     font-size: 20px;
 }
 
@@ -205,11 +278,16 @@ body {
 
 .card {
     background: white;
+
     border-radius: 20px;
+
     padding: 25px;
+
     margin-bottom: 20px;
+
     box-shadow:
-        0 5px 20px rgba(0,0,0,0.06);
+        0 5px 20px
+        rgba(0,0,0,0.06);
 }
 
 
@@ -221,6 +299,7 @@ body {
 .titulo-secao h2,
 .titulo-historico h2 {
     color: #444;
+
     font-size: 21px;
 }
 
@@ -228,7 +307,9 @@ body {
 .titulo-secao p,
 .titulo-historico p {
     color: #999;
+
     margin-top: 6px;
+
     font-size: 14px;
 }
 
@@ -239,25 +320,37 @@ body {
 
 #formRegistro {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
     gap: 15px;
 }
 
 
 .campo label {
     display: block;
+
     font-weight: bold;
+
     margin-bottom: 8px;
+
     font-size: 14px;
 }
 
 
 .campo input {
     width: 100%;
+
     padding: 14px;
-    border: 1px solid #ddd;
+
+    border:
+        1px solid #ddd;
+
     border-radius: 11px;
+
     outline: none;
+
     font-size: 15px;
 }
 
@@ -269,24 +362,34 @@ body {
 
 .btn-salvar {
     grid-column: 1 / -1;
+
     border: none;
+
     padding: 15px;
+
     border-radius: 12px;
+
     background: #e75480;
+
     color: white;
+
     font-size: 16px;
+
     font-weight: bold;
+
     cursor: pointer;
 }
 
 
 .btn-salvar:hover {
-    transform: translateY(-1px);
+    transform:
+        translateY(-1px);
 }
 
 
 .btn-salvar:disabled {
     opacity: 0.6;
+
     cursor: wait;
 }
 
@@ -297,44 +400,203 @@ body {
 
 .titulo-historico {
     display: flex;
-    justify-content: space-between;
+
+    justify-content:
+        space-between;
+
     align-items: center;
+
     margin-bottom: 20px;
 }
 
 
 .btn-atualizar {
     border: none;
+
     background: #fff0f5;
+
     color: #c94f78;
-    padding: 9px 13px;
+
+    padding:
+        9px 13px;
+
     border-radius: 10px;
+
     cursor: pointer;
 }
 
 
+/* =========================
+   FILTRO
+========================= */
+
+.filtro-mes {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 15px;
+
+    background: #fff7fa;
+
+    border:
+        1px solid #f3e6ea;
+
+    border-radius: 14px;
+
+    margin-bottom: 15px;
+
+    flex-wrap: wrap;
+}
+
+
+.filtro-mes label {
+    font-weight: bold;
+
+    font-size: 14px;
+
+    color: #555;
+}
+
+
+.filtro-mes input {
+    padding: 11px;
+
+    border:
+        1px solid #ddd;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-size: 15px;
+}
+
+
+.filtro-mes input:focus {
+    border-color: #e75480;
+}
+
+
+.btn-limpar {
+    border: none;
+
+    background: #eee;
+
+    color: #555;
+
+    padding:
+        10px 14px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+
+
+.btn-limpar:hover {
+    background: #e4e4e4;
+}
+
+
+/* =========================
+   RESUMO DO FILTRO
+========================= */
+
+.resumo-filtro {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+}
+
+
+.resumo-filtro > div {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 13px;
+
+    background: #fafafa;
+
+    border-radius: 12px;
+
+    border:
+        1px solid #eee;
+}
+
+
+.resumo-filtro span {
+    font-size: 23px;
+}
+
+
+.resumo-filtro small {
+    display: block;
+
+    color: #999;
+
+    font-size: 12px;
+
+    margin-bottom: 3px;
+}
+
+
+.resumo-filtro strong {
+    color: #c94f78;
+
+    font-size: 17px;
+}
+
+
+/* =========================
+   LISTA
+========================= */
+
 .lista-registros {
     display: flex;
+
     flex-direction: column;
+
     gap: 10px;
 }
 
 
 .registro {
     display: grid;
-    grid-template-columns: 1fr 1fr auto;
+
+    grid-template-columns:
+        1fr 1fr auto;
+
     align-items: center;
+
     gap: 15px;
+
     padding: 15px;
+
     background: #fffafa;
-    border: 1px solid #f3e6ea;
+
+    border:
+        1px solid #f3e6ea;
+
     border-radius: 14px;
 }
 
 
 .registro-data {
     display: flex;
+
     align-items: center;
+
     gap: 10px;
 }
 
@@ -351,13 +613,16 @@ body {
 
 .registro-data small {
     display: block;
+
     color: #999;
+
     margin-top: 4px;
 }
 
 
 .registro-valor strong {
     display: block;
+
     color: #c94f78;
 }
 
@@ -369,15 +634,20 @@ body {
 
 .registro-acoes {
     display: flex;
+
     gap: 7px;
 }
 
 
 .registro-acoes button {
     border: none;
+
     width: 38px;
+
     height: 38px;
+
     border-radius: 10px;
+
     cursor: pointer;
 }
 
@@ -392,17 +662,24 @@ body {
 }
 
 
+/* =========================
+   ESTADOS
+========================= */
+
 .carregando,
 .vazio,
 .erro-box {
     text-align: center;
+
     padding: 30px;
+
     color: #888;
 }
 
 
 .vazio div {
     font-size: 35px;
+
     margin-bottom: 10px;
 }
 
@@ -423,16 +700,23 @@ body {
 
 .total-geral {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+
+    grid-template-columns:
+        1fr 1fr;
+
     gap: 15px;
 }
 
 
 .total-geral > div {
     background: #e75480;
+
     color: white;
+
     padding: 25px;
+
     border-radius: 18px;
+
     text-align: center;
 }
 
@@ -456,15 +740,19 @@ body {
    CELULAR
 ========================= */
 
-@media (max-width: 650px) {
+@media (
+    max-width: 650px
+) {
 
     .painel {
-        padding: 20px 12px 40px;
+        padding:
+            20px 12px 40px;
     }
 
 
     .topo {
-        align-items: flex-start;
+        align-items:
+            flex-start;
     }
 
 
@@ -474,34 +762,63 @@ body {
 
 
     .resumo {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
     }
 
 
     #formRegistro {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
     }
 
 
     .registro {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
+
         gap: 12px;
     }
 
 
     .registro-valor {
-        border-top: 1px solid #eee;
+        border-top:
+            1px solid #eee;
+
         padding-top: 10px;
     }
 
 
     .registro-acoes {
-        justify-content: flex-end;
+        justify-content:
+            flex-end;
     }
 
 
     .total-geral {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .resumo-filtro {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .filtro-mes {
+        align-items:
+            stretch;
+
+        flex-direction:
+            column;
+    }
+
+
+    .filtro-mes input,
+    .btn-limpar {
+        width: 100%;
     }
 
 
