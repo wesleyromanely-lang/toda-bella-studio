@@ -15,8 +15,7 @@ import {
 
 const SENHA_ADMIN = "1234";
 
-const CAMINHO =
-    "controleFinanceiro";
+const CAMINHO = "controleFinanceiro";
 
 
 // =====================================
@@ -50,6 +49,9 @@ const ganhoInput =
 const listaRegistros =
     document.getElementById("listaRegistros");
 
+const filtroMes =
+    document.getElementById("filtroMes");
+
 
 // =====================================
 // DATA LOCAL
@@ -57,7 +59,8 @@ const listaRegistros =
 
 function dataLocal() {
 
-    const hoje = new Date();
+    const hoje =
+        new Date();
 
     const ano =
         hoje.getFullYear();
@@ -77,19 +80,38 @@ function dataLocal() {
 
 
 // =====================================
+// MÊS ATUAL
+// =====================================
+
+function mesAtual() {
+
+    return dataLocal().substring(
+        0,
+        7
+    );
+
+}
+
+
+// =====================================
 // FORMATAR DATA
 // =====================================
 
 function formatarData(data) {
 
     if (!data) {
+
         return "--/--/----";
+
     }
+
 
     const partes =
         data.split("-");
 
+
     return `${partes[2]}/${partes[1]}/${partes[0]}`;
+
 }
 
 
@@ -99,7 +121,9 @@ function formatarData(data) {
 
 function formatarDinheiro(valor) {
 
-    return Number(valor || 0).toLocaleString(
+    return Number(
+        valor || 0
+    ).toLocaleString(
         "pt-BR",
         {
             style: "currency",
@@ -114,12 +138,17 @@ function formatarDinheiro(valor) {
 // LOGIN
 // =====================================
 
-window.entrar = function () {
+window.entrar =
+function () {
 
     const valorSenha =
         senha.value;
 
-    if (valorSenha !== SENHA_ADMIN) {
+
+    if (
+        valorSenha !==
+        SENHA_ADMIN
+    ) {
 
         erroLogin.textContent =
             "Senha incorreta.";
@@ -129,20 +158,28 @@ window.entrar = function () {
         senha.focus();
 
         return;
+
     }
 
 
-    erroLogin.textContent = "";
-
-    login.style.display = "none";
-
-    painel.style.display = "block";
+    erroLogin.textContent =
+        "";
 
 
-    // Colocar data de hoje
+    login.style.display =
+        "none";
+
+
+    painel.style.display =
+        "block";
+
 
     dataInput.value =
         dataLocal();
+
+
+    filtroMes.value =
+        mesAtual();
 
 
     carregarRegistros();
@@ -154,13 +191,20 @@ window.entrar = function () {
 // SAIR
 // =====================================
 
-window.sair = function () {
+window.sair =
+function () {
 
-    painel.style.display = "none";
+    painel.style.display =
+        "none";
 
-    login.style.display = "flex";
 
-    senha.value = "";
+    login.style.display =
+        "flex";
+
+
+    senha.value =
+        "";
+
 
     senha.focus();
 
@@ -181,18 +225,18 @@ formRegistro.addEventListener(
         const data =
             dataInput.value;
 
+
         const pessoas =
             Number(
                 pessoasInput.value
             );
+
 
         const ganho =
             Number(
                 ganhoInput.value
             );
 
-
-        // Validação
 
         if (!data) {
 
@@ -206,7 +250,9 @@ formRegistro.addEventListener(
 
 
         if (
-            !Number.isInteger(pessoas) ||
+            !Number.isInteger(
+                pessoas
+            ) ||
             pessoas < 0
         ) {
 
@@ -239,7 +285,9 @@ formRegistro.addEventListener(
             );
 
 
-        btn.disabled = true;
+        btn.disabled =
+            true;
+
 
         btn.textContent =
             "Salvando...";
@@ -254,18 +302,19 @@ formRegistro.addEventListener(
                 );
 
 
-            // Verificar se já existe registro para o dia
-
             const snapshot =
                 await get(
                     registrosRef
                 );
 
 
-            let registroExistente = null;
+            let registroExistente =
+                null;
 
 
-            if (snapshot.exists()) {
+            if (
+                snapshot.exists()
+            ) {
 
                 const dados =
                     snapshot.val();
@@ -276,13 +325,19 @@ formRegistro.addEventListener(
                 ) {
 
                     if (
-                        dados[chave].data === data
+                        dados[chave].data ===
+                        data
                     ) {
 
                         registroExistente = {
+
                             chave: chave,
-                            dados: dados[chave]
+
+                            dados:
+                                dados[chave]
+
                         };
+
 
                         break;
 
@@ -293,9 +348,13 @@ formRegistro.addEventListener(
             }
 
 
-            // Se já existe, atualizar
+            // =================================
+            // ATUALIZAR REGISTRO EXISTENTE
+            // =================================
 
-            if (registroExistente) {
+            if (
+                registroExistente
+            ) {
 
                 const confirmar =
                     confirm(
@@ -306,12 +365,17 @@ formRegistro.addEventListener(
                     );
 
 
-                if (!confirmar) {
+                if (
+                    !confirmar
+                ) {
 
-                    btn.disabled = false;
+                    btn.disabled =
+                        false;
+
 
                     btn.textContent =
                         "💾 Salvar dia";
+
 
                     return;
 
@@ -324,9 +388,14 @@ formRegistro.addEventListener(
                         `${CAMINHO}/${registroExistente.chave}`
                     ),
                     {
-                        data: data,
-                        pessoas: pessoas,
-                        ganho: ganho
+                        data:
+                            data,
+
+                        pessoas:
+                            pessoas,
+
+                        ganho:
+                            ganho
                     }
                 );
 
@@ -336,16 +405,27 @@ formRegistro.addEventListener(
                 );
 
 
-            } else {
+            }
 
-                // Criar novo
+            // =================================
+            // NOVO REGISTRO
+            // =================================
+
+            else {
 
                 await push(
                     registrosRef,
                     {
-                        data: data,
-                        pessoas: pessoas,
-                        ganho: ganho
+
+                        data:
+                            data,
+
+                        pessoas:
+                            pessoas,
+
+                        ganho:
+                            ganho
+
                     }
                 );
 
@@ -357,11 +437,13 @@ formRegistro.addEventListener(
             }
 
 
-            // Limpar
+            pessoasInput.value =
+                "";
 
-            pessoasInput.value = "";
 
-            ganhoInput.value = "";
+            ganhoInput.value =
+                "";
+
 
             dataInput.value =
                 dataLocal();
@@ -370,7 +452,9 @@ formRegistro.addEventListener(
             await carregarRegistros();
 
 
-        } catch (erro) {
+        }
+
+        catch (erro) {
 
             console.error(
                 "Erro ao salvar:",
@@ -382,10 +466,13 @@ formRegistro.addEventListener(
                 "Não foi possível salvar o registro."
             );
 
+        }
 
-        } finally {
+        finally {
 
-            btn.disabled = false;
+            btn.disabled =
+                false;
+
 
             btn.textContent =
                 "💾 Salvar dia";
@@ -403,12 +490,11 @@ formRegistro.addEventListener(
 window.carregarRegistros =
 async function () {
 
-    listaRegistros.innerHTML =
-        `
+    listaRegistros.innerHTML = `
         <div class="carregando">
             Carregando registros...
         </div>
-        `;
+    `;
 
 
     try {
@@ -422,18 +508,27 @@ async function () {
             );
 
 
-        if (!snapshot.exists()) {
+        if (
+            !snapshot.exists()
+        ) {
 
-            listaRegistros.innerHTML =
-                `
+            listaRegistros.innerHTML = `
                 <div class="vazio">
-                    <div>📋</div>
-                    <strong>Nenhum registro ainda</strong>
+
+                    <div>
+                        📋
+                    </div>
+
+                    <strong>
+                        Nenhum registro ainda
+                    </strong>
+
                     <p>
                         Registre seu primeiro dia acima.
                     </p>
+
                 </div>
-                `;
+            `;
 
 
             atualizarResumo({});
@@ -447,12 +542,19 @@ async function () {
             snapshot.val();
 
 
-        atualizarResumo(dados);
+        atualizarResumo(
+            dados
+        );
 
-        renderizarHistorico(dados);
+
+        renderizarHistorico(
+            dados
+        );
 
 
-    } catch (erro) {
+    }
+
+    catch (erro) {
 
         console.error(
             "Erro ao carregar registros:",
@@ -460,12 +562,11 @@ async function () {
         );
 
 
-        listaRegistros.innerHTML =
-            `
+        listaRegistros.innerHTML = `
             <div class="erro-box">
                 ❌ Erro ao carregar os registros.
             </div>
-            `;
+        `;
 
     }
 
@@ -476,19 +577,79 @@ async function () {
 // RENDERIZAR HISTÓRICO
 // =====================================
 
-function renderizarHistorico(dados) {
+function renderizarHistorico(
+    dados
+) {
 
-    listaRegistros.innerHTML = "";
+    listaRegistros.innerHTML =
+        "";
+
+
+    const filtro =
+        filtroMes.value;
 
 
     const registros =
         Object.entries(dados)
+            .filter(
+                ([chave, item]) => {
+
+                    if (
+                        !filtro
+                    ) {
+
+                        return true;
+
+                    }
+
+
+                    return (
+                        item.data &&
+                        item.data.startsWith(
+                            filtro
+                        )
+                    );
+
+                }
+            )
             .sort(
                 (a, b) =>
                     b[1].data.localeCompare(
                         a[1].data
                     )
             );
+
+
+    atualizarResumoFiltro(
+        registros
+    );
+
+
+    if (
+        registros.length === 0
+    ) {
+
+        listaRegistros.innerHTML = `
+            <div class="vazio">
+
+                <div>
+                    📅
+                </div>
+
+                <strong>
+                    Nenhum registro encontrado
+                </strong>
+
+                <p>
+                    Não há registros para o período selecionado.
+                </p>
+
+            </div>
+        `;
+
+        return;
+
+    }
 
 
     registros.forEach(
@@ -524,7 +685,9 @@ function renderizarHistorico(dados) {
 
                 <div class="registro-data">
 
-                    <span>📅</span>
+                    <span>
+                        📅
+                    </span>
 
                     <div>
 
@@ -594,33 +757,46 @@ function renderizarHistorico(dados) {
 
 
 // =====================================
-// RESUMO
+// RESUMO GERAL
 // =====================================
 
-function atualizarResumo(dados) {
+function atualizarResumo(
+    dados
+) {
 
     const hoje =
         dataLocal();
 
 
-    const mesAtual =
+    const mes =
         hoje.substring(
             0,
             7
         );
 
 
-    let pessoasHoje = 0;
+    let pessoasHoje =
+        0;
 
-    let ganhoHoje = 0;
 
-    let pessoasMes = 0;
+    let ganhoHoje =
+        0;
 
-    let ganhoMes = 0;
 
-    let pessoasTotal = 0;
+    let pessoasMes =
+        0;
 
-    let ganhoTotal = 0;
+
+    let ganhoMes =
+        0;
+
+
+    let pessoasTotal =
+        0;
+
+
+    let ganhoTotal =
+        0;
 
 
     for (
@@ -652,11 +828,13 @@ function atualizarResumo(dados) {
 
 
         if (
-            item.data === hoje
+            item.data ===
+            hoje
         ) {
 
             pessoasHoje +=
                 pessoas;
+
 
             ganhoHoje +=
                 ganho;
@@ -667,12 +845,13 @@ function atualizarResumo(dados) {
         if (
             item.data &&
             item.data.startsWith(
-                mesAtual
+                mes
             )
         ) {
 
             pessoasMes +=
                 pessoas;
+
 
             ganhoMes +=
                 ganho;
@@ -727,7 +906,87 @@ function atualizarResumo(dados) {
 
 
 // =====================================
-// EDITAR
+// RESUMO DO FILTRO
+// =====================================
+
+function atualizarResumoFiltro(
+    registros
+) {
+
+    let pessoas =
+        0;
+
+
+    let ganho =
+        0;
+
+
+    registros.forEach(
+        ([chave, item]) => {
+
+            pessoas +=
+                Number(
+                    item.pessoas || 0
+                );
+
+
+            ganho +=
+                Number(
+                    item.ganho || 0
+                );
+
+        }
+    );
+
+
+    document.getElementById(
+        "pessoasFiltro"
+    ).textContent =
+        pessoas;
+
+
+    document.getElementById(
+        "ganhoFiltro"
+    ).textContent =
+        formatarDinheiro(
+            ganho
+        );
+
+}
+
+
+// =====================================
+// FILTRO DE MÊS
+// =====================================
+
+filtroMes.addEventListener(
+    "change",
+    function () {
+
+        carregarRegistros();
+
+    }
+);
+
+
+// =====================================
+// LIMPAR FILTRO
+// =====================================
+
+window.limparFiltro =
+function () {
+
+    filtroMes.value =
+        "";
+
+
+    carregarRegistros();
+
+};
+
+
+// =====================================
+// EDITAR REGISTRO
 // =====================================
 
 window.editarRegistro =
@@ -744,7 +1003,9 @@ async function (chave) {
             );
 
 
-        if (!snapshot.exists()) {
+        if (
+            !snapshot.exists()
+        ) {
 
             alert(
                 "Registro não encontrado."
@@ -772,8 +1033,11 @@ async function (chave) {
 
 
         window.scrollTo({
+
             top: 0,
+
             behavior: "smooth"
+
         });
 
 
@@ -785,11 +1049,14 @@ async function (chave) {
         );
 
 
-    } catch (erro) {
+    }
+
+    catch (erro) {
 
         console.error(
             erro
         );
+
 
         alert(
             "Erro ao abrir o registro."
@@ -801,7 +1068,7 @@ async function (chave) {
 
 
 // =====================================
-// EXCLUIR
+// EXCLUIR REGISTRO
 // =====================================
 
 window.excluirRegistro =
@@ -813,8 +1080,12 @@ async function (chave) {
         );
 
 
-    if (!confirmar) {
+    if (
+        !confirmar
+    ) {
+
         return;
+
     }
 
 
@@ -836,7 +1107,9 @@ async function (chave) {
         carregarRegistros();
 
 
-    } catch (erro) {
+    }
+
+    catch (erro) {
 
         console.error(
             "Erro ao excluir:",
@@ -862,7 +1135,8 @@ senha.addEventListener(
     function (event) {
 
         if (
-            event.key === "Enter"
+            event.key ===
+            "Enter"
         ) {
 
             entrar();
@@ -880,5 +1154,10 @@ senha.addEventListener(
 painel.style.display =
     "none";
 
+
 dataInput.value =
     dataLocal();
+
+
+filtroMes.value =
+    mesAtual();
