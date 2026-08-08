@@ -19,6 +19,8 @@ import {
 
 const CAMINHO = "controleFinanceiro";
 
+const EMAIL_ADMIN = "amorinhaamora495@gmail.com";
+
 
 // =====================================
 // ELEMENTOS
@@ -56,31 +58,12 @@ const filtroMes =
 
 
 // =====================================
-// E-MAIL DO ADMIN
-// =====================================
-//
-// IMPORTANTE:
-// coloque aqui o MESMO e-mail que você
-// cadastrou no Firebase Authentication.
-//
-// Exemplo:
-//
-// const EMAIL_ADMIN = "seuemail@gmail.com";
-//
-// NÃO coloque sua senha aqui.
-//
-
-const EMAIL_ADMIN = "amorinhaamora495@gmail.com";
-
-
-// =====================================
 // DATA LOCAL
 // =====================================
 
 function dataLocal() {
 
-    const hoje =
-        new Date();
+    const hoje = new Date();
 
     const ano =
         hoje.getFullYear();
@@ -96,7 +79,6 @@ function dataLocal() {
         ).padStart(2, "0");
 
     return `${ano}-${mes}-${dia}`;
-
 }
 
 
@@ -121,16 +103,13 @@ function mesAtual() {
 function formatarData(data) {
 
     if (!data) {
-
         return "--/--/----";
-
     }
 
     const partes =
         data.split("-");
 
     return `${partes[2]}/${partes[1]}/${partes[0]}`;
-
 }
 
 
@@ -154,43 +133,61 @@ function formatarDinheiro(valor) {
 
 
 // =====================================
-// LOGIN FIREBASE
+// MOSTRAR PAINEL
+// =====================================
+
+function mostrarPainel() {
+
+    login.style.display =
+        "none";
+
+    painel.style.display =
+        "block";
+
+    dataInput.value =
+        dataLocal();
+
+    filtroMes.value =
+        mesAtual();
+
+    carregarRegistros();
+
+}
+
+
+// =====================================
+// ESCONDER PAINEL
+// =====================================
+
+function esconderPainel() {
+
+    painel.style.display =
+        "none";
+
+    login.style.display =
+        "flex";
+
+}
+
+
+// =====================================
+// LOGIN
 // =====================================
 
 window.entrar =
 async function () {
 
-    const email =
-        EMAIL_ADMIN.trim();
-
     const password =
         senha.value.trim();
 
-
     erroLogin.textContent =
         "";
-
-
-    if (
-        !email ||
-        email ===
-        "COLOQUE_SEU_EMAIL_AQUI"
-    ) {
-
-        erroLogin.textContent =
-            "Configure o e-mail do administrador no admin.js.";
-
-        return;
-
-    }
 
 
     if (!password) {
 
         erroLogin.textContent =
             "Digite sua senha.";
-
-        senha.focus();
 
         return;
 
@@ -219,15 +216,19 @@ async function () {
         const resultado =
             await signInWithEmailAndPassword(
                 auth,
-                email,
+                EMAIL_ADMIN,
                 password
             );
 
 
+        const usuario =
+            resultado.user;
+
+
         if (
-            resultado.user.email
-                .toLowerCase() !==
-            email.toLowerCase()
+            !usuario.email ||
+            usuario.email.toLowerCase() !==
+            EMAIL_ADMIN.toLowerCase()
         ) {
 
             await signOut(
@@ -235,7 +236,7 @@ async function () {
             );
 
             throw new Error(
-                "Usuário não autorizado."
+                "USUARIO_NAO_AUTORIZADO"
             );
 
         }
@@ -253,68 +254,111 @@ async function () {
     catch (erro) {
 
         console.error(
-            "Erro no login:",
+            "ERRO COMPLETO DO FIREBASE:",
             erro
         );
 
 
-        let mensagem =
-            "Não foi possível entrar.";
+        console.error(
+            "CÓDIGO DO ERRO:",
+            erro.code
+        );
 
 
-        if (
-            erro.code ===
-            "auth/invalid-credential"
-        ) {
+        console.error(
+            "MENSAGEM DO ERRO:",
+            erro.message
+        );
 
-            mensagem =
-                "E-mail ou senha incorretos.";
+
+        switch (erro.code) {
+
+            case "auth/invalid-credential":
+
+                erroLogin.textContent =
+                    "E-mail ou senha incorretos.";
+
+                break;
+
+
+            case "auth/invalid-email":
+
+                erroLogin.textContent =
+                    "O e-mail configurado no ADM é inválido.";
+
+                break;
+
+
+            case "auth/user-not-found":
+
+                erroLogin.textContent =
+                    "Esse usuário não existe no Firebase Authentication.";
+
+                break;
+
+
+            case "auth/wrong-password":
+
+                erroLogin.textContent =
+                    "A senha está incorreta.";
+
+                break;
+
+
+            case "auth/too-many-requests":
+
+                erroLogin.textContent =
+                    "Muitas tentativas. Aguarde alguns minutos e tente novamente.";
+
+                break;
+
+
+            case "auth/network-request-failed":
+
+                erroLogin.textContent =
+                    "Falha de conexão. Verifique sua internet.";
+
+                break;
+
+
+            case "auth/operation-not-allowed":
+
+                erroLogin.textContent =
+                    "O login por E-mail/senha não está ativado no Firebase.";
+
+                break;
+
+
+            case "auth/api-key-not-valid.-please-pass-a-valid-api-key.":
+
+                erroLogin.textContent =
+                    "A chave do Firebase não é válida.";
+
+                break;
+
+
+            default:
+
+                if (
+                    erro.message ===
+                    "USUARIO_NAO_AUTORIZADO"
+                ) {
+
+                    erroLogin.textContent =
+                        "Usuário não autorizado.";
+
+                }
+
+                else {
+
+                    erroLogin.textContent =
+                        `Erro Firebase: ${erro.code || erro.message}`;
+
+                }
+
+                break;
 
         }
-
-        else if (
-            erro.code ===
-            "auth/invalid-email"
-        ) {
-
-            mensagem =
-                "O e-mail do administrador é inválido.";
-
-        }
-
-        else if (
-            erro.code ===
-            "auth/too-many-requests"
-        ) {
-
-            mensagem =
-                "Muitas tentativas. Aguarde um pouco e tente novamente.";
-
-        }
-
-        else if (
-            erro.code ===
-            "auth/network-request-failed"
-        ) {
-
-            mensagem =
-                "Verifique sua conexão com a internet.";
-
-        }
-
-        else if (
-            erro.message ===
-            "Usuário não autorizado."
-        ) {
-
-            mensagem =
-                "Usuário não autorizado.";
-
-        }
-
-
-        erroLogin.textContent =
-            mensagem;
 
     }
 
@@ -336,98 +380,14 @@ async function () {
 
 
 // =====================================
-// MOSTRAR PAINEL
-// =====================================
-
-function mostrarPainel() {
-
-    login.style.display =
-        "none";
-
-
-    painel.style.display =
-        "block";
-
-
-    dataInput.value =
-        dataLocal();
-
-
-    filtroMes.value =
-        mesAtual();
-
-
-    carregarRegistros();
-
-}
-
-
-// =====================================
-// ESCONDER PAINEL
-// =====================================
-
-function esconderPainel() {
-
-    painel.style.display =
-        "none";
-
-
-    login.style.display =
-        "flex";
-
-
-    senha.value =
-        "";
-
-
-    erroLogin.textContent =
-        "";
-
-}
-
-
-// =====================================
-// SAIR
-// =====================================
-
-window.sair =
-async function () {
-
-    try {
-
-        await signOut(
-            auth
-        );
-
-        esconderPainel();
-
-    }
-
-    catch (erro) {
-
-        console.error(
-            "Erro ao sair:",
-            erro
-        );
-
-        alert(
-            "Não foi possível sair."
-        );
-
-    }
-
-};
-
-
-// =====================================
-// VERIFICAR AUTENTICAÇÃO
+// VERIFICAR LOGIN AUTOMATICAMENTE
 // =====================================
 
 onAuthStateChanged(
     auth,
-    function (user) {
+    function (usuario) {
 
-        if (!user) {
+        if (!usuario) {
 
             esconderPainel();
 
@@ -437,14 +397,12 @@ onAuthStateChanged(
 
 
         if (
-            !user.email ||
-            user.email.toLowerCase() !==
+            !usuario.email ||
+            usuario.email.toLowerCase() !==
             EMAIL_ADMIN.toLowerCase()
         ) {
 
-            signOut(
-                auth
-            );
+            signOut(auth);
 
             esconderPainel();
 
@@ -463,6 +421,41 @@ onAuthStateChanged(
 
 
 // =====================================
+// SAIR
+// =====================================
+
+window.sair =
+async function () {
+
+    try {
+
+        await signOut(
+            auth
+        );
+
+        senha.value =
+            "";
+
+        erroLogin.textContent =
+            "";
+
+        esconderPainel();
+
+    }
+
+    catch (erro) {
+
+        console.error(
+            "Erro ao sair:",
+            erro
+        );
+
+    }
+
+};
+
+
+// =====================================
 // SALVAR REGISTRO
 // =====================================
 
@@ -472,8 +465,6 @@ formRegistro.addEventListener(
 
         event.preventDefault();
 
-
-        // Garantir que existe usuário autenticado
 
         if (!auth.currentUser) {
 
@@ -516,9 +507,7 @@ formRegistro.addEventListener(
 
 
         if (
-            !Number.isInteger(
-                pessoas
-            ) ||
+            !Number.isInteger(pessoas) ||
             pessoas < 0
         ) {
 
@@ -553,7 +542,6 @@ formRegistro.addEventListener(
 
         btn.disabled =
             true;
-
 
         btn.textContent =
             "Salvando...";
@@ -604,7 +592,6 @@ formRegistro.addEventListener(
 
                         };
 
-
                         break;
 
                     }
@@ -613,10 +600,6 @@ formRegistro.addEventListener(
 
             }
 
-
-            // =================================
-            // ATUALIZAR EXISTENTE
-            // =================================
 
             if (
                 registroExistente
@@ -631,15 +614,7 @@ formRegistro.addEventListener(
                     );
 
 
-                if (
-                    !confirmar
-                ) {
-
-                    btn.disabled =
-                        false;
-
-                    btn.textContent =
-                        "💾 Salvar dia";
+                if (!confirmar) {
 
                     return;
 
@@ -652,14 +627,9 @@ formRegistro.addEventListener(
                         `${CAMINHO}/${registroExistente.chave}`
                     ),
                     {
-                        data:
-                            data,
-
-                        pessoas:
-                            pessoas,
-
-                        ganho:
-                            ganho
+                        data,
+                        pessoas,
+                        ganho
                     }
                 );
 
@@ -670,25 +640,14 @@ formRegistro.addEventListener(
 
             }
 
-            // =================================
-            // NOVO REGISTRO
-            // =================================
-
             else {
 
                 await push(
                     registrosRef,
                     {
-
-                        data:
-                            data,
-
-                        pessoas:
-                            pessoas,
-
-                        ganho:
-                            ganho
-
+                        data,
+                        pessoas,
+                        ganho
                     }
                 );
 
@@ -703,10 +662,8 @@ formRegistro.addEventListener(
             pessoasInput.value =
                 "";
 
-
             ganhoInput.value =
                 "";
-
 
             dataInput.value =
                 dataLocal();
@@ -724,37 +681,9 @@ formRegistro.addEventListener(
             );
 
 
-            if (
-                erro.code ===
-                "PERMISSION_DENIED"
-            ) {
-
-                alert(
-                    "O Firebase bloqueou o acesso. Ainda precisamos atualizar as regras de segurança."
-                );
-
-            }
-
-            else if (
-                erro.code ===
-                "auth/user-token-expired"
-            ) {
-
-                alert(
-                    "Sua sessão expirou. Entre novamente."
-                );
-
-                esconderPainel();
-
-            }
-
-            else {
-
-                alert(
-                    "Não foi possível salvar o registro."
-                );
-
-            }
+            alert(
+                `Não foi possível salvar.\n\n${erro.code || erro.message}`
+            );
 
         }
 
@@ -780,9 +709,7 @@ window.carregarRegistros =
 async function () {
 
     if (!auth.currentUser) {
-
         return;
-
     }
 
 
@@ -804,9 +731,7 @@ async function () {
             );
 
 
-        if (
-            !snapshot.exists()
-        ) {
+        if (!snapshot.exists()) {
 
             listaRegistros.innerHTML = `
                 <div class="vazio">
@@ -854,35 +779,18 @@ async function () {
     catch (erro) {
 
         console.error(
-            "Erro ao carregar registros:",
+            "Erro ao carregar:",
             erro
         );
 
 
-        if (
-            erro.code ===
-            "PERMISSION_DENIED"
-        ) {
-
-            listaRegistros.innerHTML = `
-                <div class="erro-box">
-                    🔒 O Firebase bloqueou o acesso.
-                    <br><br>
-                    Precisamos configurar as regras de segurança.
-                </div>
-            `;
-
-        }
-
-        else {
-
-            listaRegistros.innerHTML = `
-                <div class="erro-box">
-                    ❌ Erro ao carregar os registros.
-                </div>
-            `;
-
-        }
+        listaRegistros.innerHTML = `
+            <div class="erro-box">
+                ❌ Erro ao carregar os registros.
+                <br><br>
+                ${erro.code || erro.message}
+            </div>
+        `;
 
     }
 
@@ -890,7 +798,7 @@ async function () {
 
 
 // =====================================
-// RENDERIZAR HISTÓRICO
+// HISTÓRICO
 // =====================================
 
 function renderizarHistorico(
@@ -911,11 +819,8 @@ function renderizarHistorico(
                 ([chave, item]) => {
 
                     if (!filtro) {
-
                         return true;
-
                     }
-
 
                     return (
                         item.data &&
@@ -969,10 +874,6 @@ function renderizarHistorico(
     registros.forEach(
         ([chave, item]) => {
 
-            const data =
-                item.data || "";
-
-
             const pessoas =
                 Number(
                     item.pessoas || 0
@@ -1006,7 +907,7 @@ function renderizarHistorico(
                     <div>
 
                         <strong>
-                            ${formatarData(data)}
+                            ${formatarData(item.data)}
                         </strong>
 
                         <small>
@@ -1041,7 +942,6 @@ function renderizarHistorico(
                     <button
                         class="btn-editar"
                         onclick="editarRegistro('${chave}')"
-                        title="Editar"
                     >
                         ✏️
                     </button>
@@ -1050,7 +950,6 @@ function renderizarHistorico(
                     <button
                         class="btn-excluir"
                         onclick="excluirRegistro('${chave}')"
-                        title="Excluir"
                     >
                         🗑️
                     </button>
@@ -1089,28 +988,12 @@ function atualizarResumo(
         );
 
 
-    let pessoasHoje =
-        0;
-
-
-    let ganhoHoje =
-        0;
-
-
-    let pessoasMes =
-        0;
-
-
-    let ganhoMes =
-        0;
-
-
-    let pessoasTotal =
-        0;
-
-
-    let ganhoTotal =
-        0;
+    let pessoasHoje = 0;
+    let ganhoHoje = 0;
+    let pessoasMes = 0;
+    let ganhoMes = 0;
+    let pessoasTotal = 0;
+    let ganhoTotal = 0;
 
 
     for (
@@ -1149,7 +1032,6 @@ function atualizarResumo(
             pessoasHoje +=
                 pessoas;
 
-
             ganhoHoje +=
                 ganho;
 
@@ -1165,7 +1047,6 @@ function atualizarResumo(
 
             pessoasMes +=
                 pessoas;
-
 
             ganhoMes +=
                 ganho;
@@ -1227,12 +1108,8 @@ function atualizarResumoFiltro(
     registros
 ) {
 
-    let pessoas =
-        0;
-
-
-    let ganho =
-        0;
+    let pessoas = 0;
+    let ganho = 0;
 
 
     registros.forEach(
@@ -1270,7 +1147,7 @@ function atualizarResumoFiltro(
 
 
 // =====================================
-// FILTRO DE MÊS
+// FILTRO
 // =====================================
 
 filtroMes.addEventListener(
@@ -1293,14 +1170,13 @@ function () {
     filtroMes.value =
         "";
 
-
     carregarRegistros();
 
 };
 
 
 // =====================================
-// EDITAR REGISTRO
+// EDITAR
 // =====================================
 
 window.editarRegistro =
@@ -1330,9 +1206,7 @@ async function (chave) {
             );
 
 
-        if (
-            !snapshot.exists()
-        ) {
+        if (!snapshot.exists()) {
 
             alert(
                 "Registro não encontrado."
@@ -1360,11 +1234,8 @@ async function (chave) {
 
 
         window.scrollTo({
-
             top: 0,
-
             behavior: "smooth"
-
         });
 
 
@@ -1372,7 +1243,7 @@ async function (chave) {
 
 
         alert(
-            "Edite os dados acima e clique em Salvar dia."
+            "Edite os dados e clique em Salvar dia."
         );
 
     }
@@ -1383,9 +1254,8 @@ async function (chave) {
             erro
         );
 
-
         alert(
-            "Erro ao abrir o registro."
+            `Erro ao abrir registro.\n\n${erro.code || erro.message}`
         );
 
     }
@@ -1394,7 +1264,7 @@ async function (chave) {
 
 
 // =====================================
-// EXCLUIR REGISTRO
+// EXCLUIR
 // =====================================
 
 window.excluirRegistro =
@@ -1420,9 +1290,7 @@ async function (chave) {
 
 
     if (!confirmar) {
-
         return;
-
     }
 
 
@@ -1448,13 +1316,12 @@ async function (chave) {
     catch (erro) {
 
         console.error(
-            "Erro ao excluir:",
             erro
         );
 
 
         alert(
-            "Não foi possível excluir o registro."
+            `Não foi possível excluir.\n\n${erro.code || erro.message}`
         );
 
     }
@@ -1463,7 +1330,7 @@ async function (chave) {
 
 
 // =====================================
-// ENTER NO LOGIN
+// ENTER
 // =====================================
 
 senha.addEventListener(
