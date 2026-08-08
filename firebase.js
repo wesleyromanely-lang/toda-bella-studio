@@ -1,72 +1,55 @@
-import { 
-initializeApp 
+import {
+    initializeApp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-
 import {
-
-getDatabase,
-ref,
-push,
-get,
-child,
-remove
-
+    getDatabase,
+    ref,
+    push,
+    get,
+    child,
+    remove,
+    update
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-
 
 
 const firebaseConfig = {
 
+    apiKey: "AIzaSyAstm5bEDdHWCKSVphs4cfddCT-SYNqjZA",
 
-apiKey: "AIzaSyAstm5bEDdHWCKSVphs4cfddCT-SYNqjZA",
+    authDomain: "todabelastudio-ea3ac.firebaseapp.com",
 
-authDomain: "todabelastudio-ea3ac.firebaseapp.com",
+    databaseURL: "https://todabelastudio-ea3ac-default-rtdb.firebaseio.com",
 
-databaseURL: "https://todabelastudio-ea3ac-default-rtdb.firebaseio.com",
+    projectId: "todabelastudio-ea3ac",
 
-projectId: "todabelastudio-ea3ac",
+    storageBucket: "todabelastudio-ea3ac.firebasestorage.app",
 
-storageBucket: "todabelastudio-ea3ac.firebasestorage.app",
+    messagingSenderId: "289555596882",
 
-messagingSenderId: "289555596882",
-
-appId: "1:289555596882:web:32519783d49afacb28c18b"
-
+    appId: "1:289555596882:web:32519783d49afacb28c18b"
 
 };
 
 
-
-
-
+// Inicializar Firebase
 
 const app = initializeApp(firebaseConfig);
 
 
-
-
+// Conectar ao Realtime Database
 
 const db = getDatabase(app);
 
 
-
-
-
+// Exportar funções
 
 export {
-
-db,
-
-ref,
-
-push,
-
-get,
-
-child,
-
-remove
-
+    db,
+    ref,
+    push,
+    get,
+    child,
+    remove,
+    update
 };
