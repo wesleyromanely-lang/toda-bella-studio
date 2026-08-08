@@ -12,6 +12,13 @@ import {
     update
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
 
 const firebaseConfig = {
 
@@ -34,22 +41,37 @@ const firebaseConfig = {
 
 // Inicializar Firebase
 
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(
+    firebaseConfig
+);
 
 
-// Conectar ao Realtime Database
+// Realtime Database
 
-const db = getDatabase(app);
+const db =
+    getDatabase(app);
 
 
-// Exportar funções
+// Authentication
+
+const auth =
+    getAuth(app);
+
+
+// Exportar tudo
 
 export {
     db,
+    auth,
+
     ref,
     push,
     get,
     child,
     remove,
-    update
+    update,
+
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
 };
