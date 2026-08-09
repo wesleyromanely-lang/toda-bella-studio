@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
@@ -10,13 +11,17 @@
     content="width=device-width, initial-scale=1.0"
 >
 
-<title>ADM - Toda Bella Studio</title>
+<title>
+    ADM - Toda Bella Studio
+</title>
+
 
 <style>
 
 *{
     box-sizing:border-box;
 }
+
 
 body{
 
@@ -32,25 +37,82 @@ body{
 
 }
 
-.login{
 
-    max-width:400px;
+#painel{
 
-    margin:70px auto;
+    max-width:1100px;
 
-    background:white;
-
-    padding:30px;
-
-    border-radius:20px;
-
-    box-shadow:0 5px 25px rgba(0,0,0,.10);
+    margin:auto;
 
 }
 
-.login h2{
+
+.topo{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+
+.topo h1{
+
+    color:#c97b95;
+
+    margin:0;
+
+}
+
+
+.subtitulo{
+
+    color:#777;
+
+    margin-top:5px;
+
+}
+
+
+.dashboard{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(200px,1fr)
+        );
+
+    gap:15px;
+
+    margin-bottom:20px;
+
+}
+
+
+.box{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0,0,0,.07);
 
     text-align:center;
+
+}
+
+
+.box h3{
 
     color:#c97b95;
 
@@ -58,13 +120,65 @@ body{
 
 }
 
-.login p{
 
-    text-align:center;
+.box strong{
 
-    color:#777;
+    font-size:25px;
 
 }
+
+
+.card{
+
+    background:white;
+
+    padding:20px;
+
+    margin-top:15px;
+
+    border-radius:15px;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0,0,0,.07);
+
+}
+
+
+.card h2{
+
+    margin-top:0;
+
+    color:#c97b95;
+
+}
+
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(200px,1fr)
+        );
+
+    gap:15px;
+
+}
+
+
+label{
+
+    display:block;
+
+    font-weight:bold;
+
+    margin-bottom:5px;
+
+}
+
 
 input{
 
@@ -72,29 +186,27 @@ input{
 
     padding:13px;
 
-    margin:8px 0;
-
     border:1px solid #ddd;
 
     border-radius:10px;
 
     font-size:16px;
 
-    outline:none;
-
 }
 
+
 input:focus{
+
+    outline:none;
 
     border-color:#c97b95;
 
 }
 
+
 button{
 
-    width:100%;
-
-    padding:13px;
+    padding:12px 18px;
 
     background:#c97b95;
 
@@ -108,17 +220,15 @@ button{
 
     font-weight:bold;
 
-    font-size:15px;
-
-    margin-top:8px;
-
 }
+
 
 button:hover{
 
     opacity:.9;
 
 }
+
 
 button:disabled{
 
@@ -128,154 +238,24 @@ button:disabled{
 
 }
 
-#erroLogin{
-
-    color:#d32f2f;
-
-    text-align:center;
-
-    font-size:14px;
-
-    margin-top:12px;
-
-    min-height:20px;
-
-}
-
-#painel{
-
-    display:none;
-
-    max-width:1100px;
-
-    margin:auto;
-
-}
-
-.topo{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:15px;
-
-    margin-bottom:20px;
-
-}
-
-.topo h1{
-
-    color:#c97b95;
-
-    margin:0;
-
-}
-
-.btn-sair{
-
-    width:auto;
-
-    background:#777;
-
-    padding:10px 18px;
-
-}
-
-.dashboard{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(auto-fit,minmax(220px,1fr));
-
-    gap:15px;
-
-    margin-bottom:20px;
-
-}
-
-.box{
-
-    background:white;
-
-    padding:20px;
-
-    border-radius:15px;
-
-    box-shadow:0 3px 12px rgba(0,0,0,.07);
-
-    text-align:center;
-
-}
-
-.box h3{
-
-    margin:0 0 8px;
-
-    color:#c97b95;
-
-}
-
-.box strong{
-
-    font-size:24px;
-
-}
-
-.card{
-
-    background:white;
-
-    padding:20px;
-
-    margin-top:15px;
-
-    border-radius:15px;
-
-    box-shadow:0 3px 12px rgba(0,0,0,.07);
-
-}
-
-.card h2{
-
-    margin-top:0;
-
-    color:#c97b95;
-
-}
-
-.form-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(auto-fit,minmax(200px,1fr));
-
-    gap:10px;
-
-}
-
-.form-grid input{
-
-    margin:0;
-
-}
 
 .btn-salvar{
 
+    width:100%;
+
     margin-top:15px;
 
+    font-size:16px;
+
 }
+
 
 .filtro{
 
     display:grid;
 
     grid-template-columns:
-        minmax(180px,250px) 1fr;
+        250px 150px;
 
     gap:10px;
 
@@ -283,11 +263,13 @@ button:disabled{
 
 }
 
+
 .filtro button{
 
-    margin:0;
+    height:46px;
 
 }
+
 
 .resumo-filtro{
 
@@ -302,6 +284,7 @@ button:disabled{
 
 }
 
+
 .resumo-item{
 
     background:#fff5f8;
@@ -314,23 +297,26 @@ button:disabled{
 
 }
 
+
 .resumo-item strong{
 
     display:block;
 
     color:#c97b95;
 
-    font-size:20px;
+    font-size:21px;
 
     margin-top:5px;
 
 }
 
+
 #listaRegistros{
 
-    margin-top:15px;
+    margin-top:20px;
 
 }
+
 
 .registro{
 
@@ -343,15 +329,16 @@ button:disabled{
 
     align-items:center;
 
+    background:#fff8fa;
+
     padding:15px;
 
     margin-bottom:10px;
 
-    background:#fff8fa;
-
     border-radius:12px;
 
 }
+
 
 .registro-data{
 
@@ -359,15 +346,17 @@ button:disabled{
 
     align-items:center;
 
-    gap:10px;
+    gap:12px;
 
 }
 
-.registro-data span{
+
+.icone-data{
 
     font-size:25px;
 
 }
+
 
 .registro-data strong{
 
@@ -375,11 +364,17 @@ button:disabled{
 
 }
 
+
 .registro-data small{
+
+    display:block;
 
     color:#777;
 
+    margin-top:4px;
+
 }
+
 
 .registro-valor{
 
@@ -387,19 +382,24 @@ button:disabled{
 
 }
 
+
 .registro-valor strong{
 
     display:block;
 
     color:#c97b95;
 
+    font-size:18px;
+
 }
+
 
 .registro-valor small{
 
     color:#777;
 
 }
+
 
 .registro-acoes{
 
@@ -409,15 +409,13 @@ button:disabled{
 
 }
 
+
 .registro-acoes button{
-
-    width:auto;
-
-    margin:0;
 
     padding:9px 12px;
 
 }
+
 
 .btn-editar{
 
@@ -425,33 +423,51 @@ button:disabled{
 
 }
 
+
 .btn-excluir{
 
     background:#e53935;
 
 }
 
-.carregando,
-.vazio,
-.erro-box{
 
-    background:#fff5f8;
+.carregando{
 
     padding:25px;
-
-    border-radius:12px;
 
     text-align:center;
 
 }
 
+
+.vazio{
+
+    text-align:center;
+
+    padding:30px;
+
+    background:#fff5f8;
+
+    border-radius:12px;
+
+}
+
+
+.icone-vazio{
+
+    font-size:35px;
+
+    margin-bottom:10px;
+
+}
+
+
 .vazio strong{
 
     display:block;
 
-    margin:10px 0;
-
 }
+
 
 .vazio p{
 
@@ -459,11 +475,19 @@ button:disabled{
 
 }
 
+
 .erro-box{
 
-    color:#d32f2f;
+    background:#ffebee;
+
+    color:#c62828;
+
+    padding:20px;
+
+    border-radius:12px;
 
 }
+
 
 @media(max-width:600px){
 
@@ -473,19 +497,43 @@ button:disabled{
 
     }
 
+
     .topo{
 
-        flex-direction:column;
+        display:block;
 
         text-align:center;
 
     }
 
-    .btn-sair{
+
+    .topo h1{
+
+        margin-bottom:5px;
+
+    }
+
+
+    .filtro{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .filtro button{
 
         width:100%;
 
     }
+
+
+    .resumo-filtro{
+
+        grid-template-columns:1fr;
+
+    }
+
 
     .registro{
 
@@ -495,11 +543,13 @@ button:disabled{
 
     }
 
+
     .registro-data{
 
         justify-content:center;
 
     }
+
 
     .registro-valor{
 
@@ -507,27 +557,17 @@ button:disabled{
 
     }
 
+
     .registro-acoes{
 
         justify-content:center;
 
     }
 
+
     .registro-acoes button{
 
         flex:1;
-
-    }
-
-    .filtro{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .resumo-filtro{
-
-        grid-template-columns:1fr;
 
     }
 
@@ -541,75 +581,29 @@ button:disabled{
 <body>
 
 
-<!-- =====================================
-     LOGIN
-===================================== -->
-
-<div
-    class="login"
-    id="login"
->
-
-    <h2>
-        🔒 Área Administrativa
-    </h2>
-
-    <p>
-        Toda Bella Studio
-    </p>
-
-
-    <input
-        type="password"
-        id="senha"
-        placeholder="Digite sua senha"
-        autocomplete="current-password"
-    >
-
-
-    <button
-        type="button"
-        onclick="entrar()"
-    >
-        🔐 Entrar
-    </button>
-
-
-    <div id="erroLogin"></div>
-
-</div>
-
-
-
-<!-- =====================================
-     PAINEL
-===================================== -->
-
 <div id="painel">
 
 
     <div class="topo">
 
-        <h1>
-            🌸 Toda Bella Studio
-        </h1>
+        <div>
 
+            <h1>
+                🌸 Toda Bella Studio
+            </h1>
 
-        <button
-            class="btn-sair"
-            type="button"
-            onclick="sair()"
-        >
-            Sair
-        </button>
+            <div class="subtitulo">
+                Controle financeiro
+            </div>
+
+        </div>
 
     </div>
 
 
-
-    <!-- =================================
+    <!-- ==================================
          RESUMO
-    ================================== -->
+    =================================== -->
 
     <div class="dashboard">
 
@@ -694,10 +688,9 @@ button:disabled{
     </div>
 
 
-
-    <!-- =================================
+    <!-- ==================================
          REGISTRAR DIA
-    ================================== -->
+    =================================== -->
 
     <div class="card">
 
@@ -714,7 +707,7 @@ button:disabled{
 
                 <div>
 
-                    <label>
+                    <label for="data">
                         Data
                     </label>
 
@@ -729,7 +722,7 @@ button:disabled{
 
                 <div>
 
-                    <label>
+                    <label for="pessoas">
                         Quantidade de pessoas
                     </label>
 
@@ -747,8 +740,8 @@ button:disabled{
 
                 <div>
 
-                    <label>
-                        Ganho do dia
+                    <label for="ganho">
+                        Quanto ganhou
                     </label>
 
                     <input
@@ -761,7 +754,6 @@ button:disabled{
                     >
 
                 </div>
-
 
             </div>
 
@@ -780,10 +772,9 @@ button:disabled{
     </div>
 
 
-
-    <!-- =================================
+    <!-- ==================================
          HISTÓRICO
-    ================================== -->
+    =================================== -->
 
     <div class="card">
 
@@ -797,8 +788,8 @@ button:disabled{
 
             <div>
 
-                <label>
-                    Filtrar por mês
+                <label for="filtroMes">
+                    Ver mês
                 </label>
 
                 <input
@@ -813,7 +804,7 @@ button:disabled{
                 type="button"
                 onclick="limparFiltro()"
             >
-                🔄 Ver todos
+                🔄 Todos
             </button>
 
 
@@ -825,7 +816,7 @@ button:disabled{
 
             <div class="resumo-item">
 
-                👩 Pessoas
+                👩 Pessoas no período
 
                 <strong id="pessoasFiltro">
                     0
@@ -836,7 +827,7 @@ button:disabled{
 
             <div class="resumo-item">
 
-                💰 Ganho
+                💰 Ganho no período
 
                 <strong id="ganhoFiltro">
                     R$ 0,00
@@ -844,16 +835,13 @@ button:disabled{
 
             </div>
 
-
         </div>
 
 
         <div id="listaRegistros">
 
             <div class="carregando">
-
-                Entre para carregar os registros.
-
+                Carregando...
             </div>
 
         </div>
@@ -864,10 +852,6 @@ button:disabled{
 
 </div>
 
-
-<!-- =====================================
-     JAVASCRIPT
-===================================== -->
 
 <script
     type="module"
