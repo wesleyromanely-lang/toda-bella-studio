@@ -1,214 +1,880 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Painel Administrativo - Toda Bella Studio</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>ADM - Toda Bella Studio</title>
 
 <style>
 
+*{
+    box-sizing:border-box;
+}
+
 body{
-font-family:Arial,sans-serif;
-background:#fff5f8;
-padding:20px;
-margin:0;
+
+    font-family:Arial,sans-serif;
+
+    background:#fff5f8;
+
+    margin:0;
+
+    padding:20px;
+
+    color:#444;
+
 }
 
 .login{
-max-width:400px;
-margin:50px auto;
-background:white;
-padding:25px;
-border-radius:15px;
-box-shadow:0 0 15px rgba(0,0,0,.1);
+
+    max-width:400px;
+
+    margin:70px auto;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:0 5px 25px rgba(0,0,0,.10);
+
 }
 
 .login h2{
-text-align:center;
-color:#c97b95;
+
+    text-align:center;
+
+    color:#c97b95;
+
+    margin-top:0;
+
+}
+
+.login p{
+
+    text-align:center;
+
+    color:#777;
+
 }
 
 input{
-width:100%;
-padding:12px;
-margin:10px 0;
-border:1px solid #ddd;
-border-radius:10px;
-box-sizing:border-box;
+
+    width:100%;
+
+    padding:13px;
+
+    margin:8px 0;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    font-size:16px;
+
+    outline:none;
+
+}
+
+input:focus{
+
+    border-color:#c97b95;
+
 }
 
 button{
-width:100%;
-padding:12px;
-background:#c97b95;
-color:white;
-border:none;
-border-radius:10px;
-cursor:pointer;
-font-weight:bold;
-margin-top:5px;
+
+    width:100%;
+
+    padding:13px;
+
+    background:#c97b95;
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    font-size:15px;
+
+    margin-top:8px;
+
 }
 
 button:hover{
-opacity:.9;
+
+    opacity:.9;
+
+}
+
+button:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+}
+
+#erroLogin{
+
+    color:#d32f2f;
+
+    text-align:center;
+
+    font-size:14px;
+
+    margin-top:12px;
+
+    min-height:20px;
+
 }
 
 #painel{
-display:none;
+
+    display:none;
+
+    max-width:1100px;
+
+    margin:auto;
+
+}
+
+.topo{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:20px;
+
+}
+
+.topo h1{
+
+    color:#c97b95;
+
+    margin:0;
+
+}
+
+.btn-sair{
+
+    width:auto;
+
+    background:#777;
+
+    padding:10px 18px;
+
 }
 
 .dashboard{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:15px;
-margin-bottom:20px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(220px,1fr));
+
+    gap:15px;
+
+    margin-bottom:20px;
+
 }
 
 .box{
-background:white;
-padding:20px;
-border-radius:15px;
-box-shadow:0 0 10px rgba(0,0,0,.08);
-text-align:center;
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+
+    text-align:center;
+
+}
+
+.box h3{
+
+    margin:0 0 8px;
+
+    color:#c97b95;
+
+}
+
+.box strong{
+
+    font-size:24px;
+
 }
 
 .card{
-background:white;
-padding:20px;
-margin-top:15px;
-border-radius:15px;
-box-shadow:0 0 10px rgba(0,0,0,.08);
+
+    background:white;
+
+    padding:20px;
+
+    margin-top:15px;
+
+    border-radius:15px;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+
 }
 
-.whatsapp{
-background:#25D366;
+.card h2{
+
+    margin-top:0;
+
+    color:#c97b95;
+
 }
 
-.confirmar{
-background:#2196F3;
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(200px,1fr));
+
+    gap:10px;
+
 }
 
-.excluir{
-background:#e53935;
+.form-grid input{
+
+    margin:0;
+
 }
 
-#agendaVisual,
-#relatorioMensal{
-background:white;
-padding:20px;
-border-radius:15px;
-margin-top:20px;
-box-shadow:0 0 10px rgba(0,0,0,.08);
+.btn-salvar{
+
+    margin-top:15px;
+
 }
 
-.livre{
-background:#e8f5e9;
-padding:10px;
-border-radius:10px;
-margin:5px 0;
+.filtro{
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(180px,250px) 1fr;
+
+    gap:10px;
+
+    align-items:end;
+
 }
 
-.ocupado{
-background:#ffebee;
-padding:10px;
-border-radius:10px;
-margin:5px 0;
+.filtro button{
+
+    margin:0;
+
 }
 
-h1{
-text-align:center;
-color:#c97b95;
-margin-bottom:20px;
+.resumo-filtro{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:10px;
+
+    margin-top:15px;
+
+}
+
+.resumo-item{
+
+    background:#fff5f8;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+}
+
+.resumo-item strong{
+
+    display:block;
+
+    color:#c97b95;
+
+    font-size:20px;
+
+    margin-top:5px;
+
+}
+
+#listaRegistros{
+
+    margin-top:15px;
+
+}
+
+.registro{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr auto auto;
+
+    gap:15px;
+
+    align-items:center;
+
+    padding:15px;
+
+    margin-bottom:10px;
+
+    background:#fff8fa;
+
+    border-radius:12px;
+
+}
+
+.registro-data{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+.registro-data span{
+
+    font-size:25px;
+
+}
+
+.registro-data strong{
+
+    display:block;
+
+}
+
+.registro-data small{
+
+    color:#777;
+
+}
+
+.registro-valor{
+
+    text-align:right;
+
+}
+
+.registro-valor strong{
+
+    display:block;
+
+    color:#c97b95;
+
+}
+
+.registro-valor small{
+
+    color:#777;
+
+}
+
+.registro-acoes{
+
+    display:flex;
+
+    gap:5px;
+
+}
+
+.registro-acoes button{
+
+    width:auto;
+
+    margin:0;
+
+    padding:9px 12px;
+
+}
+
+.btn-editar{
+
+    background:#2196f3;
+
+}
+
+.btn-excluir{
+
+    background:#e53935;
+
+}
+
+.carregando,
+.vazio,
+.erro-box{
+
+    background:#fff5f8;
+
+    padding:25px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+}
+
+.vazio strong{
+
+    display:block;
+
+    margin:10px 0;
+
+}
+
+.vazio p{
+
+    color:#777;
+
+}
+
+.erro-box{
+
+    color:#d32f2f;
+
+}
+
+@media(max-width:600px){
+
+    body{
+
+        padding:10px;
+
+    }
+
+    .topo{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+    .btn-sair{
+
+        width:100%;
+
+    }
+
+    .registro{
+
+        grid-template-columns:1fr;
+
+        text-align:center;
+
+    }
+
+    .registro-data{
+
+        justify-content:center;
+
+    }
+
+    .registro-valor{
+
+        text-align:center;
+
+    }
+
+    .registro-acoes{
+
+        justify-content:center;
+
+    }
+
+    .registro-acoes button{
+
+        flex:1;
+
+    }
+
+    .filtro{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .resumo-filtro{
+
+        grid-template-columns:1fr;
+
+    }
+
 }
 
 </style>
 
 </head>
 
+
 <body>
 
-<div class="login" id="login">
 
-<h2>🔒 Área Administrativa</h2>
+<!-- =====================================
+     LOGIN
+===================================== -->
 
-<input
-type="password"
-id="senha"
-placeholder="Digite sua senha">
+<div
+    class="login"
+    id="login"
+>
 
-<button onclick="entrar()">
-Entrar
-</button>
+    <h2>
+        🔒 Área Administrativa
+    </h2>
+
+    <p>
+        Toda Bella Studio
+    </p>
+
+
+    <input
+        type="password"
+        id="senha"
+        placeholder="Digite sua senha"
+        autocomplete="current-password"
+    >
+
+
+    <button
+        type="button"
+        onclick="entrar()"
+    >
+        🔐 Entrar
+    </button>
+
+
+    <div id="erroLogin"></div>
 
 </div>
+
+
+
+<!-- =====================================
+     PAINEL
+===================================== -->
 
 <div id="painel">
 
-<h1>Toda Bella Studio</h1>
 
-<div class="dashboard">
+    <div class="topo">
 
-<div class="box">
-<h3 id="hoje">📅 Hoje: 0</h3>
+        <h1>
+            🌸 Toda Bella Studio
+        </h1>
+
+
+        <button
+            class="btn-sair"
+            type="button"
+            onclick="sair()"
+        >
+            Sair
+        </button>
+
+    </div>
+
+
+
+    <!-- =================================
+         RESUMO
+    ================================== -->
+
+    <div class="dashboard">
+
+
+        <div class="box">
+
+            <h3>
+                👩 Pessoas hoje
+            </h3>
+
+            <strong id="pessoasHoje">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="box">
+
+            <h3>
+                💰 Ganho hoje
+            </h3>
+
+            <strong id="ganhoHoje">
+                R$ 0,00
+            </strong>
+
+        </div>
+
+
+        <div class="box">
+
+            <h3>
+                👩 Pessoas no mês
+            </h3>
+
+            <strong id="pessoasMes">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="box">
+
+            <h3>
+                💰 Ganho no mês
+            </h3>
+
+            <strong id="ganhoMes">
+                R$ 0,00
+            </strong>
+
+        </div>
+
+
+        <div class="box">
+
+            <h3>
+                👩 Total de pessoas
+            </h3>
+
+            <strong id="pessoasTotal">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="box">
+
+            <h3>
+                💰 Total ganho
+            </h3>
+
+            <strong id="ganhoTotal">
+                R$ 0,00
+            </strong>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================
+         REGISTRAR DIA
+    ================================== -->
+
+    <div class="card">
+
+        <h2>
+            ➕ Registrar dia
+        </h2>
+
+
+        <form id="formRegistro">
+
+
+            <div class="form-grid">
+
+
+                <div>
+
+                    <label>
+                        Data
+                    </label>
+
+                    <input
+                        type="date"
+                        id="data"
+                        required
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Quantidade de pessoas
+                    </label>
+
+                    <input
+                        type="number"
+                        id="pessoas"
+                        min="0"
+                        step="1"
+                        placeholder="Ex: 5"
+                        required
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Ganho do dia
+                    </label>
+
+                    <input
+                        type="number"
+                        id="ganho"
+                        min="0"
+                        step="0.01"
+                        placeholder="Ex: 350,00"
+                        required
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                type="submit"
+                id="btnSalvar"
+                class="btn-salvar"
+            >
+                💾 Salvar dia
+            </button>
+
+
+        </form>
+
+    </div>
+
+
+
+    <!-- =================================
+         HISTÓRICO
+    ================================== -->
+
+    <div class="card">
+
+        <h2>
+            📋 Histórico
+        </h2>
+
+
+        <div class="filtro">
+
+
+            <div>
+
+                <label>
+                    Filtrar por mês
+                </label>
+
+                <input
+                    type="month"
+                    id="filtroMes"
+                >
+
+            </div>
+
+
+            <button
+                type="button"
+                onclick="limparFiltro()"
+            >
+                🔄 Ver todos
+            </button>
+
+
+        </div>
+
+
+        <div class="resumo-filtro">
+
+
+            <div class="resumo-item">
+
+                👩 Pessoas
+
+                <strong id="pessoasFiltro">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="resumo-item">
+
+                💰 Ganho
+
+                <strong id="ganhoFiltro">
+                    R$ 0,00
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <div id="listaRegistros">
+
+            <div class="carregando">
+
+                Entre para carregar os registros.
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
 </div>
 
-<div class="box">
-<h3 id="amanha">📅 Amanhã: 0</h3>
-</div>
 
-<div class="box">
-<h3 id="faturamentoHoje">💰 Hoje: R$ 0,00</h3>
-</div>
+<!-- =====================================
+     JAVASCRIPT
+===================================== -->
 
-<div class="box">
-<h3 id="faturamento">💰 Total: R$ 0,00</h3>
-</div>
+<script
+    type="module"
+    src="./admin.js"
+></script>
 
-</div>
-
-<div id="relatorioMensal">
-
-<h2>📊 Relatório Mensal</h2>
-
-<p id="clientesMes">👩 Clientes: 0</p>
-
-<p id="faturamentoMes">💰 Faturamento Mensal: R$ 0,00</p>
-
-<p id="servicoMaisVendido">⭐ Serviço Mais Vendido: -</p>
-
-</div>
-
-<input
-type="text"
-id="pesquisa"
-placeholder="Pesquisar cliente">
-
-<button onclick="pesquisarCliente()">
-🔍 Pesquisar
-</button>
-
-<div id="lista"></div>
-
-<div id="agendaVisual">
-
-<h2>📅 Agenda por Data</h2>
-
-<input
-type="date"
-id="dataAgenda">
-
-<button onclick="mostrarAgendaData()">
-Consultar Agenda
-</button>
-
-<div id="agenda"></div>
-
-</div>
-
-</div>
-
-<script type="module" src="admin.js"></script>
 
 </body>
+
 </html>
