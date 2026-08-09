@@ -39,28 +39,20 @@ const firebaseConfig = {
 };
 
 
-// Inicializar Firebase
+const app =
+    initializeApp(firebaseConfig);
 
-const app = initializeApp(
-    firebaseConfig
-);
-
-
-// Realtime Database
 
 const db =
     getDatabase(app);
 
 
-// Authentication
-
 const auth =
     getAuth(app);
 
 
-// Exportar tudo
-
 export {
+
     db,
     auth,
 
@@ -74,4 +66,5 @@ export {
     signInWithEmailAndPassword,
     signOut,
     onAuthStateChanged
+
 };
