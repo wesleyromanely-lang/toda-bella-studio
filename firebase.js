@@ -12,13 +12,6 @@ import {
     update
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-import {
-    getAuth,
-    signInWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
 
 const firebaseConfig = {
 
@@ -39,32 +32,30 @@ const firebaseConfig = {
 };
 
 
-const app =
-    initializeApp(firebaseConfig);
+const app = initializeApp(
+    firebaseConfig
+);
 
 
-const db =
-    getDatabase(app);
-
-
-const auth =
-    getAuth(app);
+const db = getDatabase(
+    app
+);
 
 
 export {
 
     db,
-    auth,
 
     ref,
-    push,
-    get,
-    child,
-    remove,
-    update,
 
-    signInWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged
+    push,
+
+    get,
+
+    child,
+
+    remove,
+
+    update
 
 };
